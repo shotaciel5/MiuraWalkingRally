@@ -109,7 +109,7 @@ export default function RouteOverview({ data }: { data: OverviewData }) {
 
       <section className="junction-inspector" aria-labelledby="junction-title" data-junction-count={junctions.length}>
         <h3 id="junction-title">分岐候補を照合する</h3>
-        <p className="route-caption">元の道路接続から抽出した確認用の情報です。開始・終了・到着点を含み、再訪は別件に数えています。コマ地図の図形・道案内はまだ生成していません。</p>
+        <p className="route-caption">元の道路接続から抽出した確認用の情報です。開始・終了・到着点を含み、再訪は別件に数えています。上のコマ図と元の接続・角度を照合できます。現地で使う案内の確認は未実施です。</p>
         <div className="junction-source" aria-label="分岐の比較対象">
           <button type="button" aria-pressed={junctionSource === "generated"} onClick={() => selectSource("generated")}>生成候補 {data.junctions.length}件</button>
           <button type="button" aria-pressed={junctionSource === "reference"} onClick={() => selectSource("reference")}>手動参照 {data.referenceJunctions.length}件</button>

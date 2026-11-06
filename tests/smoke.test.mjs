@@ -65,6 +65,12 @@ test("local Next.js HTTP smoke check", async (t) => {
     assert.match(html, /data-junction-sequence="1"/);
     assert.match(html, /data-junction-highlight="1"/);
   });
+  await t.test("serves the first koma, stop binding and navigation controls", () => {
+    assert.match(html, /data-koma-count="31"/);
+    assert.match(html, /data-koma-svg="1"/);
+    assert.match(html, /data-koma-stop="S"/);
+    assert.match(html, /id="koma-select"/);
+  });
   await t.test("returns 404 for an unknown route", async () => {
     const missing = await get("/__smoke_missing_route__");
     assert.equal(missing.status, 404);

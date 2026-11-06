@@ -1,13 +1,14 @@
 import RouteOverview, { type OverviewData } from "./route-overview";
-import { createMisakiJunctionPoc } from "../lib/misaki-junctions";
+import { createMisakiKomaPoc } from "../lib/misaki-koma";
+import KomaBrowser from "./koma-browser";
 import type { OsmNode } from "../lib/route/types";
 
 function meters(value: number) { return Math.round(value).toLocaleString("ja-JP"); }
 
 export default function Home() {
-  let poc: ReturnType<typeof createMisakiJunctionPoc>;
+  let poc: ReturnType<typeof createMisakiKomaPoc>;
   try {
-    poc = createMisakiJunctionPoc();
+    poc = createMisakiKomaPoc();
   } catch (error) {
     return (
       <main>
@@ -55,6 +56,7 @@ export default function Home() {
         <div><span>推定歩行時間</span><strong>約{Math.ceil(route.minutes)}<small> 分</small></strong></div>
         <div><span>訪問順</span><strong>固定<small> · 4区間</small></strong></div>
       </div>
+      <KomaBrowser generated={poc.koma} reference={poc.referenceKoma}/>
       <div className="content-grid">
         <section className="panel map-panel" aria-labelledby="overview-title">
           <div className="card-heading"><div><p className="eyebrow">ROUTE OVERVIEW</p><h2 id="overview-title">経路を比べる</h2></div><span className="subtle">北が上</span></div>
@@ -89,7 +91,7 @@ export default function Home() {
         <ul>
           <li>歩道は必須にせず、一般道路と徒歩道を候補にします。徒歩禁止・自動車専用・立入制限を優先し、未解決の条件付き制限は探索に使いません。</li>
           <li>距離はOSM道路中心線の点間距離の合計。時間は時速{route.speedKmh}kmを仮定し、信号待ち・休憩・撮影・坂や階段による減速を含めていません。生成候補に階段区間があります。</li>
-          <li>道路の接続が確認できない点を近さだけでつなぎません。分岐候補と方位角は検証用の情報です。コマ地図の案内表示は次のタスク以降です。</li>
+          <li>道路の接続が確認できない点を近さだけでつなぎません。コマ図と分岐・方位角は検証用です。表示できても、現地の正確性・安全性を確認済みとはしません。</li>
         </ul>
         <details><summary>仮の到着点と道路データの記録</summary>
           <dl className="anchor-list">{route.stops.map(stop => <div key={stop.id}><dt>{stop.id} · {stop.name} <a href={`https://www.openstreetmap.org/node/${stop.nodeId}`}>OSM node/{stop.nodeId}</a></dt><dd>{stop.note}</dd></div>)}</dl>
