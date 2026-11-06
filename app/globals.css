@@ -155,3 +155,74 @@ footer { display: flex; justify-content: space-between; padding: 35px 0 0; color
   .koma-card { padding: 16px; }
   .koma-card h3 { font-size: 21px; }
 }
+
+/* Linked operator review: one selection across diagram, overview and ordered cards. */
+main { max-width: 1380px; }
+.intro { padding: 32px 0 22px; }
+h1 { font-size: clamp(29px, 3.3vw, 42px); }
+.review-toolbar { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:20px; }
+.review-toolbar h2 { margin-bottom:5px; }
+.review-toolbar p:last-child { margin:0; font-size:12px; color:var(--muted); }
+.review-options { flex-shrink:0; }
+.context-layers { border:0; padding:0; margin:12px 0 0; display:flex; flex-wrap:wrap; gap:8px 14px; font-size:12px; }
+.context-layers legend { color:var(--muted); margin-bottom:4px; }
+.context-layers label { display:inline-flex; gap:5px; align-items:center; cursor:pointer; min-height:30px; }
+.context-layers input { width:16px; height:16px; accent-color:var(--green); }
+.review-columns { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:20px; align-items:start; }
+.review-columns > .panel { min-width:0; padding:22px; margin-bottom:0; }
+.review-columns .koma-layout { display:block; }
+.review-columns .koma-intro { font-size:12px; margin-bottom:17px; }
+.review-columns .koma-card { padding:16px; }
+.review-columns .koma-figure { max-width:340px; margin:auto; }
+.review-columns .koma-context { margin-top:18px; }
+.landmark-key { margin-top:14px; border-top:1px solid var(--line); padding-top:12px; font-size:12px; }
+.landmark-key p { margin:0 0 6px; font-weight:600; }
+.landmark-key small { font-weight:400; color:var(--muted); }
+.landmark-key ol { padding-left:23px; margin:0; }
+.landmark-key li { padding:2px 0; overflow-wrap:anywhere; }
+.landmark-key li::marker { color:#79551d; font-weight:700; }
+.landmark-key li span { display:block; font-size:10px; color:var(--muted); }
+.context-roadnames { margin:12px 0 0; font-size:11px; color:var(--muted); }
+.active-segment { border-color:#276bb4; }
+.map-linked-caption { color:#235d98; background:#edf4fb; border:1px solid #d5e4f2; border-radius:8px; font-size:12px; margin:14px 0 0; padding:12px; }
+.map-pin { cursor:pointer; }
+.map-pin:focus { outline:none; }
+.map-pin:focus-visible circle:nth-child(2) { stroke:#b86a28; stroke-width:5px; }
+.koma-gallery { margin-top:22px; }
+.koma-grid { list-style:none; margin:22px 0 0; padding:0; display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+.koma-grid li { min-width:0; }
+.koma-thumbnail { width:100%; height:100%; display:flex; flex-direction:column; cursor:pointer; color:var(--ink); text-align:left; border:1px solid #d4ddd2; background:white; border-radius:10px; padding:10px; }
+.koma-thumbnail:hover { background:#f7f9f3; border-color:#94ac9c; }
+.koma-thumbnail[aria-pressed="true"] { border:2px solid #276bb4; padding:9px; background:#f1f6fb; box-shadow:0 0 0 2px #d7e6f6; }
+.thumbnail-heading { display:flex; justify-content:space-between; align-items:baseline; gap:5px; width:100%; font-size:10px; color:var(--muted); margin-bottom:8px; }
+.thumbnail-heading strong { color:var(--ink); font-size:16px; }
+.thumbnail-name { display:block; font-size:12px; font-weight:700; line-height:1.5; margin-top:9px; overflow-wrap:anywhere; }
+.thumbnail-distance { display:block; font-size:10px; color:var(--muted); margin-top:auto; padding-top:5px; }
+.koma-thumbnail .koma-held { min-height:0; width:100%; aspect-ratio:300/280; padding:8px; border-radius:8px; }
+.koma-thumbnail .koma-held p { display:none; }
+.koma-thumbnail .koma-held strong { font-size:10px; }
+.koma-thumbnail .koma-held > span { width:23px; height:23px; margin-bottom:4px; }
+.route-details { margin-top:22px; }
+.route-details .stop-list { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:16px; }
+.route-details .stop-list li { padding:0; }
+.route-details .stop-list li::before { display:none; }
+.route-details .itinerary .route-caption { margin-bottom:0; }
+@media(min-width:1051px) { .review-columns > .map-panel { position:sticky; top:14px; } }
+@media(max-width:1100px) { .koma-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } .review-toolbar { align-items:flex-start; flex-direction:column; gap:14px; } }
+@media(max-width:850px) {
+  .review-columns { grid-template-columns:minmax(0,1fr); }
+  .review-columns .koma-layout { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:18px; }
+  .review-columns .koma-context { margin-top:0; }
+  .route-details .stop-list { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media(max-width:560px) {
+  .review-columns .koma-layout { display:block; }
+  .review-columns .koma-context { margin-top:18px; }
+  .review-toolbar, .review-columns > .panel, .koma-gallery { padding:16px; }
+  .review-options { min-width:0; width:100%; }
+  .review-source { flex-wrap:wrap; }
+  .koma-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+  .route-details .stop-list { grid-template-columns:minmax(0,1fr); }
+  .route-details .stop-list li { padding-bottom:10px; }
+  .review-columns .card-heading { align-items:flex-start; gap:10px; flex-wrap:wrap; }
+}

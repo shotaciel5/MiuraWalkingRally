@@ -1,14 +1,14 @@
-import RouteOverview, { type OverviewData } from "./route-overview";
-import { createMisakiKomaPoc } from "../lib/misaki-koma";
-import KomaBrowser from "./koma-browser";
+import type { OverviewData } from "./route-overview";
+import { createMisakiReviewPoc } from "../lib/misaki-review";
+import RouteReview from "./route-review";
 import type { OsmNode } from "../lib/route/types";
 
 function meters(value: number) { return Math.round(value).toLocaleString("ja-JP"); }
 
 export default function Home() {
-  let poc: ReturnType<typeof createMisakiKomaPoc>;
+  let poc: ReturnType<typeof createMisakiReviewPoc>;
   try {
-    poc = createMisakiKomaPoc();
+    poc = createMisakiReviewPoc();
   } catch (error) {
     return (
       <main>
@@ -22,7 +22,10 @@ export default function Home() {
     const node = graph.nodes.get(id) as OsmNode;
     return { lat: node.lat, lon: node.lon };
   };
+  const flatten=(legs:{nodeIds:number[]}[])=>legs.flatMap((leg,i)=>leg.nodeIds.slice(i?1:0)).map(point);
   const data: OverviewData = {
+    context:poc.context,
+    paths:{generated:flatten(route.legs),reference:flatten(reference)},
     junctions: junctions.candidates,
     referenceJunctions: referenceJunctions.candidates,
     roads: [...graph.ways.values()].map(way => ({
@@ -44,8 +47,8 @@ export default function Home() {
       </header>
       <section className="intro" aria-labelledby="page-title">
         <p className="eyebrow">MIURA / MISAKI</p>
-        <h1 id="page-title">三崎下町を、<br />道路に沿って。</h1>
-        <p className="lead">港から神社、お寺へ。小さな周回の経路候補を、<br className="desktop-break" />道路データと手動参照で確かめています。</p>
+        <h1 id="page-title">ルートとコマを、<br />見比べて確かめる。</h1>
+        <p className="lead">三崎下町の固定ルートを使った、運営者向けの検証画面です。<br className="desktop-break" />一覧・コマ・全体地図を連動させ、公開前の確認方法を試しています。</p>
       </section>
       <section className="notice" aria-label="経路の確認状態">
         <span className="status">机上候補・確認待ち</span>
@@ -56,12 +59,8 @@ export default function Home() {
         <div><span>推定歩行時間</span><strong>約{Math.ceil(route.minutes)}<small> 分</small></strong></div>
         <div><span>訪問順</span><strong>固定<small> · 4区間</small></strong></div>
       </div>
-      <KomaBrowser generated={poc.koma} reference={poc.referenceKoma}/>
-      <div className="content-grid">
-        <section className="panel map-panel" aria-labelledby="overview-title">
-          <div className="card-heading"><div><p className="eyebrow">ROUTE OVERVIEW</p><h2 id="overview-title">経路を比べる</h2></div><span className="subtle">北が上</span></div>
-          <RouteOverview data={data} />
-        </section>
+      <RouteReview generated={poc.koma} reference={poc.referenceKoma} data={data}/>
+      <div className="route-details">
         <section className="panel itinerary" aria-labelledby="itinerary-title">
           <p className="eyebrow">FIXED ORDER</p><h2 id="itinerary-title">今回の訪問順</h2>
           <ol className="stop-list">
@@ -89,13 +88,14 @@ export default function Home() {
       <section className="panel notes" aria-labelledby="conditions-title">
         <p className="eyebrow">CONDITIONS & SOURCE</p><h2 id="conditions-title">計算条件と未確認事項</h2>
         <ul>
+          <li>ルート探索（Dijkstra法）、分岐抽出、コマの投影・回転はプログラムによる計算です。生成AIは使用していません。同じコード・固定データ・地点順・設定から同じ結果を再計算します。訪問順・仮の到着点の選択と安全確認は人の判断です。</li>
           <li>歩道は必須にせず、一般道路と徒歩道を候補にします。徒歩禁止・自動車専用・立入制限を優先し、未解決の条件付き制限は探索に使いません。</li>
           <li>距離はOSM道路中心線の点間距離の合計。時間は時速{route.speedKmh}kmを仮定し、信号待ち・休憩・撮影・坂や階段による減速を含めていません。生成候補に階段区間があります。</li>
           <li>道路の接続が確認できない点を近さだけでつなぎません。コマ図と分岐・方位角は検証用です。表示できても、現地の正確性・安全性を確認済みとはしません。</li>
         </ul>
         <details><summary>仮の到着点と道路データの記録</summary>
           <dl className="anchor-list">{route.stops.map(stop => <div key={stop.id}><dt>{stop.id} · {stop.name} <a href={`https://www.openstreetmap.org/node/${stop.nodeId}`}>OSM node/{stop.nodeId}</a></dt><dd>{stop.note}</dd></div>)}</dl>
-          <p>データ取得：{source.retrievedAt} ／ OSM基準時刻：{source.osmBaseTimestamp}。起動・生成時の外部API接続はありません。</p>
+          <p>データ取得：{source.retrievedAt} ／ OSM基準時刻：{source.osmBaseTimestamp}。起動・生成時の外部API接続はありません。</p><p>目印データ取得：{poc.contextSource.retrievedAt} ／ 指定基準時刻：{poc.contextSource.requestedSnapshotAt}。建物は形状、施設の面はラベル位置として表示します。入口・通行許可・営業状況は示しません。未登録の情報、複数の面を使う建物・施設は表示できない場合があります。</p>
           <p>今回の範囲内の明示的な除外・確認待ち：{graph.diagnostics.map(d => d.type + "/" + d.id + " (" + (d.state === "review" ? "確認待ち" : "除外") + ")").join("、")}。これらを候補が通過したという意味ではありません。</p>
           <p>手動参照の根拠：{poc.referenceBasis}</p>
           <p><a href="https://www.city.miura.kanagawa.jp/material/files/group/27/12_misakiguchi_2109015_tenchi.pdf">公式散策冊子</a> ／ <a href="https://www.city.miura.kanagawa.jp/shisetsu-map/2897.html">三浦市の施設マップ（通行止め情報）</a></p>

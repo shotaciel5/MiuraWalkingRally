@@ -71,6 +71,15 @@ test("local Next.js HTTP smoke check", async (t) => {
     assert.match(html, /data-koma-stop="S"/);
     assert.match(html, /id="koma-select"/);
   });
+  await t.test("serves all ordered thumbnails and linked selection with OSM context", () => {
+    assert.equal([...html.matchAll(/data-review-card=/g)].length,31);
+    assert.match(html,/data-review-card="1" aria-pressed="true"/);
+    assert.match(html,/data-map-pin=/);
+    assert.match(html,/data-next-koma-segment="1"/);
+    assert.match(html,/data-context-landmark=/);
+    assert.match(html,/data-context-building=/);
+    assert.match(html,/data-context-toggle="landmarks"/);
+  });
   await t.test("returns 404 for an unknown route", async () => {
     const missing = await get("/__smoke_missing_route__");
     assert.equal(missing.status, 404);

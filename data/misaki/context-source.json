@@ -1,0 +1,17 @@
+{
+  "provider": "OpenStreetMap",
+  "attribution": "© OpenStreetMap contributors",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "license": "ODbL-1.0",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "httpMethod": "POST",
+  "query": "[out:json][timeout:40][date:\"2026-11-06T12:46:21Z\"];\n(\n  way[\"building\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  node[\"amenity\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  way[\"amenity\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  node[\"shop\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  way[\"shop\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  node[\"tourism\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  way[\"tourism\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  node[\"historic\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  way[\"historic\"](35.1398295,139.6170348,35.1437657,139.6220291);\n  node[\"highway\"~\"^(traffic_signals|crossing|bus_stop)$\"](35.1398295,139.6170348,35.1437657,139.6220291);\n);\n(._;>;);\nout body;\n",
+  "retrievedAt": "2026-11-06T15:55:21.314Z",
+  "requestedSnapshotAt": "2026-11-06T12:46:21Z",
+  "serverOsmBaseTimestamp": "2026-11-06T15:53:21Z",
+  "originalSha256": "0f59b26d0a4d30e1e74a8313374060d36329ca4f98b1962264b7cbadb9c4fbca",
+  "snapshotSha256": "840b106523a427b9619115577b9dddd42c1d2c30ad1f517858309c75af771e24",
+  "routingSnapshotSha256": "13cd793e7ba64c3fdfd1d86438a5eddfa37befaba5458f544a75dca388a65c84",
+  "normalization": "Node coordinates, closed/open way references and whitelisted context tags. No relations, editor, contact or address metadata. Context never changes walking topology."
+}
