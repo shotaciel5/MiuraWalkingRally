@@ -79,6 +79,10 @@ test("local Next.js HTTP smoke check", async (t) => {
     assert.match(html,/data-context-landmark=/);
     assert.match(html,/data-context-building=/);
     assert.match(html,/data-context-toggle="landmarks"/);
+    assert.match(html,/data-landmark-icon="bus"/);
+    assert.match(html,/data-landmark-label=/);
+    assert.match(html,/data-landmark-name=/);
+    assert.match(html,/class="landmark-details"/);
   });
   await t.test("returns 404 for an unknown route", async () => {
     const missing = await get("/__smoke_missing_route__");

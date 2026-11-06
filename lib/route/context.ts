@@ -3,8 +3,9 @@ import { KOMA_VIEW, projectKomaPoint } from "./koma.ts";
 import type { KomaMap, DiagramPoint } from "./koma.ts";
 import type { Graph, Point, Snapshot, Tags } from "./types.ts";
 
+export type LandmarkSymbol = "signal"|"crossing"|"bus"|"shrine"|"temple"|"worship"|"toilet"|"water"|"parking"|"shop"|"food"|"historic"|"tourism"|"facility"|"stop-sign"|"stop-control"|"give-way-control"|"sign";
 export type Landmark = {
-  id: string; point: Point; name: string; kind: string; symbol: string;
+  id: string; point: Point; name: string; kind: string; symbol: LandmarkSymbol; detail?:string; sourceTags?:Tags;
   anchor: "node" | "area-label";
 };
 export type ContextData = {
@@ -20,20 +21,27 @@ export type KomaContext = {
 };
 
 const nameOf = (tags:Tags) => tags["name:ja"] || tags.name || "";
-function category(tags:Tags): {kind:string;symbol:string}|null {
-  if(tags.highway==="traffic_signals")return {kind:"信号",symbol:"信"};
-  if(tags.highway==="crossing")return {kind:"横断箇所",symbol:"横"};
-  if(tags.highway==="bus_stop")return {kind:"バス停",symbol:"バ"};
-  if(tags.amenity==="place_of_worship")return tags.religion==="shinto"?{kind:"神社",symbol:"神"}:tags.religion==="buddhist"?{kind:"寺院",symbol:"寺"}:{kind:"宗教施設",symbol:"宗"};
-  if(tags.amenity==="toilets")return {kind:"トイレ",symbol:"WC"};
-  if(tags.amenity==="drinking_water")return {kind:"飲用水",symbol:"水"};
-  if(tags.amenity==="parking")return {kind:"駐車場",symbol:"P"};
+function category(tags:Tags): {kind:string;symbol:LandmarkSymbol;detail?:string;sourceTags?:Tags}|null {
+  const signKeys=["traffic_sign","traffic_sign:forward","traffic_sign:backward"];
+  const values=signKeys.flatMap(key=>(tags[key]??"").split(/[;,]/).map(value=>value.trim()));
+  const evidence=Object.fromEntries(Object.entries(tags).filter(([key])=>signKeys.includes(key)||["highway","direction","traffic_sign:direction","stop"].includes(key)));
+  if(values.some(value=>["JP:330","JP:330-A","JP:330-B"].includes(value)))return {kind:"止まれ標識",symbol:"stop-sign",detail:"OSMの標識情報。実位置・対象方向は現地未確認。",sourceTags:evidence};
+  if(tags.highway==="stop")return {kind:"一時停止点",symbol:"stop-control",detail:"OSMの停止点。標識そのものの位置・対象方向は未確認。",sourceTags:evidence};
+  if(tags.highway==="give_way")return {kind:"譲れの制御点",symbol:"give-way-control",detail:"OSMの制御点。標識の位置・対象方向は未確認。",sourceTags:evidence};
+  if(signKeys.some(key=>tags[key]&&tags[key]!=="no"))return {kind:"道路標識",symbol:"sign",detail:"種類を特定できないOSM標識情報。形状や規制内容は推測しません。",sourceTags:evidence};
+  if(tags.highway==="traffic_signals")return {kind:"信号",symbol:"signal"};
+  if(tags.highway==="crossing")return {kind:"横断箇所",symbol:"crossing"};
+  if(tags.highway==="bus_stop")return {kind:"バス停",symbol:"bus"};
+  if(tags.amenity==="place_of_worship")return tags.religion==="shinto"?{kind:"神社",symbol:"shrine"}:tags.religion==="buddhist"?{kind:"寺院",symbol:"temple"}:{kind:"宗教施設",symbol:"worship"};
+  if(tags.amenity==="toilets")return {kind:"トイレ",symbol:"toilet"};
+  if(tags.amenity==="drinking_water")return {kind:"飲用水",symbol:"water"};
+  if(tags.amenity==="parking")return {kind:"駐車場",symbol:"parking"};
   if(!nameOf(tags))return null;
-  if(tags.shop)return {kind:"店舗",symbol:"店"};
-  if(["restaurant","cafe","fast_food","bar","pub"].includes(tags.amenity))return {kind:"飲食店",symbol:"食"};
-  if(tags.historic)return {kind:"史跡",symbol:"史"};
-  if(tags.tourism)return {kind:"観光施設",symbol:"観"};
-  if(tags.amenity)return {kind:"施設",symbol:"施"};
+  if(tags.shop)return {kind:"店舗",symbol:"shop"};
+  if(["restaurant","cafe","fast_food","bar","pub"].includes(tags.amenity))return {kind:"飲食店",symbol:"food"};
+  if(tags.historic)return {kind:"史跡",symbol:"historic"};
+  if(tags.tourism)return {kind:"観光施設",symbol:"tourism"};
+  if(tags.amenity)return {kind:"施設",symbol:"facility"};
   return null;
 }
 
@@ -59,11 +67,18 @@ export function polygonLabelPoint(points:Point[]): Point|null {
   return best?.point??null;
 }
 
-export function extractContext(snapshot:Snapshot, graph:Graph):ContextData {
-  const nodes=new Map(snapshot.elements.filter(e=>e.type==="node").map(e=>[e.id,e]));
+export function extractContext(snapshot:Snapshot, graph:Graph, signs?:Snapshot):ContextData {
+  const elements=new Map(snapshot.elements.map(e=>[e.type+"/"+e.id,e]));
+  for(const sign of signs?.elements??[]){
+    if(sign.type!=="node")throw new Error("Sign supplement must contain nodes");
+    const id="node/"+sign.id,existing=elements.get(id);
+    if(existing?.type==="node"&&(existing.lat!==sign.lat||existing.lon!==sign.lon))throw new Error("Sign/context coordinate mismatch: "+id);
+    elements.set(id,{...sign,tags:{...existing?.tags,...sign.tags}});
+  }
+  const nodes=new Map([...elements.values()].filter(e=>e.type==="node").map(e=>[e.id,e]));
   const buildings:ContextData["buildings"]=[];
   const landmarks=new Map<string,Landmark>();
-  for(const item of snapshot.elements){
+  for(const item of elements.values()){
     const tags=item.tags??{}, id=item.type+"/"+item.id;
     let point:Point|null=null, anchor:Landmark["anchor"]="node";
     if(item.type==="node")point={lat:item.lat,lon:item.lon};
@@ -98,7 +113,7 @@ export function createKomaContext(graph:Graph,map:KomaMap,data:ContextData):Koma
   const scale=KOMA_VIEW.radius/30;
   const project=(point:Point)=>{const p=projectKomaPoint(center,point,map.headingDegrees!);return {x:KOMA_VIEW.centerX+p.x*scale,y:KOMA_VIEW.centerY+p.y*scale}};
   const nearby=data.landmarks.map(feature=>({...feature,meters:distanceMeters(center,feature.point)}))
-    .filter(f=>f.meters<=30).sort((a,b)=>a.meters-b.meters||a.id.localeCompare(b.id,"en"));
+    .filter(f=>f.meters<=30).sort((a,b)=>landmarkPriority(a)-landmarkPriority(b)||a.meters-b.meters||a.id.localeCompare(b.id,"en"));
   const buildings=data.buildings.map(building=>{
     const relative=building.points.map(p=>projectKomaPoint(center,p,map.headingDegrees!));
     const distance=Math.min(...relative.slice(1).map((p,i)=>segmentDistance(relative[i],p)));
@@ -120,15 +135,8 @@ export function createKomaContext(graph:Graph,map:KomaMap,data:ContextData):Koma
   };
 }
 
-export function placeLandmarkBadges(points:{x:number;y:number}[],width:number,height:number,roads:{x:number;y:number}[][]=[]){
-  const placed:{x:number;y:number}[]=[];
-  const offsets=[[16,-18],[-16,-18],[16,18],[-16,18],[32,0],[-32,0],[0,-32],[0,32]];
-  for(const point of points){
-    const candidates=offsets.map(([dx,dy])=>({x:Math.max(18,Math.min(width-18,point.x+dx)),y:Math.max(18,Math.min(height-35,point.y+dy))}));
-    const cost=(p:{x:number;y:number})=>placed.reduce((sum,q)=>sum+Math.max(0,20-Math.hypot(p.x-q.x,p.y-q.y))**2*10,0)+
-      roads.reduce((sum,line)=>sum+line.slice(1).reduce((s,b,i)=>s+Math.max(0,12-segmentDistance({x:line[i].x-p.x,y:line[i].y-p.y},{x:b.x-p.x,y:b.y-p.y}))**2,0),0);
-    // Stable ties keep the first candidate. Only labels move; source points stay fixed.
-    placed.push(candidates.reduce((best,p)=>cost(p)<cost(best)?p:best));
-  }
-  return placed;
+export function landmarkPriority(landmark:Pick<Landmark,"symbol">){
+  if(["stop-sign","stop-control","give-way-control","signal","crossing","bus"].includes(landmark.symbol))return 0;
+  if(["shrine","temple","parking","toilet","water"].includes(landmark.symbol))return 1;
+  return 2;
 }

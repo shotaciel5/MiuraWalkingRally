@@ -4,8 +4,9 @@ import {createHash} from "node:crypto";
 import {readFileSync} from "node:fs";
 import {createMisakiKomaPoc} from "../lib/misaki-koma.ts";
 import {createMisakiReviewPoc} from "../lib/misaki-review.ts";
-import {extractContext,createKomaContext,polygonLabelPoint,placeLandmarkBadges} from "../lib/route/context.ts";
-import {projectKomaPoint,KOMA_VIEW} from "../lib/route/koma.ts";
+import {extractContext,createKomaContext,polygonLabelPoint,landmarkPriority} from "../lib/route/context.ts";
+import {projectKomaPoint,KOMA_VIEW,arrowPath} from "../lib/route/koma.ts";
+import {layoutLandmarks,landmarkLabelLines} from "../lib/route/landmark-layout.ts";
 import {nextOccurrenceIndex} from "../lib/route/review.ts";
 
 const poc=createMisakiReviewPoc();
@@ -98,13 +99,89 @@ test("a building edge near the center is included even when all vertices lie out
  assert.equal(context.buildings.length,1);
 });
 
-test("coincident landmark badges remain apart without moving source points or covering a selected road",()=>{
- const points=Array.from({length:4},()=>({x:150,y:140})),before=structuredClone(points);
- const road=[[{x:150,y:40},{x:150,y:240}]];
- const result=placeLandmarkBadges(points,300,280,road);
- assert.deepEqual(points,before);
- assert.deepEqual(result,placeLandmarkBadges(points,300,280,road));
- result.forEach((p,i)=>{assert.ok(Math.abs(p.x-150)>=12);result.slice(i+1).forEach(q=>assert.ok(Math.hypot(p.x-q.x,p.y-q.y)>=20))});
- const clipped=placeLandmarkBadges([{x:0,y:0},{x:300,y:280}],300,280);
- assert.ok(clipped.every(p=>p.x>=18&&p.x<=282&&p.y>=18&&p.y<=245));
+
+test("direct names fit two lines, while category-only landmarks use a recognizable symbol",()=>{
+ assert.deepEqual(landmarkLabelLines("signal","signal"),[]);
+ assert.deepEqual(landmarkLabelLines("一時停止点","一時停止点"),["停止点"]);
+ const lines=landmarkLabelLines("とても長い施設の名称をそのまま確認したい","施設");
+ assert.equal(lines.length,2);assert.ok(lines.every(line=>Array.from(line).length<=8));
+ assert.ok(lines[1].endsWith("…"));
+});
+test("direct landmark labels remain bounded and distinct without moving their OSM source",()=>{
+ const features=Array.from({length:4},(_,i)=>({id:"node/"+i,name:"店舗"+i,kind:"店舗",x:150,y:140}));
+ const before=structuredClone(features),road=[[{x:150,y:40},{x:150,y:240}]];
+ const labels=layoutLandmarks(features,300,280,road);
+ assert.deepEqual(features,before);assert.deepEqual(labels,layoutLandmarks(features,300,280,road));
+ labels.forEach((label,i)=>{
+  assert.deepEqual(label.source,{x:150,y:140});
+  assert.ok(label.x>=8&&label.x+label.width<=292&&label.y>=8&&label.y+label.height<=258);
+  labels.slice(i+1).forEach(other=>{
+   const overlap=Math.max(0,Math.min(label.x+label.width,other.x+other.width)-Math.max(label.x,other.x))*Math.max(0,Math.min(label.y+label.height,other.y+other.height)-Math.max(label.y,other.y));
+   assert.equal(overlap,0);
+  });
+ });
+});
+test("stop sign tags, stopping points and unrecognized signs have distinct semantics",()=>{
+ const nodes=[
+  {id:1,tags:{traffic_sign:"JP:330-A"}},
+  {id:2,tags:{traffic_sign:"JP:330-B"}},
+  {id:3,tags:{highway:"stop",direction:"forward"}},
+  {id:4,tags:{"traffic_sign:backward":"JP:330;JP:316"}},
+  {id:5,tags:{traffic_sign:"JP:3300"}},
+  {id:6,tags:{traffic_sign:"no"}},
+  {id:7,tags:{highway:"give_way"}},
+  {id:8,tags:{traffic_sign:"US:R1-1"}},
+ ].map(n=>({type:"node",lat:0,lon:n.id*.00001,...n}));
+ const data=extractContext({elements:nodes},{nodes:new Map()});
+ const byId=id=>data.landmarks.find(l=>l.id==="node/"+id);
+ for(const id of [1,2,4])assert.equal(byId(id).symbol,"stop-sign");
+ assert.equal(byId(3).symbol,"stop-control");assert.equal(byId(3).sourceTags.direction,"forward");
+ assert.match(byId(3).detail,/標識そのものの位置/);
+ assert.equal(byId(5).symbol,"sign");assert.equal(byId(6),undefined);
+ assert.equal(byId(7).symbol,"give-way-control");assert.equal(byId(8).symbol,"sign");
+});
+test("sign overlay preserves tags and rejects incompatible or invented source coordinates",()=>{
+ const original={type:"node",id:1,lat:1,lon:2,tags:{name:"known",amenity:"cafe"}};
+ const supplement={...original,tags:{traffic_sign:"JP:330-A"}};
+ const data=extractContext({elements:[original]},{nodes:new Map()},{elements:[supplement]});
+ assert.equal(data.landmarks.length,1);assert.equal(data.landmarks[0].name,"known");assert.equal(data.landmarks[0].symbol,"stop-sign");
+ assert.throws(()=>extractContext({elements:[original]},{nodes:new Map()},{elements:[{...supplement,lat:2}]}),/coordinate mismatch/);
+ assert.throws(()=>extractContext({elements:[]},{nodes:new Map()},{elements:[{type:"way",id:2,nodes:[]}]}),/must contain nodes/);
+});
+test("recognizable road controls and map symbols have priority over general nearby facilities",()=>{
+ assert.ok(landmarkPriority({symbol:"signal"})<landmarkPriority({symbol:"shop"}));
+ assert.ok(landmarkPriority({symbol:"stop-sign"})<landmarkPriority({symbol:"tourism"}));
+ assert.ok(landmarkPriority({symbol:"temple"})<landmarkPriority({symbol:"shop"}));
+ const graph={nodes:new Map([[1,{lat:0,lon:0}]]),ways:new Map()};
+ const map={state:"ready",headingDegrees:0,nodeId:1,branches:[]};
+ const features=Array.from({length:4},(_,i)=>({id:"node/"+i,name:"shop",kind:"店舗",symbol:"shop",anchor:"node",point:{lat:.000001*(i+1),lon:0}}));
+ const signal={id:"node/10",name:"信号",kind:"信号",symbol:"signal",anchor:"node",point:{lat:.00015,lon:0}};
+ const result=createKomaContext(graph,map,{buildings:[],landmarks:[...features,signal]});
+ assert.equal(result.landmarks[0].id,signal.id);assert.equal(result.landmarks.length,4);
+});
+test("a stop control is visible near the original Misaki junction without altering its route",()=>{
+ for(const sequence of [6,12,26]){
+  const card=poc.koma[sequence-1];
+  assert.ok(card.context.landmarks.some(l=>l.symbol==="stop-control"));
+ }
+});
+test("fixed sign supplement matches its source and preserves the road/context snapshots",()=>{
+ const source=JSON.parse(readFileSync(new URL("../data/misaki/signs-source.json",import.meta.url),"utf8"));
+ assert.equal(hash("../data/misaki/signs.json"),source.snapshotSha256);
+ assert.equal(hash("../data/misaki/osm.json"),source.routingSnapshotSha256);
+ assert.equal(hash("../data/misaki/context.json"),source.contextSnapshotSha256);
+ assert.equal(source.requestedSnapshotAt,poc.source.osmBaseTimestamp);
+});
+
+test("labels stay local on the overview and leave Misaki inlet dots and exit arrow tips uncovered",()=>{
+ const clustered=Array.from({length:4},(_,i)=>({id:String(i),name:"近い店舗の名称",kind:"店舗",x:240+i,y:300+i}));
+ const overview=layoutLandmarks(clustered,800,600,[[{x:0,y:300},{x:800,y:300}],[{x:240,y:0},{x:240,y:600}]]);
+ for(const label of overview)assert.ok(Math.hypot(label.x+label.width/2-label.source.x,label.y+label.height/2-label.source.y)<110);
+ for(const card of [...poc.koma,...poc.referenceKoma].filter(c=>c.map.state==="ready")){
+  const labels=layoutLandmarks(card.context.landmarks,300,280,card.map.branches.map(b=>b.points));
+  const protectedPoints=card.map.branches.flatMap(branch=>[...(branch.arrival?[branch.points.at(-1)]:[]),...(branch.departure?[arrowPath(branch.points).at(-1)]:[])]);
+  for(const point of protectedPoints)for(const label of labels){
+   assert.ok(!(point.x>=label.x&&point.x<=label.x+label.width&&point.y>=label.y&&point.y<=label.y+label.height),"Navigation symbol covered at koma "+card.map.sequence);
+  }
+ }
 });

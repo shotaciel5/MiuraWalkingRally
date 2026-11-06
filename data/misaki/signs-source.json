@@ -1,0 +1,26 @@
+{
+  "provider": "OpenStreetMap",
+  "attribution": "© OpenStreetMap contributors",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "license": "ODbL-1.0",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "sourceType": "derived-from-fixed-road-snapshot",
+  "inputFile": "osm.json",
+  "retrievedAt": "2026-11-06T12:47:59.567Z",
+  "requestedSnapshotAt": "2026-11-06T12:46:21Z",
+  "derivedAt": "2026-11-06T16:43:27.245Z",
+  "snapshotSha256": "a1c87290fe03e89898eb3ad0c436949a7185c5f7e24e9db90fb173cf0c36a998",
+  "routingSnapshotSha256": "13cd793e7ba64c3fdfd1d86438a5eddfa37befaba5458f544a75dca388a65c84",
+  "contextSnapshotSha256": "840b106523a427b9619115577b9dddd42c1d2c30ad1f517858309c75af771e24",
+  "coverage": "Only stop/give-way control nodes already retained in the fixed road snapshot, within the context bounds. This is not an inventory of physical traffic signs.",
+  "physicalSignAcquisition": {
+    "status": "unavailable",
+    "checkedAt": "2026-11-06T16:43:27.247Z",
+    "attempts": [
+      "overpass-api.de: timeout and HTTP 502",
+      "overpass.kumi.systems: timeout"
+    ],
+    "queryVariant": "Both exact tag keys and key regexp were attempted; no new physical sign data was accepted."
+  },
+  "normalization": "Derived nodes retain existing coordinates and tags. No new sign position, direction or routing implication is inferred."
+}

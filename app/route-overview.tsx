@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import type { JunctionCandidate } from "../lib/route/junctions";
 
 import {nextOccurrenceIndex, type ReviewSelection} from "../lib/route/review";
-import {placeLandmarkBadges} from "../lib/route/context";
+import LandmarkLayer from "./landmark-layer";
 import type {ContextData, KomaContext} from "../lib/route/context";
 import type {ContextLayers} from "./koma-figure";
 
@@ -56,7 +56,7 @@ export default function RouteOverview({ data, selection, onSelect, layers, conte
   const segment=next?path.slice(selectedJunction.pathIndex,next.pathIndex+1):[];
   const pinIds=[...new Set(junctions.map(c=>c.nodeId))].sort((a,b)=>Number(a===selectedJunction.nodeId)-Number(b===selectedJunction.nodeId));
   const selectPin=(nodeId:number)=>onSelect({...selection,index:nextOccurrenceIndex(junctions,junctionIndex,nodeId)});
-  const badges=placeLandmarkBadges(context.landmarks.map(l=>{const [x,y]=xy(l.point);return {x,y}}),width,height);
+  const mapLandmarks=context.landmarks.map(l=>{const [x,y]=xy(l.point);return {...l,x,y}});
   const labels: Record<string, [number, number]> = { S: [16, 25], C1: [-92, -18], W1: [-62, -22], C2: [16, -17] };
   return (
     <div className="overview">
@@ -91,7 +91,7 @@ export default function RouteOverview({ data, selection, onSelect, layers, conte
           ))}
         </g>
         {segment.length>1&&<g fill="none" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none"><polyline points={line(segment)} stroke="white" strokeWidth="12"/><polyline data-next-koma-segment={selectedJunction.sequence} points={line(segment)} stroke="#276bb4" strokeWidth="7"/></g>}
-        {layers.landmarks&&context.landmarks.map((l,i)=>{const [x,y]=xy(l.point);return <g key={l.id} data-overview-landmark={l.id} pointerEvents="none"><circle cx={x} cy={y} r="3" fill="#79551d"/><path d={`M${x} ${y}L${badges[i].x} ${badges[i].y}`} stroke="#79551d"/><circle cx={badges[i].x} cy={badges[i].y} r="9" fill="#fff9e8" stroke="#8b692d"/><text x={badges[i].x} y={badges[i].y+4} textAnchor="middle" fontSize="12" fill="#63491e">{i+1}</text></g>})}
+        {layers.landmarks&&<LandmarkLayer features={mapLandmarks} width={width} height={height} roads={data.legs.map(leg=>leg.points.map(p=>{const [x,y]=xy(p);return {x,y}}))} overview/>}
         {data.stops.filter(stop => stop.id !== "G").map(stop => {
           const [x, y] = xy(stop.point);
           const [dx, dy] = labels[stop.id] ?? [16, -18];
@@ -125,7 +125,7 @@ export default function RouteOverview({ data, selection, onSelect, layers, conte
         <span><i className="legend-line road" />OSM道路</span><span><i className="legend-line active-segment"/>選択コマ → 次のコマ</span>
       </div>
       <p className="map-attribution">道路データ © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL 1.0</p>
-      <p className="map-linked-caption" aria-live="polite">選択中：{junctionSource==="generated"?"生成経路":"手動参照"}のコマ #{selectedJunction.sequence}。青い点がコマの位置、青い線が次のコマまでの道路です。GPS現在地ではありません。</p><p className="route-caption">地図の点を選ぶとコマも切り替わります。同じ点を繰り返し押すと再訪順に切り替わります。目印の番号はコマ図と共通です。</p><p className="route-caption">道路中心線による比較用の地図です。道路幅や歩道、横断位置を表すものではありません。重なる往復区間は「区間」ボタンで確認できます。</p>
+      <p className="map-linked-caption" aria-live="polite">選択中：{junctionSource==="generated"?"生成経路":"手動参照"}のコマ #{selectedJunction.sequence}。青い点がコマの位置、青い線が次のコマまでの道路です。GPS現在地ではありません。</p><p className="route-caption">地図の点を選ぶとコマも切り替わります。同じ点を繰り返し押すと再訪順に切り替わります。目印はコマ図と同じ記号・名称で表示します。</p><p className="route-caption">道路中心線による比較用の地図です。道路幅や歩道、横断位置を表すものではありません。重なる往復区間は「区間」ボタンで確認できます。</p>
 
       <section className="junction-inspector" aria-labelledby="junction-title" data-junction-count={junctions.length}>
         <h3 id="junction-title">選択コマの道路接続を照合する</h3>

@@ -3,7 +3,7 @@
 import { useId } from "react";
 import { arrowPath, KOMA_VIEW } from "../lib/route/koma";
 import type { KomaMap } from "../lib/route/koma";
-import {placeLandmarkBadges} from "../lib/route/context";
+import LandmarkLayer from "./landmark-layer";
 import type { KomaContext } from "../lib/route/context";
 export type ContextLayers={buildings:boolean;landmarks:boolean;details:boolean};
 
@@ -16,7 +16,6 @@ export default function KomaFigure({ map, name, context, layers, compact=false }
       <p>近接した分岐や方向・形状の不足により、進む枝を確実に区別できません。全体地図と根拠を確認してください。</p>
     </div>
   );
-  const badges=placeLandmarkBadges(context.landmarks,300,280,map.branches.map(b=>b.points));
   const incoming=map.branches.find(branch=>branch.arrival);
   const outgoing=map.branches.find(branch=>branch.departure);
   const inlet=incoming?.points.at(-1);
@@ -40,12 +39,8 @@ export default function KomaFigure({ map, name, context, layers, compact=false }
         const count=Math.max(1,Math.floor(length/7));
         return Array.from({length:count},(_,j)=>{const t=(j+.5)/count,x=s.from.x+dx*t,y=s.from.y+dy*t;return <line key={i+"-"+j} data-context-steps={s.wayIds.join(",")} x1={x-dy/length*5} y1={y+dx/length*5} x2={x+dy/length*5} y2={y-dx/length*5}/>});
       })}</g>}
-      {layers.landmarks&&context.landmarks.map((l,i)=><g key={l.id} data-context-landmark={l.id} pointerEvents="none">
-        <circle cx={l.x} cy={l.y} r="2.5" fill="#79551d" stroke="white" strokeWidth="1"/>
-        {!compact&&<><path d={`M${l.x} ${l.y}L${badges[i].x} ${badges[i].y}`} stroke="#79551d" strokeWidth="1"/>
-        <circle cx={badges[i].x} cy={badges[i].y} r="8" fill="#fff9e8" stroke="#8b692d"/>
-        <text x={badges[i].x} y={badges[i].y+3} textAnchor="middle" fontSize="10" fill="#63491e" fontWeight="700">{i+1}</text></>}
-      </g>)}
+      {layers.landmarks&&<LandmarkLayer features={context.landmarks} width={300} height={280} roads={map.branches.map(b=>b.points)} compact={compact}/>}
+
       {inlet&&<circle cx={inlet.x} cy={inlet.y} r={6} fill="#263d34" data-koma-inlet-dot="true"/>}
       <circle cx={KOMA_VIEW.centerX} cy={KOMA_VIEW.centerY} r={map.kind==="start"?6:4} fill={map.kind==="start"?"#263d34":"white"} stroke="#263d34" strokeWidth={2}/>
       {!compact&&<text x="150" y="263" textAnchor="middle" className="koma-orientation">{map.kind==="start"?"出る方向が上":map.kind==="finish"?"入ってきた道から、ここで終了":"入ってきた道が下"}</text>}

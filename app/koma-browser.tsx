@@ -1,5 +1,6 @@
 "use client";
 
+import LandmarkIcon from "./landmark-icon";
 import KomaFigure, {type ContextLayers} from "./koma-figure";
 import type {ReviewCard} from "../lib/misaki-review";
 import type {ReviewSelection} from "../lib/route/review";
@@ -24,8 +25,8 @@ export default function KomaBrowser({generated,reference,source,index,onSelect,l
             <span className="koma-cumulative">出発から {Math.round(map.metersFromStart)} m</span>
           </div>
           {layers.landmarks&&map.state==="ready"&&<div className="landmark-key" data-context-key="true">
-            <p>周辺の目印 <small>30m以内・近い順に最大4件</small></p>
-            {card.context.landmarks.length?<ol>{card.context.landmarks.map(l=><li key={l.id}><a href={`https://www.openstreetmap.org/${l.id}`}>{l.name}</a><span>{l.kind} · 約{Math.round(l.meters)}m{l.anchor==="area-label"?" · エリア内の表示点":""}</span></li>)}</ol>:<p className="subtle">この範囲に表示対象の目印はありません。</p>}
+            <p>周辺の目印 <small>30m以内・標識や信号を優先して最大4件</small></p>
+            {card.context.landmarks.length?<ul className="landmark-details">{card.context.landmarks.map(l=><li key={l.id}><LandmarkIcon symbol={l.symbol}/><div><a href={`https://www.openstreetmap.org/${l.id}`}>{l.name}</a><span>{l.kind} · 約{Math.round(l.meters)}m{l.anchor==="area-label"?" · エリア内の表示点":""}</span>{l.detail&&<span>{l.detail}</span>}</div></li>)}</ul>:<p className="subtle">この範囲に表示対象の目印はありません。</p>}
             {card.context.availableLandmarks>4&&<p className="subtle">OSMにある{card.context.availableLandmarks}件から表示しています。</p>}
           </div>}
           {layers.details&&map.state==="ready"&&<p className="context-roadnames">道路名：{[...new Set(card.context.roads.map(r=>r.name).filter(Boolean))].join(" / ")||"OSMの記録なし"}{card.context.steps.length>0?" · 茶色の横線は階段区間":""}</p>}
@@ -43,7 +44,8 @@ export default function KomaBrowser({generated,reference,source,index,onSelect,l
           <p className="route-caption">局所の道路形状を切り出した模式図です。道幅・歩道・横断位置を表しません。距離は図上の長さではなく、次のコマまで道路に沿って集計しています。</p>
           <details className="koma-evidence"><summary>この図の根拠と確認状態</summary>
             <p><a href={`https://www.openstreetmap.org/node/${map.nodeId}`}>OSM node/{map.nodeId}</a> · 通過位置{map.pathIndex}。接続{card.candidate.branches.length}枝。描画は各枝30m以内、次の分岐・終端までです。</p>
-            <p>補足表示は目印30m以内・最大4件、建物は境界35m以内などから最大12件です。番号の引出線の先がOSMの表示点です。登録のない目印や入口は補完しません。</p>
+            <p>実線の赤い「止まれ」は標識タグ、破線の「停」は停止点の記録です。標識の実位置や対象方向、歩行者への指示を保証するものではありません。</p>
+            <p>補足表示は目印30m以内・最大4件、建物は境界35m以内などから最大12件です。記号・名称の引出線の先がOSMの表示点です。登録のない目印や入口は補完しません。</p>
             <p>{map.state==="held"?"図は保留しています。":"元データの局所形状を描画できました。現地での正確性・安全性は未確認です。"}</p>
             {map.issues.length>0&&<p>近接分岐、または方向・形状・通行条件に確認が必要な情報があります。</p>}
             <ul>{card.candidate.branches.map(branch=><li key={branch.neighborNodeId}>接続先 <a href={`https://www.openstreetmap.org/node/${branch.neighborNodeId}`}>{branch.neighborNodeId}</a>{branch.arrival?" / 進入":""}{branch.departure?" / 退出":""} · 退出条件 {branch.exit==="candidate"?"候補":branch.exit==="review"?"保留":"除外"}</li>)}</ul>
