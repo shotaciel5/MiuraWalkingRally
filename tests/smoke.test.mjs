@@ -19,7 +19,7 @@ async function get(path) {
     });
   } catch (cause) {
     throw new Error(
-      "Start the local app with npm run dev (or npm start after building) before npm test.",
+      "Start the local app with npm run dev (or npm start after building) before npm run test:smoke.",
       { cause },
     );
   }
@@ -49,6 +49,14 @@ test("local Next.js HTTP smoke check", async (t) => {
     assert.equal(cssResponse.status, 200);
     assert.match(cssResponse.headers.get("content-type") ?? "", /text\/css/i);
     assert.ok((await cssResponse.text()).length > 0);
+  });
+
+  await t.test("serves the generated route, reference geometry and review status", () => {
+    assert.equal([...html.matchAll(/data-generated-leg=/g)].length, 4);
+    assert.equal([...html.matchAll(/data-reference-leg=/g)].length, 4);
+    assert.match(html, /OpenStreetMap contributors/);
+    assert.match(html, /\u673a\u4e0a\u5019\u88dc\u30fb\u78ba\u8a8d\u5f85\u3061/);
+    assert.match(html.replace(/<!--[\s\S]*?-->/g, ""), /\u6642\u901f4/);
   });
 
   await t.test("returns 404 for an unknown route", async () => {

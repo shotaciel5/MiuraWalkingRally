@@ -12,7 +12,9 @@
     "start": "next start --hostname 127.0.0.1",
     "build": "next build",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test tests/smoke.test.mjs"
+    "test": "node --test tests/route.test.mjs tests/misaki.test.mjs",
+    "test:smoke": "node --test tests/smoke.test.mjs",
+    "route:report": "node scripts/route-report.mjs"
   },
   "dependencies": {
     "next": "15.5.29",
@@ -29,5 +31,6 @@
     "next": {
       "postcss": "8.5.32"
     }
-  }
+  },
+  "type": "module"
 }

@@ -1,0 +1,15 @@
+{
+  "provider": "OpenStreetMap",
+  "attribution": "© OpenStreetMap contributors",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "license": "ODbL-1.0",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "query": "[out:json][timeout:25];\nway[\"highway\"](35.137,139.614,35.147,139.627)->.roads;\n(\n  .roads;\n  node(w.roads);\n  nwr[\"name\"~\"^(三崎港|海南神社|光念寺|本瑞寺)$\"](35.137,139.614,35.147,139.627);\n  rel(bw.roads)[\"type\"~\"^restriction\"];\n);\n(._;>;);\nout body;\n",
+  "retrievedAt": "2026-11-06T12:47:59.567Z",
+  "osmBaseTimestamp": "2026-11-06T12:46:21Z",
+  "originalSha256": "17b0c3d3283d63ba6d9509a393ebbd41b0dd1ce947ca40cbb2a977db5b817835",
+  "snapshotSha256": "13cd793e7ba64c3fdfd1d86438a5eddfa37befaba5458f544a75dca388a65c84",
+  "normalization": "Retained IDs, node coordinates, way references, relation members and routing/place tags; removed editor metadata and unrelated tags.",
+  "httpMethod": "POST"
+}
