@@ -59,6 +59,12 @@ test("local Next.js HTTP smoke check", async (t) => {
     assert.match(html.replace(/<!--[\s\S]*?-->/g, ""), /\u6642\u901f4/);
   });
 
+  await t.test("serves the junction inspection controls and source counts", () => {
+    assert.match(html, /data-junction-count="31"/);
+    assert.match(html, /<select\b[^>]*\bid="junction-point"/);
+    assert.match(html, /data-junction-sequence="1"/);
+    assert.match(html, /data-junction-highlight="1"/);
+  });
   await t.test("returns 404 for an unknown route", async () => {
     const missing = await get("/__smoke_missing_route__");
     assert.equal(missing.status, 404);

@@ -1,13 +1,13 @@
 import RouteOverview, { type OverviewData } from "./route-overview";
-import { createMisakiPoc } from "../lib/misaki";
+import { createMisakiJunctionPoc } from "../lib/misaki-junctions";
 import type { OsmNode } from "../lib/route/types";
 
 function meters(value: number) { return Math.round(value).toLocaleString("ja-JP"); }
 
 export default function Home() {
-  let poc: ReturnType<typeof createMisakiPoc>;
+  let poc: ReturnType<typeof createMisakiJunctionPoc>;
   try {
-    poc = createMisakiPoc();
+    poc = createMisakiJunctionPoc();
   } catch (error) {
     return (
       <main>
@@ -16,12 +16,14 @@ export default function Home() {
       </main>
     );
   }
-  const { graph, route, reference, source } = poc;
+  const { graph, route, reference, source, junctions, referenceJunctions } = poc;
   const point = (id: number) => {
     const node = graph.nodes.get(id) as OsmNode;
     return { lat: node.lat, lon: node.lon };
   };
   const data: OverviewData = {
+    junctions: junctions.candidates,
+    referenceJunctions: referenceJunctions.candidates,
     roads: [...graph.ways.values()].map(way => ({
       id: way.id, points: way.nodes.map(point),
       walking: !graph.diagnostics.some(d => d.type === "way" && d.id === way.id),
@@ -87,7 +89,7 @@ export default function Home() {
         <ul>
           <li>歩道は必須にせず、一般道路と徒歩道を候補にします。徒歩禁止・自動車専用・立入制限を優先し、未解決の条件付き制限は探索に使いません。</li>
           <li>距離はOSM道路中心線の点間距離の合計。時間は時速{route.speedKmh}kmを仮定し、信号待ち・休憩・撮影・坂や階段による減速を含めていません。生成候補に階段区間があります。</li>
-          <li>道路の接続が確認できない点を近さだけでつなぎません。コマ地図・進行方向の案内は次のタスク以降です。</li>
+          <li>道路の接続が確認できない点を近さだけでつなぎません。分岐候補と方位角は検証用の情報です。コマ地図の案内表示は次のタスク以降です。</li>
         </ul>
         <details><summary>仮の到着点と道路データの記録</summary>
           <dl className="anchor-list">{route.stops.map(stop => <div key={stop.id}><dt>{stop.id} · {stop.name} <a href={`https://www.openstreetmap.org/node/${stop.nodeId}`}>OSM node/{stop.nodeId}</a></dt><dd>{stop.note}</dd></div>)}</dl>

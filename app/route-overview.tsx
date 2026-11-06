@@ -1,17 +1,32 @@
 "use client";
 
 import { useState } from "react";
+import type { JunctionCandidate } from "../lib/route/junctions";
 
 type Coordinate = { lat: number; lon: number };
 export type OverviewData = {
   roads: { id: number; points: Coordinate[]; walking: boolean }[];
   legs: { label: string; points: Coordinate[]; reference: Coordinate[] }[];
   stops: { id: string; name: string; point: Coordinate }[];
+  junctions: JunctionCandidate[];
+  referenceJunctions: JunctionCandidate[];
 };
 
 export default function RouteOverview({ data }: { data: OverviewData }) {
   const [selected, setSelected] = useState(-1);
   const [showReference, setShowReference] = useState(true);
+  const [junctionSource, setJunctionSource] = useState<"generated" | "reference">("generated");
+  const [junctionIndex, setJunctionIndex] = useState(0);
+  const junctions = junctionSource === "generated" ? data.junctions : data.referenceJunctions;
+  const selectedJunction = junctions[junctionIndex];
+  const angle = (value: number | null) => value === null ? "—" : value.toFixed(1) + "°";
+  const reasonNames = {start:"出発",finish:"終了",stop:"到着点",junction:"分岐",return:"折返し"};
+  const accessNames = {candidate:"候補",excluded:"除外",review:"保留"};
+  const pointName = (point: JunctionCandidate) => point.stopIds.map(id => data.stops.find(stop => stop.id === id)?.name ?? id).join(" / ");
+  const selectSource = (source: "generated" | "reference") => {
+    setJunctionSource(source); setJunctionIndex(0); setSelected(-1);
+    if (source === "reference") setShowReference(true);
+  };
   const extent = data.legs.flatMap(leg => [...leg.points, ...leg.reference]);
   const midLat = extent.reduce((sum, p) => sum + p.lat, 0) / extent.length;
   const lonFactor = 111_195.08 * Math.cos(midLat * Math.PI / 180);
@@ -71,6 +86,12 @@ export default function RouteOverview({ data }: { data: OverviewData }) {
             </g>
           );
         })}
+        {selectedJunction && (
+          <g data-junction-highlight={selectedJunction.sequence}>
+            <circle cx={xy(selectedJunction.point)[0]} cy={xy(selectedJunction.point)[1]} r={16} fill="none" stroke="#b86a28" strokeWidth={3} />
+            <text x={xy(selectedJunction.point)[0] + 19} y={xy(selectedJunction.point)[1] + 25} className="map-label">#{selectedJunction.sequence}</text>
+          </g>
+        )}
         <g className="map-annotations">
           <path d="M758 60V28m-6 9 6-9 6 9" stroke="#506154" fill="none" strokeWidth="2" />
           <text x={758} y={20} textAnchor="middle">N</text>
@@ -85,6 +106,48 @@ export default function RouteOverview({ data }: { data: OverviewData }) {
       </div>
       <p className="map-attribution">道路データ © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL 1.0</p>
       <p className="route-caption">道路中心線による比較用の地図です。道路幅や歩道、横断位置を表すものではありません。重なる往復区間は「区間」ボタンで確認できます。</p>
+
+      <section className="junction-inspector" aria-labelledby="junction-title" data-junction-count={junctions.length}>
+        <h3 id="junction-title">分岐候補を照合する</h3>
+        <p className="route-caption">元の道路接続から抽出した確認用の情報です。開始・終了・到着点を含み、再訪は別件に数えています。コマ地図の図形・道案内はまだ生成していません。</p>
+        <div className="junction-source" aria-label="分岐の比較対象">
+          <button type="button" aria-pressed={junctionSource === "generated"} onClick={() => selectSource("generated")}>生成候補 {data.junctions.length}件</button>
+          <button type="button" aria-pressed={junctionSource === "reference"} onClick={() => selectSource("reference")}>手動参照 {data.referenceJunctions.length}件</button>
+        </div>
+        <label htmlFor="junction-point">通過する候補を選択</label>
+        <select id="junction-point" value={junctionIndex} onChange={event => {setJunctionIndex(Number(event.target.value)); setSelected(-1);}}>
+          {junctions.map((point, i) => <option key={point.pathIndex} value={i}>#{point.sequence} {pointName(point) || "分岐"} · 累積{Math.round(point.metersFromStart)}m</option>)}
+        </select>
+        {selectedJunction && (
+          <div className="junction-result" aria-live="polite" data-junction-sequence={selectedJunction.sequence}>
+            <p className="junction-kind">#{selectedJunction.sequence} {pointName(selectedJunction)} · {selectedJunction.reasons.map(reason => reasonNames[reason]).join(" / ")}</p>
+            <dl className="junction-metrics">
+              <div><dt>接続する枝</dt><dd>{selectedJunction.branches.length}本</dd></div>
+              <div><dt>次の候補まで</dt><dd>{selectedJunction.metersToNext === null ? "終了" : Math.round(selectedJunction.metersToNext) + " m"}</dd></div>
+              <div><dt>進入 → 退出（北基準）</dt><dd>{angle(selectedJunction.arrival?.bearingDegrees ?? null)} → {angle(selectedJunction.departure?.bearingDegrees ?? null)}</dd></div>
+              <div><dt>進入方向からの相対角</dt><dd>{angle(selectedJunction.turnDegrees)}</dd></div>
+            </dl>
+            <p className="route-caption">北基準は北0°・時計回り。相対角は正が右、負が左で、−180°は折返し方向です。角度は直近の元ノード間から計算しています。</p>
+            {selectedJunction.issues.length > 0 && <p className="junction-warning">角度・通行条件・切出し範囲に確認が必要なデータがあります。確定した案内として扱えません。</p>}
+            <details className="junction-evidence">
+              <summary>接続・方向の根拠を見る</summary>
+              <p>通過位置 {selectedJunction.pathIndex} · <a href={`https://www.openstreetmap.org/node/${selectedJunction.nodeId}`}>OSM node/{selectedJunction.nodeId}</a>。同じ場所の再訪も、通過順に別の候補として記録します。</p>
+              <p>各枝の角度は分岐から外へ向く方向です。進入の向きは、進入枝の反対向きです。</p>
+              <div className="table-scroll"><table><caption className="sr-only">選択した分岐に接続する各枝の根拠</caption><thead><tr><th>接続先・道路</th><th>経路上の役割</th><th>外向き北 / 相対角</th><th>徒歩 進入 / 退出</th></tr></thead><tbody>
+                {selectedJunction.branches.map(branch => (
+                  <tr key={branch.neighborNodeId}>
+                    <td><a href={`https://www.openstreetmap.org/node/${branch.neighborNodeId}`}>node/{branch.neighborNodeId}</a><span className="branch-ways">{branch.evidence.map(e => <a key={e.wayId} href={`https://www.openstreetmap.org/way/${e.wayId}`}>way/{e.wayId} ({e.highway})</a>)}</span></td>
+                    <td>{[branch.arrival ? "進入" : "", branch.departure ? "退出" : ""].filter(Boolean).join("・") || "他の枝"}</td>
+                    <td>{angle(branch.bearingDegrees)} / {angle(branch.relativeDegrees)}</td>
+                    <td>{accessNames[branch.entry]} / {accessNames[branch.exit]}</td>
+                  </tr>
+                ))}
+              </tbody></table></div>
+              <p>枝の通行状態は隣接する1区間のデータ上の判定です。先の道路全体の通行許可・安全性を保証しません。座標は選択時点の固定データを使い、リンク先OSMの更新後の内容とは異なる場合があります。</p>
+            </details>
+          </div>
+        )}
+      </section>
     </div>
   );
 }

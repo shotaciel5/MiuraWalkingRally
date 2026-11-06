@@ -91,3 +91,21 @@ footer { display: flex; justify-content: space-between; padding: 35px 0 0; color
   th, td { padding: 10px 8px; font-size: 11px; white-space: nowrap; }
   footer { gap: 12px; flex-wrap: wrap; }
 }
+
+.junction-inspector { border-top: 1px solid var(--line); margin-top: 22px; padding-top: 22px; }
+.junction-inspector h3 { margin: 0 0 9px; font-size: 17px; }
+.junction-source { display: flex; flex-wrap: wrap; gap: 7px; margin: 18px 0; }
+.junction-source button { cursor: pointer; border: 1px solid var(--line); border-radius: 7px; min-height: 44px; padding: 8px 12px; color: var(--muted); background: white; font-size: 12px; }
+.junction-source button[aria-pressed="true"] { color: white; background: var(--green); border-color: var(--green); }
+.junction-inspector > label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+.junction-inspector select { display: block; width: 100%; min-width: 0; min-height: 44px; padding: 8px 10px; border: 1px solid #c7d4c9; border-radius: 7px; background: white; color: var(--ink); font: inherit; font-size: 13px; }
+.junction-result { margin-top: 18px; }
+.junction-kind { font-size: 13px; font-weight: 700; }
+.junction-metrics { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin: 16px 0; }
+.junction-metrics dt { color: var(--muted); font-size: 11px; font-weight: 400; }
+.junction-metrics dd { margin: 3px 0 0; color: var(--ink); font-size: 13px; }
+.junction-warning { background: #fff6df; color: #79551d; padding: 12px; font-size: 12px; border-radius: 7px; }
+.branch-ways { display: flex; flex-direction: column; font-size: 10px; }
+.junction-evidence table { font-size: 11px; }
+.junction-evidence th, .junction-evidence td { padding: 9px 6px; }
+@media (max-width:800px) { .junction-evidence th, .junction-evidence td { white-space: nowrap; } }

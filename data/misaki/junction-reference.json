@@ -1,0 +1,209 @@
+{
+  "schemaVersion": 1,
+  "snapshotSha256": "13cd793e7ba64c3fdfd1d86438a5eddfa37befaba5458f544a75dca388a65c84",
+  "basis": "P2-05の抽出処理を実装する前に、固定OSMのway/node列と承認済み経路の訪問順から手作業で照合点を記録。現地の交差点形状・通行確認ではない。",
+  "cases": [
+    {
+      "id": "J01-port",
+      "area": "J-01",
+      "nodeId": 355777203,
+      "neighbors": [
+        355777205,
+        6017293033
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 0,
+          "previous": null,
+          "next": 6017293033,
+          "stopIds": [
+            "S"
+          ]
+        },
+        {
+          "pathIndex": 64,
+          "previous": 6017293033,
+          "next": null,
+          "stopIds": [
+            "G"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J01-street",
+      "area": "J-01",
+      "nodeId": 355777201,
+      "neighbors": [
+        6017293023,
+        6017293024,
+        6017293033
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 2,
+          "previous": 6017293033,
+          "next": 6017293024
+        },
+        {
+          "pathIndex": 62,
+          "previous": 6017293024,
+          "next": 6017293033
+        }
+      ]
+    },
+    {
+      "id": "J02-kainan",
+      "area": "J-02",
+      "nodeId": 2845402200,
+      "neighbors": [
+        1469287397,
+        3289972120,
+        3880329682,
+        3880329685
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 15,
+          "previous": 1469287397,
+          "next": 1469287397,
+          "stopIds": [
+            "C1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J03-four-arms",
+      "area": "J-03",
+      "nodeId": 1469285921,
+      "neighbors": [
+        13785934758,
+        13785960265,
+        13785960266,
+        2845403904
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 12,
+          "previous": 13785934758,
+          "next": 2845403904
+        },
+        {
+          "pathIndex": 18,
+          "previous": 2845403904,
+          "next": 13785960266
+        },
+        {
+          "pathIndex": 52,
+          "previous": 13785960266,
+          "next": 13785934758
+        }
+      ]
+    },
+    {
+      "id": "J03-steps",
+      "area": "J-03",
+      "nodeId": 1469285653,
+      "neighbors": [
+        1469285590,
+        1469285798,
+        7704328846
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 21,
+          "previous": 1469285798,
+          "next": 7704328846
+        },
+        {
+          "pathIndex": 49,
+          "previous": 7704328846,
+          "next": 1469285798
+        }
+      ]
+    },
+    {
+      "id": "J04-paths",
+      "area": "J-04",
+      "nodeId": 2845403997,
+      "neighbors": [
+        13785960251,
+        2845402186,
+        2845403974
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 28,
+          "previous": 2845403974,
+          "next": 2845402186
+        },
+        {
+          "pathIndex": 30,
+          "previous": 2845402186,
+          "next": 13785960251
+        },
+        {
+          "pathIndex": 42,
+          "previous": 13785960251,
+          "next": 2845403974
+        }
+      ]
+    },
+    {
+      "id": "J04-konenji",
+      "area": "J-04",
+      "nodeId": 2845402186,
+      "neighbors": [
+        2845403997
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 29,
+          "previous": 2845403997,
+          "next": 2845403997,
+          "stopIds": [
+            "W1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J05-honzuiji",
+      "area": "J-05",
+      "nodeId": 2845403964,
+      "neighbors": [
+        13785960250,
+        13785960255
+      ],
+      "generatedPasses": [
+        {
+          "pathIndex": 36,
+          "previous": 13785960255,
+          "next": 13785960255,
+          "stopIds": [
+            "C2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "J05-reference-only",
+      "area": "J-05",
+      "nodeId": 1469285056,
+      "neighbors": [
+        1469285137,
+        2159276973,
+        3325095324,
+        11578759238
+      ],
+      "generatedPasses": [],
+      "referencePasses": [
+        {
+          "previous": 1469285137,
+          "next": 3325095324
+        }
+      ]
+    }
+  ]
+}
