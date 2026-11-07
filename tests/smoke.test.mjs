@@ -115,13 +115,25 @@ test("participant rally list and detail HTTP smoke check",async t=>{
     assert.ok(anchors.some(tag=>/data-rally-back-link/.test(tag)&&/href="\/"/.test(tag)),"Detail must link back to the rally list.");
     assert.match(detail,/name="robots"[^>]*noindex/);
   });
-  await t.test("shows unavailable participation and undecided conditions without a start or check-in action",()=>{
+  await t.test("distinguishes the development demo from public participation and future visit actions",()=>{
     for(const html of [list,detail]){
       assert.ok(plain(html).includes("参加は受け付けていません"));
       const actions=[...html.matchAll(/<(?:a|button)\b[^>]*>[\s\S]*?<\/(?:a|button)>/g)].map(m=>m[0]);
       assert.ok(!actions.some(action=>/参加する|ラリーを開始|チェックイン|QRを読み取る|クーポンを受け取る/.test(action)));
     }
     assert.ok(detail.includes("達成条件と特典の内容は未定"));
+  });
+  await t.test("serves a demo start page with a matching edition and detail link",async()=>{
+    const response=await get(rally.href+"/play"),html=await response.text();
+    assert.equal(response.status,200);assert.match(html,/data-participant-page="play"/);
+    assert.match(html,/data-participation-state="loading"/);
+    assert.ok(html.includes(rally.revision));assert.ok(html.includes('href="'+rally.href+'"'));
+    assert.match(html,/name="robots"[^>]*noindex/);
+  });
+  await t.test("server HTML never invents a per-tab participation",()=>{
+    assert.match(detail,/data-participation-state="loading"/);
+    assert.doesNotMatch(detail,/data-participation-id=/);
+    assert.doesNotMatch(detail,/data-participation-state="active"/);
   });
   await t.test("returns 404 for an unknown rally",async()=>{
     const response=await get("/rallies/__unknown_rally__");

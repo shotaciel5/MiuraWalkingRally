@@ -20,3 +20,9 @@ test("participant stop roles distinguish start/goal visits and checkpoints from 
   assert.equal(byId("W1").role,"経由地候補");
   assert.deepEqual(rally.stops.filter(s=>s.role==="チェックポイント候補").map(s=>s.id),["C1","C2"]);
 });
+
+test("the fixed demo exposes a stable content revision for participation binding",()=>{
+  const a=getDemoRally(),b=getDemoRally();
+  assert.match(a.revision,/^demo-v1-[0-9a-f]{64}$/);
+  assert.equal(a.revision,b.revision);
+});

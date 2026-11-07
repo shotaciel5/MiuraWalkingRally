@@ -388,3 +388,29 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
   .rally-footer { font-size:10px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+
+/* Anonymous demo start. Its saved state is limited to the current tab. */
+.participation-start { margin-bottom:22px; }
+.participation-start .session-scope { font-size:12px; color:var(--muted); margin:14px 0; }
+.demo-start-button { width:100%; cursor:pointer; font:inherit; font-size:14px; margin-top:18px; }
+.participation-start .rally-secondary-link { cursor:pointer; font:inherit; font-size:12px; }
+.session-details { margin-top:18px; color:var(--muted); font-size:11px; }
+.session-details summary { cursor:pointer; width:fit-content; }
+.session-details p { margin:10px 0 0; line-height:1.9; }
+.participation-active { padding-top:15px; }
+.participation-active > p { font-size:13px; }
+.participation-status { display:inline-flex; padding:3px 10px; border:1px solid #bcd2bf; border-radius:24px; background:#edf4e8; color:var(--green); font-size:12px; font-weight:600; }
+.participation-start-facts { margin:15px 0 20px; display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; }
+.participation-start-facts dt { font-size:11px; color:var(--muted); font-weight:400; }
+.participation-start-facts dd { font-size:13px; margin:4px 0 0; overflow-wrap:anywhere; }
+.participation-error { padding:13px 15px; border:1px solid #d7b490; background:#fcf4e9; border-radius:8px; color:#775333; font-size:12px; }
+.participation-error p { margin:0 0 12px; }
+.participation-page .participation-heading { margin:30px 0 26px; }
+.participation-heading h1 { margin-top:15px; font-size:clamp(29px,3.6vw,41px); }
+.participation-page .participation-start { margin:26px auto 22px; max-width:720px; }
+.participation-page > .rally-secondary-link { max-width:720px; margin:0 auto; }
+@media(max-width:600px) {
+  .participation-start-facts { grid-template-columns:minmax(0,1fr); gap:12px; }
+  .participation-start .session-scope { font-size:11px; }
+  .demo-start-button { min-height:50px; }
+}

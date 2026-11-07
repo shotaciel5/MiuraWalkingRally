@@ -1,3 +1,4 @@
+import {createHash} from "node:crypto";
 import {createMisakiPoc} from "./misaki.ts";
 
 export const DEMO_RALLY_ID="misaki-shitamachi";
@@ -12,8 +13,8 @@ const stopCopy:Record<string,{role:string;description:string}>={
 
 // This participant view uses the same fixed route as the PoC; no copied distance/time.
 export function getDemoRally(){
-  const {route,graph}=createMisakiPoc();
-  return {
+  const {route,graph,source}=createMisakiPoc();
+  const rally = {
     id:DEMO_RALLY_ID,href:DEMO_RALLY_HREF,title:"三崎下町さんぽ",area:"三崎下町",
     subtitle:"港から、神社とお寺へ。",
     description:"三崎港周辺を起点に、海南神社・光念寺・本瑞寺をたどり、港に戻る周回コースの開発用デモです。",
@@ -27,5 +28,9 @@ export function getDemoRally(){
       return {id:stop.id,name:stop.name,...copy};
     }),
   };
+  const revision = "demo-v1-" + createHash("sha256").update(JSON.stringify({
+    rally, roadSnapshot:source.snapshotSha256, legs:route.legs,
+  })).digest("hex");
+  return {...rally, revision};
 }
 export type DemoRally=ReturnType<typeof getDemoRally>;

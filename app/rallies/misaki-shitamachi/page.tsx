@@ -1,6 +1,7 @@
 import type {Metadata} from "next";
 import Link from "next/link";
 import SiteHeader from "../../site-header";
+import ParticipationPanel from "../../participation-panel";
 import {ArrowIcon,DemoBadge,DemoNotice,RallyArtwork,RallyFacts,RallyFooter,WalkingEstimateNote} from "../../rally-ui";
 import {getDemoRally} from "../../../lib/demo-rally";
 
@@ -18,13 +19,14 @@ export default function RallyDetail(){
     <DemoNotice/>
     <div className="rally-detail-layout">
       <div>
+        <ParticipationPanel rally={{id:rally.id, revision:rally.revision, title:rally.title, href:rally.href}}/>
         <section className="participant-panel" aria-labelledby="course-stops-title" id="course-stops">
           <p className="eyebrow">COURSE PREVIEW</p><h2 id="course-stops-title">地点順のプレビュー</h2><p className="participant-note">地点と順番は開発用の想定です。施設の入口や、立ち止まれる場所は確認待ちです。</p>
           <ol className="participant-stop-list">{rally.stops.map((stop,i)=><li key={stop.id} data-rally-stop={stop.id}><span className="participant-stop-marker" aria-hidden="true">{i===0?"S":i===rally.stops.length-1?"G":String(i)}</span><div><span className="participant-stop-role">{stop.role}</span><h3>{stop.name}</h3><p>{stop.description}</p></div></li>)}</ol>
         </section>
         <section className="participant-panel participation-panel" aria-labelledby="participation-title">
           <p className="eyebrow">BEFORE YOU JOIN</p><h2 id="participation-title">参加条件と確認中の内容</h2>
-          <dl className="participation-conditions"><div><dt>参加受付</dt><dd>公開前のため、現在は参加できません。コース情報をご覧いただくためのデモです。</dd></div><div><dt>チェックポイントの判定</dt><dd>地点と達成方法を調整中です。</dd></div><div><dt>ゴール・特典</dt><dd>達成条件と特典の内容は未定です。</dd></div><div><dt>道順の確認</dt><dd>入口・横断・階段や通路の利用条件を確認する必要があります。</dd></div></dl>
+          <dl className="participation-conditions"><div><dt>参加受付</dt><dd>開発用デモの開始を試せます。一般向けの参加受付は行っていません。</dd></div><div><dt>チェックポイントの判定</dt><dd>地点と達成方法を調整中です。</dd></div><div><dt>ゴール・特典</dt><dd>達成条件と特典の内容は未定です。</dd></div><div><dt>道順の確認</dt><dd>入口・横断・階段や通路の利用条件を確認する必要があります。</dd></div></dl>
         </section>
       </div>
       <aside className="participant-panel rally-summary" aria-labelledby="summary-title">

@@ -2,7 +2,7 @@ import type {DemoRally} from "../lib/demo-rally";
 
 export function DemoBadge(){return <span className="demo-badge">開発用・未公開</span>}
 export function DemoNotice(){
-  return <aside className="demo-notice" aria-label="公開・参加受付の状態"><span aria-hidden="true" className="demo-notice-mark">i</span><div><strong>コース情報のプレビューです</strong><p>現地の入口・通行・横断などは未確認です。現在は情報の閲覧のみで、参加は受け付けていません。</p></div></aside>;
+  return <aside className="demo-notice" aria-label="公開・参加受付の状態"><span aria-hidden="true" className="demo-notice-mark">i</span><div><strong>開発用コースのデモです</strong><p>現地の入口・通行・横断などは未確認です。開発用デモのみ試せます。一般の参加は受け付けていません。</p></div></aside>;
 }
 export function RallyFacts({rally}:{rally:DemoRally}){
   return <dl className="rally-facts" aria-label="歩行の目安">
