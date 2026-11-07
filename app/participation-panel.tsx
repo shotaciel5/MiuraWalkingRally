@@ -1,6 +1,7 @@
 "use client";
 
 import {useEffect, useState} from "react";
+import type {ReactNode} from "react";
 import Link from "next/link";
 import {useRouter} from "next/navigation";
 import {readParticipation, startParticipation} from "../lib/participation";
@@ -9,10 +10,11 @@ import type {ParticipationState, RallyEdition} from "../lib/participation";
 type Props = {
   rally: RallyEdition & { title: string; href: string };
   view?: "detail" | "play";
+  children?: ReactNode;
 };
 const storage = () => window.sessionStorage;
 
-export default function ParticipationPanel({rally, view = "detail"}: Props) {
+export default function ParticipationPanel({rally, view = "detail", children}: Props) {
   const router = useRouter();
   const [state, setState] = useState<ParticipationState | {status: "loading"}>({status: "loading"});
   useEffect(() => { setState(readParticipation(storage, rally)); }, [rally.id, rally.revision]);
@@ -24,10 +26,19 @@ export default function ParticipationPanel({rally, view = "detail"}: Props) {
     if (next.status === "active" && view === "detail") router.push(rally.href + "/play");
   }
   const incompatible = state.status === "invalid" || state.status === "different-edition";
+  if (view === "play" && state.status === "active" && children) return <>
+    <section className="participant-session-bar" aria-label="デモの開始記録" data-participation-state="active">
+      <div data-participation-id={state.participation.participationId} data-participation-revision={state.participation.rallyRevision}>
+        <span className="participation-status">開始済み</span><span>このタブの記録を引き継いでいます。</span>
+        <details className="session-details"><summary>開始記録と保持範囲</summary><p>開始：<time dateTime={state.participation.startedAt}>{new Intl.DateTimeFormat("ja-JP", {dateStyle:"medium", timeStyle:"short", timeZone:"Asia/Tokyo"}).format(new Date(state.participation.startedAt))}</time>。開始記録はこのタブ内に一時保存します。通常はタブを閉じると消え、複製やブラウザ復元でコピー・復元される場合があります。閲覧位置は再読込みで最初に戻ります。コマの閲覧では達成を記録しません。</p></details>
+      </div>
+    </section>
+    {children}
+  </>;
   return <section className="participant-panel participation-start" aria-labelledby="demo-start-title" data-participation-state={state.status}>
     <p className="eyebrow">TRY THE DEMO</p>
     <h2 id="demo-start-title">{state.status === "active" ? "開始済みのデモ" : "デモを試す"}</h2>
-    <p className="participant-note">ログインや個人情報の入力は不要です。試せるのはデモの開始と再表示です。実際の散策には使用できません。</p>
+    <p className="participant-note">ログインや個人情報の入力は不要です。デモの開始、コマ地図・地点情報の閲覧を試せます。実際の散策には使用できません。</p>
     <p className="session-scope">開始記録はこのタブ内に保存します。再読込み後も続けられますが、通常はタブを閉じると消えます。</p>
     {state.status === "loading" && <><p role="status">開始記録を確認しています…</p><noscript><p>デモの開始にはJavaScriptを有効にしてください。</p></noscript></>}
     {state.status === "active" && <div className="participation-active" data-participation-id={state.participation.participationId} data-participation-revision={state.participation.rallyRevision}>

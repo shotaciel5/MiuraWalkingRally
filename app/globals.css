@@ -414,3 +414,55 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
   .participation-start .session-scope { font-size:11px; }
   .demo-start-button { min-height:50px; }
 }
+
+/* Participant-only navigation reuses the original koma figure and projection. */
+.participant-navigation-page .participation-heading { margin:22px 0; }
+.participant-session-bar { margin:22px 0; padding:14px 18px; border:1px solid var(--line); border-radius:10px; background:#f2f5ed; font-size:12px; }
+.participant-session-bar > div { display:flex; align-items:center; gap:10px 15px; flex-wrap:wrap; }
+.participant-session-bar .session-details { flex-basis:100%; margin-top:0; }
+.participant-session-bar .session-details p { max-width:760px; }
+.participant-navigation-layout { display:grid; grid-template-columns:minmax(0,1fr) 310px; align-items:start; gap:23px; margin-bottom:26px; }
+.participant-frame { padding:26px; }
+.participant-frame-heading { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:12px; color:var(--muted); }
+.participant-frame-heading .eyebrow { margin:0; }
+.participant-frame h2 { margin:14px 0 7px; scroll-margin-top:16px; }
+.participant-figure-guide { font-size:12px; color:var(--muted); margin:0 0 17px; }
+.participant-figure { max-width:390px; margin:0 auto; }
+.participant-frame .koma-distance { margin-top:14px; }
+.participant-koma-select { display:block; margin-top:22px; color:var(--muted); font-size:12px; }
+.participant-koma-select select { display:block; width:100%; min-width:0; min-height:46px; margin-top:7px; padding:10px; border:1px solid #bdcfbf; background:white; border-radius:8px; font:inherit; color:var(--ink); }
+.participant-spot { border-top:1px solid var(--line); padding-top:22px; margin-top:24px; }
+.participant-spot h3 { margin:6px 0 10px; font-size:21px; }
+.participant-spot > p { font-size:12px; color:var(--muted); }
+.participant-spot-photo { margin:18px 0 0; }
+.participant-spot-photo img { display:block; width:100%; height:auto; border-radius:9px; border:1px solid var(--line); }
+.participant-spot-photo img[hidden] { display:none; }
+.participant-spot-photo figcaption { margin-top:10px; color:var(--muted); font-size:10px; overflow-wrap:anywhere; }
+.participant-spot-photo figcaption > span { display:block; margin-top:5px; }
+.participant-spot-photo a { text-underline-offset:2px; }
+.photo-unavailable { padding:20px; border:1px dashed #c6d3c4; border-radius:9px; font-size:12px; color:var(--muted); background:#f6f7f0; }
+.participant-map-notes { margin-top:24px; padding-top:17px; border-top:1px solid var(--line); font-size:11px; color:var(--muted); }
+.participant-map-notes summary { cursor:pointer; width:fit-content; }
+.participant-map-notes p { line-height:1.9; margin:12px 0 0; }
+.participant-frame .map-attribution { margin-bottom:0; }
+.participant-checkpoints { position:sticky; top:16px; }
+.participant-checkpoints h2 { font-size:19px; }
+.participant-checkpoints ol { padding:0; margin:22px 0; list-style:none; }
+.participant-checkpoints li { padding:17px 0; border-top:1px solid var(--line); }
+.participant-checkpoints li > strong { display:block; font-size:17px; }
+.checkpoint-state { display:inline-flex; padding:2px 8px; border:1px solid #d7d5c7; border-radius:20px; font-size:10px; color:#71684f; background:#faf7ed; }
+.participant-checkpoints li .checkpoint-state { margin:7px 0 12px; }
+.participant-checkpoints button { cursor:pointer; display:flex; justify-content:space-between; gap:10px; width:100%; padding:10px 11px; min-height:46px; border:1px solid #bdcfbf; border-radius:7px; background:white; color:var(--green); font:inherit; font-size:12px; text-align:left; }
+.participant-checkpoints button:hover { background:#f3f7ee; }
+.navigation-retention { border-top:1px solid var(--line); margin-top:20px; padding-top:17px; }
+.participant-finish-note { margin:18px 0 0; padding:13px 15px; border-radius:8px; background:#f4f2e7; color:#71684f; font-size:12px; }
+@media(max-width:850px) {
+  .participant-navigation-layout { grid-template-columns:minmax(0,1fr); }
+  .participant-checkpoints { position:static; }
+}
+@media(max-width:600px) {
+  .participant-frame { padding:19px 16px; }
+  .participant-frame-heading { font-size:11px; }
+  .participant-session-bar { padding:13px 15px; font-size:11px; }
+  .participant-figure-guide { font-size:11px; }
+}

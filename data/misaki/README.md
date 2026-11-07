@@ -55,3 +55,7 @@ node scripts/fetch-misaki-signs.mjs --refresh
 ~~~
 
 取得スクリプトは同じ基準時刻・小範囲の明示タグだけを要求します。公共APIの失敗時に空データを成功として保存しません。データと記号の意味・未確認事項は[PoC記録15節](../../docs/poc-route-map.md#p2-06c)を参照してください。
+
+## 参考写真のメタデータ（P3-03）
+
+spot-photos.jsonはOSMからの抽出ではなく、C1/C2の写真について作者・原典/固定版・個別ライセンス・取得URL・寸法/バイト数/ハッシュを記録する。写真本体と条件は[public/photos](../../public/photos/README.md)を参照。写真へ一律にODbLを適用せず、各画像のCC BY-SA 4.0またはCC BY 4.0の表示を保持する。既存の道路/補足スナップショットとそのODbL条件は変えない。

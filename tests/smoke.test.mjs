@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {createHash} from "node:crypto";
 import test from "node:test";
 import {getDemoRally} from "../lib/demo-rally.ts";
 
@@ -134,6 +135,18 @@ test("participant rally list and detail HTTP smoke check",async t=>{
     assert.match(detail,/data-participation-state="loading"/);
     assert.doesNotMatch(detail,/data-participation-id=/);
     assert.doesNotMatch(detail,/data-participation-state="active"/);
+  });
+  await t.test("serves the two local reference photos with their recorded bytes",async()=>{
+    for(const spot of rally.stops.filter(s=>s.photo)){
+      const photo=spot.photo,response=await get(photo.path),bytes=Buffer.from(await response.arrayBuffer());
+      assert.equal(response.status,200);assert.match(response.headers.get("content-type")??"",/image\/jpeg/);
+      assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256);
+    }
+  });
+  await t.test("does not render an active navigator before the tab explicitly starts",async()=>{
+    const response=await get(rally.href+"/play"),html=await response.text();
+    assert.doesNotMatch(html,/<section\b[^>]*data-participant-navigator/);
+    assert.match(html,/data-participation-state="loading"/);
   });
   await t.test("returns 404 for an unknown rally",async()=>{
     const response=await get("/rallies/__unknown_rally__");
