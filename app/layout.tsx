@@ -3,9 +3,9 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "三崎下町のコマ地図 | 三浦市ウォーキングラリー",
+  title: {default:"三浦市ウォーキングラリー",template:"%s | 三浦市ウォーキングラリー"},
   description:
-    "三崎下町の短い周回を題材に、徒歩ルートとコマ地図の案内を検証します。",
+    "三崎下町の開発用ラリーの概要・地点順・歩行の目安と、コマ地図の検証画面を確認できます。",
   robots: { index: false, follow: false },
 };
 

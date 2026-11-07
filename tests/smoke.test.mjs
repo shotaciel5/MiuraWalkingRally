@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import {getDemoRally} from "../lib/demo-rally.ts";
 
 const baseUrl = new URL(
   process.env.SMOKE_BASE_URL ?? "http://127.0.0.1:3000",
@@ -25,8 +26,8 @@ async function get(path) {
   }
 }
 
-test("local Next.js HTTP smoke check", async (t) => {
-  const response = await get("/");
+test("retained route PoC HTTP smoke check", async (t) => {
+  const response = await get("/poc");
   const html = await response.text();
 
   await t.test("serves a Japanese HTML document with a main landmark", () => {
@@ -88,5 +89,42 @@ test("local Next.js HTTP smoke check", async (t) => {
     const missing = await get("/__smoke_missing_route__");
     assert.equal(missing.status, 404);
     await missing.arrayBuffer();
+  });
+});
+
+
+test("participant rally list and detail HTTP smoke check",async t=>{
+  const rally=getDemoRally(),listResponse=await get("/"),list=await listResponse.text();
+  const detailResponse=await get(rally.href),detail=await detailResponse.text();
+  const plain=html=>html.replace(/<!--[\s\S]*?-->/g,"");
+  await t.test("serves one unpublished rally with a link to its detail",()=>{
+    assert.equal(listResponse.status,200);assert.match(list,/data-participant-page="list"/);
+    assert.equal([...list.matchAll(/data-rally-card=/g)].length,1);
+    assert.ok(list.includes('href="'+rally.href+'"'));
+    assert.ok(list.includes(rally.title));assert.ok(list.includes("開発用・未公開"));
+    assert.match(list,/<html\b[^>]*\blang="ja"/);assert.match(list,/<meta\b[^>]*\bname="robots"[^>]*noindex/);
+  });
+  await t.test("serves detail with the same route facts, stop order and return path",()=>{
+    assert.equal(detailResponse.status,200);assert.match(detail,/data-participant-page="detail"/);
+    assert.ok(detail.includes('data-rally-id="'+rally.id+'"'));
+    assert.ok(list.includes('data-rally-distance="'+rally.distanceMeters+'"'));
+    assert.ok(detail.includes('data-rally-distance="'+rally.distanceMeters+'"'));
+    assert.ok(detail.includes('data-rally-minutes="'+rally.walkingMinutes+'"'));
+    assert.deepEqual([...detail.matchAll(/data-rally-stop="([^"]+)"/g)].map(m=>m[1]),rally.stops.map(s=>s.id));
+    const anchors=[...detail.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]);
+    assert.ok(anchors.some(tag=>/data-rally-back-link/.test(tag)&&/href="\/"/.test(tag)),"Detail must link back to the rally list.");
+    assert.match(detail,/name="robots"[^>]*noindex/);
+  });
+  await t.test("shows unavailable participation and undecided conditions without a start or check-in action",()=>{
+    for(const html of [list,detail]){
+      assert.ok(plain(html).includes("参加は受け付けていません"));
+      const actions=[...html.matchAll(/<(?:a|button)\b[^>]*>[\s\S]*?<\/(?:a|button)>/g)].map(m=>m[0]);
+      assert.ok(!actions.some(action=>/参加する|ラリーを開始|チェックイン|QRを読み取る|クーポンを受け取る/.test(action)));
+    }
+    assert.ok(detail.includes("達成条件と特典の内容は未定"));
+  });
+  await t.test("returns 404 for an unknown rally",async()=>{
+    const response=await get("/rallies/__unknown_rally__");
+    assert.equal(response.status,404);await response.arrayBuffer();
   });
 });
