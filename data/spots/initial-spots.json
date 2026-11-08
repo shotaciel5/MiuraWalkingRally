@@ -1,0 +1,4233 @@
+{
+  "schemaVersion": 1,
+  "sourceSnapshotSha256": "28ed822530bf8017e3a27b90d20fc0ae30439b9ada9123c7a66ccff16bec8ff4",
+  "roadSnapshotSha256": "13cd793e7ba64c3fdfd1d86438a5eddfa37befaba5458f544a75dca388a65c84",
+  "spots": [
+    {
+      "id": "osm-node-1211621029",
+      "name": "城ヶ島灯台",
+      "category": "attraction",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1350791,
+        "lon": 139.6111277,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 1211621029,
+        "url": "https://www.openstreetmap.org/node/1211621029"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-1947511994",
+      "name": "丸一鮮魚店&食堂",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1403486,
+        "lon": 139.6184478,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 1947511994,
+        "url": "https://www.openstreetmap.org/node/1947511994"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-1947514027",
+      "name": "しぶき亭",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1365968,
+        "lon": 139.6128407,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 1947514027,
+        "url": "https://www.openstreetmap.org/node/1947514027"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-2046962408",
+      "name": "うらりマルシェ さかな館",
+      "category": "market",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1409278,
+        "lon": 139.616376,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 2046962408,
+        "url": "https://www.openstreetmap.org/node/2046962408"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3866592181",
+      "name": "TOY CHERRY",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1485552,
+        "lon": 139.6267238,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3866592181,
+        "url": "https://www.openstreetmap.org/node/3866592181"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3867070376",
+      "name": "CREATE SD",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1482057,
+        "lon": 139.6289406,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3867070376,
+        "url": "https://www.openstreetmap.org/node/3867070376"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3867070378",
+      "name": "ファミリーマート",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1487848,
+        "lon": 139.6291599,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3867070378,
+        "url": "https://www.openstreetmap.org/node/3867070378"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3867070381",
+      "name": "たかなし",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1437419,
+        "lon": 139.6346336,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3867070381,
+        "url": "https://www.openstreetmap.org/node/3867070381"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3872880057",
+      "name": "洲御前",
+      "category": "religious",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1298165,
+        "lon": 139.6285093,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3872880057,
+        "url": "https://www.openstreetmap.org/node/3872880057"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3872880060",
+      "name": "櫻稲荷大明神",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1396612,
+        "lon": 139.6250553,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3872880060,
+        "url": "https://www.openstreetmap.org/node/3872880060"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3872880061",
+      "name": "大椿寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1404821,
+        "lon": 139.6230529,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3872880061,
+        "url": "https://www.openstreetmap.org/node/3872880061"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3879304416",
+      "name": "ステーキ ガスト",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1569842,
+        "lon": 139.6373235,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3879304416,
+        "url": "https://www.openstreetmap.org/node/3879304416"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3879304417",
+      "name": "ローソン",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1569941,
+        "lon": 139.6375713,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3879304417,
+        "url": "https://www.openstreetmap.org/node/3879304417"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3880329335",
+      "name": "CABIN",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413286,
+        "lon": 139.6184208,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329335,
+        "url": "https://www.openstreetmap.org/node/3880329335"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329336",
+      "name": "Misaki Donuts",
+      "category": "sweets",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.140928,
+        "lon": 139.6184821,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329336,
+        "url": "https://www.openstreetmap.org/node/3880329336"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329337",
+      "name": "ROJI",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1402621,
+        "lon": 139.6189052,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329337,
+        "url": "https://www.openstreetmap.org/node/3880329337"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329338",
+      "name": "good day house",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414923,
+        "lon": 139.6183295,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329338,
+        "url": "https://www.openstreetmap.org/node/3880329338"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329339",
+      "name": "いちごいちえ",
+      "category": "cafe",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1410383,
+        "lon": 139.6185492,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329339,
+        "url": "https://www.openstreetmap.org/node/3880329339"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329340",
+      "name": "いづみ",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413185,
+        "lon": 139.6183205,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329340,
+        "url": "https://www.openstreetmap.org/node/3880329340"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329341",
+      "name": "えのもと",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1411779,
+        "lon": 139.6183702,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329341,
+        "url": "https://www.openstreetmap.org/node/3880329341"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329342",
+      "name": "ごはん屋　でこり",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1419761,
+        "lon": 139.6185496,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329342,
+        "url": "https://www.openstreetmap.org/node/3880329342"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329343",
+      "name": "さくらや",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414159,
+        "lon": 139.618422,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329343,
+        "url": "https://www.openstreetmap.org/node/3880329343"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329344",
+      "name": "イタコ",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1418342,
+        "lon": 139.6185975,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329344,
+        "url": "https://www.openstreetmap.org/node/3880329344"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329345",
+      "name": "サトウ薬局",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1406067,
+        "lon": 139.6187732,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329345,
+        "url": "https://www.openstreetmap.org/node/3880329345"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329702",
+      "name": "ミサキプレッソ",
+      "category": "cafe",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1406956,
+        "lon": 139.6186271,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329702,
+        "url": "https://www.openstreetmap.org/node/3880329702"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329703",
+      "name": "三上寫眞館",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1417163,
+        "lon": 139.6184645,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329703,
+        "url": "https://www.openstreetmap.org/node/3880329703"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329704",
+      "name": "三崎堂書店",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.140855,
+        "lon": 139.6186591,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329704,
+        "url": "https://www.openstreetmap.org/node/3880329704"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329709",
+      "name": "三浦市保護樹木 No.22 海南神社のイチョウ(雌)①",
+      "category": "scenery",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1425606,
+        "lon": 139.6189045,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329709,
+        "url": "https://www.openstreetmap.org/node/3880329709"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329710",
+      "name": "三浦市保護樹木 No.23 海南神社のイチョウ(雄) ②",
+      "category": "scenery",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1424967,
+        "lon": 139.6188855,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329710,
+        "url": "https://www.openstreetmap.org/node/3880329710"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329711",
+      "name": "中華料理　牡丹",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1406422,
+        "lon": 139.6186996,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329711,
+        "url": "https://www.openstreetmap.org/node/3880329711"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329712",
+      "name": "公海　金目鯛",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1411425,
+        "lon": 139.6185053,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329712,
+        "url": "https://www.openstreetmap.org/node/3880329712"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329713",
+      "name": "包丁塚",
+      "category": "history",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1427102,
+        "lon": 139.6186666,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329713,
+        "url": "https://www.openstreetmap.org/node/3880329713"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329714",
+      "name": "大神宮",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1429687,
+        "lon": 139.6188014,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329714,
+        "url": "https://www.openstreetmap.org/node/3880329714"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329715",
+      "name": "山田屋酒店",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1415331,
+        "lon": 139.6182416,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329715,
+        "url": "https://www.openstreetmap.org/node/3880329715"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329716",
+      "name": "御霊神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1423436,
+        "lon": 139.6188654,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329716,
+        "url": "https://www.openstreetmap.org/node/3880329716"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329717",
+      "name": "手打ちうどん　はるかぜ",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1403195,
+        "lon": 139.6188353,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329717,
+        "url": "https://www.openstreetmap.org/node/3880329717"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329718",
+      "name": "有魚亭",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1406801,
+        "lon": 139.6188949,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329718,
+        "url": "https://www.openstreetmap.org/node/3880329718"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329719",
+      "name": "本宮神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1402995,
+        "lon": 139.6185952,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329719,
+        "url": "https://www.openstreetmap.org/node/3880329719"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329722",
+      "name": "水神　龍神　社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1424517,
+        "lon": 139.6188295,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329722,
+        "url": "https://www.openstreetmap.org/node/3880329722"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329724",
+      "name": "疱瘡神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1423765,
+        "lon": 139.6186603,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329724,
+        "url": "https://www.openstreetmap.org/node/3880329724"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329725",
+      "name": "福徳稲荷神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1425148,
+        "lon": 139.6189616,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329725,
+        "url": "https://www.openstreetmap.org/node/3880329725"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329726",
+      "name": "菓子の老舗　嶋清",
+      "category": "sweets",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1405287,
+        "lon": 139.6189524,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329726,
+        "url": "https://www.openstreetmap.org/node/3880329726"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329727",
+      "name": "蔵",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414565,
+        "lon": 139.6184604,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329727,
+        "url": "https://www.openstreetmap.org/node/3880329727"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329728",
+      "name": "重美屋",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1410084,
+        "lon": 139.6184459,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329728,
+        "url": "https://www.openstreetmap.org/node/3880329728"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329729",
+      "name": "金毘羅宮",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1428206,
+        "lon": 139.619067,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329729,
+        "url": "https://www.openstreetmap.org/node/3880329729"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3880329730",
+      "name": "音羽",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1405601,
+        "lon": 139.618884,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3880329730,
+        "url": "https://www.openstreetmap.org/node/3880329730"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881821374",
+      "name": "○つね",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.142868,
+        "lon": 139.6132425,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821374,
+        "url": "https://www.openstreetmap.org/node/3881821374"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3881821375",
+      "name": "くろまぐろ鮨　たち吉",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413773,
+        "lon": 139.6173954,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821375,
+        "url": "https://www.openstreetmap.org/node/3881821375"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881821378",
+      "name": "ひとみ食堂",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1416155,
+        "lon": 139.6164219,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821378,
+        "url": "https://www.openstreetmap.org/node/3881821378"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881821427",
+      "name": "三崎海楼",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413749,
+        "lon": 139.6170971,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821427,
+        "url": "https://www.openstreetmap.org/node/3881821427"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881821429",
+      "name": "三崎館本店",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414121,
+        "lon": 139.6169169,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821429,
+        "url": "https://www.openstreetmap.org/node/3881821429"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881821438",
+      "name": "加藤酒店",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1470467,
+        "lon": 139.6177389,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821438,
+        "url": "https://www.openstreetmap.org/node/3881821438"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3881821446",
+      "name": "岬陽館",
+      "category": "stay",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1420998,
+        "lon": 139.6155425,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821446,
+        "url": "https://www.openstreetmap.org/node/3881821446"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881821447",
+      "name": "成龍丸",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1432002,
+        "lon": 139.6126419,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821447,
+        "url": "https://www.openstreetmap.org/node/3881821447"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3881821450",
+      "name": "日本調剤　油壺薬局",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1543307,
+        "lon": 139.61915,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881821450,
+        "url": "https://www.openstreetmap.org/node/3881821450"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3881822166",
+      "name": "海生水産",
+      "category": "market",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1417502,
+        "lon": 139.6162363,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822166,
+        "url": "https://www.openstreetmap.org/node/3881822166"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822167",
+      "name": "澤田痴陶人美術館",
+      "category": "attraction",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1416057,
+        "lon": 139.6181143,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822167,
+        "url": "https://www.openstreetmap.org/node/3881822167"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822168",
+      "name": "珈琲屋",
+      "category": "cafe",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414285,
+        "lon": 139.616814,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822168,
+        "url": "https://www.openstreetmap.org/node/3881822168"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822175",
+      "name": "立花",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413825,
+        "lon": 139.6170413,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822175,
+        "url": "https://www.openstreetmap.org/node/3881822175"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822176",
+      "name": "美之商会",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1418347,
+        "lon": 139.6160955,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822176,
+        "url": "https://www.openstreetmap.org/node/3881822176"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822177",
+      "name": "羽床総本店",
+      "category": "market",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1415796,
+        "lon": 139.616479,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822177,
+        "url": "https://www.openstreetmap.org/node/3881822177"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822178",
+      "name": "蓮花",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413676,
+        "lon": 139.6173029,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822178,
+        "url": "https://www.openstreetmap.org/node/3881822178"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822196",
+      "name": "青木釣具店",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1421239,
+        "lon": 139.6150933,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822196,
+        "url": "https://www.openstreetmap.org/node/3881822196"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822199",
+      "name": "香花",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413805,
+        "lon": 139.6171652,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822199,
+        "url": "https://www.openstreetmap.org/node/3881822199"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3881822200",
+      "name": "鮮味樂",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414319,
+        "lon": 139.6162872,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3881822200,
+        "url": "https://www.openstreetmap.org/node/3881822200"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3983444458",
+      "name": "コーヒー 岬",
+      "category": "cafe",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1406833,
+        "lon": 139.6179505,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444458,
+        "url": "https://www.openstreetmap.org/node/3983444458"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3983444465",
+      "name": "ファミリーマート",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1415076,
+        "lon": 139.6176614,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444465,
+        "url": "https://www.openstreetmap.org/node/3983444465"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3983444467",
+      "name": "いけだ",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1362788,
+        "lon": 139.6129092,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444467,
+        "url": "https://www.openstreetmap.org/node/3983444467"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3983444471",
+      "name": "庄和丸",
+      "category": "market",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414377,
+        "lon": 139.6176306,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444471,
+        "url": "https://www.openstreetmap.org/node/3983444471"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3983444472",
+      "name": "咲乃家",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1409238,
+        "lon": 139.6181158,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444472,
+        "url": "https://www.openstreetmap.org/node/3983444472"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3983444477",
+      "name": "第２展望台",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1308718,
+        "lon": 139.6253216,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444477,
+        "url": "https://www.openstreetmap.org/node/3983444477"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3983444481",
+      "name": "梶ノ亭",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1366368,
+        "lon": 139.6118283,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444481,
+        "url": "https://www.openstreetmap.org/node/3983444481"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3983444487",
+      "name": "魚音",
+      "category": "market",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1416418,
+        "lon": 139.6177229,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444487,
+        "url": "https://www.openstreetmap.org/node/3983444487"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3983444489",
+      "name": "イワノ薬局",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1410226,
+        "lon": 139.6181365,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3983444489,
+        "url": "https://www.openstreetmap.org/node/3983444489"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3984034161",
+      "name": "クリエイトSD",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1516559,
+        "lon": 139.6289068,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034161,
+        "url": "https://www.openstreetmap.org/node/3984034161"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3984034164",
+      "name": "Fuji",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1534678,
+        "lon": 139.6311925,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034164,
+        "url": "https://www.openstreetmap.org/node/3984034164"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3984034166",
+      "name": "セブン-イレブン",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1510421,
+        "lon": 139.6284172,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034166,
+        "url": "https://www.openstreetmap.org/node/3984034166"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3984034167",
+      "name": "TSUTAYA",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1536493,
+        "lon": 139.6318062,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034167,
+        "url": "https://www.openstreetmap.org/node/3984034167"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3984034169",
+      "name": "しまむら",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.153423,
+        "lon": 139.6311141,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034169,
+        "url": "https://www.openstreetmap.org/node/3984034169"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3984034171",
+      "name": "セブン-イレブン",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1549989,
+        "lon": 139.6323196,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034171,
+        "url": "https://www.openstreetmap.org/node/3984034171"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3984034227",
+      "name": "東京靴流通センター",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1527482,
+        "lon": 139.6300329,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3984034227,
+        "url": "https://www.openstreetmap.org/node/3984034227"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988005814",
+      "name": "風致亭",
+      "category": "souvenir",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1357374,
+        "lon": 139.612418,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988005814,
+        "url": "https://www.openstreetmap.org/node/3988005814"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988005815",
+      "name": "北原園",
+      "category": "souvenir",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1357747,
+        "lon": 139.6122706,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988005815,
+        "url": "https://www.openstreetmap.org/node/3988005815"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006022",
+      "name": "中村屋",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.13517,
+        "lon": 139.6121557,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006022,
+        "url": "https://www.openstreetmap.org/node/3988006022"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006023",
+      "name": "八大龍王",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1407739,
+        "lon": 139.6221931,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006023,
+        "url": "https://www.openstreetmap.org/node/3988006023"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3988006026",
+      "name": "城ヶ島 Diving Center",
+      "category": "activity",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1363242,
+        "lon": 139.6122228,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006026,
+        "url": "https://www.openstreetmap.org/node/3988006026"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006031",
+      "name": "大六天神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1449413,
+        "lon": 139.6159505,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006031,
+        "url": "https://www.openstreetmap.org/node/3988006031"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-3988006033",
+      "name": "小桜観音",
+      "category": "religious",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1354026,
+        "lon": 139.6114538,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006033,
+        "url": "https://www.openstreetmap.org/node/3988006033"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006034",
+      "name": "山王日枝",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1543414,
+        "lon": 139.609448,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006034,
+        "url": "https://www.openstreetmap.org/node/3988006034"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006035",
+      "name": "日枝神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1543185,
+        "lon": 139.6094499,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006035,
+        "url": "https://www.openstreetmap.org/node/3988006035"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006038",
+      "name": "梅一",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.13635,
+        "lon": 139.6128128,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006038,
+        "url": "https://www.openstreetmap.org/node/3988006038"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006040",
+      "name": "楫三郎神社",
+      "category": "religious",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.136855,
+        "lon": 139.6114193,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006040,
+        "url": "https://www.openstreetmap.org/node/3988006040"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006045",
+      "name": "牛頭観音",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.141157,
+        "lon": 139.6280678,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006045,
+        "url": "https://www.openstreetmap.org/node/3988006045"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006050",
+      "name": "白秋碑",
+      "category": "history",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1366736,
+        "lon": 139.6217916,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006050,
+        "url": "https://www.openstreetmap.org/node/3988006050"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006053",
+      "name": "稲荷神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1541783,
+        "lon": 139.6094543,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006053,
+        "url": "https://www.openstreetmap.org/node/3988006053"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006055",
+      "name": "若宮神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1541956,
+        "lon": 139.609453,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006055,
+        "url": "https://www.openstreetmap.org/node/3988006055"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-3988006056",
+      "name": "諸磯遺跡",
+      "category": "history",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1502227,
+        "lon": 139.6204192,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 3988006056,
+        "url": "https://www.openstreetmap.org/node/3988006056"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200247034",
+      "name": "手打ちそば 太庵",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1556771,
+        "lon": 139.6341437,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200247034,
+        "url": "https://www.openstreetmap.org/node/4200247034"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200247036",
+      "name": "茶屋",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1529776,
+        "lon": 139.6306561,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200247036,
+        "url": "https://www.openstreetmap.org/node/4200247036"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200247037",
+      "name": "ローソン",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1475915,
+        "lon": 139.6254193,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200247037,
+        "url": "https://www.openstreetmap.org/node/4200247037"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200247042",
+      "name": "雀家",
+      "category": "cafe",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1412436,
+        "lon": 139.6181711,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200247042,
+        "url": "https://www.openstreetmap.org/node/4200247042"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-4200247047",
+      "name": "寿司 元",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1419725,
+        "lon": 139.6255215,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200247047,
+        "url": "https://www.openstreetmap.org/node/4200247047"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-4200310999",
+      "name": "いけのや釣具",
+      "category": "shopping",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1359557,
+        "lon": 139.6133105,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200310999,
+        "url": "https://www.openstreetmap.org/node/4200310999"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311001",
+      "name": "さかや",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1347406,
+        "lon": 139.6119249,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311001,
+        "url": "https://www.openstreetmap.org/node/4200311001"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311002",
+      "name": "ひもの　やまはる",
+      "category": "market",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1362161,
+        "lon": 139.6130489,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311002,
+        "url": "https://www.openstreetmap.org/node/4200311002"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311003",
+      "name": "まぐろのお宿　城ヶ島　さんご荘",
+      "category": "stay",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1351581,
+        "lon": 139.6128039,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311003,
+        "url": "https://www.openstreetmap.org/node/4200311003"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311004",
+      "name": "まぐろ問屋　恵総本店",
+      "category": "market",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1361823,
+        "lon": 139.6131208,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311004,
+        "url": "https://www.openstreetmap.org/node/4200311004"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311005",
+      "name": "まるか",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1360184,
+        "lon": 139.613136,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311005,
+        "url": "https://www.openstreetmap.org/node/4200311005"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311006",
+      "name": "ウミウ展望台",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1328072,
+        "lon": 139.6208339,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311006,
+        "url": "https://www.openstreetmap.org/node/4200311006"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311193",
+      "name": "三海荘",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1362182,
+        "lon": 139.6133776,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311193,
+        "url": "https://www.openstreetmap.org/node/4200311193"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311196",
+      "name": "城ヶ島地魚料理　潮風",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1345403,
+        "lon": 139.6118205,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311196,
+        "url": "https://www.openstreetmap.org/node/4200311196"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311198",
+      "name": "城ヶ島灯台　点灯百二十周年記念碑",
+      "category": "history",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1350331,
+        "lon": 139.6110402,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311198,
+        "url": "https://www.openstreetmap.org/node/4200311198"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311199",
+      "name": "海への祈り",
+      "category": "attraction",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1352774,
+        "lon": 139.6115611,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311199,
+        "url": "https://www.openstreetmap.org/node/4200311199"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311200",
+      "name": "港屋",
+      "category": "stay",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1344151,
+        "lon": 139.6123075,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311200,
+        "url": "https://www.openstreetmap.org/node/4200311200"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311201",
+      "name": "燈台創設八十年　記念碑",
+      "category": "history",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1350602,
+        "lon": 139.6110934,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311201,
+        "url": "https://www.openstreetmap.org/node/4200311201"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311203",
+      "name": "磯料理　かねあ",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.135378,
+        "lon": 139.6120905,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311203,
+        "url": "https://www.openstreetmap.org/node/4200311203"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4200311204",
+      "name": "馬の背洞門",
+      "category": "attraction",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1312348,
+        "lon": 139.6183254,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4200311204,
+        "url": "https://www.openstreetmap.org/node/4200311204"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4202281806",
+      "name": "安房崎",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1291633,
+        "lon": 139.6298296,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4202281806,
+        "url": "https://www.openstreetmap.org/node/4202281806"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4202281807",
+      "name": "灘ヶ崎",
+      "category": "scenery",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1376128,
+        "lon": 139.6098096,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4202281807,
+        "url": "https://www.openstreetmap.org/node/4202281807"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4202281808",
+      "name": "長津呂崎",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1345902,
+        "lon": 139.6089621,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4202281808,
+        "url": "https://www.openstreetmap.org/node/4202281808"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4394291547",
+      "name": "なこう",
+      "category": "sweets",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1494066,
+        "lon": 139.6278291,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4394291547,
+        "url": "https://www.openstreetmap.org/node/4394291547"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4394291551",
+      "name": "やなぎや",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1465072,
+        "lon": 139.6234296,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4394291551,
+        "url": "https://www.openstreetmap.org/node/4394291551"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-4394291555",
+      "name": "七兵衛丸",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1412699,
+        "lon": 139.616157,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4394291555,
+        "url": "https://www.openstreetmap.org/node/4394291555"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-4394291556",
+      "name": "TAKARAYA",
+      "category": "sweets",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1479939,
+        "lon": 139.6261819,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4394291556,
+        "url": "https://www.openstreetmap.org/node/4394291556"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-4394291560",
+      "name": "京急ストア",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1461685,
+        "lon": 139.6209561,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4394291560,
+        "url": "https://www.openstreetmap.org/node/4394291560"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-4401959220",
+      "name": "J.LUNA",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1382216,
+        "lon": 139.6280638,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 4401959220,
+        "url": "https://www.openstreetmap.org/node/4401959220"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-5259377676",
+      "name": "栄児童公園",
+      "category": "park",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1472535,
+        "lon": 139.6270399,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 5259377676,
+        "url": "https://www.openstreetmap.org/node/5259377676"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-5259377677",
+      "name": "宮川神明社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.146459,
+        "lon": 139.6334108,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 5259377677,
+        "url": "https://www.openstreetmap.org/node/5259377677"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-5261386177",
+      "name": "原稲荷神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1503003,
+        "lon": 139.6314586,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 5261386177,
+        "url": "https://www.openstreetmap.org/node/5261386177"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-5270038718",
+      "name": "日本キリスト教団三崎教会",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1453384,
+        "lon": 139.6215509,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 5270038718,
+        "url": "https://www.openstreetmap.org/node/5270038718"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-5502675429",
+      "name": "たからや",
+      "category": "sweets",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1407659,
+        "lon": 139.6164409,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 5502675429,
+        "url": "https://www.openstreetmap.org/node/5502675429"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-5502675451",
+      "name": "うらりマルシェ やさい館",
+      "category": "market",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1406749,
+        "lon": 139.616171,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 5502675451,
+        "url": "https://www.openstreetmap.org/node/5502675451"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-7168038654",
+      "name": "南無阿弥陀仏",
+      "category": "history",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1411349,
+        "lon": 139.6282993,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 7168038654,
+        "url": "https://www.openstreetmap.org/node/7168038654"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-7168038661",
+      "name": "庚申供養塔",
+      "category": "history",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1411039,
+        "lon": 139.628272,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 7168038661,
+        "url": "https://www.openstreetmap.org/node/7168038661"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-7168038668",
+      "name": "供養塔",
+      "category": "history",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1401943,
+        "lon": 139.632525,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 7168038668,
+        "url": "https://www.openstreetmap.org/node/7168038668"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-9653105765",
+      "name": "魚市場食堂",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1414082,
+        "lon": 139.6141876,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 9653105765,
+        "url": "https://www.openstreetmap.org/node/9653105765"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-10171316122",
+      "name": "クアーズミサキ",
+      "category": "activity",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1471248,
+        "lon": 139.6234587,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 10171316122,
+        "url": "https://www.openstreetmap.org/node/10171316122"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-10230120491",
+      "name": "赤羽根海岸",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1323918,
+        "lon": 139.6208437,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 10230120491,
+        "url": "https://www.openstreetmap.org/node/10230120491"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-10230120492",
+      "name": "赤羽根崎",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1309879,
+        "lon": 139.6179426,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 10230120492,
+        "url": "https://www.openstreetmap.org/node/10230120492"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-11896359569",
+      "name": "第二展望台",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.132541,
+        "lon": 139.6184244,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 11896359569,
+        "url": "https://www.openstreetmap.org/node/11896359569"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-12277709615",
+      "name": "五常の松",
+      "category": "scenery",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.143266,
+        "lon": 139.6199575,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 12277709615,
+        "url": "https://www.openstreetmap.org/node/12277709615"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-12364319660",
+      "name": "安房崎灯台",
+      "category": "attraction",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1302008,
+        "lon": 139.6275671,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 12364319660,
+        "url": "https://www.openstreetmap.org/node/12364319660"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-13531576207",
+      "name": "みはらし広場",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1333632,
+        "lon": 139.6157408,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 13531576207,
+        "url": "https://www.openstreetmap.org/node/13531576207"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-13531587940",
+      "name": "山崎屋食堂",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1533577,
+        "lon": 139.6302813,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 13531587940,
+        "url": "https://www.openstreetmap.org/node/13531587940"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-node-14047975901",
+      "name": "鮨処 魚音",
+      "category": "food",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1415826,
+        "lon": 139.6172611,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 14047975901,
+        "url": "https://www.openstreetmap.org/node/14047975901"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-node-14130348834",
+      "name": "ウミウ生息地",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1311734,
+        "lon": 139.623273,
+        "kind": "node"
+      },
+      "source": {
+        "type": "node",
+        "id": 14130348834,
+        "url": "https://www.openstreetmap.org/node/14130348834"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-322226781",
+      "name": "見桃寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1444247,
+        "lon": 139.6153089,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 322226781,
+        "url": "https://www.openstreetmap.org/way/322226781"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-383437295",
+      "name": "三峯神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1459967,
+        "lon": 139.6315037,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 383437295,
+        "url": "https://www.openstreetmap.org/way/383437295"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-384676338",
+      "name": "海南神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.142676,
+        "lon": 139.6188478,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 384676338,
+        "url": "https://www.openstreetmap.org/way/384676338"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "poc-reference",
+        "nodeId": 2845402200
+      }
+    },
+    {
+      "id": "osm-way-384676339",
+      "name": "相州海南高家神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1426451,
+        "lon": 139.618612,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 384676339,
+        "url": "https://www.openstreetmap.org/way/384676339"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-384827683",
+      "name": "歌舞島公園",
+      "category": "park",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1437291,
+        "lon": 139.6135,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 384827683,
+        "url": "https://www.openstreetmap.org/way/384827683"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-384827686",
+      "name": "白須児童公園",
+      "category": "park",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1538189,
+        "lon": 139.6193146,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 384827686,
+        "url": "https://www.openstreetmap.org/way/384827686"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-384827687",
+      "name": "神奈川県指定天然記念物　三浦市海外町のスランプ構造",
+      "category": "scenery",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1482261,
+        "lon": 139.6169134,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 384827687,
+        "url": "https://www.openstreetmap.org/way/384827687"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-394752553",
+      "name": "大乗寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1435036,
+        "lon": 139.6177513,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 394752553,
+        "url": "https://www.openstreetmap.org/way/394752553"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-394752554",
+      "name": "光念寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1422136,
+        "lon": 139.6197981,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 394752554,
+        "url": "https://www.openstreetmap.org/way/394752554"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "poc-reference",
+        "nodeId": 2845402186
+      }
+    },
+    {
+      "id": "osm-way-394752555",
+      "name": "眞福寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1451594,
+        "lon": 139.6171948,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 394752555,
+        "url": "https://www.openstreetmap.org/way/394752555"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-394752556",
+      "name": "長善寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.14423,
+        "lon": 139.6173803,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 394752556,
+        "url": "https://www.openstreetmap.org/way/394752556"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-394752558",
+      "name": "本瑞寺",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1424308,
+        "lon": 139.620653,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 394752558,
+        "url": "https://www.openstreetmap.org/way/394752558"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "poc-reference",
+        "nodeId": 2845403964
+      }
+    },
+    {
+      "id": "osm-way-395998635",
+      "name": "城ヶ島児童公園",
+      "category": "park",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1344218,
+        "lon": 139.6183368,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998635,
+        "url": "https://www.openstreetmap.org/way/395998635"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-395998642",
+      "name": "二町若神明社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1450095,
+        "lon": 139.6160522,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998642,
+        "url": "https://www.openstreetmap.org/way/395998642"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-395998644",
+      "name": "住吉神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1429445,
+        "lon": 139.6167936,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998644,
+        "url": "https://www.openstreetmap.org/way/395998644"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-395998645",
+      "name": "向ヶ崎公園",
+      "category": "park",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1397256,
+        "lon": 139.622501,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998645,
+        "url": "https://www.openstreetmap.org/way/395998645"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-395998646",
+      "name": "城ヶ島公園",
+      "category": "park",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1326601,
+        "lon": 139.6245523,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998646,
+        "url": "https://www.openstreetmap.org/way/395998646"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-395998647",
+      "name": "城島山　常光寺",
+      "category": "religious",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1342293,
+        "lon": 139.6181841,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998647,
+        "url": "https://www.openstreetmap.org/way/395998647"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-395998655",
+      "name": "日枝神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413807,
+        "lon": 139.626534,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998655,
+        "url": "https://www.openstreetmap.org/way/395998655"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-395998657",
+      "name": "海南神社",
+      "category": "religious",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1347603,
+        "lon": 139.6189561,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998657,
+        "url": "https://www.openstreetmap.org/way/395998657"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-395998658",
+      "name": "白秋記念館",
+      "category": "attraction",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1364234,
+        "lon": 139.621917,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998658,
+        "url": "https://www.openstreetmap.org/way/395998658"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-395998661",
+      "name": "諏訪神社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.142458,
+        "lon": 139.6243346,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998661,
+        "url": "https://www.openstreetmap.org/way/395998661"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-395998663",
+      "name": "諸磯神明社",
+      "category": "religious",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1542707,
+        "lon": 139.6099296,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 395998663,
+        "url": "https://www.openstreetmap.org/way/395998663"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-420045013",
+      "name": "海上イケス釣り堀　J's Fishing",
+      "category": "activity",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1374731,
+        "lon": 139.6131975,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 420045013,
+        "url": "https://www.openstreetmap.org/way/420045013"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-420289246",
+      "name": "白秋碑苑",
+      "category": "park",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1363121,
+        "lon": 139.6214381,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 420289246,
+        "url": "https://www.openstreetmap.org/way/420289246"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-544266676",
+      "name": "クリエイトSD",
+      "category": "shopping",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1481775,
+        "lon": 139.6287964,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 544266676,
+        "url": "https://www.openstreetmap.org/way/544266676"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-766104762",
+      "name": "城ヶ島大橋",
+      "category": "attraction",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1379297,
+        "lon": 139.6227095,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 766104762,
+        "url": "https://www.openstreetmap.org/way/766104762"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    },
+    {
+      "id": "osm-way-889083959",
+      "name": "濱田屋",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1359004,
+        "lon": 139.6137719,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 889083959,
+        "url": "https://www.openstreetmap.org/way/889083959"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-921126858",
+      "name": "お食事処相模亭",
+      "category": "food",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1345379,
+        "lon": 139.6101375,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 921126858,
+        "url": "https://www.openstreetmap.org/way/921126858"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-921126881",
+      "name": "第一展望台",
+      "category": "scenery",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1338889,
+        "lon": 139.613612,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 921126881,
+        "url": "https://www.openstreetmap.org/way/921126881"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-way-923579091",
+      "name": "CARO FORESTA",
+      "category": "stay",
+      "area": "jogashima-vicinity",
+      "position": {
+        "lat": 35.1361211,
+        "lon": 139.6216949,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "way",
+        "id": 923579091,
+        "url": "https://www.openstreetmap.org/way/923579091"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "outside-road-snapshot"
+      }
+    },
+    {
+      "id": "osm-relation-15654456",
+      "name": "三崎公園",
+      "category": "park",
+      "area": "misaki-vicinity",
+      "position": {
+        "lat": 35.1413712,
+        "lon": 139.6179517,
+        "kind": "bounding-box-center"
+      },
+      "source": {
+        "type": "relation",
+        "id": 15654456,
+        "url": "https://www.openstreetmap.org/relation/15654456"
+      },
+      "reviewStatus": "unverified",
+      "routing": {
+        "state": "entrance-unverified"
+      }
+    }
+  ],
+  "held": [
+    {
+      "id": "osm-node-1211621023",
+      "name": "安房崎灯台",
+      "reason": "旧安房崎灯台跡の記録。現灯台と同名のため、表示と訪問位置を確認してから採用する。"
+    },
+    {
+      "id": "osm-node-3880329700",
+      "name": "マツウラ",
+      "reason": "近隣の同名「マツウラ」（osm-node-3880329701）との店舗の区別を確認する。"
+    },
+    {
+      "id": "osm-node-3880329701",
+      "name": "マツウラ",
+      "reason": "近隣の同名「マツウラ」（osm-node-3880329700）との店舗の区別を確認する。"
+    },
+    {
+      "id": "osm-node-4200247030",
+      "name": "うらりカフェ",
+      "reason": "OSM名は「うらりカフェ」。施設公式ページの「うらりテイスト」との対応・表示名を確認する。"
+    },
+    {
+      "id": "osm-node-5411368121",
+      "name": "インド料理",
+      "reason": "OSM名「インド料理」だけでは店舗を特定しにくいため、正式名称と現況を確認する。"
+    },
+    {
+      "id": "osm-node-7168038649",
+      "name": "青面金剛",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "id": "osm-node-7168038651",
+      "name": "青面金剛",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "id": "osm-node-7168038653",
+      "name": "庚申塔",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "id": "osm-node-7168038660",
+      "name": "庚申塔",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "id": "osm-node-7168038662",
+      "name": "庚申塔",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "id": "osm-node-7168038663",
+      "name": "庚申塔",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "id": "osm-node-9653105763",
+      "name": "さん",
+      "reason": "OSM名「さん」の名称と現況を確認する。"
+    },
+    {
+      "id": "osm-way-544266671",
+      "name": "TSUTAYA",
+      "reason": "同名の近接ノードosm-node-3984034167と重複する可能性がある。ノード側だけを暫定候補とし、ウェイは保留する。"
+    },
+    {
+      "id": "osm-way-544266672",
+      "name": "東京靴流通センター",
+      "reason": "同名の近接ノードosm-node-3984034227と重複する可能性がある。ノード側だけを暫定候補とし、ウェイは保留する。"
+    },
+    {
+      "id": "osm-way-544266674",
+      "name": "ローソン",
+      "reason": "同名の近接ノードosm-node-4200247037と重複する可能性がある。ノード側だけを暫定候補とし、ウェイは保留する。"
+    }
+  ],
+  "excluded": [
+    {
+      "id": "osm-node-1420813522",
+      "name": "三崎二葉保育園",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1420813539",
+      "name": "三浦三崎郵便局",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1420813540",
+      "name": "三浦城山郵便局",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1420813541",
+      "name": "三浦市図書館",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1420813548",
+      "name": "三浦市消防署三崎出張所",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1420816223",
+      "name": "城ケ島保育園",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1420823369",
+      "name": "椿の御所幼稚園",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655896744",
+      "name": "はまゆう在宅介護支援センター",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655899713",
+      "name": "シニアハウス三崎",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655900327",
+      "name": "ビバリーコート油壺(リタイメントリビングヘルスケアセンター)",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655902042",
+      "name": "三浦市地域福祉センター",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655902062",
+      "name": "三浦市社会福祉協議会在宅介護支援センター",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655902081",
+      "name": "三浦市立病院",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655902096",
+      "name": "三浦市老人福祉保健センター",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655917265",
+      "name": "油壺エデンの園",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-1655920644",
+      "name": "社会福祉法人啓生会 はまゆう荘",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3866592177",
+      "name": "かながわ信用金庫",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3867070382",
+      "name": "コインランドリー　デポ",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3867071697",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3867071700",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3867071701",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3867071702",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3880329707",
+      "name": "三浦一族歴史めぐり　海南神社",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3880329708",
+      "name": "三浦七福神　筌龍弁財天　三浦総鎮守　海南神社",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3880329720",
+      "name": "本宮神社",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3880329721",
+      "name": "松岡",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3880329723",
+      "name": "理容　辻井",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3881821373",
+      "name": "Welcome to MIURA",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881821428",
+      "name": "三崎港周辺案内",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881821430",
+      "name": "三浦一族の歴史コース　歌舞島",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881821432",
+      "name": "三浦道寸父子と油壺湾",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881821454",
+      "name": "歌舞島公園周辺のみどころ",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822169",
+      "name": "白秋文学コース⑦歌舞島",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822170",
+      "name": "白秋文学コース　二町谷",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822171",
+      "name": "白秋文学コース　見桃寺",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822174",
+      "name": "神奈川県指定天然記念物　三浦市海外町のスランプ構造",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822181",
+      "name": "諸磯湾",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3881822183",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822184",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822185",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822186",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822187",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822188",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822189",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3881822190",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3885927113",
+      "name": "関東ふれあいの道",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3983444479",
+      "name": "横浜銀行",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3984034163",
+      "name": "ENEOS",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3984034165",
+      "name": "ジェイエイ-エスエス",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3984034194",
+      "name": "井上歯科",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-3988005594",
+      "name": "ようこそ城ヶ島へ",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006028",
+      "name": "城ヶ島海南神社",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006032",
+      "name": "安房崎と州の御前",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006039",
+      "name": "楫の三郎山",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006046",
+      "name": "白秋文学コース　11 渡船場",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006047",
+      "name": "白秋文学コース　15　通り矢",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006049",
+      "name": "白秋文学コース　諸磯",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-3988006054",
+      "name": "若宮神社",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4200311192",
+      "name": "三浦半島八景　城ヶ島の落雁",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4200311194",
+      "name": "城ヶ島のウミウ、ヒメウ及びクロサギの生息地",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4200311195",
+      "name": "城ヶ島めぐり　遊び船案内",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4200311197",
+      "name": "城ヶ島灯台",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4200311202",
+      "name": "白秋文学コース　ウミウ展望台",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4200325799",
+      "name": "馬の背洞門",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-4394291544",
+      "name": "飯島医院",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-4394291554",
+      "name": "にしやま小児科",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-4394291564",
+      "name": "湘南しんきん",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-4401958664",
+      "name": "(有)青木造船所",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-5468883111",
+      "name": "エネオス",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-5584059437",
+      "name": "Esso",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-7022957332",
+      "name": "三井のリパーク",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-7155090298",
+      "name": "城ヶ島大橋",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-7155090304",
+      "name": "城ヶ島公園",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-7155090305",
+      "name": "城ヶ島公園の自然と景観",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-7168038669",
+      "name": "白秋文学コース 16 八景原",
+      "reason": "information-sign"
+    },
+    {
+      "id": "osm-node-9653105764",
+      "name": "三崎動物愛護病院",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-13531576215",
+      "name": "神奈川県水産技術センター",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-13531583021",
+      "name": "日本さかな専門学校",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-13722789595",
+      "name": "三浦ブルワリー",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-node-13722830581",
+      "name": "うらりマルシェ(三崎フィッシャリーナ・ウォーフ)",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260072436",
+      "name": "県立城ヶ島公園第2駐車場",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260072437",
+      "name": "城ヶ島西側第1駐車場",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260072438",
+      "name": "城ヶ島西側第3駐車場",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260072439",
+      "name": "城ヶ島西側第4駐車場",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260078295",
+      "name": "三浦郵便局",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260078296",
+      "name": "油壷幼稚園",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-260078297",
+      "name": "三浦市立名向小学校",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-394752560",
+      "name": "三浦市立三崎小学校",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-395998636",
+      "name": "県立城ヶ島公園第1駐車場",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-395998640",
+      "name": "三浦市立病院",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-396378484",
+      "name": "三浦市立岬陽小学校",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-420038645",
+      "name": "城ヶ島西側第2駐車場",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-544266675",
+      "name": "かながわ信用金庫",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-544267209",
+      "name": "chocoZAP",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-545261586",
+      "name": "三浦市役所　本館",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-545261589",
+      "name": "三浦市役所　分館",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-547149928",
+      "name": "森山動物病院",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-921126869",
+      "name": "城ヶ島",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-1333414341",
+      "name": "三浦市役所　第2分館",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-1473783419",
+      "name": "城ケ島駐在所",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-way-1473783421",
+      "name": "三崎港交番",
+      "reason": "outside-initial-categories"
+    },
+    {
+      "id": "osm-relation-13915891",
+      "name": "相模湾",
+      "reason": "representative-point-outside-collection"
+    }
+  ],
+  "duplicateNames": [
+    {
+      "name": "ファミリーマート",
+      "ids": [
+        "osm-node-3867070378",
+        "osm-node-3983444465"
+      ]
+    },
+    {
+      "name": "ローソン",
+      "ids": [
+        "osm-node-3879304417",
+        "osm-node-4200247037"
+      ]
+    },
+    {
+      "name": "クリエイトSD",
+      "ids": [
+        "osm-node-3984034161",
+        "osm-way-544266676"
+      ]
+    },
+    {
+      "name": "セブン-イレブン",
+      "ids": [
+        "osm-node-3984034166",
+        "osm-node-3984034171"
+      ]
+    },
+    {
+      "name": "日枝神社",
+      "ids": [
+        "osm-node-3988006035",
+        "osm-way-395998655"
+      ]
+    },
+    {
+      "name": "海南神社",
+      "ids": [
+        "osm-way-384676338",
+        "osm-way-395998657"
+      ]
+    }
+  ],
+  "summary": {
+    "source": 295,
+    "admitted": 178,
+    "held": 15,
+    "excluded": 102,
+    "byCategory": {
+      "activity": 3,
+      "attraction": 7,
+      "cafe": 5,
+      "food": 43,
+      "history": 8,
+      "market": 8,
+      "park": 8,
+      "religious": 38,
+      "scenery": 15,
+      "shopping": 32,
+      "souvenir": 2,
+      "stay": 4,
+      "sweets": 5
+    },
+    "byArea": {
+      "jogashima-vicinity": 48,
+      "misaki-vicinity": 130
+    },
+    "byRoutingState": {
+      "entrance-unverified": 83,
+      "outside-road-snapshot": 92,
+      "poc-reference": 3
+    }
+  }
+}

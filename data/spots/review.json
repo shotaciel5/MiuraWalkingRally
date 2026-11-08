@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-11-08",
+  "scope": "Candidate curation only; no operating-status, entrance, permission or field-safety approval.",
+  "anchors": [
+    {
+      "spotId": "osm-way-384676338",
+      "nodeId": 2845402200,
+      "fixtureStopId": "C1",
+      "basis": "data/misaki/stops.json"
+    },
+    {
+      "spotId": "osm-way-394752554",
+      "nodeId": 2845402186,
+      "fixtureStopId": "W1",
+      "basis": "data/misaki/stops.json"
+    },
+    {
+      "spotId": "osm-way-394752558",
+      "nodeId": 2845403964,
+      "fixtureStopId": "C2",
+      "basis": "data/misaki/stops.json"
+    }
+  ],
+  "holds": [
+    {
+      "spotId": "osm-node-1211621023",
+      "reason": "旧安房崎灯台跡の記録。現灯台と同名のため、表示と訪問位置を確認してから採用する。"
+    },
+    {
+      "spotId": "osm-node-3880329700",
+      "reason": "近隣の同名「マツウラ」（osm-node-3880329701）との店舗の区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-3880329701",
+      "reason": "近隣の同名「マツウラ」（osm-node-3880329700）との店舗の区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-4200247030",
+      "reason": "OSM名は「うらりカフェ」。施設公式ページの「うらりテイスト」との対応・表示名を確認する。",
+      "evidenceUrl": "https://www.umigyo.co.jp/marche/marche-yasai.html"
+    },
+    {
+      "spotId": "osm-node-5411368121",
+      "reason": "OSM名「インド料理」だけでは店舗を特定しにくいため、正式名称と現況を確認する。"
+    },
+    {
+      "spotId": "osm-node-9653105763",
+      "reason": "OSM名「さん」の名称と現況を確認する。"
+    },
+    {
+      "spotId": "osm-way-544266671",
+      "reason": "同名の近接ノードosm-node-3984034167と重複する可能性がある。ノード側だけを暫定候補とし、ウェイは保留する。"
+    },
+    {
+      "spotId": "osm-way-544266672",
+      "reason": "同名の近接ノードosm-node-3984034227と重複する可能性がある。ノード側だけを暫定候補とし、ウェイは保留する。"
+    },
+    {
+      "spotId": "osm-way-544266674",
+      "reason": "同名の近接ノードosm-node-4200247037と重複する可能性がある。ノード側だけを暫定候補とし、ウェイは保留する。"
+    },
+    {
+      "spotId": "osm-node-7168038649",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-7168038651",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-7168038653",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-7168038660",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-7168038662",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    },
+    {
+      "spotId": "osm-node-7168038663",
+      "reason": "同じ一角に同名の石塔が複数記録されている。個別の訪問対象としての区別を確認する。"
+    }
+  ],
+  "followUpCandidates": [
+    {
+      "id": "review-misaki-morning-market",
+      "name": "三崎朝市",
+      "position": null,
+      "reason": "対象OSMスナップショットに対応する名称を確認できない。施設位置・到達点を確認してから初期台帳へ追加する。",
+      "sourceUrl": "https://miura-info.ne.jp/souvenir-misaki/souvenir-13/"
+    },
+    {
+      "id": "review-jogashima-fish-market",
+      "name": "城ヶ島おさかな市場",
+      "position": null,
+      "reason": "運営会社グループの開業案内は確認したが、対象OSMの名称付き地点に対応を確認できない。位置と到達点を確認する。",
+      "sourceUrl": "https://www.keikyu.co.jp/company/news/2026/20260416HP_25007RK.html"
+    },
+    {
+      "id": "review-shima-cafe-makana",
+      "name": "Shima Café MAKANA",
+      "position": null,
+      "reason": "観光協会掲載は確認したが、対象OSMの名称付き地点に対応を確認できない。位置と到達点を確認する。",
+      "sourceUrl": "https://miura-info.ne.jp/shima-cafe-makana/"
+    }
+  ]
+}

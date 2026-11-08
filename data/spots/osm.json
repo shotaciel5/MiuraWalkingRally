@@ -1,0 +1,3360 @@
+{
+  "schemaVersion": 1,
+  "bounds": {
+    "south": 35.125,
+    "west": 139.608,
+    "north": 35.157,
+    "east": 139.638
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 1211621023,
+      "lat": 35.129126,
+      "lon": 139.6300588,
+      "positionKind": "node",
+      "tags": {
+        "name": "安房崎灯台",
+        "historic": "旧安房崎灯台跡"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1211621029,
+      "lat": 35.1350791,
+      "lon": 139.6111277,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島灯台",
+        "man_made": "lighthouse"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420813522,
+      "lat": 35.145381,
+      "lon": 139.621901,
+      "positionKind": "node",
+      "tags": {
+        "name": "三崎二葉保育園",
+        "amenity": "kindergarten"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420813539,
+      "lat": 35.141423,
+      "lon": 139.614324,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦三崎郵便局",
+        "amenity": "post_office"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420813540,
+      "lat": 35.1468692,
+      "lon": 139.6241503,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦城山郵便局",
+        "amenity": "post_office"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420813541,
+      "lat": 35.1447078,
+      "lon": 139.6207562,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市図書館",
+        "name:ja": "三浦市図書館",
+        "amenity": "library"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420813548,
+      "lat": 35.1401072,
+      "lon": 139.6175875,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市消防署三崎出張所",
+        "amenity": "fire_station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420816223,
+      "lat": 35.134216,
+      "lon": 139.618457,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ケ島保育園",
+        "amenity": "kindergarten"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1420823369,
+      "lat": 35.140298,
+      "lon": 139.623317,
+      "positionKind": "node",
+      "tags": {
+        "name": "椿の御所幼稚園",
+        "amenity": "kindergarten"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655896744,
+      "lat": 35.151159,
+      "lon": 139.621289,
+      "positionKind": "node",
+      "tags": {
+        "name": "はまゆう在宅介護支援センター",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655899713,
+      "lat": 35.154159,
+      "lon": 139.61504,
+      "positionKind": "node",
+      "tags": {
+        "name": "シニアハウス三崎",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655900327,
+      "lat": 35.151547,
+      "lon": 139.617522,
+      "positionKind": "node",
+      "tags": {
+        "name": "ビバリーコート油壺(リタイメントリビングヘルスケアセンター)",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655902042,
+      "lat": 35.145075,
+      "lon": 139.627122,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市地域福祉センター",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655902062,
+      "lat": 35.145075,
+      "lon": 139.627122,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市社会福祉協議会在宅介護支援センター",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655902081,
+      "lat": 35.1447983,
+      "lon": 139.6284214,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市立病院",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655902096,
+      "lat": 35.1535903,
+      "lon": 139.6107711,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市老人福祉保健センター",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655917265,
+      "lat": 35.1531072,
+      "lon": 139.6189186,
+      "positionKind": "node",
+      "tags": {
+        "name": "油壺エデンの園",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1655920644,
+      "lat": 35.151218,
+      "lon": 139.621398,
+      "positionKind": "node",
+      "tags": {
+        "name": "社会福祉法人啓生会 はまゆう荘",
+        "amenity": "social_facility"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1947511994,
+      "lat": 35.1403486,
+      "lon": 139.6184478,
+      "positionKind": "node",
+      "tags": {
+        "name": "丸一鮮魚店&食堂",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 1947514027,
+      "lat": 35.1365968,
+      "lon": 139.6128407,
+      "positionKind": "node",
+      "tags": {
+        "name": "しぶき亭",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 2046962408,
+      "lat": 35.1409278,
+      "lon": 139.616376,
+      "positionKind": "node",
+      "tags": {
+        "name": "うらりマルシェ さかな館",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3866592177,
+      "lat": 35.1482105,
+      "lon": 139.6267229,
+      "positionKind": "node",
+      "tags": {
+        "name": "かながわ信用金庫",
+        "amenity": "bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3866592181,
+      "lat": 35.1485552,
+      "lon": 139.6267238,
+      "positionKind": "node",
+      "tags": {
+        "name": "TOY CHERRY",
+        "shop": "toys"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867070376,
+      "lat": 35.1482057,
+      "lon": 139.6289406,
+      "positionKind": "node",
+      "tags": {
+        "name": "CREATE SD",
+        "amenity": "pharmacy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867070378,
+      "lat": 35.1487848,
+      "lon": 139.6291599,
+      "positionKind": "node",
+      "tags": {
+        "name": "ファミリーマート",
+        "name:ja": "ファミリーマート",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867070381,
+      "lat": 35.1437419,
+      "lon": 139.6346336,
+      "positionKind": "node",
+      "tags": {
+        "name": "たかなし",
+        "shop": "alcohol"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867070382,
+      "lat": 35.1482835,
+      "lon": 139.6291866,
+      "positionKind": "node",
+      "tags": {
+        "name": "コインランドリー　デポ",
+        "shop": "laundry"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867071697,
+      "lat": 35.1422824,
+      "lon": 139.6369788,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867071700,
+      "lat": 35.1434475,
+      "lon": 139.6349392,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867071701,
+      "lat": 35.1434767,
+      "lon": 139.6349236,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "map"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3867071702,
+      "lat": 35.1438626,
+      "lon": 139.6349353,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3872880057,
+      "lat": 35.1298165,
+      "lon": 139.6285093,
+      "positionKind": "node",
+      "tags": {
+        "name": "洲御前",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3872880060,
+      "lat": 35.1396612,
+      "lon": 139.6250553,
+      "positionKind": "node",
+      "tags": {
+        "name": "櫻稲荷大明神",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3872880061,
+      "lat": 35.1404821,
+      "lon": 139.6230529,
+      "positionKind": "node",
+      "tags": {
+        "name": "大椿寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3879304416,
+      "lat": 35.1569842,
+      "lon": 139.6373235,
+      "positionKind": "node",
+      "tags": {
+        "name": "ステーキ ガスト",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3879304417,
+      "lat": 35.1569941,
+      "lon": 139.6375713,
+      "positionKind": "node",
+      "tags": {
+        "name": "ローソン",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329335,
+      "lat": 35.1413286,
+      "lon": 139.6184208,
+      "positionKind": "node",
+      "tags": {
+        "name": "CABIN",
+        "amenity": "bar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329336,
+      "lat": 35.140928,
+      "lon": 139.6184821,
+      "positionKind": "node",
+      "tags": {
+        "name": "Misaki Donuts",
+        "shop": "confectionery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329337,
+      "lat": 35.1402621,
+      "lon": 139.6189052,
+      "positionKind": "node",
+      "tags": {
+        "name": "ROJI",
+        "shop": "antiques"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329338,
+      "lat": 35.1414923,
+      "lon": 139.6183295,
+      "positionKind": "node",
+      "tags": {
+        "name": "good day house",
+        "shop": "furniture"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329339,
+      "lat": 35.1410383,
+      "lon": 139.6185492,
+      "positionKind": "node",
+      "tags": {
+        "name": "いちごいちえ",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329340,
+      "lat": 35.1413185,
+      "lon": 139.6183205,
+      "positionKind": "node",
+      "tags": {
+        "name": "いづみ",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329341,
+      "lat": 35.1411779,
+      "lon": 139.6183702,
+      "positionKind": "node",
+      "tags": {
+        "name": "えのもと",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329342,
+      "lat": 35.1419761,
+      "lon": 139.6185496,
+      "positionKind": "node",
+      "tags": {
+        "name": "ごはん屋　でこり",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329343,
+      "lat": 35.1414159,
+      "lon": 139.618422,
+      "positionKind": "node",
+      "tags": {
+        "name": "さくらや",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329344,
+      "lat": 35.1418342,
+      "lon": 139.6185975,
+      "positionKind": "node",
+      "tags": {
+        "name": "イタコ",
+        "amenity": "bar"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329345,
+      "lat": 35.1406067,
+      "lon": 139.6187732,
+      "positionKind": "node",
+      "tags": {
+        "name": "サトウ薬局",
+        "amenity": "pharmacy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329700,
+      "lat": 35.1408441,
+      "lon": 139.6185298,
+      "positionKind": "node",
+      "tags": {
+        "name": "マツウラ",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329701,
+      "lat": 35.1409652,
+      "lon": 139.6185932,
+      "positionKind": "node",
+      "tags": {
+        "name": "マツウラ",
+        "shop": "bag"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329702,
+      "lat": 35.1406956,
+      "lon": 139.6186271,
+      "positionKind": "node",
+      "tags": {
+        "name": "ミサキプレッソ",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329703,
+      "lat": 35.1417163,
+      "lon": 139.6184645,
+      "positionKind": "node",
+      "tags": {
+        "name": "三上寫眞館",
+        "shop": "photo"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329704,
+      "lat": 35.140855,
+      "lon": 139.6186591,
+      "positionKind": "node",
+      "tags": {
+        "name": "三崎堂書店",
+        "shop": "books"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329707,
+      "lat": 35.1423384,
+      "lon": 139.6187047,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦一族歴史めぐり　海南神社",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329708,
+      "lat": 35.1426341,
+      "lon": 139.6188861,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦七福神　筌龍弁財天　三浦総鎮守　海南神社",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329709,
+      "lat": 35.1425606,
+      "lon": 139.6189045,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市保護樹木 No.22 海南神社のイチョウ(雌)①",
+        "natural": "tree"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329710,
+      "lat": 35.1424967,
+      "lon": 139.6188855,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦市保護樹木 No.23 海南神社のイチョウ(雄) ②",
+        "natural": "tree"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329711,
+      "lat": 35.1406422,
+      "lon": 139.6186996,
+      "positionKind": "node",
+      "tags": {
+        "name": "中華料理　牡丹",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329712,
+      "lat": 35.1411425,
+      "lon": 139.6185053,
+      "positionKind": "node",
+      "tags": {
+        "name": "公海　金目鯛",
+        "amenity": "fast_food"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329713,
+      "lat": 35.1427102,
+      "lon": 139.6186666,
+      "positionKind": "node",
+      "tags": {
+        "name": "包丁塚",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329714,
+      "lat": 35.1429687,
+      "lon": 139.6188014,
+      "positionKind": "node",
+      "tags": {
+        "name": "大神宮",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329715,
+      "lat": 35.1415331,
+      "lon": 139.6182416,
+      "positionKind": "node",
+      "tags": {
+        "name": "山田屋酒店",
+        "shop": "alcohol"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329716,
+      "lat": 35.1423436,
+      "lon": 139.6188654,
+      "positionKind": "node",
+      "tags": {
+        "name": "御霊神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329717,
+      "lat": 35.1403195,
+      "lon": 139.6188353,
+      "positionKind": "node",
+      "tags": {
+        "name": "手打ちうどん　はるかぜ",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329718,
+      "lat": 35.1406801,
+      "lon": 139.6188949,
+      "positionKind": "node",
+      "tags": {
+        "name": "有魚亭",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329719,
+      "lat": 35.1402995,
+      "lon": 139.6185952,
+      "positionKind": "node",
+      "tags": {
+        "name": "本宮神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329720,
+      "lat": 35.140305,
+      "lon": 139.6186311,
+      "positionKind": "node",
+      "tags": {
+        "name": "本宮神社",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329721,
+      "lat": 35.1404491,
+      "lon": 139.6189348,
+      "positionKind": "node",
+      "tags": {
+        "name": "松岡",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329722,
+      "lat": 35.1424517,
+      "lon": 139.6188295,
+      "positionKind": "node",
+      "tags": {
+        "name": "水神　龍神　社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329723,
+      "lat": 35.1416227,
+      "lon": 139.6184285,
+      "positionKind": "node",
+      "tags": {
+        "name": "理容　辻井",
+        "shop": "hairdresser"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329724,
+      "lat": 35.1423765,
+      "lon": 139.6186603,
+      "positionKind": "node",
+      "tags": {
+        "name": "疱瘡神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329725,
+      "lat": 35.1425148,
+      "lon": 139.6189616,
+      "positionKind": "node",
+      "tags": {
+        "name": "福徳稲荷神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329726,
+      "lat": 35.1405287,
+      "lon": 139.6189524,
+      "positionKind": "node",
+      "tags": {
+        "name": "菓子の老舗　嶋清",
+        "shop": "confectionery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329727,
+      "lat": 35.1414565,
+      "lon": 139.6184604,
+      "positionKind": "node",
+      "tags": {
+        "name": "蔵",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329728,
+      "lat": 35.1410084,
+      "lon": 139.6184459,
+      "positionKind": "node",
+      "tags": {
+        "name": "重美屋",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329729,
+      "lat": 35.1428206,
+      "lon": 139.619067,
+      "positionKind": "node",
+      "tags": {
+        "name": "金毘羅宮",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3880329730,
+      "lat": 35.1405601,
+      "lon": 139.618884,
+      "positionKind": "node",
+      "tags": {
+        "name": "音羽",
+        "amenity": "pub"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821373,
+      "lat": 35.141242,
+      "lon": 139.6179338,
+      "positionKind": "node",
+      "tags": {
+        "name": "Welcome to MIURA",
+        "tourism": "information",
+        "information": "map"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821374,
+      "lat": 35.142868,
+      "lon": 139.6132425,
+      "positionKind": "node",
+      "tags": {
+        "name": "○つね",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821375,
+      "lat": 35.1413773,
+      "lon": 139.6173954,
+      "positionKind": "node",
+      "tags": {
+        "name": "くろまぐろ鮨　たち吉",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821378,
+      "lat": 35.1416155,
+      "lon": 139.6164219,
+      "positionKind": "node",
+      "tags": {
+        "name": "ひとみ食堂",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821427,
+      "lat": 35.1413749,
+      "lon": 139.6170971,
+      "positionKind": "node",
+      "tags": {
+        "name": "三崎海楼",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821428,
+      "lat": 35.1411773,
+      "lon": 139.6172987,
+      "positionKind": "node",
+      "tags": {
+        "name": "三崎港周辺案内",
+        "tourism": "information",
+        "information": "map"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821429,
+      "lat": 35.1414121,
+      "lon": 139.6169169,
+      "positionKind": "node",
+      "tags": {
+        "name": "三崎館本店",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821430,
+      "lat": 35.143722,
+      "lon": 139.6127216,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦一族の歴史コース　歌舞島",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821432,
+      "lat": 35.1569501,
+      "lon": 139.6202102,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦道寸父子と油壺湾",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821438,
+      "lat": 35.1470467,
+      "lon": 139.6177389,
+      "positionKind": "node",
+      "tags": {
+        "name": "加藤酒店",
+        "shop": "alcohol"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821446,
+      "lat": 35.1420998,
+      "lon": 139.6155425,
+      "positionKind": "node",
+      "tags": {
+        "name": "岬陽館",
+        "tourism": "hotel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821447,
+      "lat": 35.1432002,
+      "lon": 139.6126419,
+      "positionKind": "node",
+      "tags": {
+        "name": "成龍丸",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821450,
+      "lat": 35.1543307,
+      "lon": 139.61915,
+      "positionKind": "node",
+      "tags": {
+        "name": "日本調剤　油壺薬局",
+        "amenity": "pharmacy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881821454,
+      "lat": 35.1436701,
+      "lon": 139.6126304,
+      "positionKind": "node",
+      "tags": {
+        "name": "歌舞島公園周辺のみどころ",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822166,
+      "lat": 35.1417502,
+      "lon": 139.6162363,
+      "positionKind": "node",
+      "tags": {
+        "name": "海生水産",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822167,
+      "lat": 35.1416057,
+      "lon": 139.6181143,
+      "positionKind": "node",
+      "tags": {
+        "name": "澤田痴陶人美術館",
+        "tourism": "museum"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822168,
+      "lat": 35.1414285,
+      "lon": 139.616814,
+      "positionKind": "node",
+      "tags": {
+        "name": "珈琲屋",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822169,
+      "lat": 35.1436958,
+      "lon": 139.6127227,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース⑦歌舞島",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822170,
+      "lat": 35.145887,
+      "lon": 139.6153098,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース　二町谷",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822171,
+      "lat": 35.1443456,
+      "lon": 139.6152174,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース　見桃寺",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822174,
+      "lat": 35.1482577,
+      "lon": 139.6168031,
+      "positionKind": "node",
+      "tags": {
+        "name": "神奈川県指定天然記念物　三浦市海外町のスランプ構造",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822175,
+      "lat": 35.1413825,
+      "lon": 139.6170413,
+      "positionKind": "node",
+      "tags": {
+        "name": "立花",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822176,
+      "lat": 35.1418347,
+      "lon": 139.6160955,
+      "positionKind": "node",
+      "tags": {
+        "name": "美之商会",
+        "shop": "tobacco"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822177,
+      "lat": 35.1415796,
+      "lon": 139.616479,
+      "positionKind": "node",
+      "tags": {
+        "name": "羽床総本店",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822178,
+      "lat": 35.1413676,
+      "lon": 139.6173029,
+      "positionKind": "node",
+      "tags": {
+        "name": "蓮花",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822181,
+      "lat": 35.1553169,
+      "lon": 139.6176723,
+      "positionKind": "node",
+      "tags": {
+        "name": "諸磯湾",
+        "name:ja": "諸磯湾",
+        "natural": "bay"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822183,
+      "lat": 35.1412402,
+      "lon": 139.6179591,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822184,
+      "lat": 35.1412538,
+      "lon": 139.6179672,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "map"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822185,
+      "lat": 35.141264,
+      "lon": 139.6179716,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822186,
+      "lat": 35.1436843,
+      "lon": 139.6126177,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822187,
+      "lat": 35.1512094,
+      "lon": 139.6162941,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822188,
+      "lat": 35.1537023,
+      "lon": 139.6183448,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822189,
+      "lat": 35.1548798,
+      "lon": 139.619428,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822190,
+      "lat": 35.1569033,
+      "lon": 139.6202037,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822196,
+      "lat": 35.1421239,
+      "lon": 139.6150933,
+      "positionKind": "node",
+      "tags": {
+        "name": "青木釣具店",
+        "shop": "fishing"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822199,
+      "lat": 35.1413805,
+      "lon": 139.6171652,
+      "positionKind": "node",
+      "tags": {
+        "name": "香花",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3881822200,
+      "lat": 35.1414319,
+      "lon": 139.6162872,
+      "positionKind": "node",
+      "tags": {
+        "name": "鮮味樂",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3885927113,
+      "lat": 35.1472532,
+      "lon": 139.617552,
+      "positionKind": "node",
+      "tags": {
+        "name": "関東ふれあいの道",
+        "tourism": "information",
+        "information": "guidepost"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444458,
+      "lat": 35.1406833,
+      "lon": 139.6179505,
+      "positionKind": "node",
+      "tags": {
+        "name": "コーヒー 岬",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444465,
+      "lat": 35.1415076,
+      "lon": 139.6176614,
+      "positionKind": "node",
+      "tags": {
+        "name": "ファミリーマート",
+        "name:ja": "ファミリーマート",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444467,
+      "lat": 35.1362788,
+      "lon": 139.6129092,
+      "positionKind": "node",
+      "tags": {
+        "name": "いけだ",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444471,
+      "lat": 35.1414377,
+      "lon": 139.6176306,
+      "positionKind": "node",
+      "tags": {
+        "name": "庄和丸",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444472,
+      "lat": 35.1409238,
+      "lon": 139.6181158,
+      "positionKind": "node",
+      "tags": {
+        "name": "咲乃家",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444477,
+      "lat": 35.1308718,
+      "lon": 139.6253216,
+      "positionKind": "node",
+      "tags": {
+        "name": "第２展望台",
+        "tourism": "viewpoint"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444479,
+      "lat": 35.1405074,
+      "lon": 139.6178145,
+      "positionKind": "node",
+      "tags": {
+        "name": "横浜銀行",
+        "name:ja": "横浜銀行",
+        "amenity": "bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444481,
+      "lat": 35.1366368,
+      "lon": 139.6118283,
+      "positionKind": "node",
+      "tags": {
+        "name": "梶ノ亭",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444487,
+      "lat": 35.1416418,
+      "lon": 139.6177229,
+      "positionKind": "node",
+      "tags": {
+        "name": "魚音",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3983444489,
+      "lat": 35.1410226,
+      "lon": 139.6181365,
+      "positionKind": "node",
+      "tags": {
+        "name": "イワノ薬局",
+        "amenity": "pharmacy"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034161,
+      "lat": 35.1516559,
+      "lon": 139.6289068,
+      "positionKind": "node",
+      "tags": {
+        "name": "クリエイトSD",
+        "name:ja": "クリエイトSD",
+        "shop": "chemist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034163,
+      "lat": 35.1501427,
+      "lon": 139.6283673,
+      "positionKind": "node",
+      "tags": {
+        "name": "ENEOS",
+        "amenity": "fuel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034164,
+      "lat": 35.1534678,
+      "lon": 139.6311925,
+      "positionKind": "node",
+      "tags": {
+        "name": "Fuji",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034165,
+      "lat": 35.1565851,
+      "lon": 139.635578,
+      "positionKind": "node",
+      "tags": {
+        "name": "JA SS",
+        "name:ja": "ジェイエイ-エスエス",
+        "amenity": "fuel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034166,
+      "lat": 35.1510421,
+      "lon": 139.6284172,
+      "positionKind": "node",
+      "tags": {
+        "name": "セブン-イレブン",
+        "name:ja": "セブン-イレブン",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034167,
+      "lat": 35.1536493,
+      "lon": 139.6318062,
+      "positionKind": "node",
+      "tags": {
+        "name": "TSUTAYA",
+        "shop": "books"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034169,
+      "lat": 35.153423,
+      "lon": 139.6311141,
+      "positionKind": "node",
+      "tags": {
+        "name": "しまむら",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034171,
+      "lat": 35.1549989,
+      "lon": 139.6323196,
+      "positionKind": "node",
+      "tags": {
+        "name": "セブン-イレブン",
+        "name:ja": "セブン-イレブン",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034194,
+      "lat": 35.1468171,
+      "lon": 139.6241922,
+      "positionKind": "node",
+      "tags": {
+        "name": "井上歯科",
+        "amenity": "dentist"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3984034227,
+      "lat": 35.1527482,
+      "lon": 139.6300329,
+      "positionKind": "node",
+      "tags": {
+        "name": "東京靴流通センター",
+        "shop": "shoes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988005594,
+      "lat": 35.1361825,
+      "lon": 139.6127859,
+      "positionKind": "node",
+      "tags": {
+        "name": "ようこそ城ヶ島へ",
+        "tourism": "information",
+        "information": "map"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988005814,
+      "lat": 35.1357374,
+      "lon": 139.612418,
+      "positionKind": "node",
+      "tags": {
+        "name": "風致亭",
+        "shop": "gift"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988005815,
+      "lat": 35.1357747,
+      "lon": 139.6122706,
+      "positionKind": "node",
+      "tags": {
+        "name": "北原園",
+        "shop": "gift"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006022,
+      "lat": 35.13517,
+      "lon": 139.6121557,
+      "positionKind": "node",
+      "tags": {
+        "name": "中村屋",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006023,
+      "lat": 35.1407739,
+      "lon": 139.6221931,
+      "positionKind": "node",
+      "tags": {
+        "name": "八大龍王",
+        "historic": "wayside_shrine",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006026,
+      "lat": 35.1363242,
+      "lon": 139.6122228,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島 Diving Center",
+        "leisure": "sports_centre"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006028,
+      "lat": 35.135034,
+      "lon": 139.6187781,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島海南神社",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006031,
+      "lat": 35.1449413,
+      "lon": 139.6159505,
+      "positionKind": "node",
+      "tags": {
+        "name": "大六天神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006032,
+      "lat": 35.1298876,
+      "lon": 139.6286359,
+      "positionKind": "node",
+      "tags": {
+        "name": "安房崎と州の御前",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006033,
+      "lat": 35.1354026,
+      "lon": 139.6114538,
+      "positionKind": "node",
+      "tags": {
+        "name": "小桜観音",
+        "historic": "wayside_shrine",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006034,
+      "lat": 35.1543414,
+      "lon": 139.609448,
+      "positionKind": "node",
+      "tags": {
+        "name": "山王日枝",
+        "historic": "wayside_shrine",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006035,
+      "lat": 35.1543185,
+      "lon": 139.6094499,
+      "positionKind": "node",
+      "tags": {
+        "name": "日枝神社",
+        "historic": "wayside_shrine",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006038,
+      "lat": 35.13635,
+      "lon": 139.6128128,
+      "positionKind": "node",
+      "tags": {
+        "name": "梅一",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006039,
+      "lat": 35.1369284,
+      "lon": 139.6112369,
+      "positionKind": "node",
+      "tags": {
+        "name": "楫の三郎山",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006040,
+      "lat": 35.136855,
+      "lon": 139.6114193,
+      "positionKind": "node",
+      "tags": {
+        "name": "楫三郎神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006045,
+      "lat": 35.141157,
+      "lon": 139.6280678,
+      "positionKind": "node",
+      "tags": {
+        "name": "牛頭観音",
+        "historic": "wayside_shrine",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006046,
+      "lat": 35.1394858,
+      "lon": 139.619788,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース　11 渡船場",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006047,
+      "lat": 35.1387224,
+      "lon": 139.6250017,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース　15　通り矢",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006049,
+      "lat": 35.1506357,
+      "lon": 139.6202443,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース　諸磯",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006050,
+      "lat": 35.1366736,
+      "lon": 139.6217916,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋碑",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006053,
+      "lat": 35.1541783,
+      "lon": 139.6094543,
+      "positionKind": "node",
+      "tags": {
+        "name": "稲荷神社",
+        "historic": "wayside_shrine",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006054,
+      "lat": 35.1541639,
+      "lon": 139.6094924,
+      "positionKind": "node",
+      "tags": {
+        "name": "若宮神社",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006055,
+      "lat": 35.1541956,
+      "lon": 139.609453,
+      "positionKind": "node",
+      "tags": {
+        "name": "若宮神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 3988006056,
+      "lat": 35.1502227,
+      "lon": 139.6204192,
+      "positionKind": "node",
+      "tags": {
+        "name": "諸磯遺跡",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200247030,
+      "lat": 35.1407649,
+      "lon": 139.6163305,
+      "positionKind": "node",
+      "tags": {
+        "name": "うらりカフェ",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200247034,
+      "lat": 35.1556771,
+      "lon": 139.6341437,
+      "positionKind": "node",
+      "tags": {
+        "name": "手打ちそば 太庵",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200247036,
+      "lat": 35.1529776,
+      "lon": 139.6306561,
+      "positionKind": "node",
+      "tags": {
+        "name": "ごはん亭 茶屋",
+        "name:ja": "茶屋",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200247037,
+      "lat": 35.1475915,
+      "lon": 139.6254193,
+      "positionKind": "node",
+      "tags": {
+        "name": "ローソン",
+        "name:ja": "ローソン",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200247042,
+      "lat": 35.1412436,
+      "lon": 139.6181711,
+      "positionKind": "node",
+      "tags": {
+        "name": "雀家",
+        "amenity": "cafe"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200247047,
+      "lat": 35.1419725,
+      "lon": 139.6255215,
+      "positionKind": "node",
+      "tags": {
+        "name": "寿司 元",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200310999,
+      "lat": 35.1359557,
+      "lon": 139.6133105,
+      "positionKind": "node",
+      "tags": {
+        "name": "いけのや釣具",
+        "shop": "fishing"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311001,
+      "lat": 35.1347406,
+      "lon": 139.6119249,
+      "positionKind": "node",
+      "tags": {
+        "name": "さかや",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311002,
+      "lat": 35.1362161,
+      "lon": 139.6130489,
+      "positionKind": "node",
+      "tags": {
+        "name": "ひもの　やまはる",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311003,
+      "lat": 35.1351581,
+      "lon": 139.6128039,
+      "positionKind": "node",
+      "tags": {
+        "name": "まぐろのお宿　城ヶ島　さんご荘",
+        "tourism": "hotel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311004,
+      "lat": 35.1361823,
+      "lon": 139.6131208,
+      "positionKind": "node",
+      "tags": {
+        "name": "まぐろ問屋　恵総本店",
+        "shop": "seafood"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311005,
+      "lat": 35.1360184,
+      "lon": 139.613136,
+      "positionKind": "node",
+      "tags": {
+        "name": "まるか",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311006,
+      "lat": 35.1328072,
+      "lon": 139.6208339,
+      "positionKind": "node",
+      "tags": {
+        "name": "ウミウ展望台",
+        "tourism": "viewpoint"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311192,
+      "lat": 35.1328392,
+      "lon": 139.6218634,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦半島八景　城ヶ島の落雁",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311193,
+      "lat": 35.1362182,
+      "lon": 139.6133776,
+      "positionKind": "node",
+      "tags": {
+        "name": "三海荘",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311194,
+      "lat": 35.1319287,
+      "lon": 139.6237567,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島のウミウ、ヒメウ及びクロサギの生息地",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311195,
+      "lat": 35.134396,
+      "lon": 139.6116356,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島めぐり　遊び船案内",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311196,
+      "lat": 35.1345403,
+      "lon": 139.6118205,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島地魚料理　潮風",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311197,
+      "lat": 35.135028,
+      "lon": 139.61088,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島灯台",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311198,
+      "lat": 35.1350331,
+      "lon": 139.6110402,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島灯台　点灯百二十周年記念碑",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311199,
+      "lat": 35.1352774,
+      "lon": 139.6115611,
+      "positionKind": "node",
+      "tags": {
+        "name": "海への祈り",
+        "tourism": "artwork"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311200,
+      "lat": 35.1344151,
+      "lon": 139.6123075,
+      "positionKind": "node",
+      "tags": {
+        "name": "港屋",
+        "tourism": "hotel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311201,
+      "lat": 35.1350602,
+      "lon": 139.6110934,
+      "positionKind": "node",
+      "tags": {
+        "name": "燈台創設八十年　記念碑",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311202,
+      "lat": 35.1327995,
+      "lon": 139.6208044,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース　ウミウ展望台",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311203,
+      "lat": 35.135378,
+      "lon": 139.6120905,
+      "positionKind": "node",
+      "tags": {
+        "name": "磯料理　かねあ",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200311204,
+      "lat": 35.1312348,
+      "lon": 139.6183254,
+      "positionKind": "node",
+      "tags": {
+        "name": "馬の背洞門",
+        "tourism": "attraction",
+        "natural": "rock"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4200325799,
+      "lat": 35.1314702,
+      "lon": 139.6183347,
+      "positionKind": "node",
+      "tags": {
+        "name": "馬の背洞門",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4202281806,
+      "lat": 35.1291633,
+      "lon": 139.6298296,
+      "positionKind": "node",
+      "tags": {
+        "name": "安房崎",
+        "name:ja": "安房崎",
+        "natural": "cape"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4202281807,
+      "lat": 35.1376128,
+      "lon": 139.6098096,
+      "positionKind": "node",
+      "tags": {
+        "name": "灘ヶ崎",
+        "name:ja": "灘ヶ崎",
+        "natural": "cape"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4202281808,
+      "lat": 35.1345902,
+      "lon": 139.6089621,
+      "positionKind": "node",
+      "tags": {
+        "name": "長津呂崎",
+        "name:ja": "長津呂崎",
+        "natural": "cape"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291544,
+      "lat": 35.1456855,
+      "lon": 139.620565,
+      "positionKind": "node",
+      "tags": {
+        "name": "飯島医院",
+        "amenity": "doctors"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291547,
+      "lat": 35.1494066,
+      "lon": 139.6278291,
+      "positionKind": "node",
+      "tags": {
+        "name": "なこう",
+        "shop": "confectionery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291551,
+      "lat": 35.1465072,
+      "lon": 139.6234296,
+      "positionKind": "node",
+      "tags": {
+        "name": "やなぎや",
+        "shop": "clothes"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291554,
+      "lat": 35.1538839,
+      "lon": 139.6311116,
+      "positionKind": "node",
+      "tags": {
+        "name": "にしやま小児科",
+        "amenity": "doctors"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291555,
+      "lat": 35.1412699,
+      "lon": 139.616157,
+      "positionKind": "node",
+      "tags": {
+        "name": "まぐろ食堂 七兵衛丸",
+        "name:ja": "七兵衛丸",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291556,
+      "lat": 35.1479939,
+      "lon": 139.6261819,
+      "positionKind": "node",
+      "tags": {
+        "name": "TAKARAYA",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291560,
+      "lat": 35.1461685,
+      "lon": 139.6209561,
+      "positionKind": "node",
+      "tags": {
+        "name": "京急ストア",
+        "shop": "supermarket"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4394291564,
+      "lat": 35.1478619,
+      "lon": 139.6254181,
+      "positionKind": "node",
+      "tags": {
+        "name": "湘南しんきん",
+        "amenity": "bank"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4401958664,
+      "lat": 35.1377785,
+      "lon": 139.6287504,
+      "positionKind": "node",
+      "tags": {
+        "name": "(有)青木造船所",
+        "man_made": "works"
+      }
+    },
+    {
+      "type": "node",
+      "id": 4401959220,
+      "lat": 35.1382216,
+      "lon": 139.6280638,
+      "positionKind": "node",
+      "tags": {
+        "name": "J.LUNA",
+        "shop": "outdoor"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5259377676,
+      "lat": 35.1472535,
+      "lon": 139.6270399,
+      "positionKind": "node",
+      "tags": {
+        "name": "栄児童公園",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5259377677,
+      "lat": 35.146459,
+      "lon": 139.6334108,
+      "positionKind": "node",
+      "tags": {
+        "name": "宮川神明社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5261386177,
+      "lat": 35.1503003,
+      "lon": 139.6314586,
+      "positionKind": "node",
+      "tags": {
+        "name": "原稲荷神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5270038718,
+      "lat": 35.1453384,
+      "lon": 139.6215509,
+      "positionKind": "node",
+      "tags": {
+        "name": "日本キリスト教団三崎教会",
+        "amenity": "place_of_worship",
+        "religion": "christian"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5411368121,
+      "lat": 35.1567442,
+      "lon": 139.6367844,
+      "positionKind": "node",
+      "tags": {
+        "name": "インド料理",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5468883111,
+      "lat": 35.1426672,
+      "lon": 139.6137428,
+      "positionKind": "node",
+      "tags": {
+        "name": "ENEOS",
+        "name:ja": "エネオス",
+        "amenity": "fuel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5502675429,
+      "lat": 35.1407659,
+      "lon": 139.6164409,
+      "positionKind": "node",
+      "tags": {
+        "name": "たからや",
+        "shop": "bakery"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5502675451,
+      "lat": 35.1406749,
+      "lon": 139.616171,
+      "positionKind": "node",
+      "tags": {
+        "name": "うらりマルシェ やさい館",
+        "shop": "greengrocer"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5584059437,
+      "lat": 35.1545892,
+      "lon": 139.6317995,
+      "positionKind": "node",
+      "tags": {
+        "name": "Esso",
+        "amenity": "fuel"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7022957332,
+      "lat": 35.1422145,
+      "lon": 139.6181857,
+      "positionKind": "node",
+      "tags": {
+        "name": "三井のリパーク",
+        "amenity": "parking"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7155090298,
+      "lat": 35.1349689,
+      "lon": 139.6219403,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島大橋",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7155090304,
+      "lat": 35.1343756,
+      "lon": 139.6213057,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島公園",
+        "tourism": "information",
+        "information": "map"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7155090305,
+      "lat": 35.1343128,
+      "lon": 139.6213147,
+      "positionKind": "node",
+      "tags": {
+        "name": "城ヶ島公園の自然と景観",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038649,
+      "lat": 35.141137,
+      "lon": 139.6282891,
+      "positionKind": "node",
+      "tags": {
+        "name": "青面金剛",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038651,
+      "lat": 35.1411203,
+      "lon": 139.6282962,
+      "positionKind": "node",
+      "tags": {
+        "name": "青面金剛",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038653,
+      "lat": 35.141129,
+      "lon": 139.628292,
+      "positionKind": "node",
+      "tags": {
+        "name": "庚申塔",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038654,
+      "lat": 35.1411349,
+      "lon": 139.6282993,
+      "positionKind": "node",
+      "tags": {
+        "name": "南無阿弥陀仏",
+        "historic": "tomb"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038660,
+      "lat": 35.1411,
+      "lon": 139.628274,
+      "positionKind": "node",
+      "tags": {
+        "name": "庚申塔",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038661,
+      "lat": 35.1411039,
+      "lon": 139.628272,
+      "positionKind": "node",
+      "tags": {
+        "name": "庚申供養塔",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038662,
+      "lat": 35.1411097,
+      "lon": 139.6282692,
+      "positionKind": "node",
+      "tags": {
+        "name": "庚申塔",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038663,
+      "lat": 35.1411157,
+      "lon": 139.6282663,
+      "positionKind": "node",
+      "tags": {
+        "name": "庚申塔",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038668,
+      "lat": 35.1401943,
+      "lon": 139.632525,
+      "positionKind": "node",
+      "tags": {
+        "name": "供養塔",
+        "historic": "memorial"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7168038669,
+      "lat": 35.141218,
+      "lon": 139.6342936,
+      "positionKind": "node",
+      "tags": {
+        "name": "白秋文学コース 16 八景原",
+        "tourism": "information",
+        "information": "board"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9653105763,
+      "lat": 35.1416233,
+      "lon": 139.6159845,
+      "positionKind": "node",
+      "tags": {
+        "name": "さん",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9653105764,
+      "lat": 35.1419439,
+      "lon": 139.6158786,
+      "positionKind": "node",
+      "tags": {
+        "name": "三崎動物愛護病院",
+        "amenity": "veterinary"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9653105765,
+      "lat": 35.1414082,
+      "lon": 139.6141876,
+      "positionKind": "node",
+      "tags": {
+        "name": "魚市場食堂",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10171316122,
+      "lat": 35.1471248,
+      "lon": 139.6234587,
+      "positionKind": "node",
+      "tags": {
+        "name": "クアーズミサキ",
+        "amenity": "public_bath"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10230120491,
+      "lat": 35.1323918,
+      "lon": 139.6208437,
+      "positionKind": "node",
+      "tags": {
+        "name": "赤羽根海岸",
+        "natural": "beach"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10230120492,
+      "lat": 35.1309879,
+      "lon": 139.6179426,
+      "positionKind": "node",
+      "tags": {
+        "name": "赤羽根崎",
+        "natural": "cape"
+      }
+    },
+    {
+      "type": "node",
+      "id": 11896359569,
+      "lat": 35.132541,
+      "lon": 139.6184244,
+      "positionKind": "node",
+      "tags": {
+        "name": "第二展望台",
+        "tourism": "viewpoint"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12277709615,
+      "lat": 35.143266,
+      "lon": 139.6199575,
+      "positionKind": "node",
+      "tags": {
+        "name": "五常の松",
+        "natural": "tree"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12364319660,
+      "lat": 35.1302008,
+      "lon": 139.6275671,
+      "positionKind": "node",
+      "tags": {
+        "name": "安房崎灯台",
+        "man_made": "lighthouse"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13531576207,
+      "lat": 35.1333632,
+      "lon": 139.6157408,
+      "positionKind": "node",
+      "tags": {
+        "name": "みはらし広場",
+        "tourism": "viewpoint"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13531576215,
+      "lat": 35.1351581,
+      "lon": 139.6232875,
+      "positionKind": "node",
+      "tags": {
+        "name": "神奈川県水産技術センター",
+        "amenity": "research_institute"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13531583021,
+      "lat": 35.142736,
+      "lon": 139.6086754,
+      "positionKind": "node",
+      "tags": {
+        "name": "日本さかな専門学校",
+        "amenity": "college"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13531587940,
+      "lat": 35.1533577,
+      "lon": 139.6302813,
+      "positionKind": "node",
+      "tags": {
+        "name": "山崎屋食堂",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13722789595,
+      "lat": 35.1418326,
+      "lon": 139.6211768,
+      "positionKind": "node",
+      "tags": {
+        "name": "三浦ブルワリー",
+        "name:ja": "三浦ブルワリー",
+        "amenity": "bicycle_rental"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13722830581,
+      "lat": 35.140895,
+      "lon": 139.6166463,
+      "positionKind": "node",
+      "tags": {
+        "name": "うらりマルシェ(三崎フィッシャリーナ・ウォーフ)",
+        "name:ja": "うらりマルシェ(三崎フィッシャリーナ・ウォーフ)",
+        "amenity": "bicycle_rental"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14047975901,
+      "lat": 35.1415826,
+      "lon": 139.6172611,
+      "positionKind": "node",
+      "tags": {
+        "name": "鮨処 魚音",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "node",
+      "id": 14130348834,
+      "lat": 35.1311734,
+      "lon": 139.623273,
+      "positionKind": "node",
+      "tags": {
+        "name": "ウミウ生息地",
+        "natural": "bird_nest"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260072436,
+      "lat": 35.1344677,
+      "lon": 139.6217212,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "県立城ヶ島公園第2駐車場",
+        "amenity": "parking"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260072437,
+      "lat": 35.13619,
+      "lon": 139.6123555,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島西側第1駐車場",
+        "amenity": "parking",
+        "access": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260072438,
+      "lat": 35.13581,
+      "lon": 139.6145207,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島西側第3駐車場",
+        "amenity": "parking"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260072439,
+      "lat": 35.1353571,
+      "lon": 139.6156272,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島西側第4駐車場",
+        "amenity": "parking"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260078295,
+      "lat": 35.1549365,
+      "lon": 139.6306647,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦郵便局",
+        "amenity": "post_office"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260078296,
+      "lat": 35.1559653,
+      "lon": 139.6286725,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "油壷幼稚園",
+        "amenity": "kindergarten"
+      }
+    },
+    {
+      "type": "way",
+      "id": 260078297,
+      "lat": 35.1552423,
+      "lon": 139.6285695,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市立名向小学校",
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 322226781,
+      "lat": 35.1444247,
+      "lon": 139.6153089,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "見桃寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 383437295,
+      "lat": 35.1459967,
+      "lon": 139.6315037,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三峯神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384676338,
+      "lat": 35.142676,
+      "lon": 139.6188478,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "海南神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384676339,
+      "lat": 35.1426451,
+      "lon": 139.618612,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "相州海南高家神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384827683,
+      "lat": 35.1437291,
+      "lon": 139.6135,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "歌舞島公園",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384827686,
+      "lat": 35.1538189,
+      "lon": 139.6193146,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "白須児童公園",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 384827687,
+      "lat": 35.1482261,
+      "lon": 139.6169134,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "神奈川県指定天然記念物　三浦市海外町のスランプ構造",
+        "natural": "cliff"
+      }
+    },
+    {
+      "type": "way",
+      "id": 394752553,
+      "lat": 35.1435036,
+      "lon": 139.6177513,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "大乗寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 394752554,
+      "lat": 35.1422136,
+      "lon": 139.6197981,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "光念寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 394752555,
+      "lat": 35.1451594,
+      "lon": 139.6171948,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "眞福寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 394752556,
+      "lat": 35.14423,
+      "lon": 139.6173803,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "長善寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 394752558,
+      "lat": 35.1424308,
+      "lon": 139.620653,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "本瑞寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 394752560,
+      "lat": 35.1431484,
+      "lon": 139.6196632,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市立三崎小学校",
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998635,
+      "lat": 35.1344218,
+      "lon": 139.6183368,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島児童公園",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998636,
+      "lat": 35.132423,
+      "lon": 139.6233795,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "県立城ヶ島公園第1駐車場",
+        "amenity": "parking",
+        "access": "destination"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998640,
+      "lat": 35.1447863,
+      "lon": 139.6283009,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市立病院",
+        "amenity": "hospital"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998642,
+      "lat": 35.1450095,
+      "lon": 139.6160522,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "二町若神明社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998644,
+      "lat": 35.1429445,
+      "lon": 139.6167936,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "住吉神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998645,
+      "lat": 35.1397256,
+      "lon": 139.622501,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "向ヶ崎公園",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998646,
+      "lat": 35.1326601,
+      "lon": 139.6245523,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島公園",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998647,
+      "lat": 35.1342293,
+      "lon": 139.6181841,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城島山　常光寺",
+        "amenity": "place_of_worship",
+        "religion": "buddhist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998655,
+      "lat": 35.1413807,
+      "lon": 139.626534,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "日枝神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998657,
+      "lat": 35.1347603,
+      "lon": 139.6189561,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "海南神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998658,
+      "lat": 35.1364234,
+      "lon": 139.621917,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "白秋記念館",
+        "tourism": "museum"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998661,
+      "lat": 35.142458,
+      "lon": 139.6243346,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "諏訪神社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 395998663,
+      "lat": 35.1542707,
+      "lon": 139.6099296,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "諸磯神明社",
+        "amenity": "place_of_worship",
+        "religion": "shinto"
+      }
+    },
+    {
+      "type": "way",
+      "id": 396378484,
+      "lat": 35.1474088,
+      "lon": 139.630567,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市立岬陽小学校",
+        "amenity": "school"
+      }
+    },
+    {
+      "type": "way",
+      "id": 420038645,
+      "lat": 35.1360795,
+      "lon": 139.6127746,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島西側第2駐車場",
+        "amenity": "parking"
+      }
+    },
+    {
+      "type": "way",
+      "id": 420045013,
+      "lat": 35.1374731,
+      "lon": 139.6131975,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "海上イケス釣り堀　J's Fishing",
+        "leisure": "fishing"
+      }
+    },
+    {
+      "type": "way",
+      "id": 420289246,
+      "lat": 35.1363121,
+      "lon": 139.6214381,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "白秋碑苑",
+        "leisure": "park"
+      }
+    },
+    {
+      "type": "way",
+      "id": 544266671,
+      "lat": 35.1536027,
+      "lon": 139.6317863,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "TSUTAYA",
+        "shop": "video"
+      }
+    },
+    {
+      "type": "way",
+      "id": 544266672,
+      "lat": 35.1527282,
+      "lon": 139.6300127,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "東京靴流通センター",
+        "shop": "yes"
+      }
+    },
+    {
+      "type": "way",
+      "id": 544266674,
+      "lat": 35.1475576,
+      "lon": 139.6253708,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "ローソン",
+        "shop": "convenience"
+      }
+    },
+    {
+      "type": "way",
+      "id": 544266675,
+      "lat": 35.1482069,
+      "lon": 139.6266894,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "かながわ信用金庫",
+        "amenity": "bank"
+      }
+    },
+    {
+      "type": "way",
+      "id": 544266676,
+      "lat": 35.1481775,
+      "lon": 139.6287964,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "クリエイトSD",
+        "shop": "chemist"
+      }
+    },
+    {
+      "type": "way",
+      "id": 544267209,
+      "lat": 35.1524153,
+      "lon": 139.6298893,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "chocoZAP",
+        "name:ja": "chocoZAP",
+        "leisure": "fitness_centre"
+      }
+    },
+    {
+      "type": "way",
+      "id": 545261586,
+      "lat": 35.144194,
+      "lon": 139.6207748,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市役所　本館",
+        "amenity": "townhall"
+      }
+    },
+    {
+      "type": "way",
+      "id": 545261589,
+      "lat": 35.1438443,
+      "lon": 139.6207187,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市役所　分館",
+        "amenity": "townhall"
+      }
+    },
+    {
+      "type": "way",
+      "id": 547149928,
+      "lat": 35.1548615,
+      "lon": 139.6302137,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "森山動物病院",
+        "amenity": "animal_shelter"
+      }
+    },
+    {
+      "type": "way",
+      "id": 766104762,
+      "lat": 35.1379297,
+      "lon": 139.6227095,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島大橋",
+        "man_made": "bridge"
+      }
+    },
+    {
+      "type": "way",
+      "id": 889083959,
+      "lat": 35.1359004,
+      "lon": 139.6137719,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "濱田屋",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "way",
+      "id": 921126858,
+      "lat": 35.1345379,
+      "lon": 139.6101375,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "お食事処相模亭",
+        "amenity": "restaurant"
+      }
+    },
+    {
+      "type": "way",
+      "id": 921126869,
+      "lat": 35.1365291,
+      "lon": 139.6122483,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ヶ島",
+        "amenity": "bus_station"
+      }
+    },
+    {
+      "type": "way",
+      "id": 921126881,
+      "lat": 35.1338889,
+      "lon": 139.613612,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "第一展望台",
+        "tourism": "viewpoint"
+      }
+    },
+    {
+      "type": "way",
+      "id": 923579091,
+      "lat": 35.1361211,
+      "lon": 139.6216949,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "CARO FORESTA",
+        "tourism": "hotel"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1333414341,
+      "lat": 35.1446924,
+      "lon": 139.6207258,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三浦市役所　第2分館",
+        "amenity": "townhall"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1473783419,
+      "lat": 35.1351432,
+      "lon": 139.6162097,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "城ケ島駐在所",
+        "amenity": "police"
+      }
+    },
+    {
+      "type": "way",
+      "id": 1473783421,
+      "lat": 35.1414709,
+      "lon": 139.6179808,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三崎港交番",
+        "amenity": "police"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 13915891,
+      "lat": 35.226921,
+      "lon": 139.3830434,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "相模湾",
+        "name:ja": "相模湾",
+        "natural": "bay"
+      }
+    },
+    {
+      "type": "relation",
+      "id": 15654456,
+      "lat": 35.1413712,
+      "lon": 139.6179517,
+      "positionKind": "bounding-box-center",
+      "tags": {
+        "name": "三崎公園",
+        "leisure": "park"
+      }
+    }
+  ]
+}

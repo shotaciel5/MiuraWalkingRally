@@ -1,0 +1,23 @@
+{
+  "provider": "OpenStreetMap",
+  "attribution": "© OpenStreetMap contributors",
+  "license": "ODbL-1.0",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "httpMethod": "POST",
+  "query": "[out:json][timeout:45];\n(\n  nwr[~\"^name(:ja)?$\"~\".\"][\"amenity\"](35.125,139.608,35.157,139.638);\n  nwr[~\"^name(:ja)?$\"~\".\"][\"shop\"](35.125,139.608,35.157,139.638);\n  nwr[~\"^name(:ja)?$\"~\".\"][\"tourism\"](35.125,139.608,35.157,139.638);\n  nwr[~\"^name(:ja)?$\"~\".\"][\"historic\"](35.125,139.608,35.157,139.638);\n  nwr[~\"^name(:ja)?$\"~\".\"][\"natural\"](35.125,139.608,35.157,139.638);\n  nwr[~\"^name(:ja)?$\"~\".\"][\"leisure\"](35.125,139.608,35.157,139.638);\n  nwr[~\"^name(:ja)?$\"~\".\"][\"man_made\"](35.125,139.608,35.157,139.638);\n);\nout center;\n",
+  "bounds": {
+    "south": 35.125,
+    "west": 139.608,
+    "north": 35.157,
+    "east": 139.638
+  },
+  "retrievedAt": "2026-11-08T07:00:21.820Z",
+  "osmBaseTimestamp": "2026-11-08T06:59:20Z",
+  "originalSha256": "cd682eccb7ddc769dc0010ac3dbe9ab651c38d38855acb45294b254bbcc8d1f9",
+  "snapshotSha256": "28ed822530bf8017e3a27b90d20fc0ae30439b9ada9123c7a66ccff16bec8ff4",
+  "originalBytes": 106744,
+  "originalElementCount": 295,
+  "normalization": "Named nodes and representative way/relation bounding-box centres. Whitelisted tags only; no editor, contact, address or full geometry. Not entrances or walking topology."
+}
