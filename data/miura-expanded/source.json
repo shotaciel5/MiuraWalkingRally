@@ -1,0 +1,36 @@
+{
+  "provider": "OpenStreetMap",
+  "attribution": "© OpenStreetMap contributors",
+  "copyrightUrl": "https://www.openstreetmap.org/copyright",
+  "license": "ODbL-1.0",
+  "licenseUrl": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "endpoint": "https://overpass-api.de/api/interpreter",
+  "httpMethod": "POST",
+  "query": "[out:json][timeout:90];\nway[\"highway\"](35.122,139.604,35.16,139.642)->.roads;\n(\n .roads;\n node(w.roads);\n rel(bw.roads)[\"type\"~\"^restriction\"];\n way[\"building\"](35.122,139.604,35.16,139.642);\n nwr[\"amenity\"](35.122,139.604,35.16,139.642);\n nwr[\"shop\"](35.122,139.604,35.16,139.642);\n nwr[\"tourism\"](35.122,139.604,35.16,139.642);\n nwr[\"historic\"](35.122,139.604,35.16,139.642);\n node[\"traffic_sign\"](35.122,139.604,35.16,139.642);\n node[\"traffic_sign:forward\"](35.122,139.604,35.16,139.642);\n node[\"traffic_sign:backward\"](35.122,139.604,35.16,139.642);\n node[\"highway\"~\"^(stop|give_way|traffic_signals|crossing|bus_stop)$\"](35.122,139.604,35.16,139.642);\n);\n(._;>;);\nout body;\n",
+  "retrievedAt": "2026-11-08T16:13:21.277Z",
+  "osmBaseTimestamp": "2026-11-08T16:11:34Z",
+  "originalSha256": "ab095388ff1e996402c16ca39874db80cb5e981814030231047e101fa94ee179",
+  "snapshotSha256": "7e9e599f0db76f35f173663b7fdc4d66960166fe74b295745ac35efdd092d77d",
+  "bounds": {
+    "south": 35.122,
+    "west": 139.604,
+    "north": 35.16,
+    "east": 139.642
+  },
+  "normalization": "Stable OSM IDs/geometry and whitelisted routing/building/landmark/sign tags only; no editor, contact or address metadata. Existing PoC data is retained separately.",
+  "counts": {
+    "nodes": 76180,
+    "highways": 1436,
+    "elements": 87319,
+    "routableNodes": 8656,
+    "bytes": 7104750
+  },
+  "roadSnapshotSha256": "136cee0ede7985d7abef29be66aab80b0fbc3454130999b0cf3502fee287e0f0",
+  "roadProjection": "Highway ways, their nodes and restriction relations derived from the same full snapshot; no changed geometry or walking rules.",
+  "roadCounts": {
+    "nodes": 9271,
+    "highways": 1436,
+    "routableNodes": 8656,
+    "bytes": 884117
+  }
+}

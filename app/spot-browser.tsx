@@ -8,7 +8,10 @@ import SpotEditor,{draftFor,type SpotDraft} from "./spot-editor";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog";
 import {AREA_LABELS,DEFAULT_FILTERS,ROUTING_LABELS,SPOT_GROUPS,filterSpots,groupFor,visibleSelection,type SpotFilters,type SpotGroup} from "../lib/spots/browser-view";
 import SpotMap from "./spot-map";
+import SpotConnection from "./spot-connection";
+import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 export default function SpotBrowser({spots:initialSpots,courseUses}:{spots:ManagedSpot[];courseUses:FixedCourseUse[]}){
+ const [connection,setConnection]=useState<RoadConnection|null>(null);
   const [spots,setSpots]=useState(initialSpots),[draft,setDraft]=useState<SpotDraft|null>(null),[busy,setBusy]=useState(false),[notice,setNotice]=useState("");
   const [refreshing,setRefreshing]=useState(false),[deleteTarget,setDeleteTarget]=useState<ManagedSpot|null>(null);
   const locked=!!draft||!!deleteTarget;
@@ -62,14 +65,14 @@ export default function SpotBrowser({spots:initialSpots,courseUses}:{spots:Manag
     </fieldset><div className="spot-result-heading"><p aria-live="polite"><strong data-spot-count>{visible.length}</strong> 件を表示 <span>／ 登録済み {spots.length} 件（初期データ178件）</span></p><button type="button" disabled={locked} onClick={()=>{setFilters(DEFAULT_FILTERS);setSelectedId(null)}} data-spot-reset>表示条件をリセット</button></div>
     <div className="spot-workspace">
       <div className="spot-map-column">
-        <SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} draftPosition={draft?{lat:draft.lat.trim()?Number(draft.lat):NaN,lon:draft.lon.trim()?Number(draft.lon):NaN}:null} onPosition={draft&&!busy&&!refreshing?point=>setDraft({...draft,lat:point.lat.toFixed(7),lon:point.lon.toFixed(7)}):null}/>
+        <SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} connection={connectionMatchesSpot(connection,selected)?connection:null} draftPosition={draft?{lat:draft.lat.trim()?Number(draft.lat):NaN,lon:draft.lon.trim()?Number(draft.lon):NaN}:null} onPosition={draft&&!busy&&!refreshing?point=>setDraft({...draft,lat:point.lat.toFixed(7),lon:point.lon.toFixed(7)}):null}/>
         {draft?<SpotEditor key={draft.id} draft={draft} onChange={setDraft} onCancel={cancel} onSaved={saved} onBusy={setBusy} refreshing={refreshing}/>:
         <section className="spot-detail-panel" aria-labelledby="spot-detail-title" data-spot-detail={selected?.id??""}>
           <p className="eyebrow">SPOT DETAILS</p>
           {selected?<><div className="spot-detail-heading"><h2 id="spot-detail-title" aria-live="polite">{selected.name}</h2><button type="button" onClick={()=>setSelectedId(null)} data-clear-spot>選択を解除</button></div>
             <p className="spot-detail-category">{SPOT_CATEGORIES[selected.category]} <span>· {AREA_LABELS[selected.area]}</span></p>
-            <p className="spot-routing-state" data-routing-state={selected.routing.state}>{ROUTING_LABELS[selected.routing.state]}</p>
-            <p className="spot-detail-note">{selected.routing.state==="poc-reference"?"既存コースで使う仮の到達点に対応しています。入口・通行・現地の安全性は未確認です。":selected.routing.state==="outside-road-snapshot"?"周辺の道路データと、徒歩で到達する位置の確認が必要です。":"施設の代表点は道路データの範囲内です。入口や道路への接続は確認待ちです。"}</p>
+            <p className="spot-routing-state" data-routing-state={selected.routing.state}>既存PoC基準：{ROUTING_LABELS[selected.routing.state]}</p>
+            <SpotConnection spot={selected} onConnection={setConnection}/>
             <dl className="spot-location-facts"><div><dt>施設の代表位置</dt><dd>{selected.position.lat.toFixed(6)}, {selected.position.lon.toFixed(6)}</dd></div><div><dt>位置の種類</dt><dd>{selected.position.kind==="operator"?"運営者が指定した位置":selected.position.kind==="node"?"OSMの地点座標":"地物の範囲の中心（概算）"}</dd></div></dl>
             <p className="spot-detail-note">営業状況・営業時間・立入り条件は確認待ちです。この位置は入口や安全な待機場所を示しません。</p>
             {selected.description&&<p className="spot-description" data-spot-detail-description>{selected.description}</p>}
@@ -81,10 +84,10 @@ export default function SpotBrowser({spots:initialSpots,courseUses}:{spots:Manag
         </section>}
       </div>
       <section className="spot-list-panel" aria-labelledby="spot-list-title"><div className="spot-list-heading"><h2 id="spot-list-title">スポット一覧</h2><span>{visible.length} 件</span></div>
-        {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=>{const g=SPOT_GROUPS[groupFor(spot.category)];return <li key={spot.id}><button type="button" className={selected?.id===spot.id?"is-selected":""} aria-pressed={selected?.id===spot.id} data-spot-list-id={spot.id} disabled={locked} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:g.color}} aria-hidden="true">{g.glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">{ROUTING_LABELS[spot.routing.state]}</span></span><span aria-hidden="true" className="spot-list-arrow">↗</span></button></li>})}</ul>:<div className="spot-empty" role="status" data-spot-empty><strong>条件に合う候補がありません</strong><p>ジャンルやエリアを変えるか、「全候補」でも探してみてください。</p></div>}
-        <p className="spot-list-note">選択は位置・情報の閲覧です。コースへの追加は後続の機能です。</p>
+        {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=>{const g=SPOT_GROUPS[groupFor(spot.category)];return <li key={spot.id}><button type="button" className={selected?.id===spot.id?"is-selected":""} aria-pressed={selected?.id===spot.id} data-spot-list-id={spot.id} disabled={locked} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:g.color}} aria-hidden="true">{g.glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">既存PoC：{ROUTING_LABELS[spot.routing.state]}</span></span><span aria-hidden="true" className="spot-list-arrow">↗</span></button></li>})}</ul>:<div className="spot-empty" role="status" data-spot-empty><strong>条件に合う候補がありません</strong><p>ジャンルやエリアを変えるか、「全候補」でも探してみてください。</p></div>}
+        <p className="spot-list-note">選択は位置・情報の閲覧です。コースへの追加は「ラリー下書き」で行います。</p>
       </section>
     </div>
-    <details className="spot-data-notes"><summary>データと表示について</summary><p>デモ表示は初期候補から選んだ24件のうち、削除済みを除いたものです。地域・ジャンルを分けた開発用の表示例です。観光の推奨や安全確認の完了を示しません。全候補へ切り替えると初期178件と追加したスポットのうち、削除済みを除いた候補から探せます。</p><p>初期候補は2026年11月8日取得の固定データです。運営者の編集・追加はPC上のSQLiteへ保存します。エリアは便宜上の区分で、行政境界ではありません。営業・入口・通行の確認は全件未実施です。</p><p>背景地図はOpenStreetMapの現在の配信画像を使うためネット接続が必要です。固定候補や既存道路データとは更新時点が異なります。コマ地図やルート生成の道路データは変更していません。</p></details>
+    <details className="spot-data-notes"><summary>データと表示について</summary><p>デモ表示は初期候補から選んだ24件のうち、削除済みを除いたものです。地域・ジャンルを分けた開発用の表示例です。観光の推奨や安全確認の完了を示しません。全候補へ切り替えると初期178件と追加したスポットのうち、削除済みを除いた候補から探せます。</p><p>初期候補は2026年11月8日取得の固定データです。運営者の編集・追加はPC上のSQLiteへ保存します。エリアは便宜上の区分で、行政境界ではありません。営業・入口・通行の確認は全件未実施です。</p><p>背景地図はOpenStreetMapの現在の配信画像を使うためネット接続が必要です。固定候補や既存道路データとは更新時点が異なります。道路の接続候補には別途取得した三崎・城ヶ島の固定データを使います。「既存PoC」の確認状態は従来の狭い範囲を示します。既存コースと31コマは保持しています。</p></details>
   </div>;
 }

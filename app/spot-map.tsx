@@ -5,6 +5,7 @@ import type {} from "leaflet.markercluster";
 import {INITIAL_SPOT_BOUNDS,within} from "../lib/spots/initial-catalog";
 import type {ManagedSpot} from "../lib/spots/editing";
 import {groupFor,SPOT_GROUPS} from "../lib/spots/browser-view";
+import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 type Engine={L:typeof Leaflet;map:Leaflet.Map;group:Leaflet.MarkerClusterGroup;tiles:Leaflet.TileLayer;markers:Map<string,Leaflet.Marker>;alive:boolean};
 let library:Promise<typeof Leaflet>|undefined;
 function loadLibrary(){
@@ -15,7 +16,7 @@ function loadLibrary(){
     return L;
   })().catch(error=>{library=undefined;throw error});
 }
-export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosition}:{spots:ManagedSpot[];selectedId:string|null;onSelect:(id:string)=>void;draftPosition?:{lat:number;lon:number}|null;onPosition?:((position:{lat:number;lon:number})=>void)|null}){
+export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosition,connection}:{spots:ManagedSpot[];selectedId:string|null;onSelect:(id:string)=>void;draftPosition?:{lat:number;lon:number}|null;onPosition?:((position:{lat:number;lon:number})=>void)|null;connection?:RoadConnection|null}){
   const container=useRef<HTMLDivElement>(null),select=useRef(onSelect),selection=useRef(selectedId);
   select.current=onSelect;selection.current=selectedId;
   const positionInput=useRef(onPosition);positionInput.current=onPosition;
@@ -28,6 +29,7 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
       if(cancelled||!container.current)return;
       instance=L.map(container.current,{center:[35.141,139.622],zoom:14,minZoom:12,maxZoom:18,scrollWheelZoom:false,zoomAnimation:false,fadeAnimation:false,markerZoomAnimation:false,
         maxBounds:[[35.115,139.595],[35.168,139.65]],maxBoundsViscosity:1});
+      const connectionsPane=instance.createPane("spot-connections");connectionsPane.style.zIndex="625";connectionsPane.style.pointerEvents="none";
       instance.on("click",(event:Leaflet.LeafletMouseEvent)=>positionInput.current?.({lat:event.latlng.lat,lon:event.latlng.lng}));
       let tileFailed=false;
       const tiles=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{
@@ -100,6 +102,19 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
     if(!engine.map.getBounds().contains(marker.getLatLng()))engine.map.panTo(marker.getLatLng(),{animate:false});
     return()=>{if(engine.alive)marker.remove()};
   },[engine,draftPosition?.lat,draftPosition?.lon]);
+  useEffect(()=>{
+    const spot=spots.find(s=>s.id===selectedId)??null;
+    if(!engine?.alive||draftPosition||!connectionMatchesSpot(connection??null,spot))return;
+    const value=connection!,{L,map}=engine,segment=value.segment;
+    const layers=L.layerGroup([
+      L.polyline([[segment.from.lat,segment.from.lon],[segment.to.lat,segment.to.lon]],{pane:"spot-connections",color:"#1f659c",weight:6,interactive:false,className:"spot-road-segment"}),
+      L.polyline([[value.facility.lat,value.facility.lon],[value.point.lat,value.point.lon]],{pane:"spot-connections",color:"#1f659c",weight:2,dashArray:"5 7",interactive:false,className:"spot-road-reference"}),
+      L.circleMarker([value.point.lat,value.point.lon],{pane:"spot-connections",radius:7,color:"#1f659c",weight:3,fillColor:"#fff",fillOpacity:1,interactive:false,className:"spot-road-point"})
+    ]).addTo(map);
+    const bounds=L.latLngBounds([[value.facility.lat,value.facility.lon],[value.point.lat,value.point.lon]]);
+    if(!map.getBounds().contains(bounds))map.fitBounds(bounds,{padding:[40,40],maxZoom:18,animate:false});
+    return()=>{if(engine.alive)layers.remove()};
+  },[engine,connection,selectedId,spots,draftPosition]);
   function fit(){
     if(engine?.alive&&spots.length){engine.map.stop();engine.map.fitBounds(engine.L.latLngBounds(spots.map(s=>[s.position.lat,s.position.lon] as [number,number])),{padding:[35,35],maxZoom:16,animate:false})}
   }

@@ -681,3 +681,5 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
 .draft-configuration button:disabled,.draft-display-modes button:disabled,.draft-group-filters button:disabled { opacity:.5; cursor:default; }
 @media(max-width:900px) { .draft-workspace { grid-template-columns:minmax(0,1fr); grid-template-areas:"map" "configuration" "candidates"; } .draft-map .spot-map-canvas { height:340px; } }
 @media(max-width:600px) { .draft-catalog-filters { padding:12px; gap:9px; } .draft-catalog-filters label:first-child { min-width:125px; } .draft-display-modes { width:100%; } .draft-configuration { padding:15px; } .draft-map .spot-map-canvas { height:300px; } .operator-tabs a { font-size:11px; padding:10px 14px; } }
+
+.spot-connection{border-top:1px solid #d9e1df;border-bottom:1px solid #d9e1df;padding:1rem 0;margin:1rem 0;font-size:.9rem;overflow-wrap:anywhere}.spot-connection h3{font-size:1rem;margin:0 0 .6rem}.spot-connection p{margin:.5rem 0}.spot-connection-name{font-weight:700}.spot-connection-name span{font-size:.8rem;font-weight:400;color:#48626a}.spot-connection details{font-size:.8rem;margin-top:.7rem}.spot-connection summary{cursor:pointer}

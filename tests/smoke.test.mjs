@@ -1,3 +1,4 @@
+import {decodeRoadConnection,connectionMatchesSpot} from "../lib/route/road-connection.ts";
 import {decodeDraftContext} from "../lib/operator/rally-draft.ts";
 import {decodeManagedSpot} from "../lib/spots/editing.ts";
 import {filterSpots,DEFAULT_FILTERS,ROUTING_LABELS} from "../lib/spots/browser-view.ts";
@@ -175,7 +176,7 @@ test("operator spot catalog HTTP smoke check",async t=>{
  await t.test("shows current review states, attribution and management without route creation",()=>{
   for(const state of new Set(visible.map(s=>s.routing.state)))assert.ok(html.includes(ROUTING_LABELS[state]));
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL 1.0/);
-  assert.match(html,/コースへの追加は後続/);assert.match(html,/data-spot-add/);assert.doesNotMatch(html,/data-demo-start/);
+  assert.match(html,/コースへの追加は「ラリー下書き」で行います/);assert.match(html,/data-spot-add/);assert.doesNotMatch(html,/data-demo-start/);
   assert.match(html,/name="robots"[^>]*noindex/);
  });
  await t.test("keeps participant and route PoC navigation with a distinct active operator link",()=>{
@@ -203,4 +204,17 @@ test("operator rally draft HTTP smoke check",async t=>{
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL 1.0/);
  });
  await t.test("returns 404 for an unknown draft child page",async()=>{const missing=await get("/operator/draft/__unknown__");assert.equal(missing.status,404);await missing.arrayBuffer()});
+});
+
+test("expanded road candidate API uses current active spots, no-store and validates input",async()=>{
+ const catalog=await (await get("/api/operator/spots")).json();
+ const spot=catalog.spots.find(s=>s.area==="jogashima-vicinity")??catalog.spots[0];
+ const response=await get("/api/operator/spots/connection?id="+encodeURIComponent(spot.id));
+ assert.equal(response.status,200);assert.match(response.headers.get("cache-control")??"",/no-store/);
+ const {connection}=await response.json();assert.equal(connection.spotId,spot.id);assert.equal(connection.spotRevision,spot.revision);
+ assert.deepEqual(connection.facility,{lat:spot.position.lat,lon:spot.position.lon});
+ assert.ok(connection.segment.wayId>0);assert.ok(connection.distanceMeters>=0);
+ const value=decodeRoadConnection(connection);assert.ok(value);assert.equal(connectionMatchesSpot(value,spot),true);
+ for(const suffix of ["","?id=bad","?id=..%2F.."]){assert.equal((await get("/api/operator/spots/connection"+suffix)).status,400)}
+ assert.equal((await get("/api/operator/spots/connection?id=local-00000000-0000-4000-8000-000000000000")).status,404);
 });

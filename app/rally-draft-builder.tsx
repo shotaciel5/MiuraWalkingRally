@@ -1,12 +1,15 @@
 "use client";
 import {useCallback,useEffect,useMemo,useRef,useState} from "react";
 import SpotMap from "./spot-map";
+import SpotConnection from "./spot-connection";
+import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog";
 import {AREA_LABELS,DEFAULT_FILTERS,SPOT_GROUPS,ROUTING_LABELS,filterSpots,groupFor,type SpotFilters,type SpotGroup} from "../lib/spots/browser-view";
 import type {ManagedSpot} from "../lib/spots/editing";
 import {blankDraft,decodeDraftContext,draftInput,draftIssues,draftSignature,refreshDraftSpots,type DraftForm,type RallyDraft,type StopKind} from "../lib/operator/rally-draft";
 
 export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|null;spots:ManagedSpot[]}}){
+ const [connection,setConnection]=useState<RoadConnection|null>(null);
  const [spots,setSpots]=useState(initial.spots),[saved,setSaved]=useState(initial.draft),[form,setForm]=useState<DraftForm>(initial.draft??blankDraft);
  const [filters,setFilters]=useState<SpotFilters>(DEFAULT_FILTERS),[selectedId,setSelectedId]=useState<string|null>(null);
  const [busy,setBusy]=useState(false),[error,setError]=useState(""),[reason,setReason]=useState(""),[notice,setNotice]=useState("");
@@ -65,16 +68,16 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
    <div className="draft-group-filters">{(["all",...Object.keys(SPOT_GROUPS)] as ("all"|SpotGroup)[]).map(group=><button type="button" key={group} disabled={busy} aria-pressed={filters.group===group} data-draft-group={group} onClick={()=>setFilters(f=>({...f,group}))}>{group==="all"?"すべて":SPOT_GROUPS[group].label}</button>)}</div>
   </div>
   <div className="draft-workspace">
-   <div className="draft-map"><SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select}/></div>
+   <div className="draft-map"><SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} connection={connectionMatchesSpot(connection,selected)?connection:null}/></div>
    <section className="draft-configuration" aria-label="作業中の下書き">
-    <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="spot-routing-state">{ROUTING_LABELS[selected.routing.state]}</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"開始にする",finish:"終了にする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div></>:<p>地図のピンや一覧から、割り当てる地点を選びます。</p>}</section>
+    <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="spot-routing-state">既存PoC基準：{ROUTING_LABELS[selected.routing.state]}</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"開始にする",finish:"終了にする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div><SpotConnection spot={selected} onConnection={setConnection}/></>:<p>地図のピンや一覧から、割り当てる地点を選びます。</p>}</section>
     <form onSubmit={e=>{e.preventDefault();void operate("save")}}><fieldset disabled={busy}>
      <div className="draft-form-heading"><h2>作業中の下書き</h2><span>{dirty?"未保存の変更あり":saved?"保存済み":"未保存"}</span></div>
      <label className="draft-title">下書き名<input required maxLength={100} value={form.title} data-draft-title onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="例：三崎のまち歩き"/></label>
-     {slot("start")}<div className="draft-stops-heading"><h3>途中の地点</h3><small>仮の並び・訪問順は生成時に確認</small></div>
+     {slot("start")}<div className="draft-stops-heading"><h3>途中の地点</h3><small>この並びで訪問・上下ボタンで変更</small></div>
      {form.stops.length?<ol className="draft-stops">{form.stops.map((stop,index)=>{const issue=issues.find(i=>i.key==="stop-"+index);return <li key={stop.spot.id} data-draft-stop={stop.spot.id} className={issue?"has-issue":""}><div className="draft-stop-top"><span>{index+1}</span><button type="button" disabled={!spots.some(s=>s.id===stop.spot.id)} onClick={()=>show(stop.spot)}>{stop.spot.name}</button><button type="button" className="draft-remove" aria-label={stop.spot.name+"を外す"} data-draft-remove-stop={index} onClick={()=>setForm(f=>({...f,stops:f.stops.filter((_,i)=>i!==index)}))}>外す</button></div><div className="draft-stop-controls"><select aria-label={stop.spot.name+"の役割"} value={stop.kind} data-draft-stop-kind={index} onChange={e=>setForm(f=>({...f,stops:f.stops.map((s,i)=>i===index?{...s,kind:e.target.value as StopKind}:s)}))}><option value="checkpoint">チェックポイント</option><option value="waypoint">経由地</option></select><button type="button" disabled={index===0} aria-label={stop.spot.name+"を上へ"} data-draft-up={index} onClick={()=>move(index,-1)}>↑</button><button type="button" disabled={index===form.stops.length-1} aria-label={stop.spot.name+"を下へ"} data-draft-down={index} onClick={()=>move(index,1)}>↓</button></div>{issue&&<p className="draft-issue">{issue.state==="missing"?"削除済みです。外すか別の地点を選んでください。":"台帳で変更されています。現在："+issue.current!.name}</p>}</li>})}</ol>:<p className="draft-empty-stops">地点を選び、チェックポイントや経由地として追加できます。</p>}
      {slot("finish")}
-     <p className="draft-scope-note">開始と終了は同じ地点を使えます。途中地点は任意です。入口・道路への接続・通行の確認は保存後も必要です。</p>
+     <p className="draft-scope-note">開始と終了は同じ地点を使えます。途中地点は任意です。訪問順はこの並びを使い、地点間の道順を自動生成する予定です。入口・道路への接続・通行の確認は保存後も必要です。</p>
     </fieldset>
     {issues.length>0&&<div className="draft-review-needed" role="status" data-draft-issues>{issues.length}件の地点情報を確認してください。削除済みの地点は選び直しが必要です。</div>}
     {error&&<div className="spot-edit-error" role="alert" data-draft-error>{error}</div>}
@@ -85,7 +88,7 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
     </form>
    </section>
    <section className="draft-candidates" aria-label="スポット候補"><div className="spot-list-heading"><h2>スポット候補</h2><span data-draft-count>{visible.length}件</span></div>
-    {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=><li key={spot.id}><button type="button" data-draft-candidate={spot.id} aria-pressed={selected?.id===spot.id} className={selected?.id===spot.id?"is-selected":""} disabled={busy} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:SPOT_GROUPS[groupFor(spot.category)].color}}>{SPOT_GROUPS[groupFor(spot.category)].glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">{ROUTING_LABELS[spot.routing.state]}</span></span></button></li>)}</ul>:<p className="spot-empty" data-draft-empty>条件に合う候補がありません。全候補や別の条件で探してください。</p>}
+    {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=><li key={spot.id}><button type="button" data-draft-candidate={spot.id} aria-pressed={selected?.id===spot.id} className={selected?.id===spot.id?"is-selected":""} disabled={busy} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:SPOT_GROUPS[groupFor(spot.category)].color}}>{SPOT_GROUPS[groupFor(spot.category)].glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">既存PoC：{ROUTING_LABELS[spot.routing.state]}</span></span></button></li>)}</ul>:<p className="spot-empty" data-draft-empty>条件に合う候補がありません。全候補や別の条件で探してください。</p>}
    </section>
   </div>
  </div>;
