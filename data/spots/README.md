@@ -2,7 +2,7 @@
 
 このディレクトリのOSM抽出・派生データは **© OpenStreetMap contributors / ODbL 1.0** です。[著作権と帰属](https://www.openstreetmap.org/copyright)、[Open Database License 1.0](https://opendatacommons.org/licenses/odbl/1-0/)に従って提供します。アプリ全体のコードのライセンスを決めるものではありません。
 
-P4-01aで初期候補178件を作成しました。すべて現地未確認です。P4-01bで[運営者向け一覧・地図](../../docs/operator-app.md)を追加しました。追加/編集/削除と保存DBは後続です。[収集・検証記録](../../docs/spot-catalog.md)を参照してください。
+P4-01aで初期候補178件を作成しました。すべて現地未確認です。P4-01bで[運営者向け一覧・地図](../../docs/operator-app.md)を追加しました。P4-01cで追加/編集を別のローカルSQLiteへ保存します。削除は後続です。[収集・検証記録](../../docs/spot-catalog.md)を参照してください。
 
 ## ファイル
 
@@ -51,4 +51,4 @@ spots:buildは固定入力と採否記録からinitial-spots.jsonを生成しま
 node scripts/fetch-initial-spots.mjs --refresh
 ~~~
 
-このコマンドはosm.json/source.jsonを更新するため、通常の再現確認では実行しません。更新後は採否記録・位置・重複・ハッシュを再レビューし、spots:build → spots:check → テストを実行してください。保留/到達点の元IDがなくなった場合は生成を止めます。初期データ更新と運営者の編集/削除の整合、ローカル保存方式はP4-01c/dで具体化します。
+このコマンドはosm.json/source.jsonを更新するため、通常の再現確認では実行しません。更新後は採否記録・位置・重複・ハッシュを再レビューし、spots:build → spots:check → テストを実行してください。保留/到達点の元IDがなくなった場合は生成を止めます。P4-01cの運営者による追加/編集は、初期JSONとは別のSQLiteへ保存してIDで重ねます。spots:buildはSQLiteを更新せず、再適用で編集を取り消しません。編集済みの初期IDが新しい基礎データからなくなる場合は台帳の読込みを止めるため、無断で削除/ID変更せず移行を別途具体化してください。削除方式とその再適用はP4-01d/Q-15で確認します。[保存方針](../../docs/decisions/009-local-spot-editing.md)を参照してください。

@@ -8,3 +8,7 @@ coverage/
 .tools/
 .npm-cache/
 npm-debug.log*
+
+.local-data/
+*.sqlite
+*.sqlite-*

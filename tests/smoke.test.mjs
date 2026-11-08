@@ -162,10 +162,10 @@ test("operator spot catalog HTTP smoke check",async t=>{
   assert.equal([...html.matchAll(/data-spot-list-id="/g)].length,24);
   assert.match(html,/data-spot-mode="all"/);assert.match(html,/178/);
  });
- await t.test("shows review states, source attribution and no route creation or editing actions",()=>{
+ await t.test("shows review states, attribution and the add action without route creation or deletion",()=>{
   assert.match(html,/道路データの範囲外/);assert.match(html,/入口・接続の確認待ち/);
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL 1.0/);
-  assert.match(html,/コースへの追加は後続/);assert.doesNotMatch(html,/data-demo-start|data-spot-save|data-spot-delete/);
+  assert.match(html,/コースへの追加は後続/);assert.match(html,/data-spot-add/);assert.doesNotMatch(html,/data-demo-start|data-spot-delete/);
   assert.match(html,/name="robots"[^>]*noindex/);
  });
  await t.test("keeps participant and route PoC navigation with a distinct active operator link",()=>{

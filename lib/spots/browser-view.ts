@@ -54,9 +54,9 @@ export function groupFor(category:SpotCategory):SpotGroup {
 export type SpotFilters={mode:"demo"|"all";group:"all"|SpotGroup;area:"all"|InitialSpot["area"];query:string};
 export const DEFAULT_FILTERS:SpotFilters={mode:"demo",group:"all",area:"all",query:""};
 const searchable=(s:string)=>s.normalize("NFKC").replace(/\s/g,"").toLocaleLowerCase("ja-JP");
-export function filterSpots(spots:readonly InitialSpot[],filters:SpotFilters) {
+export function filterSpots<T extends Pick<InitialSpot,"id"|"name"|"category"|"area">>(spots:readonly T[],filters:SpotFilters) {
   const demo=new Set<string>(DEMO_SPOT_IDS),query=searchable(filters.query);
   return spots.filter(s=>(filters.mode==="all"||demo.has(s.id))&&(filters.group==="all"||groupFor(s.category)===filters.group)
     &&(filters.area==="all"||s.area===filters.area)&&searchable(s.name).includes(query));
 }
-export function visibleSelection(spots:readonly InitialSpot[],id:string|null){return spots.find(s=>s.id===id)??null}
+export function visibleSelection<T extends {id:string}>(spots:readonly T[],id:string|null){return spots.find(s=>s.id===id)??null}

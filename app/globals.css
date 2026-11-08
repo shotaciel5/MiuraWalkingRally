@@ -581,3 +581,28 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
 @media(max-width:1000px) { .spot-workspace { grid-template-columns:minmax(0,1fr) 300px; gap:14px; } .spot-map-canvas { height:430px; } }
 @media(max-width:800px) { .operator-intro { flex-direction:column; align-items:flex-start; gap:12px; padding-top:30px; } .spot-workspace { grid-template-columns:minmax(0,1fr); } .spot-result-list { max-height:420px; } .spot-filter-top { flex-wrap:wrap; } .spot-display-modes { width:100%; } .spot-display-modes button { flex:1; } .spot-search { flex:1; } .spot-map-canvas { height:400px; } }
 @media(max-width:600px) { .view-switch a { font-size:10px; padding-left:7px; padding-right:7px; } .operator-intro h1 { font-size:30px; } .operator-intro .participant-lead { font-size:12px; } .operator-scope { align-items:flex-start; font-size:10px; padding:12px; gap:8px; } .spot-filters { padding:12px; } .spot-filter-top { gap:11px; } .spot-area { width:134px; } .spot-search input,.spot-area select { padding:7px; font-size:11px; } .spot-group-filters { gap:5px; margin-top:12px; padding-top:12px; } .spot-group-filters button { padding:5px 8px; gap:5px; font-size:10px; } .spot-result-heading { align-items:flex-start; gap:8px; font-size:10px; } .spot-result-heading p > span { display:block; margin-left:0; } .spot-result-heading > button { font-size:10px; } .spot-map-canvas { height:340px; } .spot-map-toolbar { padding:11px; } .spot-map-toolbar strong { font-size:12px; } .spot-map-toolbar button { font-size:10px; padding:6px 7px; } .spot-detail-panel { padding:17px; } .spot-detail-heading { flex-wrap:wrap; gap:0; } .spot-detail-panel h2 { font-size:18px; } .spot-tile-feedback { flex-direction:column; align-items:flex-start; } }
+
+/* Operator spot editing */
+.spot-catalog-actions { display:flex; align-items:center; justify-content:space-between; gap:12px; margin:0 0 17px; }
+.spot-catalog-actions p { color:var(--muted); font-size:12px; margin:0; }
+.spot-catalog-actions button { cursor:pointer; font:inherit; font-size:12px; padding:11px 16px; }
+.spot-filter-lock,.spot-editor fieldset { border:0; margin:0; padding:0; min-width:0; }
+.spot-filter-lock:disabled { opacity:.65; }
+.spot-editor { margin-top:18px; background:#fff; border:1px solid #cddac8; border-radius:12px; padding:22px; }
+.spot-editor h2 { font-size:20px; margin-bottom:10px; }
+.spot-editor label { display:block; font-size:12px; font-weight:700; color:var(--green); margin:14px 0; min-width:0; }
+.spot-editor label > span { font-size:9px; font-weight:400; color:var(--muted); margin-left:6px; }
+.spot-editor input,.spot-editor select,.spot-editor textarea { display:block; width:100%; min-width:0; border:1px solid #cbd8c8; border-radius:6px; padding:10px; margin-top:6px; background:#fff; color:var(--ink); font:inherit; font-weight:400; font-size:13px; }
+.spot-editor textarea { resize:vertical; }
+.spot-editor .spot-detail-note { font-size:11px; }
+.spot-coordinate-inputs { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.spot-edit-actions { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin:18px 0 14px; }
+.spot-edit-actions button { font:inherit; font-size:12px; cursor:pointer; padding:11px 16px; border-radius:7px; }
+.spot-edit-actions button[type=button] { border:1px solid #cbd8c8; background:white; color:var(--green); }
+.spot-edit-error { border:1px solid #d6b09a; border-radius:7px; padding:14px; background:#fcf1e9; color:#854821; font-size:12px; }
+.spot-edit-error p { margin:7px 0 0; overflow-wrap:anywhere; }
+.spot-edit-open { display:block; width:100%; border:1px solid #acc2ab; border-radius:7px; padding:11px; background:#f1f6ec; color:var(--green); font:inherit; font-size:12px; cursor:pointer; margin-top:18px; }
+.spot-description { font-size:12px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.spot-save-notice { padding:12px 16px; background:#eaf3e1; color:var(--green); border-radius:7px; font-size:12px; }
+.spot-editor button:disabled,.spot-catalog-actions button:disabled,.spot-result-list button:disabled { opacity:.6; cursor:default; }
+@media(max-width:600px) { .spot-catalog-actions { align-items:flex-start; } .spot-catalog-actions p { max-width:135px; font-size:10px; } .spot-catalog-actions button { font-size:11px; padding:10px 12px; } .spot-editor { padding:17px; } .spot-coordinate-inputs { gap:8px; } .spot-editor input,.spot-editor select,.spot-editor textarea { font-size:12px; padding:9px 7px; } }
