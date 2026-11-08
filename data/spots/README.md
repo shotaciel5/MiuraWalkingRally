@@ -2,7 +2,7 @@
 
 このディレクトリのOSM抽出・派生データは **© OpenStreetMap contributors / ODbL 1.0** です。[著作権と帰属](https://www.openstreetmap.org/copyright)、[Open Database License 1.0](https://opendatacommons.org/licenses/odbl/1-0/)に従って提供します。アプリ全体のコードのライセンスを決めるものではありません。
 
-P4-01aで初期候補178件を作成しました。すべて現地未確認です。運営者向け一覧・追加/編集/削除画面や保存DBはまだありません。[収集・検証記録](../../docs/spot-catalog.md)を参照してください。
+P4-01aで初期候補178件を作成しました。すべて現地未確認です。P4-01bで[運営者向け一覧・地図](../../docs/operator-app.md)を追加しました。追加/編集/削除と保存DBは後続です。[収集・検証記録](../../docs/spot-catalog.md)を参照してください。
 
 ## ファイル
 

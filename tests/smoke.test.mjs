@@ -153,3 +153,26 @@ test("participant rally list and detail HTTP smoke check",async t=>{
     assert.equal(response.status,404);await response.arrayBuffer();
   });
 });
+
+test("operator spot catalog HTTP smoke check",async t=>{
+ const response=await get("/operator/spots"),html=await response.text();
+ await t.test("serves an operator page with 24 default entries and an all-candidate option",()=>{
+  assert.equal(response.status,200);assert.match(html,/data-operator-page="spots"/);
+  assert.match(html,/data-spot-browser/);assert.match(html,/data-visible-count="24"/);
+  assert.equal([...html.matchAll(/data-spot-list-id="/g)].length,24);
+  assert.match(html,/data-spot-mode="all"/);assert.match(html,/178/);
+ });
+ await t.test("shows review states, source attribution and no route creation or editing actions",()=>{
+  assert.match(html,/道路データの範囲外/);assert.match(html,/入口・接続の確認待ち/);
+  assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL 1.0/);
+  assert.match(html,/コースへの追加は後続/);assert.doesNotMatch(html,/data-demo-start|data-spot-save|data-spot-delete/);
+  assert.match(html,/name="robots"[^>]*noindex/);
+ });
+ await t.test("keeps participant and route PoC navigation with a distinct active operator link",()=>{
+  const active=[...html.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]).find(tag=>tag.includes('href="/operator/spots"')); assert.ok(active?.includes('aria-current="true"'));
+  assert.match(html,/href="\/poc"/);assert.match(html,/href="\/"/);
+ });
+ await t.test("returns 404 for an unknown operator page",async()=>{
+  const missing=await get("/operator/__missing__");assert.equal(missing.status,404);await missing.arrayBuffer();
+ });
+});

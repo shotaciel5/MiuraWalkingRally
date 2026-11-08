@@ -12,7 +12,7 @@
     "start": "next start --hostname 127.0.0.1",
     "build": "next build",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test tests/route.test.mjs tests/misaki.test.mjs tests/junctions.test.mjs tests/koma.test.mjs tests/review.test.mjs tests/demo-rally.test.mjs tests/participation.test.mjs tests/participant-course.test.mjs tests/checkpoint-progress.test.mjs tests/goal.test.mjs tests/initial-spots.test.mjs",
+    "test": "node --test tests/route.test.mjs tests/misaki.test.mjs tests/junctions.test.mjs tests/koma.test.mjs tests/review.test.mjs tests/demo-rally.test.mjs tests/participation.test.mjs tests/participant-course.test.mjs tests/checkpoint-progress.test.mjs tests/goal.test.mjs tests/initial-spots.test.mjs tests/spot-browser.test.mjs",
     "test:smoke": "node --test tests/smoke.test.mjs",
     "route:report": "node scripts/route-report.mjs",
     "junction:report": "node scripts/junction-report.mjs",
@@ -24,13 +24,17 @@
   "dependencies": {
     "next": "15.5.29",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "leaflet": "1.9.4",
+    "leaflet.markercluster": "1.5.3"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "@types/leaflet": "1.9.22",
+    "@types/leaflet.markercluster": "1.5.6"
   },
   "overrides": {
     "next": {

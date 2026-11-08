@@ -1,7 +1,7 @@
 # P4-01a：初期スポット候補の収集・検証
 
 - 日付：2026-11-08
-- 状態：実装・検証済み・レビュー待ち
+- 状態：完了（2026-11-08の次タスク着手指示で承認済み）。本書はP4-01a時点の記録。後続の一覧/地図は[運営画面の記録](operator-app.md)を参照。
 - 基準：[要件](requirements.md)、[設計](design.md)、[バックログ](backlog.md#operator-first)、[運営側優先の承認](decisions/007-operator-first-development.md)
 - 成果物：[初期候補データ](../data/spots/initial-spots.json)、[出典/再現手順](../data/spots/README.md)、[保留・追加調査](../data/spots/review.json)
 
