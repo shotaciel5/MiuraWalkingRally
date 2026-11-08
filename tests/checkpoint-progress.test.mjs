@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {applyCheckpointConfirmation, decodeParticipation, participationKey, readParticipation, saveCheckpointConfirmation, startParticipation} from "../lib/participation.ts";
 
-const edition={id:"misaki-shitamachi",revision:"demo-v1-current",checkpointIds:["C1","C2"]};
+const edition={id:"misaki-shitamachi",revision:"demo-v1-current",checkpointIds:["C1","C2"],goalStopId:"G"};
 const id="a06adbe7-5fb2-4f0f-9237-3718f9d6c38e";
 const startedAt="2026-11-08T00:00:00.000Z",later="2026-11-08T00:10:00.000Z";
-const record={schemaVersion:2,participationId:id,rallyId:edition.id,rallyRevision:edition.revision,startedAt,achievements:[]};
+const record={schemaVersion:3,participationId:id,rallyId:edition.id,rallyRevision:edition.revision,startedAt,achievements:[],completion:null};
 const confirmation=(checkpointId="C1",recordedAt=later)=>({checkpointId,method:"demo-button",recordedAt});
 function memory(raw=JSON.stringify(record)){
   let value=raw;const writes=[];
@@ -13,18 +13,18 @@ function memory(raw=JSON.stringify(record)){
   return {store,provider:()=>store,writes,raw:()=>value};
 }
 test("legacy start-only reads preserve identity without writing or accepting old achievement fields",()=>{
-  const {achievements,...legacy}=record;legacy.schemaVersion=1;
+  const {achievements,completion,...legacy}=record;legacy.schemaVersion=1;
   const m=memory(JSON.stringify(legacy));
   assert.deepEqual(readParticipation(m.provider,edition),{status:"active",participation:record});
   assert.equal(m.writes.length,0);assert.equal(JSON.parse(m.raw()).schemaVersion,1);
   assert.equal(decodeParticipation(JSON.stringify({...legacy,achievements:[confirmation()]}),edition).status,"invalid");
 });
 test("the first explicit achievement upgrades a legacy record while retaining its identity and start time",()=>{
-  const {achievements,...legacy}=record;legacy.schemaVersion=1;
+  const {achievements,completion,...legacy}=record;legacy.schemaVersion=1;
   const m=memory(JSON.stringify(legacy)),result=saveCheckpointConfirmation(m.provider,edition,id,confirmation());
   assert.equal(result.status,"saved");assert.equal(result.added,true);
   assert.equal(result.participation.participationId,id);assert.equal(result.participation.startedAt,startedAt);
-  assert.equal(JSON.parse(m.raw()).schemaVersion,2);assert.deepEqual(JSON.parse(m.raw()).achievements,[confirmation()]);
+  assert.equal(JSON.parse(m.raw()).schemaVersion,3);assert.deepEqual(JSON.parse(m.raw()).achievements,[confirmation()]);
 });
 test("the common recording transition appends a confirmation without mutating its input",()=>{
   const before=JSON.stringify(record),result=applyCheckpointConfirmation(record,edition,confirmation());

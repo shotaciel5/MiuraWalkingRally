@@ -2,10 +2,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {decodeParticipation, participationKey, readParticipation, startParticipation} from "../lib/participation.ts";
 
-const edition = {id:"misaki-shitamachi", revision:"demo-v1-current",checkpointIds:["C1","C2"]};
+const edition = {id:"misaki-shitamachi", revision:"demo-v1-current",checkpointIds:["C1","C2"],goalStopId:"G"};
 const id = "a06adbe7-5fb2-4f0f-9237-3718f9d6c38e";
 const startedAt = "2026-11-07T06:00:00.000Z";
-const record = {schemaVersion:2, participationId:id, rallyId:edition.id, rallyRevision:edition.revision, startedAt, achievements:[]};
+const record = {schemaVersion:3, participationId:id, rallyId:edition.id, rallyRevision:edition.revision, startedAt, achievements:[],completion:null};
 function memory(initial = null) {
   const values = new Map(initial === null ? [] : [[participationKey(edition.id),initial]]);
   const writes = [];
@@ -42,7 +42,7 @@ test("the click reads current storage even when an earlier view saw an empty ses
   assert.equal(m.writes.length,0);
 });
 test("malformed, incomplete and extended records never restore an active participation",()=>{
-  const cases=["","broken","null","[]","{}",JSON.stringify({...record,schemaVersion:3}),
+  const cases=["","broken","null","[]","{}",JSON.stringify({...record,schemaVersion:4}),
     JSON.stringify({...record,participationId:"not-a-uuid"}),JSON.stringify({...record,startedAt:"not-a-date"}),
     JSON.stringify({...record,startedAt:"2026-02-30T00:00:00.000Z"}),
     JSON.stringify({...record,startedAt:123}),JSON.stringify({...record,rallyId:""}),

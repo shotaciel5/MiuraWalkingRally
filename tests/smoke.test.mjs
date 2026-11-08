@@ -122,7 +122,7 @@ test("participant rally list and detail HTTP smoke check",async t=>{
       const actions=[...html.matchAll(/<(?:a|button)\b[^>]*>[\s\S]*?<\/(?:a|button)>/g)].map(m=>m[0]);
       assert.ok(!actions.some(action=>/参加する|ラリーを開始|チェックイン|QRを読み取る|クーポンを受け取る/.test(action)));
     }
-    assert.ok(detail.includes("達成条件と特典の内容は未定"));
+    assert.ok(detail.includes("両チェックポイント達成後"));assert.ok(detail.includes("実利用の条件・特典は未定"));
   });
   await t.test("serves a demo start page with a matching edition and detail link",async()=>{
     const response=await get(rally.href+"/play"),html=await response.text();

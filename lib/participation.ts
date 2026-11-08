@@ -1,18 +1,24 @@
-export type RallyEdition = { id: string; revision: string; checkpointIds: readonly string[] };
+export type RallyEdition = { id: string; revision: string; checkpointIds: readonly string[]; goalStopId: string };
 export type CheckpointConfirmation = { checkpointId: string; method: "demo-button"; recordedAt: string };
+export type GoalConfirmation = { stopId: string; method: "demo-button"; recordedAt: string };
 export type Participation = {
-  schemaVersion: 2;
+  schemaVersion: 3;
   participationId: string;
   rallyId: string;
   rallyRevision: string;
   startedAt: string;
   achievements: CheckpointConfirmation[];
+  completion: GoalConfirmation | null;
 };
 export type ParticipationState =
   | { status: "empty" | "invalid" | "different-edition" | "unavailable" }
   | { status: "active"; participation: Participation };
 export type CheckpointWriteResult =
   | { status: "saved"; participation: Participation; added: boolean }
+  | { status: "empty" | "invalid" | "different-edition" | "unavailable" | "different-participation" | "invalid-confirmation" };
+export type GoalWriteResult =
+  | { status: "finished"; participation: Participation; added: boolean }
+  | { status: "incomplete"; participation: Participation; missingCheckpointIds: string[] }
   | { status: "empty" | "invalid" | "different-edition" | "unavailable" | "different-participation" | "invalid-confirmation" };
 export type ParticipationStorage = {
   getItem(key: string): string | null;
@@ -41,9 +47,9 @@ export function decodeParticipation(raw: string | null, edition: RallyEdition): 
     const value: unknown = JSON.parse(raw);
     if (!value || typeof value !== "object" || Array.isArray(value)) return { status: "invalid" };
     const record = value as Record<string, unknown>;
-    const legacy = record.schemaVersion === 1;
-    if ((!legacy && record.schemaVersion !== 2)
-      || !hasFields(record, legacy ? identityFields : [...identityFields, "achievements"])
+    const version = record.schemaVersion, legacy = version === 1;
+    if ((version !== 1 && version !== 2 && version !== 3)
+      || !hasFields(record, legacy ? identityFields : version === 2 ? [...identityFields, "achievements"] : [...identityFields, "achievements", "completion"])
       || typeof record.participationId !== "string" || !uuidV4.test(record.participationId)
       || typeof record.rallyId !== "string" || !record.rallyId
       || typeof record.rallyRevision !== "string" || !record.rallyRevision
@@ -62,9 +68,20 @@ export function decodeParticipation(raw: string | null, edition: RallyEdition): 
         achievements.push({checkpointId:item.checkpointId, method:"demo-button", recordedAt:item.recordedAt});
       }
     }
+    let completion: GoalConfirmation | null = null;
+    if (version === 3 && record.completion !== null) {
+      if (!record.completion || typeof record.completion !== "object" || Array.isArray(record.completion)) return {status:"invalid"};
+      const goal = record.completion as Record<string, unknown>;
+      const latest = Math.max(Date.parse(record.startedAt), ...achievements.map(a=>Date.parse(a.recordedAt)));
+      if (!hasFields(goal, ["stopId", "method", "recordedAt"])
+        || typeof goal.stopId !== "string" || goal.stopId !== edition.goalStopId || goal.method !== "demo-button"
+        || !isoDate(goal.recordedAt) || Date.parse(goal.recordedAt) < latest
+        || !edition.checkpointIds.length || !edition.checkpointIds.every(id=>seen.has(id))) return {status:"invalid"};
+      completion = {stopId:goal.stopId, method:"demo-button", recordedAt:goal.recordedAt};
+    }
     return { status: "active", participation: {
-      schemaVersion: 2, participationId: record.participationId, rallyId: record.rallyId,
-      rallyRevision: record.rallyRevision, startedAt: record.startedAt, achievements,
+      schemaVersion: 3, participationId: record.participationId, rallyId: record.rallyId,
+      rallyRevision: record.rallyRevision, startedAt: record.startedAt, achievements, completion,
     } };
   } catch { return { status: "invalid" }; }
 }
@@ -83,8 +100,8 @@ export function startParticipation(
     if (previous.status === "active") return previous;
     if (previous.status !== "empty" && !replaceIncompatible) return previous;
     const raw = JSON.stringify({
-      schemaVersion: 2, participationId: source.uuid(), rallyId: edition.id,
-      rallyRevision: edition.revision, startedAt: source.now(), achievements: [],
+      schemaVersion: 3, participationId: source.uuid(), rallyId: edition.id,
+      rallyRevision: edition.revision, startedAt: source.now(), achievements: [], completion: null,
     });
     const next = decodeParticipation(raw, edition);
     if (next.status !== "active") return { status: "unavailable" };
@@ -122,6 +139,38 @@ export function saveCheckpointConfirmation(
     if (current.participation.participationId !== expectedParticipationId) return {status:"different-participation"};
     const result = applyCheckpointConfirmation(current.participation, edition, confirmation);
     if (result.status !== "saved" || !result.added) return result;
+    const raw = JSON.stringify(result.participation);
+    store.setItem(key, raw);
+    if (store.getItem(key) !== raw) return {status:"unavailable"};
+    return result;
+  } catch { return {status:"unavailable"}; }
+}
+
+export function applyGoalConfirmation(
+  participation: Participation, edition: RallyEdition, confirmation: GoalConfirmation,
+): GoalWriteResult {
+  if (participation.rallyId !== edition.id || participation.rallyRevision !== edition.revision) return {status:"different-edition"};
+  const latest = Math.max(Date.parse(participation.startedAt), ...participation.achievements.map(a=>Date.parse(a.recordedAt)));
+  if (!edition.goalStopId || confirmation.stopId !== edition.goalStopId || confirmation.method !== "demo-button"
+    || !isoDate(confirmation.recordedAt) || Date.parse(confirmation.recordedAt) < latest || !edition.checkpointIds.length) {
+    return {status:"invalid-confirmation"};
+  }
+  if (participation.completion) return {status:"finished", participation, added:false};
+  const missingCheckpointIds = edition.checkpointIds.filter(id=>!participation.achievements.some(a=>a.checkpointId===id));
+  if (missingCheckpointIds.length) return {status:"incomplete", participation, missingCheckpointIds};
+  return {status:"finished", participation:{...participation, completion:{...confirmation}}, added:true};
+}
+
+export function saveGoalConfirmation(
+  storage: StorageProvider, edition: RallyEdition, expectedParticipationId: string, confirmation: GoalConfirmation,
+): GoalWriteResult {
+  try {
+    const store = storage(), key = participationKey(edition.id);
+    const current = decodeParticipation(store.getItem(key), edition);
+    if (current.status !== "active") return current;
+    if (current.participation.participationId !== expectedParticipationId) return {status:"different-participation"};
+    const result = applyGoalConfirmation(current.participation, edition, confirmation);
+    if (result.status !== "finished" || !result.added) return result;
     const raw = JSON.stringify(result.participation);
     store.setItem(key, raw);
     if (store.getItem(key) !== raw) return {status:"unavailable"};

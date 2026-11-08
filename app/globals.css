@@ -478,3 +478,19 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
 .demo-save-success p,.demo-confirmation .participation-error > p { margin:0; }
 .demo-confirmation .participation-error { margin-top:12px; }
 .demo-confirmation .participation-error button { margin-top:12px; width:100%; }
+
+.demo-goal { margin-top:24px; padding:20px; border:1px solid #c8d8c5; border-radius:10px; background:#f5f8ef; }
+.demo-goal h3 { font-size:20px; margin:8px 0 14px; }
+.demo-goal .rally-primary-link { width:100%; justify-content:center; cursor:pointer; font:inherit; font-size:14px; }
+.demo-goal .rally-primary-link:disabled { cursor:default; color:#627969; background:#edf1e8; border-color:#c8d7c5; }
+.demo-goal-requirements { list-style:none; padding:0; margin:18px 0; }
+.demo-goal-requirements li { display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--line); font-size:13px; }
+.demo-goal-limit { margin:16px 0 0; }
+.demo-goal-result > p { font-size:13px; }
+.demo-finished-time { font-size:12px; color:var(--green); overflow-wrap:anywhere; }
+.demo-goal .participation-error { margin-top:15px; }
+.demo-goal .participation-error p { margin:0 0 12px; }
+.demo-goal .participation-error button { width:100%; font:inherit; font-size:12px; cursor:pointer; }
+.demo-goal-shortcut { border-top:1px solid var(--line); margin-top:20px; padding-top:18px; }
+.demo-goal-shortcut h3 { font-size:16px; margin-bottom:8px; }
+@media(max-width:600px) { .demo-goal { padding:16px 13px; } .demo-goal h3 { font-size:18px; } }

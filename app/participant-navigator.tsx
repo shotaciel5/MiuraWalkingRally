@@ -2,9 +2,10 @@
 
 import {useRef, useState} from "react";
 import KomaFigure from "./koma-figure";
+import DemoGoal from "./demo-goal";
 import type {ParticipantCourse, ParticipantSpot} from "../lib/participant-course";
-import {participantFrame} from "../lib/participant-view";
-import type {CheckpointConfirmation, CheckpointWriteResult, Participation} from "../lib/participation";
+import {participantSpotDescription, participantFrame} from "../lib/participant-view";
+import type {CheckpointConfirmation, CheckpointWriteResult, GoalWriteResult, Participation} from "../lib/participation";
 
 type Feedback = {checkpointId:string; ok:boolean; message:string} | null;
 function SpotDetails({spot, achievement, onConfirm, feedback, onRetry}: {spot:ParticipantSpot; achievement?:CheckpointConfirmation; onConfirm:(id:string)=>void; feedback:Feedback; onRetry:()=>void}) {
@@ -14,7 +15,7 @@ function SpotDetails({spot, achievement, onConfirm, feedback, onRetry}: {spot:Pa
     <p className="participant-stop-role">{spot.role}</p>
     <h3>{spot.name}</h3>
     {spot.kind === "checkpoint" && <span className={"checkpoint-state"+(achievement?" demo-achieved":"")}>{achievement?"デモ達成済み":"未達成"}</span>}
-    <p>{spot.description}</p>
+    <p>{participantSpotDescription(spot)}</p>
     {spot.kind === "checkpoint" && <div className="demo-confirmation">
       <button type="button" className="rally-primary-link" data-demo-confirm={spot.id} disabled={!!achievement} onClick={() => onConfirm(spot.id)}>{achievement ? "デモ達成済み" : "デモ用：達成にする"}</button>
       <p className="participant-note">テスト用の操作です。実際の到着は確認しません。</p>
@@ -33,7 +34,7 @@ function SpotDetails({spot, achievement, onConfirm, feedback, onRetry}: {spot:Pa
   </article>;
 }
 
-export default function ParticipantNavigator({course, participation, onConfirm, onRetry}: {course:ParticipantCourse; participation:Participation; onConfirm:(id:string)=>CheckpointWriteResult; onRetry:()=>unknown}) {
+export default function ParticipantNavigator({course, participation, onConfirm, onGoal, onRetry}: {course:ParticipantCourse; participation:Participation; onConfirm:(id:string)=>CheckpointWriteResult; onGoal:(stopId:string)=>GoalWriteResult; onRetry:()=>unknown}) {
   const [index, setIndex] = useState(0);
   const [feedback, setFeedback] = useState<Feedback>(null);
   function confirm(id:string) {
@@ -64,8 +65,9 @@ export default function ParticipantNavigator({course, participation, onConfirm, 
         <div className="koma-distance" data-participant-distance={card.map.metersToNext ?? ""}><span>{card.map.metersToNext === null ? "最後のコマを表示しています" : "次のコマまで"}</span>{card.map.metersToNext !== null && <strong>{Math.round(card.map.metersToNext)}<small> m</small></strong>}<span className="koma-cumulative">出発から {Math.round(card.map.metersFromStart)} m</span></div>
         <div className="koma-navigation"><button type="button" data-participant-prev disabled={index === 0} onClick={() => setIndex(i => Math.max(0, i-1))}>← 前のコマ</button><button type="button" data-participant-next disabled={index === course.cards.length-1} onClick={() => setIndex(i => Math.min(course.cards.length-1, i+1))}>次のコマ →</button></div>
         <label className="participant-koma-select" htmlFor="participant-koma-select">閲覧するコマ<select id="participant-koma-select" value={index} onChange={e => setIndex(Number(e.target.value))}>{course.cards.map((c,i) => <option key={c.map.pathIndex} value={i}>#{c.map.sequence} {c.stopIds.map(id => course.stops.find(s => s.id === id)?.name).join(" / ") || "分岐"}</option>)}</select></label>
-        {card.map.kind === "finish" && <p className="participant-finish-note" role="note">コース図の最後です。実際の到着やゴールの判定は行っていません。</p>}
+        {card.map.kind === "finish" && <p className="participant-finish-note" role="note">コース図の最後です。デモの終了は下のゴール操作で記録します。実際の到着は確認しません。</p>}
         <div className="participant-spot-details">{stops.map(spot => <SpotDetails key={spot.id} spot={spot} achievement={participation.achievements.find(a=>a.checkpointId===spot.id)} onConfirm={confirm} feedback={feedback} onRetry={retry}/>)}</div>
+        {card.map.kind === "finish" && card.stopIds.includes(course.rally.goalStopId) && <DemoGoal participation={participation} requirements={checkpoints.map(s=>({id:s.id,name:s.name,achieved:participation.achievements.some(a=>a.checkpointId===s.id)}))} onFinish={()=>onGoal(course.rally.goalStopId)} onRetry={onRetry}/>}
         <details className="participant-map-notes"><summary>図の見方・出典</summary><p>道路の曲がりと枝を切り出した模式図です。距離は道路沿いの概算で、図の長さとは異なります。道幅・歩道・安全な横断位置は表しません。</p><p>茶色の横線は階段です。目印は30m以内の最大4件で、引出線の先が元データの位置です。破線の「停」は停止点の記録で、歩行者への指示ではありません。</p><p>施設の入口・通行・現地の安全性は確認待ちです。コマの選択はGPS現在地や到着の判定ではありません。</p></details>
         <p className="map-attribution">道路・目印 © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a></p>
       </section>
@@ -77,6 +79,7 @@ export default function ParticipantNavigator({course, participation, onConfirm, 
           return <li key={spot.id} data-participant-checkpoint={spot.id} data-checkpoint-status={achieved?"demo-completed":"unverified"}><strong>{spot.name}</strong><span className={"checkpoint-state"+(achieved?" demo-achieved":"")}>{achieved?"デモ達成済み":"未達成"}</span><button type="button" onClick={() => showCheckpoint(spot.id)} data-checkpoint-frame={spot.id}>{spot.name}のコマを見る<span aria-hidden="true">→</span></button></li>;
         })}</ol>
         <p className="participant-note">光念寺は経由地候補です。チェックポイントの達成対象には含めていません。</p>
+        <section className="demo-goal-shortcut" aria-label="ゴールの閲覧"><h3>デモのゴール</h3><p className="participant-note">{participation.completion?"デモ終了済みです。結果と終了日時を確認できます。":"両チェックポイント達成後、最後のコマのボタンで終了できます。"}</p><button type="button" data-view-goal onClick={()=>showCheckpoint(course.rally.goalStopId)}>{participation.completion?"ゴール結果を見る":"最後のコマを見る"}<span aria-hidden="true">→</span></button></section>
         <p className="participant-note navigation-retention">閲覧位置は画面内だけで保持し、再読込みすると最初のコマに戻ります。</p>
       </aside>
     </div>

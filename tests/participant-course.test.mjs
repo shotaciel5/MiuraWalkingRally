@@ -24,8 +24,8 @@ test("participant visits preserve the distinct start, waypoint, checkpoints and 
 });
 test("selecting frames does not mutate the course or turn viewing into achievements",()=>{
   const course=getParticipantCourse(),before=JSON.stringify(course);
-  const record={schemaVersion:2,participationId:"a06adbe7-5fb2-4f0f-9237-3718f9d6c38e",
-    rallyId:course.rally.id,rallyRevision:course.rally.revision,startedAt:"2026-11-07T06:00:00.000Z",achievements:[]};
+  const record={schemaVersion:3,participationId:"a06adbe7-5fb2-4f0f-9237-3718f9d6c38e",
+    rallyId:course.rally.id,rallyRevision:course.rally.revision,startedAt:"2026-11-07T06:00:00.000Z",achievements:[],completion:null};
   const saved=JSON.stringify(record);
   for(const i of [...course.cards.keys(),...course.cards.keys()].reverse()){
     const frame=participantFrame(course,i);
@@ -34,7 +34,7 @@ test("selecting frames does not mutate the course or turn viewing into achieveme
   }
   assert.equal(JSON.stringify(course),before);
   assert.deepEqual(decodeParticipation(saved,course.rally),{status:"active",participation:record});
-  assert.deepEqual(Object.keys(record).sort(),["schemaVersion","participationId","rallyId","rallyRevision","startedAt","achievements"].sort());
+  assert.deepEqual(Object.keys(record).sort(),["schemaVersion","participationId","rallyId","rallyRevision","startedAt","achievements","completion"].sort());
 });
 test("invalid viewing indices and missing stop bindings fail instead of selecting another occurrence",()=>{
   const course=getParticipantCourse();
@@ -61,7 +61,7 @@ test("only the two checkpoint candidates carry the checked local reference photo
 });
 test("the participant edition matches the detail/start model including its licensed photo metadata",()=>{
   const course=getParticipantCourse(),rally=getDemoRally();
-  assert.deepEqual(course.rally,{id:rally.id,revision:rally.revision,title:rally.title,href:rally.href,checkpointIds:rally.checkpointIds});
+  assert.deepEqual(course.rally,{id:rally.id,revision:rally.revision,title:rally.title,href:rally.href,checkpointIds:rally.checkpointIds,goalStopId:rally.goalStopId});
   assert.deepEqual(course.stops,rally.stops);
   assert.equal(getParticipantCourse().rally.revision,course.rally.revision);
 });
