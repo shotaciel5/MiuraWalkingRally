@@ -35,6 +35,6 @@ export function getDemoRally(){
     rally, roadSnapshot:source.snapshotSha256, legs:route.legs,
     navigationPresentation:"participant-koma-v1", contextSnapshot:contextSource.snapshotSha256, signsSnapshot:signsSource.snapshotSha256,
   })).digest("hex");
-  return {...rally, revision};
+  return {...rally, revision, checkpointIds:rally.stops.filter(s=>s.kind==="checkpoint").map(s=>s.id)};
 }
 export type DemoRally=ReturnType<typeof getDemoRally>;
