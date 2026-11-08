@@ -1,3 +1,4 @@
+import {decodeDraftContext} from "../lib/operator/rally-draft.ts";
 import {decodeManagedSpot} from "../lib/spots/editing.ts";
 import {filterSpots,DEFAULT_FILTERS,ROUTING_LABELS} from "../lib/spots/browser-view.ts";
 import assert from "node:assert/strict";
@@ -184,4 +185,22 @@ test("operator spot catalog HTTP smoke check",async t=>{
  await t.test("returns 404 for an unknown operator page",async()=>{
   const missing=await get("/operator/__missing__");assert.equal(missing.status,404);await missing.arrayBuffer();
  });
+});
+
+test("operator rally draft HTTP smoke check",async t=>{
+ const response=await get("/operator/draft"),html=await response.text(),api=await get("/api/operator/draft"),state=await api.json();
+ await t.test("loads a single draft with active catalog data and no-store",()=>{
+  assert.equal(api.status,200);assert.equal(api.headers.get("cache-control"),"no-store");assert.ok(decodeDraftContext(state));
+  assert.equal(response.status,200);assert.match(html,/data-operator-page="draft"/);assert.match(html,/data-draft-builder/);
+  assert.ok(html.includes('data-draft-revision="'+(state.draft?.revision??0)+'"'));
+ });
+ await t.test("provides selection and save controls while generation remains pending",()=>{
+  assert.match(html,/data-draft-title/);assert.match(html,/data-draft-slot="start"/);assert.match(html,/data-draft-slot="finish"/);
+  assert.match(html,/data-draft-save/);assert.match(html,/data-draft-refresh/);assert.match(html,/ルート・コマ地図の生成は準備中/);assert.doesNotMatch(html,/data-demo-start|data-koma-count/);
+ });
+ await t.test("links the spot catalog and draft work area",()=>{
+  assert.match(html,/href="\/operator\/spots"/);assert.match(html,/href="\/operator\/draft"/);
+  assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL 1.0/);
+ });
+ await t.test("returns 404 for an unknown draft child page",async()=>{const missing=await get("/operator/draft/__unknown__");assert.equal(missing.status,404);await missing.arrayBuffer()});
 });

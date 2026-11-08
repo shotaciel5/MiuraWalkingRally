@@ -624,3 +624,60 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
 .spot-delete-dialog .spot-edit-error button { margin-top:12px; }
 .spot-delete-dialog button:disabled { cursor:default; opacity:.6; }
 @media(max-width:600px) { .spot-delete-dialog { padding:19px; } .spot-delete-dialog h2 { font-size:19px; } .spot-delete-actions { justify-content:stretch; } .spot-delete-actions button { flex:1; font-size:11px; padding:10px 8px; } }
+
+/* Operator rally draft */
+.operator-tabs { display:flex; gap:8px; border-bottom:1px solid var(--line); padding-top:22px; }
+.operator-tabs a { padding:11px 17px; text-decoration:none; color:var(--muted); font-size:12px; border-bottom:2px solid transparent; }
+.operator-tabs a[aria-current=page] { color:var(--green); border-color:var(--green); font-weight:700; }
+.draft-catalog-filters { display:flex; gap:12px; flex-wrap:wrap; padding:17px; background:white; border:1px solid var(--line); border-radius:10px; margin-bottom:18px; align-items:flex-end; }
+.draft-catalog-filters label { font-size:10px; color:var(--muted); }
+.draft-catalog-filters label:first-child { flex:1; min-width:130px; }
+.draft-catalog-filters input,.draft-catalog-filters select,.draft-title input { display:block; width:100%; border:1px solid #cbd8c8; border-radius:6px; padding:9px 11px; margin-top:5px; font:inherit; font-size:12px; background:white; color:var(--ink); }
+.draft-display-modes,.draft-group-filters { display:flex; flex-wrap:wrap; gap:5px; }
+.draft-group-filters { width:100%; border-top:1px solid var(--line); padding-top:12px; }
+.draft-display-modes button,.draft-group-filters button { padding:8px 10px; border:1px solid #dbe3d5; color:var(--green); background:white; border-radius:6px; font:inherit; font-size:10px; cursor:pointer; }
+.draft-display-modes button[aria-pressed=true],.draft-group-filters button[aria-pressed=true] { background:#eaf3e1; border-color:#a1bb9c; }
+.draft-workspace { display:grid; grid-template-columns:minmax(0,1fr) 380px; grid-template-areas:"map configuration" "candidates configuration"; gap:18px; align-items:start; }
+.draft-map { grid-area:map; min-width:0; }
+.draft-map .spot-map-canvas { height:360px; }
+.draft-candidates { grid-area:candidates; min-width:0; border:1px solid var(--line); background:white; border-radius:10px; overflow:hidden; }
+.draft-candidates .spot-result-list { max-height:360px; }
+.draft-configuration { grid-area:configuration; border:1px solid var(--line); border-radius:11px; background:white; padding:18px; min-width:0; }
+.draft-configuration fieldset { border:0; padding:0; margin:0; min-width:0; }
+.draft-choice { padding-bottom:17px; border-bottom:1px solid var(--line); margin-bottom:18px; }
+.draft-choice h2 { font-size:18px; margin:6px 0; overflow-wrap:anywhere; }
+.draft-choice > p { font-size:11px; color:var(--muted); }
+.draft-choice .eyebrow { font-size:9px; }
+.draft-assign-actions { display:grid; grid-template-columns:1fr 1fr; gap:7px; margin-top:8px; }
+.draft-assign-actions button { border:1px solid #b9ccb3; background:#f2f7ec; color:var(--green); padding:10px 5px; border-radius:6px; font:inherit; font-size:10px; cursor:pointer; }
+.draft-form-heading { display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.draft-form-heading h2 { font-size:17px; }
+.draft-form-heading span { color:var(--muted); font-size:9px; }
+.draft-title { display:block; margin:14px 0; font-size:11px; color:var(--green); }
+.draft-slot { display:flex; justify-content:space-between; gap:8px; padding:12px; border:1px solid var(--line); border-radius:7px; background:#f9fbf5; margin:12px 0; min-width:0; }
+.draft-slot > div { min-width:0; }
+.draft-slot b { display:block; font-size:10px; color:var(--green); margin-bottom:7px; }
+.draft-slot div > button,.draft-stop-top > button:not(.draft-remove) { display:block; font:inherit; font-size:12px; text-align:left; border:0; padding:0; background:transparent; color:var(--ink); cursor:pointer; overflow-wrap:anywhere; }
+.draft-slot small { display:block; color:var(--muted); font-size:9px; margin-top:5px; }
+.draft-slot p,.draft-empty-stops { font-size:11px; color:var(--muted); margin:0; }
+.draft-remove { background:transparent; color:var(--muted); border:0; font:inherit; font-size:10px; padding:0; align-self:flex-start; cursor:pointer; white-space:nowrap; }
+.draft-stops-heading h3 { font-size:12px; margin:16px 0 3px; }
+.draft-stops-heading small { color:var(--muted); font-size:9px; }
+.draft-stops { list-style:none; padding:0; margin:10px 0; }
+.draft-stops > li { border:1px solid var(--line); border-radius:7px; padding:11px; margin:8px 0; }
+.draft-stop-top { display:flex; align-items:flex-start; gap:8px; }
+.draft-stop-top > span { color:var(--green); font-size:10px; }
+.draft-stop-top > button:not(.draft-remove) { flex:1; min-width:0; }
+.draft-stop-controls { display:flex; gap:6px; margin-top:9px; }
+.draft-stop-controls select { min-width:0; flex:1; padding:6px; border:1px solid #d2ddcd; border-radius:5px; background:white; font:inherit; font-size:10px; color:var(--green); }
+.draft-stop-controls button { border:1px solid #d2ddcd; border-radius:5px; background:white; color:var(--green); padding:4px 9px; cursor:pointer; }
+.draft-scope-note,.draft-saved-time { font-size:10px; color:var(--muted); line-height:1.8; margin:12px 0; }
+.draft-save-actions { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 10px; }
+.draft-save-actions button { border:1px solid #b9ccb3; border-radius:6px; background:white; color:var(--green); font:inherit; font-size:10px; padding:10px 12px; cursor:pointer; }
+.draft-save-actions .rally-primary-link { width:100%; background:var(--green); color:white; justify-content:center; }
+.draft-review-needed { font-size:11px; padding:12px; background:#fff3df; color:#835823; border-radius:6px; margin:12px 0; }
+.has-issue { border-color:#c9a47e!important; background:#fffaf0; }
+.draft-issue { color:#8b5628!important; font-size:10px!important; margin:8px 0 0!important; overflow-wrap:anywhere; }
+.draft-configuration button:disabled,.draft-display-modes button:disabled,.draft-group-filters button:disabled { opacity:.5; cursor:default; }
+@media(max-width:900px) { .draft-workspace { grid-template-columns:minmax(0,1fr); grid-template-areas:"map" "configuration" "candidates"; } .draft-map .spot-map-canvas { height:340px; } }
+@media(max-width:600px) { .draft-catalog-filters { padding:12px; gap:9px; } .draft-catalog-filters label:first-child { min-width:125px; } .draft-display-modes { width:100%; } .draft-configuration { padding:15px; } .draft-map .spot-map-canvas { height:300px; } .operator-tabs a { font-size:11px; padding:10px 14px; } }
