@@ -10,7 +10,7 @@ function failure(error:unknown){
 export function GET(){
   try{return Response.json({spots:getSpotRepository().list()},{headers})}catch(error){return failure(error)}
 }
-export async function PUT(request:Request){
+async function write(request:Request,action:(value:unknown)=>unknown,key:"spot"|"deleted"){
   let origin:URL;try{origin=new URL(request.headers.get("origin")||"")}catch{return Response.json({error:"この画面から保存をやり直してください。"},{status:403,headers})}
   if(!["127.0.0.1","localhost","[::1]"].includes(origin.hostname)||origin.host!==request.headers.get("host")||origin.protocol!==new URL(request.url).protocol)return Response.json({error:"この画面から保存をやり直してください。"},{status:403,headers});
   if(request.headers.get("content-type")?.split(";")[0].trim()!=="application/json")return Response.json({error:"JSON形式で保存してください。"},{status:415,headers});
@@ -21,6 +21,9 @@ export async function PUT(request:Request){
     while(true){const {value,done}=await reader.read();if(done)break;length+=value.byteLength;if(length>16384){await reader.cancel();throw new SpotError("invalid","入力が長すぎます。")}chunks.push(value)}
     const bytes=new Uint8Array(length);let offset=0;for(const chunk of chunks){bytes.set(chunk,offset);offset+=chunk.byteLength}
     let value:unknown;try{value=JSON.parse(new TextDecoder("utf-8",{fatal:true}).decode(bytes))}catch{throw new SpotError("invalid","保存内容の形式を確認してください。")}
-    return Response.json({spot:getSpotRepository().save(value)},{headers});
+    return Response.json({[key]:action(value)},{headers});
   }catch(error){return failure(error)}
 }
+
+export function PUT(request:Request){return write(request,value=>getSpotRepository().save(value),"spot")}
+export function DELETE(request:Request){return write(request,value=>getSpotRepository().remove(value),"deleted")}

@@ -606,3 +606,21 @@ h1 { font-size: clamp(29px, 3.3vw, 42px); }
 .spot-save-notice { padding:12px 16px; background:#eaf3e1; color:var(--green); border-radius:7px; font-size:12px; }
 .spot-editor button:disabled,.spot-catalog-actions button:disabled,.spot-result-list button:disabled { opacity:.6; cursor:default; }
 @media(max-width:600px) { .spot-catalog-actions { align-items:flex-start; } .spot-catalog-actions p { max-width:135px; font-size:10px; } .spot-catalog-actions button { font-size:11px; padding:10px 12px; } .spot-editor { padding:17px; } .spot-coordinate-inputs { gap:8px; } .spot-editor input,.spot-editor select,.spot-editor textarea { font-size:12px; padding:9px 7px; } }
+
+/* Operator spot deletion confirmation */
+.spot-delete-open { margin-top:11px; padding:8px 0; color:#925237; background:transparent; border:0; text-decoration:underline; text-underline-offset:3px; font:inherit; font-size:11px; cursor:pointer; }
+.spot-delete-dialog { width:min(500px,calc(100% - 32px)); max-height:calc(100dvh - 32px); overflow-y:auto; overscroll-behavior:contain; border:1px solid #d5dccc; border-radius:14px; padding:26px; color:var(--ink); background:#fcfcf7; box-shadow:0 20px 70px #183a2e33; margin:auto; }
+.spot-delete-dialog::backdrop { background:#183a2e80; }
+.spot-delete-dialog h2 { font-size:22px; margin:8px 0 18px; line-height:1.6; }
+.spot-delete-dialog > p { font-size:12px; line-height:1.9; }
+.spot-delete-target { border:1px solid var(--line); background:white; border-radius:8px; padding:14px; margin-bottom:17px; }
+.spot-delete-target strong { display:block; font-size:16px; overflow-wrap:anywhere; }
+.spot-delete-target span,.spot-delete-target small { display:block; color:var(--muted); font-size:10px; margin-top:6px; overflow-wrap:anywhere; }
+.spot-delete-usage { padding:14px; margin:15px 0; border:1px solid #d7d7b9; background:#f6f3e5; border-radius:8px; font-size:11px; }
+.spot-delete-usage p { margin:8px 0 0; overflow-wrap:anywhere; }
+.spot-delete-actions { display:flex; justify-content:flex-end; gap:10px; margin-top:22px; }
+.spot-delete-actions button,.spot-delete-dialog .spot-edit-error button { padding:10px 15px; border:1px solid #bcccba; border-radius:7px; background:white; color:var(--green); font:inherit; font-size:12px; cursor:pointer; }
+.spot-delete-actions .spot-delete-confirm { background:#955334; border-color:#955334; color:white; }
+.spot-delete-dialog .spot-edit-error button { margin-top:12px; }
+.spot-delete-dialog button:disabled { cursor:default; opacity:.6; }
+@media(max-width:600px) { .spot-delete-dialog { padding:19px; } .spot-delete-dialog h2 { font-size:19px; } .spot-delete-actions { justify-content:stretch; } .spot-delete-actions button { flex:1; font-size:11px; padding:10px 8px; } }

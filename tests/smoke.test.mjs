@@ -1,3 +1,5 @@
+import {decodeManagedSpot} from "../lib/spots/editing.ts";
+import {filterSpots,DEFAULT_FILTERS,ROUTING_LABELS} from "../lib/spots/browser-view.ts";
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import test from "node:test";
@@ -155,17 +157,24 @@ test("participant rally list and detail HTTP smoke check",async t=>{
 });
 
 test("operator spot catalog HTTP smoke check",async t=>{
+ const apiResponse=await get("/api/operator/spots"),catalog=await apiResponse.json();
+ assert.equal(apiResponse.status,200);assert.equal(apiResponse.headers.get("cache-control"),"no-store");
+ assert.ok(Array.isArray(catalog.spots));
+ const spots=catalog.spots.map(decodeManagedSpot);assert.ok(spots.every(Boolean));
+ assert.equal(new Set(spots.map(s=>s.id)).size,spots.length);
+ const visible=filterSpots(spots,DEFAULT_FILTERS);
  const response=await get("/operator/spots"),html=await response.text();
- await t.test("serves an operator page with 24 default entries and an all-candidate option",()=>{
-  assert.equal(response.status,200);assert.match(html,/data-operator-page="spots"/);
-  assert.match(html,/data-spot-browser/);assert.match(html,/data-visible-count="24"/);
-  assert.equal([...html.matchAll(/data-spot-list-id="/g)].length,24);
-  assert.match(html,/data-spot-mode="all"/);assert.match(html,/178/);
+ await t.test("serves active sample entries and an all-candidate option after edits or deletions",()=>{
+  assert.equal(response.status,200);assert.match(html,/data-operator-page="spots"/);assert.match(html,/data-spot-browser/);
+  assert.ok(html.includes('data-visible-count="'+visible.length+'"'));
+  assert.equal([...html.matchAll(/data-spot-list-id="/g)].length,visible.length);
+  const displayed=[...html.matchAll(/data-spot-list-id="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(displayed,visible.map(s=>s.id));
+  assert.match(html,/data-spot-mode="all"/);
  });
- await t.test("shows review states, attribution and the add action without route creation or deletion",()=>{
-  assert.match(html,/道路データの範囲外/);assert.match(html,/入口・接続の確認待ち/);
+ await t.test("shows current review states, attribution and management without route creation",()=>{
+  for(const state of new Set(visible.map(s=>s.routing.state)))assert.ok(html.includes(ROUTING_LABELS[state]));
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL 1.0/);
-  assert.match(html,/コースへの追加は後続/);assert.match(html,/data-spot-add/);assert.doesNotMatch(html,/data-demo-start|data-spot-delete/);
+  assert.match(html,/コースへの追加は後続/);assert.match(html,/data-spot-add/);assert.doesNotMatch(html,/data-demo-start/);
   assert.match(html,/name="robots"[^>]*noindex/);
  });
  await t.test("keeps participant and route PoC navigation with a distinct active operator link",()=>{
