@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {createRallyPreview} from "../lib/operator/rally-preview.ts";
 import {expandShortKoma} from "../lib/route/koma-display.ts";
-import {createKomaMaps} from "../lib/route/koma.ts";
+import {createKomaMaps,arrowPath} from "../lib/route/koma.ts";
 import {extractJunctions} from "../lib/route/junctions.ts";
 import {routeThroughStops} from "../lib/route/routing.ts";
 import {getBrowserSpots} from "../lib/spots/browser-catalog.ts";
@@ -68,7 +68,7 @@ test("close competing branches and overlapping return markers are conservatively
  c.map.shortGeometry.branches=[make(11,[{x:150,y:140,nodeId:1},{x:150,y:147,nodeId:11}],true,false),make(12,[{x:150,y:140,nodeId:1},{x:150.1,y:147,nodeId:12}],false,true)];
  assert.equal(expandShortKoma(c.map,c.referenceContext,300),null);
  c.map.shortGeometry.branches=[make(11,[{x:150,y:140,nodeId:1},{x:150,y:147,nodeId:11}],true,true)];
- assert.equal(expandShortKoma(c.map,c.referenceContext,300),null);
+ assert.equal(expandShortKoma(c.map,c.referenceContext,160),null);
 });
 test("access warnings survive expansion and start and finish do not invent arrival or departure branches",()=>{
  const flagged=cards.filter(c=>c.candidate.issues.length);assert.equal(flagged.length,2);
@@ -81,4 +81,40 @@ test("reference context does not replace original held context or change the sav
  const p=previews[0];assert.equal(p.cards.length,39);assert.ok(Math.abs(p.meters-1231.9926403365716)<1e-6);
  for(const c of cards){assert.equal(c.context.landmarks.length,0);assert.ok(c.referenceContext);assert.equal(c.referenceContext.roads.length>0,true)}
  assert.deepEqual(p.visits.map(v=>v.spotId),AUDIT_CASES[0].ids);assert.equal(p.visits[0].komaIndex,0);assert.equal(p.visits.at(-1).komaIndex,38);
+});
+
+const walkingLoop=()=>{
+ const ids=["osm-node-2046962408","osm-way-384676338","osm-way-394752554","osm-way-394752558","osm-node-2046962408"].map(id=>byId.get(id));
+ return createRallyPreview({title:"三崎町さんぽ・再現",start:ids[0],finish:ids.at(-1),stops:ids.slice(1,-1).map(spot=>({kind:"checkpoint",spot})),revision:1,updatedAt:"2026-11-09T00:00:00.000Z"},spots);
+};
+test("Kainan short return at koma 14 is readable without changing the 41-card route or saved geometry",()=>{
+ const p=walkingLoop(),c=p.cards[13],before=structuredClone(p);
+ assert.equal(p.cards.length,41);assert.equal(c.map.kind,"return");assert.equal(c.stops[0].name,"海南神社");
+ assert.ok(Math.abs(p.cards[12].map.metersToNext-8.406036772752145)<1e-6);assert.equal(p.cards[12].map.nodeId,p.cards[14].map.nodeId);
+ const original=c.map.shortGeometry.branches.find(b=>b.arrival&&b.departure);assert.ok(original);
+ for(const width of [300,260,220,180]){
+  const d=expandShortKoma(c.map,c.referenceContext,width);assert.ok(d,"Missing short return at "+width);
+  const branch=d.map.branches.find(b=>b.arrival&&b.departure),dot=branch.points.at(-1),arrow=arrowPath(branch.points).at(-1),screenScale=width/300;
+  assert.ok(Math.hypot(dot.x-arrow.x,dot.y-arrow.y)*screenScale>=14);
+  assert.ok(length(branch.points)*screenScale>=30);
+  assert.deepEqual(d.map.branches.map(b=>[b.neighborNodeId,b.arrival,b.departure,b.entry,b.exit]),c.map.shortGeometry.branches.map(b=>[b.neighborNodeId,b.arrival,b.departure,b.entry,b.exit]));
+  assert.ok(d.map.branches.every(b=>b.sourceSegments.every((s,i)=>s.from===c.map.shortGeometry.branches.find(x=>x.neighborNodeId===b.neighborNodeId).sourceSegments[i].from&&s.fraction>0&&s.fraction<=1)));
+  for(const b of d.map.branches){const source=c.map.shortGeometry.branches.find(x=>x.neighborNodeId===b.neighborNodeId);
+   for(const [i,segment]of b.sourceSegments.entries()){const old=source.sourceSegments[i],t=segment.fraction/old.fraction,a=source.points[i],z=source.points[i+1];
+    assert.equal(segment.to,old.to);assert.deepEqual(segment.wayIds,old.wayIds);
+    assert.ok(Math.abs(b.points[i+1].x-(150+(a.x+(z.x-a.x)*t-150)*d.zoomFactor))<1e-7);
+    assert.ok(Math.abs(b.points[i+1].y-(140+(a.y+(z.y-a.y)*t-140)*d.zoomFactor))<1e-7);
+   }
+  }
+  assert.equal(d.map.metersToNext,c.map.metersToNext);
+ }
+ assert.deepEqual(p,before);
+});
+test("a short return stays held when screen space cannot separate its real markers",()=>{
+ const p=walkingLoop(),c=p.cards[13];assert.equal(expandShortKoma(c.map,c.referenceContext,160),null);
+ const folded=structuredClone(c.map),branch=folded.shortGeometry.branches.find(b=>b.arrival&&b.departure);
+ // At 76% of this real path length the arrow returns to the same point as the inlet.
+ branch.points=[{x:150,y:140,nodeId:1},{x:150,y:159,nodeId:2},{x:150,y:156,nodeId:3},{x:150,y:159,nodeId:4}];
+ branch.sourceSegments=branch.points.slice(1).map((_,i)=>({...branch.sourceSegments[0],from:i+1,to:i+2}));
+ assert.equal(expandShortKoma(folded,c.referenceContext,300),null);
 });

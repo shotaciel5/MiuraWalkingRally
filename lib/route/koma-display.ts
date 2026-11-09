@@ -29,7 +29,18 @@ export function expandShortKoma(map:KomaMap,context:KomaContext,width:number){
   if(!geometry.branches.length||geometry.branches.some(b=>b.points.length<2||b.sourceSegments.length!==b.points.length-1||b.points.some(p=>!Number.isFinite(p.x)||!Number.isFinite(p.y))))return null;
   const selected=geometry.branches.filter(b=>b.arrival||b.departure),min=Math.min(...selected.map(b=>pathLength(b.points)));
   if(!(min>0&&min<30))return null;
-  const screenScale=width/300,factor=Math.max(1,36/(min*screenScale)),branches=geometry.branches.map(b=>crop(b,factor));
+  const screenScale=width/300;
+  let factor=Math.max(1,36/(min*screenScale));
+  const returning=selected.find(b=>b.arrival&&b.departure);
+  if(returning){
+   const inlet=returning.points.at(-1)!,arrow=arrowPath(returning.points).at(-1)!;
+   const gap=Math.hypot(inlet.x-arrow.x,inlet.y-arrow.y);
+   if(!(gap>0))return null;
+   // A short return shares one arm. Scale its real markers apart as well as lengthening the arm.
+   // Aim above the existing 14px guard; cropping and all actual clearances are still checked below.
+   factor=Math.max(factor,16/(gap*screenScale));
+  }
+  const branches=geometry.branches.map(b=>crop(b,factor));
   if(branches.filter(b=>b.arrival||b.departure).some(b=>b.pathPixels*screenScale<30))return null;
   const anchors=branches.flatMap(b=>[...(b.arrival?[{neighbor:b.neighborNodeId,point:b.points.at(-1)!}]:[]),...(b.departure?[{neighbor:b.neighborNodeId,point:arrowPath(b.points).at(-1)!}]:[])]);
   if(anchors.some(a=>branches.filter(b=>b.neighborNodeId!==a.neighbor).some(b=>b.points.slice(1).some((p,i)=>lineDistance(a.point,b.points[i],p)*screenScale<12))))return null;
