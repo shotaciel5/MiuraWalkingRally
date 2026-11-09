@@ -29,9 +29,9 @@ test("invalid names, IDs, revisions, roles and repeated intermediate identities 
  input({stops:[{kind:"checkpoint",spot:ref(a)},{kind:"waypoint",spot:ref(a)}]}),{...input(),published:true},
  input({start:{id:s,revision:0,position:{lat:0,lon:0}}})])assert.throws(()=>parseDraftInput(value));
 });
-test("opening the work area does not create a draft and initializes version 3",t=>{
+test("opening the work area does not create a draft and initializes version 4",t=>{
  const {path,repo}=fixture(t),state=repo.load();assert.equal(state.draft,null);assert.equal(state.spots.length,178);
- const db=new DatabaseSync(path);assert.equal(db.prepare("PRAGMA user_version").get().user_version,3);assert.equal(db.prepare("SELECT count(*) AS n FROM rally_draft").get().n,0);db.close();
+ const db=new DatabaseSync(path);assert.equal(db.prepare("PRAGMA user_version").get().user_version,4);assert.equal(db.prepare("SELECT count(*) AS n FROM rally_draft").get().n,0);db.close();
 });
 test("saving records roles and source snapshots without generating a route",t=>{
  const {repo}=fixture(t),state=repo.save(input()),draft=state.draft;
@@ -92,7 +92,7 @@ test("version 2 migration preserves edited and deleted spot records",t=>{
  const deletion={id:a,name:"Deleted",deletedFromRevision:0,revision:1,deletedAt:"2026-11-08T04:00:00.000Z"};
  db.prepare("INSERT INTO spot_edits VALUES (?,?)").run(s,JSON.stringify(edit));db.prepare("INSERT INTO spot_deletions VALUES (?,?)").run(a,JSON.stringify(deletion));db.close();
  const state=createDraftRepository(path).load();assert.equal(state.draft,null);assert.equal(state.spots.length,177);assert.equal(state.spots.find(v=>v.id===s).name,"Earlier name");
- const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,3);
+ const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,4);
  assert.deepEqual(JSON.parse(check.prepare("SELECT value FROM spot_edits WHERE id=?").get(s).value),edit);assert.deepEqual(JSON.parse(check.prepare("SELECT value FROM spot_deletions WHERE id=?").get(a).value),deletion);check.close();
 });
 test("corrupt or missing draft tables fail without replacing saved data",t=>{

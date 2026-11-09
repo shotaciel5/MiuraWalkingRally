@@ -2,10 +2,11 @@
 import {useEffect,useState} from "react";
 import type {ManagedSpot} from "../lib/spots/editing";
 import {connectionMatchesSpot,decodeRoadConnection,type RoadConnection} from "../lib/route/road-connection";
-export default function SpotConnection({spot,onConnection}:{spot:ManagedSpot;onConnection:(value:RoadConnection|null)=>void}){
+export default function SpotConnection({spot,onConnection,override}:{spot:ManagedSpot;override?:RoadConnection|null;onConnection:(value:RoadConnection|null)=>void}){
  const [attempt,setAttempt]=useState(0),[result,setResult]=useState<{key:string;state:string;connection:RoadConnection|null}>({key:"",state:"loading",connection:null});
- const key=[spot.id,spot.revision,spot.position.lat,spot.position.lon].join("/");
+ const key=[spot.id,spot.revision,spot.position.lat,spot.position.lon].join("/")+"/"+JSON.stringify(override??null);
  useEffect(()=>{
+  if(override&&connectionMatchesSpot(override,spot)){setResult({key,state:"ready",connection:override});onConnection(override);return}
   let active=true;const controller=new AbortController(),timer=window.setTimeout(()=>controller.abort(),15000);
   setResult({key,state:"loading",connection:null});onConnection(null);
   void (async()=>{
@@ -23,7 +24,7 @@ export default function SpotConnection({spot,onConnection}:{spot:ManagedSpot;onC
  },[key,attempt,onConnection,spot.id,spot.revision,spot.position.lat,spot.position.lon]);
  const state=result.key===key?result.state:"loading",value=state==="ready"?result.connection:null;
  return <section className="spot-connection" aria-label="道路への接続候補" data-road-connection={state} data-road-spot={spot.id}>
-  <h3>近くの道路を自動で探す</h3>
+  <h3>{override?"この下書きの道路上の到達点（手動補正）":"近くの道路を自動で探す"}</h3>
   {state==="loading"&&<p role="status">道路上の候補を計算しています…</p>}
   {state==="error"&&<><p role="status">候補を読み込めませんでした。台帳が変更されている場合は、最新情報を読み込んでください。</p><button type="button" data-road-retry onClick={()=>setAttempt(v=>v+1)}>候補を再試行</button></>}
   {state==="empty"&&<p>対象範囲の道路から候補を見つけられませんでした。</p>}

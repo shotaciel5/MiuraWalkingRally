@@ -1,3 +1,4 @@
+import {emptyCorrections,staleCorrections,type RallyCorrections} from "./rally-corrections.ts";
 import {draftIssues,draftVisits,decodeRallyDraft,type RallyDraft} from "./rally-draft.ts";
 import {prepareExpandedRoadConnections,expandedRoadSource} from "../miura-road-connections.ts";
 import {routeThroughStops,shortestPath} from "../route/routing.ts";
@@ -8,14 +9,15 @@ import {expandedKomaContext} from "../expanded-context.ts";
 import type {ManagedSpot} from "../spots/editing.ts";
 import type {Point} from "../route/types.ts";
 
-export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedSpot[]){
+export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedSpot[],corrections:RallyCorrections=emptyCorrections()){
  const blocked=(reason:string,message:string)=>({state:"blocked" as const,reason,message});
  if(!input)return blocked("missing","保存済みの下書きがありません。地点を選んで保存してください。");
  const draft=decodeRallyDraft(input);if(!draft)return blocked("invalid","下書きの内容を確認してください。");
  const issues=draftIssues(draft,spots);
  if(issues.length)return blocked("catalog-changed",issues.map(i=>i.label+"「"+i.spot?.name+"」"+(i.state==="missing"?"は削除済み・利用できません。":"は台帳で変更されています。")).join(" ")+" 下書きへ戻り、最新情報を確認して再保存してください。");
+ const stale=staleCorrections(draft,spots,corrections);if(stale.length)return blocked("correction-stale","保存した到達点の補正が台帳・道路データと一致しません。到達点の修正画面で再確認するか、自動候補に戻してください。");
  const visits=draftVisits(draft).map(v=>({...v,spot:v.spot!}));
- const prepared=prepareExpandedRoadConnections(visits.map(v=>v.spot)),{graph,nodeIdsBySpot,splits}=prepared;
+ const prepared=prepareExpandedRoadConnections(visits.map(v=>v.spot),corrections.items),{graph,nodeIdsBySpot,splits}=prepared;
  const stops=visits.map(v=>({id:v.key,name:v.spot.name,nodeId:nodeIdsBySpot.get(v.spot.id)!,note:"未確認の道路上候補。施設までの通路は未検証です。"}));
  let route;
  try{route=routeThroughStops(graph,stops)}
@@ -44,8 +46,8 @@ export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedS
   const p=w.points;return Math.min(...p.map(n=>n.lat))<=north&&Math.max(...p.map(n=>n.lat))>=south&&Math.min(...p.map(n=>n.lon))<=east&&Math.max(...p.map(n=>n.lon))>=west;
  }).map(w=>({id:w.id,points:w.points.map(p=>({lat:p.lat,lon:p.lon}))}));
  const connections=new Map(prepared.connections.map(c=>[c.spotId,c]));
- return {state:"ready" as const,title:draft.title,draftRevision:draft.revision,draftUpdatedAt:draft.updatedAt,source:expandedRoadSource,
+ return {state:"ready" as const,correctionRevision:corrections.revision,title:draft.title,draftRevision:draft.revision,draftUpdatedAt:draft.updatedAt,source:expandedRoadSource,
   meters:route.meters,minutes:route.minutes,speedKmh:route.speedKmh,legs,path,roads,cards,
-  visits:visits.map((v,i)=>{const c=connections.get(v.spot.id)!;return {id:v.key,label:v.label,name:v.spot.name,spotId:v.spot.id,spotRevision:v.spot.revision,point:c.point as Point,facility:c.facility as Point,gap:c.distanceMeters,komaIndex:cards.findIndex(card=>card.map.stopIds.includes(stops[i].id))}})};
+  visits:visits.map((v,i)=>{const c=connections.get(v.spot.id)!;return {id:v.key,label:v.label,name:v.spot.name,spotId:v.spot.id,spotRevision:v.spot.revision,point:c.point as Point,facility:c.facility as Point,gap:c.distanceMeters,mode:corrections.items.some(m=>m.spotId===v.spot.id)?"manual" as const:"auto" as const,komaIndex:cards.findIndex(card=>card.map.stopIds.includes(stops[i].id))}})};
 }
 export type RallyPreview=Extract<ReturnType<typeof createRallyPreview>,{state:"ready"}>;

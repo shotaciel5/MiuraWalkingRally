@@ -16,7 +16,7 @@ function loadLibrary(){
     return L;
   })().catch(error=>{library=undefined;throw error});
 }
-export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosition,connection}:{spots:ManagedSpot[];selectedId:string|null;onSelect:(id:string)=>void;draftPosition?:{lat:number;lon:number}|null;onPosition?:((position:{lat:number;lon:number})=>void)|null;connection?:RoadConnection|null}){
+export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosition,connection,positionLabel}:{spots:ManagedSpot[];selectedId:string|null;onSelect:(id:string)=>void;draftPosition?:{lat:number;lon:number}|null;onPosition?:((position:{lat:number;lon:number})=>void)|null;connection?:RoadConnection|null;positionLabel?:string}){
   const container=useRef<HTMLDivElement>(null),select=useRef(onSelect),selection=useRef(selectedId);
   select.current=onSelect;selection.current=selectedId;
   const positionInput=useRef(onPosition);positionInput.current=onPosition;
@@ -119,7 +119,7 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
     if(engine?.alive&&spots.length){engine.map.stop();engine.map.fitBounds(engine.L.latLngBounds(spots.map(s=>[s.position.lat,s.position.lon] as [number,number])),{padding:[35,35],maxZoom:16,animate:false})}
   }
   return <section className="spot-map-panel" aria-label="スポットの位置図" data-spot-map-state={state} data-tile-state={tilesState}>
-    <div className="spot-map-toolbar"><span><strong>地図から探す</strong><small>{onPosition?"地図をクリックして施設位置を指定":"ピンを選ぶと詳細を表示"}</small></span><button type="button" onClick={fit} disabled={!engine||!spots.length} data-map-fit>表示中の範囲へ</button></div>
+    <div className="spot-map-toolbar"><span><strong>地図から探す</strong><small>{onPosition?(positionLabel??"地図をクリックして施設位置を指定"):"ピンを選ぶと詳細を表示"}</small></span><button type="button" onClick={fit} disabled={!engine||!spots.length} data-map-fit>表示中の範囲へ</button></div>
     <div className="spot-map-canvas" ref={container} aria-label="スポットの背景地図"/>
     {state==="loading"&&<p className="spot-map-feedback" role="status">地図を準備しています…</p>}
     {state==="unavailable"&&<div className="spot-map-feedback" role="alert"><p>地図を準備できませんでした。一覧からスポットを確認できます。</p><button type="button" onClick={()=>setAttempt(v=>v+1)} data-map-retry>地図を再試行</button></div>}

@@ -1,20 +1,24 @@
 "use client";
 import {useCallback,useEffect,useMemo,useRef,useState} from "react";
+import {decodeCorrectionContext,emptyCorrections,staleCorrections,type RallyCorrections} from "../lib/operator/rally-corrections";
 import SpotMap from "./spot-map";
 import SpotConnection from "./spot-connection";
 import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog";
 import {AREA_LABELS,DEFAULT_FILTERS,SPOT_GROUPS,ROUTING_LABELS,filterSpots,groupFor,type SpotFilters,type SpotGroup} from "../lib/spots/browser-view";
 import type {ManagedSpot} from "../lib/spots/editing";
-import {blankDraft,decodeDraftContext,draftInput,draftIssues,draftSignature,refreshDraftSpots,type DraftForm,type RallyDraft,type StopKind} from "../lib/operator/rally-draft";
+import {blankDraft,draftInput,draftIssues,draftSignature,refreshDraftSpots,type DraftForm,type RallyDraft,type StopKind} from "../lib/operator/rally-draft";
 
-export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|null;spots:ManagedSpot[]}}){
+export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|null;spots:ManagedSpot[];corrections?:RallyCorrections}}){
+ const [corrections,setCorrections]=useState(initial.corrections??emptyCorrections());
  const [connection,setConnection]=useState<RoadConnection|null>(null);
  const [spots,setSpots]=useState(initial.spots),[saved,setSaved]=useState(initial.draft),[form,setForm]=useState<DraftForm>(initial.draft??blankDraft);
  const [filters,setFilters]=useState<SpotFilters>(DEFAULT_FILTERS),[selectedId,setSelectedId]=useState<string|null>(null);
  const [busy,setBusy]=useState(false),[error,setError]=useState(""),[reason,setReason]=useState(""),[notice,setNotice]=useState("");
  const request=useRef<AbortController|null>(null),running=useRef(false),alive=useRef(true),list=useRef<HTMLUListElement>(null),choice=useRef<HTMLElement>(null);
  const visible=useMemo(()=>filterSpots(spots,filters),[spots,filters]),selected=visible.find(s=>s.id===selectedId)??null;
+ const correctionProblems=staleCorrections(form,spots,corrections);
+ const manual=corrections.items.find(c=>c.spotId===selected?.id&&!correctionProblems.includes(c));
  const issues=draftIssues(form,spots),dirty=draftSignature(form)!==draftSignature(saved??blankDraft());
  useEffect(()=>{alive.current=true;return()=>{alive.current=false;request.current?.abort()}},[]);
  useEffect(()=>{if(!dirty)return;const prevent=(e:BeforeUnloadEvent)=>e.preventDefault();window.addEventListener("beforeunload",prevent);return()=>window.removeEventListener("beforeunload",prevent)},[dirty]);
@@ -48,9 +52,9 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
     if(alive.current&&value&&typeof value==="object"&&"reason" in value&&typeof value.reason==="string")setReason(value.reason);
     throw Error(value&&typeof value==="object"&&"error" in value&&typeof value.error==="string"?value.error:"保存先を利用できません。");
    }
-   const result=decodeDraftContext(value);if(!result||mode==="save"&&!result.draft)throw Error("保存結果を確認できません。同じ内容で再試行してください。");
+   const result=decodeCorrectionContext(value);if(!result||mode==="save"&&!result.draft)throw Error("保存結果を確認できません。同じ内容で再試行してください。");
    if(!alive.current)return;
-   setSpots(result.spots);
+   setSpots(result.spots);setCorrections(result.corrections);
    if(mode==="catalog"){setForm(before=>refreshDraftSpots(before,result.spots));setNotice("台帳の最新情報を反映しました。内容を確認し、削除済みの地点は選び直して保存してください。")}
    else{setSaved(result.draft);setForm(result.draft??blankDraft());setReason("");setNotice(mode==="save"?"下書きを保存しました。":"保存済みの下書きを読み込みました。")}
   }catch(error){if(alive.current)setError(error instanceof Error&&error.name!=="AbortError"?error.message:"結果を確認できません。同じ内容で再試行できます。")}
@@ -70,7 +74,7 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
   <div className="draft-workspace">
    <div className="draft-map"><SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} connection={connectionMatchesSpot(connection,selected)?connection:null}/></div>
    <section className="draft-configuration" aria-label="作業中の下書き">
-    <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="spot-routing-state">既存PoC基準：{ROUTING_LABELS[selected.routing.state]}</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"開始にする",finish:"終了にする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div><SpotConnection spot={selected} onConnection={setConnection}/></>:<p>地図のピンや一覧から、割り当てる地点を選びます。</p>}</section>
+    <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="spot-routing-state">既存PoC基準：{ROUTING_LABELS[selected.routing.state]}</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"開始にする",finish:"終了にする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div><SpotConnection spot={selected} override={manual} onConnection={setConnection}/></>:<p>地図のピンや一覧から、割り当てる地点を選びます。</p>}</section>
     <form onSubmit={e=>{e.preventDefault();void operate("save")}}><fieldset disabled={busy}>
      <div className="draft-form-heading"><h2>作業中の下書き</h2><span>{dirty?"未保存の変更あり":saved?"保存済み":"未保存"}</span></div>
      <label className="draft-title">下書き名<input required maxLength={100} value={form.title} data-draft-title onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="例：三崎のまち歩き"/></label>
@@ -80,11 +84,13 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
      <p className="draft-scope-note">開始と終了は同じ地点を使えます。途中地点は任意です。訪問順はこの並びを使い、保存後に地点間の道順を自動生成できます。入口・道路への接続・通行の確認は保存後も必要です。</p>
     </fieldset>
     {issues.length>0&&<div className="draft-review-needed" role="status" data-draft-issues>{issues.length}件の地点情報を確認してください。削除済みの地点は選び直しが必要です。</div>}
+    {correctionProblems.length>0&&<p className="draft-review-needed" data-draft-correction-stale>到達点の補正{correctionProblems.length}件に再確認が必要です。地点の変更を保存した後、「道路上の到達点」で確認してください。</p>}
     {error&&<div className="spot-edit-error" role="alert" data-draft-error>{error}</div>}
     {notice&&<p className="spot-save-notice" role="status" data-draft-notice>{notice}</p>}
     <div className="draft-save-actions"><button type="submit" className="rally-primary-link" disabled={busy||invalid||reason==="draft-conflict"} data-draft-save>{busy?"処理中…":error?"同じ内容で再試行":"下書きを保存"}</button><button type="button" disabled={busy} data-draft-refresh onClick={()=>void operate("catalog")}>台帳の最新情報を反映</button><button type="button" disabled={busy} data-draft-reload onClick={()=>void operate("reload")}>保存済みを読み直す（未保存を破棄）</button></div>
     {saved&&<p className="draft-saved-time">保存日時：<time dateTime={saved.updatedAt}>{new Date(saved.updatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time></p>}
-    {saved&&!dirty&&!invalid&&!busy?<a className="preview-generate" href="/operator/preview" data-preview-generate>ルート・コマを生成</a>:<button type="button" className="preview-generate" disabled data-preview-generate>下書きを保存してから生成</button>}
+    {saved&&!dirty&&!busy&&<a className="preview-generate" href="/operator/connections" data-draft-corrections>道路上の到達点を確認・修正（保存{corrections.items.length}件）</a>}
+    {saved&&!dirty&&!invalid&&!busy&&!correctionProblems.length?<a className="preview-generate" href="/operator/preview" data-preview-generate>ルート・コマを生成</a>:<button type="button" className="preview-generate" disabled data-preview-generate>{correctionProblems.length?"到達点の補正を再確認してから生成":"下書きを保存してから生成"}</button>}
     <p className="draft-scope-note">作業中の下書きは1件です。ページを移動する前に保存してください。保存後にルート・コマを生成して確認できます。</p>
     </form>
    </section>

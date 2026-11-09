@@ -1,3 +1,4 @@
+import {decodeCorrectionContext,CORRECTION_SOURCE} from "../lib/operator/rally-corrections.ts";
 import {decodeRoadConnection,connectionMatchesSpot} from "../lib/route/road-connection.ts";
 import {decodeDraftContext} from "../lib/operator/rally-draft.ts";
 import {decodeManagedSpot} from "../lib/spots/editing.ts";
@@ -226,4 +227,15 @@ test("operator preview page exposes saved generation or a clear blocking reason"
  assert.doesNotMatch(html,/https:\/\/www\.openstreetmap\.org\/node\/-\d/);
  if(html.includes("data-rally-preview")){assert.match(html,/data-preview-overview/);assert.match(html,/data-preview-select/);assert.match(html,/現地未確認/);assert.match(html,/data-preview-card=/)}
  const unknown=await get("/operator/preview/__unknown__");assert.equal(unknown.status,404);await unknown.arrayBuffer();
+});
+
+test("road correction API and editor expose versioned context and reject invalid writes",async()=>{
+ const api=await get("/api/operator/connections"),value=await api.json();
+ assert.equal(api.status,200);assert.match(api.headers.get("cache-control")??"",/no-store/);assert.ok(decodeCorrectionContext(value));
+ const page=await get("/operator/connections"),html=await page.text();assert.equal(page.status,200);assert.match(html,/data-operator-page="connections"/);assert.match(html,/data-correction-editor|data-correction-blocked/);
+ const unknown=await get("/operator/connections/__unknown__");assert.equal(unknown.status,404);await unknown.arrayBuffer();
+ const body={expectedDraftRevision:1,expectedCorrectionRevision:0,spotId:"osm-way-384676338",spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.14,lon:139.62}};
+ for(const [extra,status]of [[{headers:{"Content-Type":"application/json",Origin:"https://example.com"},body:JSON.stringify(body)},403],[{headers:{"Content-Type":"text/plain",Origin:baseUrl.origin},body:"x"},415],[{headers:{"Content-Type":"application/json",Origin:baseUrl.origin},body:"{bad"},400],[{headers:{"Content-Type":"application/json",Origin:baseUrl.origin},body:JSON.stringify({...body,point:{lat:0,lon:0}})},400]]){
+  const response=await fetch(new URL("/api/operator/connections",baseUrl),{method:"PUT",...extra});assert.equal(response.status,status);await response.arrayBuffer();
+ }
 });
