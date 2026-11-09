@@ -195,9 +195,9 @@ test("operator rally draft HTTP smoke check",async t=>{
   assert.equal(response.status,200);assert.match(html,/data-operator-page="draft"/);assert.match(html,/data-draft-builder/);
   assert.ok(html.includes('data-draft-revision="'+(state.draft?.revision??0)+'"'));
  });
- await t.test("provides selection and save controls while generation remains pending",()=>{
+ await t.test("provides selection and save controls and an explicit preview action",()=>{
   assert.match(html,/data-draft-title/);assert.match(html,/data-draft-slot="start"/);assert.match(html,/data-draft-slot="finish"/);
-  assert.match(html,/data-draft-save/);assert.match(html,/data-draft-refresh/);assert.match(html,/ルート・コマ地図の生成は準備中/);assert.doesNotMatch(html,/data-demo-start|data-koma-count/);
+  assert.match(html,/data-draft-save/);assert.match(html,/data-draft-refresh/);assert.match(html,/data-preview-generate/);assert.doesNotMatch(html,/data-demo-start|data-koma-count/);
  });
  await t.test("links the spot catalog and draft work area",()=>{
   assert.match(html,/href="\/operator\/spots"/);assert.match(html,/href="\/operator\/draft"/);
@@ -217,4 +217,13 @@ test("expanded road candidate API uses current active spots, no-store and valida
  const value=decodeRoadConnection(connection);assert.ok(value);assert.equal(connectionMatchesSpot(value,spot),true);
  for(const suffix of ["","?id=bad","?id=..%2F.."]){assert.equal((await get("/api/operator/spots/connection"+suffix)).status,400)}
  assert.equal((await get("/api/operator/spots/connection?id=local-00000000-0000-4000-8000-000000000000")).status,404);
+});
+
+test("operator preview page exposes saved generation or a clear blocking reason",async()=>{
+ const response=await get("/operator/preview"),html=await response.text();
+ assert.equal(response.status,200);assert.match(html,/data-operator-page="preview"/);
+ assert.match(html,/data-rally-preview|data-preview-blocked/);assert.match(html,/href="\/operator\/draft"/);
+ assert.doesNotMatch(html,/https:\/\/www\.openstreetmap\.org\/node\/-\d/);
+ if(html.includes("data-rally-preview")){assert.match(html,/data-preview-overview/);assert.match(html,/data-preview-select/);assert.match(html,/現地未確認/);assert.match(html,/data-preview-card=/)}
+ const unknown=await get("/operator/preview/__unknown__");assert.equal(unknown.status,404);await unknown.arrayBuffer();
 });

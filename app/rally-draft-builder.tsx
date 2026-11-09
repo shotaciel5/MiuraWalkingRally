@@ -77,14 +77,15 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
      {slot("start")}<div className="draft-stops-heading"><h3>途中の地点</h3><small>この並びで訪問・上下ボタンで変更</small></div>
      {form.stops.length?<ol className="draft-stops">{form.stops.map((stop,index)=>{const issue=issues.find(i=>i.key==="stop-"+index);return <li key={stop.spot.id} data-draft-stop={stop.spot.id} className={issue?"has-issue":""}><div className="draft-stop-top"><span>{index+1}</span><button type="button" disabled={!spots.some(s=>s.id===stop.spot.id)} onClick={()=>show(stop.spot)}>{stop.spot.name}</button><button type="button" className="draft-remove" aria-label={stop.spot.name+"を外す"} data-draft-remove-stop={index} onClick={()=>setForm(f=>({...f,stops:f.stops.filter((_,i)=>i!==index)}))}>外す</button></div><div className="draft-stop-controls"><select aria-label={stop.spot.name+"の役割"} value={stop.kind} data-draft-stop-kind={index} onChange={e=>setForm(f=>({...f,stops:f.stops.map((s,i)=>i===index?{...s,kind:e.target.value as StopKind}:s)}))}><option value="checkpoint">チェックポイント</option><option value="waypoint">経由地</option></select><button type="button" disabled={index===0} aria-label={stop.spot.name+"を上へ"} data-draft-up={index} onClick={()=>move(index,-1)}>↑</button><button type="button" disabled={index===form.stops.length-1} aria-label={stop.spot.name+"を下へ"} data-draft-down={index} onClick={()=>move(index,1)}>↓</button></div>{issue&&<p className="draft-issue">{issue.state==="missing"?"削除済みです。外すか別の地点を選んでください。":"台帳で変更されています。現在："+issue.current!.name}</p>}</li>})}</ol>:<p className="draft-empty-stops">地点を選び、チェックポイントや経由地として追加できます。</p>}
      {slot("finish")}
-     <p className="draft-scope-note">開始と終了は同じ地点を使えます。途中地点は任意です。訪問順はこの並びを使い、地点間の道順を自動生成する予定です。入口・道路への接続・通行の確認は保存後も必要です。</p>
+     <p className="draft-scope-note">開始と終了は同じ地点を使えます。途中地点は任意です。訪問順はこの並びを使い、保存後に地点間の道順を自動生成できます。入口・道路への接続・通行の確認は保存後も必要です。</p>
     </fieldset>
     {issues.length>0&&<div className="draft-review-needed" role="status" data-draft-issues>{issues.length}件の地点情報を確認してください。削除済みの地点は選び直しが必要です。</div>}
     {error&&<div className="spot-edit-error" role="alert" data-draft-error>{error}</div>}
     {notice&&<p className="spot-save-notice" role="status" data-draft-notice>{notice}</p>}
     <div className="draft-save-actions"><button type="submit" className="rally-primary-link" disabled={busy||invalid||reason==="draft-conflict"} data-draft-save>{busy?"処理中…":error?"同じ内容で再試行":"下書きを保存"}</button><button type="button" disabled={busy} data-draft-refresh onClick={()=>void operate("catalog")}>台帳の最新情報を反映</button><button type="button" disabled={busy} data-draft-reload onClick={()=>void operate("reload")}>保存済みを読み直す（未保存を破棄）</button></div>
     {saved&&<p className="draft-saved-time">保存日時：<time dateTime={saved.updatedAt}>{new Date(saved.updatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time></p>}
-    <p className="draft-scope-note">作業中の下書きは1件です。ページを移動する前に保存してください。ルート・コマ地図の生成は準備中です。</p>
+    {saved&&!dirty&&!invalid&&!busy?<a className="preview-generate" href="/operator/preview" data-preview-generate>ルート・コマを生成</a>:<button type="button" className="preview-generate" disabled data-preview-generate>下書きを保存してから生成</button>}
+    <p className="draft-scope-note">作業中の下書きは1件です。ページを移動する前に保存してください。保存後にルート・コマを生成して確認できます。</p>
     </form>
    </section>
    <section className="draft-candidates" aria-label="スポット候補"><div className="spot-list-heading"><h2>スポット候補</h2><span data-draft-count>{visible.length}件</span></div>
