@@ -1,4 +1,4 @@
 import Link from "next/link";
-export default function OperatorNav({view}:{view:"spots"|"draft"|"preview"|"connections"}){
- return <nav className="operator-tabs" aria-label="運営者機能"><Link prefetch={false} href="/operator/spots" aria-current={view==="spots"?"page":undefined}>スポット台帳</Link><Link prefetch={false} href="/operator/draft" aria-current={view==="draft"?"page":undefined}>ラリー下書き</Link>{view==="connections"&&<span aria-current="page" className="preview-nav-current">道路上の到達点</span>}{view==="preview"&&<span aria-current="page" className="preview-nav-current">生成プレビュー</span>}</nav>;
+export default function OperatorNav({view}:{view:"spots"|"draft"|"preview"|"connections"|"courses"}){
+ return <nav className="operator-tabs" aria-label="運営者機能"><Link prefetch={false} href="/operator/spots" aria-current={view==="spots"?"page":undefined}>スポット台帳</Link><Link prefetch={false} href="/operator/draft" aria-current={view==="draft"?"page":undefined}>ラリー下書き</Link><Link prefetch={false} href="/operator/courses" aria-current={view==="courses"?"page":undefined}>保存済みコース</Link>{view==="connections"&&<span aria-current="page" className="preview-nav-current">道路上の到達点</span>}{view==="preview"&&<span aria-current="page" className="preview-nav-current">生成プレビュー</span>}</nav>;
 }

@@ -239,3 +239,22 @@ test("road correction API and editor expose versioned context and reject invalid
   const response=await fetch(new URL("/api/operator/connections",baseUrl),{method:"PUT",...extra});assert.equal(response.status,status);await response.arrayBuffer();
  }
 });
+
+test("saved course pages are private review views and unknown IDs return 404",async()=>{
+ const r=await get("/operator/courses"),html=await r.text();assert.equal(r.status,200);assert.match(html,/data-operator-page="courses"/);assert.match(html,/非公開・現地未確認/);assert.match(html,/data-course-list(?:-empty|-error)?/);assert.match(html,/name="robots"[^>]*noindex/);
+ for(const id of ["invalid","course-00000000-0000-4000-8000-000000000000"]){const missing=await get("/operator/courses/"+id);assert.equal(missing.status,404);await missing.arrayBuffer()}
+ const method=await get("/api/operator/courses");assert.equal(method.status,405);await method.arrayBuffer();
+});
+test("saved course POST validates origin, JSON, size and strict receipt without saving",async()=>{
+ const valid={formatVersion:1,fingerprint:"a".repeat(64),draftRevision:1,correctionRevision:0,roadSha256:"b".repeat(64),contextSha256:"c".repeat(64)};
+ for(const [headers,body,status]of [
+  [{"Content-Type":"application/json",Origin:"https://example.com"},JSON.stringify(valid),403],
+  [{"Content-Type":"application/json"},JSON.stringify(valid),403],
+  [{"Content-Type":"text/plain",Origin:baseUrl.origin},"x",415],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"{bad",400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify({...valid,payload:{}}),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"x".repeat(17000),400]
+ ]){
+  const response=await fetch(new URL("/api/operator/courses",baseUrl),{method:"POST",headers,body});assert.equal(response.status,status);assert.equal(response.headers.get("cache-control"),"no-store");await response.arrayBuffer();
+ }
+});

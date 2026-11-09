@@ -75,11 +75,11 @@ test("road source mismatch blocks requests and stale saved sources block generat
 test("version 3 migration preserves the draft, spot edits and tombstones",t=>{
  const {repo,path,state,spots}=fixture(t),s=state.spots.find(s=>s.id===C);
  spots.save({id:C,expectedRevision:0,name:"Edited",category:s.category,position:{lat:s.position.lat,lon:s.position.lon},description:"kept"});spots.remove({id:M,expectedRevision:0});
- const before=repo.load(),db=new DatabaseSync(path);db.exec("DROP TABLE rally_corrections; PRAGMA user_version=3");db.close();
- const migrated=repo.load();assert.deepEqual(migrated,before);const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,4);assert.equal(check.prepare("SELECT count(*) AS n FROM rally_corrections").get().n,0);check.close();
+ const before=repo.load(),db=new DatabaseSync(path);db.exec("DROP TABLE rally_corrections; DROP TABLE saved_courses; PRAGMA user_version=3");db.close();
+ const migrated=repo.load();assert.deepEqual(migrated,before);const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,5);assert.equal(check.prepare("SELECT count(*) AS n FROM rally_corrections").get().n,0);check.close();
 });
 test("failed migration rolls back and missing/corrupt correction data is never reset",t=>{
- const {repo,path,state}=fixture(t);let db=new DatabaseSync(path);db.exec("DROP TABLE rally_corrections; CREATE TABLE rally_corrections(note TEXT); INSERT INTO rally_corrections VALUES ('keep'); PRAGMA user_version=3");db.close();
+ const {repo,path,state}=fixture(t);let db=new DatabaseSync(path);db.exec("DROP TABLE rally_corrections; DROP TABLE saved_courses; CREATE TABLE rally_corrections(note TEXT); INSERT INTO rally_corrections VALUES ('keep'); PRAGMA user_version=3");db.close();
  assert.throws(()=>repo.load());db=new DatabaseSync(path);assert.equal(db.prepare("PRAGMA user_version").get().user_version,3);assert.equal(db.prepare("SELECT note FROM rally_corrections").get().note,"keep");db.exec("DROP TABLE rally_corrections");db.close();
  const now=repo.load();repo.saveCorrection(input(now));db=new DatabaseSync(path);db.exec("UPDATE rally_corrections SET value='{bad'");db.close();
  assert.throws(()=>repo.load());assert.throws(()=>repo.save(draftInput(state.draft,1)));

@@ -8,7 +8,6 @@ import {emptyCorrections,decodeCorrections,parseCorrectionInput,CORRECTION_SOURC
 import {roadConnectionForPoint,roadConnectionForSpot,connectionOnCurrentRoad} from "../miura-road-connections.ts";
 import {distanceMeters} from "../route/graph.ts";
 
-export function createDraftRepository(path:string,loadInitial:()=>InitialSpot[]|null=getBrowserSpots,now=()=>new Date().toISOString()){
  function readDraft(db:ReturnType<typeof openOperatorDatabase>){
   const rows=db.prepare("SELECT slot,value FROM rally_draft").all();
   if(!rows.length)return null;
@@ -25,6 +24,9 @@ export function createDraftRepository(path:string,loadInitial:()=>InitialSpot[]|
   if(value.items.some(c=>c.snapshotSha256===CORRECTION_SOURCE.snapshotSha256&&c.osmBaseTimestamp===CORRECTION_SOURCE.osmBaseTimestamp&&!connectionOnCurrentRoad(c)))throw new CorrectionError("unavailable","保存された補正と元の道路情報が一致しません。保存ファイルを確認してください。");
   return value;
  }
+
+export function readDraftContext(db:ReturnType<typeof openOperatorDatabase>,loadInitial:()=>InitialSpot[]|null=getBrowserSpots){return {draft:readDraft(db),spots:readSpotState(db,loadInitial).active,corrections:readCorrections(db)}}
+export function createDraftRepository(path:string,loadInitial:()=>InitialSpot[]|null=getBrowserSpots,now=()=>new Date().toISOString()){
  function writeCorrections(db:ReturnType<typeof openOperatorDatabase>,before:RallyCorrections,items:RallyCorrections["items"]){
   items=[...items].sort((a,b)=>a.spotId<b.spotId?-1:a.spotId>b.spotId?1:0);
   if(JSON.stringify(before.items)===JSON.stringify(items))return before;

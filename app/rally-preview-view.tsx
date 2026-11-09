@@ -2,10 +2,12 @@
 import {useEffect,useState} from "react";
 import KomaFigure from "./koma-figure";
 import OperatorKomaDisplay from "./operator-koma-display";
+import CourseSaveButton from "./course-save-button";
+import type {SaveReceipt} from "../lib/operator/course-format";
 import LandmarkIcon from "./landmark-icon";
 import type {RallyPreview} from "../lib/operator/rally-preview";
 
-export default function RallyPreviewView({data}:{data:RallyPreview}){
+export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavailable}:{data:RallyPreview;saved?:{id:string;createdAt:string};saveReceipt?:SaveReceipt|null;saveUnavailable?:string}){
  const [hydrated,setHydrated]=useState(false);useEffect(()=>setHydrated(true),[]);
  const [index,setIndex]=useState(0),[zoom,setZoom]=useState(1),[layers,setLayers]=useState({buildings:true,landmarks:true,details:true});
  const card=data.cards[index],map=card.map,next=data.cards[index+1];
@@ -22,12 +24,13 @@ export default function RallyPreviewView({data}:{data:RallyPreview}){
  const sourceUrl="https://www.openstreetmap.org/"+card.evidence.kind+"/"+card.evidence.id;
  return <div data-rally-preview data-preview-hydrated={hydrated} data-preview-revision={data.draftRevision} data-preview-count={data.cards.length}>
   <section className="preview-summary" aria-label="生成結果">
-   <div><p className="eyebrow">GENERATED COURSE / REVIEW</p><h1>{data.title}</h1><p>未確認の道路上候補を使った開発用プレビュー</p></div>
+   <div><p className="eyebrow">{saved?"SAVED COURSE / REVIEW":"GENERATED COURSE / REVIEW"}</p><h1>{data.title}</h1><p>{saved?"保存済みの計算結果・読取専用（非公開）":"未確認の道路上候補を使った開発用プレビュー"}</p></div>
    <dl><div><dt>道路上の距離</dt><dd data-preview-meters>{Math.round(data.meters).toLocaleString("ja-JP")} m</dd></div><div><dt>歩行時間の概算</dt><dd>約{Math.ceil(data.minutes)}分</dd></div><div><dt>コマ数</dt><dd>{data.cards.length}枚</dd></div></dl>
   </section>
   <p className="operator-scope"><span>現地未確認</span>入口・施設までの通路・通行・安全性は確認待ちです。道路上の移動時間は時速{data.speedKmh}kmの概算で、観光・施設への移動や滞在時間を含みません。</p>
-  <p className="preview-version">保存済み下書きの版{data.draftRevision}・到達点の補正版{data.correctionRevision}から生成（下書き保存日時：{new Date(data.draftUpdatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}）。表示後の変更は「最新の保存内容から再生成」で反映します。</p>
-  <div className="preview-actions"><a href="/operator/connections" data-preview-corrections>道路上の到達点を修正</a><a href="/operator/draft" data-preview-back>下書きを編集</a><a href="/operator/preview" data-preview-regenerate>最新の保存内容から再生成</a></div>
+  {saved?<p className="preview-version" data-saved-course-id={saved.id}>保存日時：<time dateTime={saved.createdAt}>{new Date(saved.createdAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time>。保存時の下書き版{data.draftRevision}・補正版{data.correctionRevision}の計算結果です。台帳や下書きの変更を自動反映しません。</p>:<p className="preview-version">保存済み下書きの版{data.draftRevision}・到達点の補正版{data.correctionRevision}から生成（下書き保存日時：{new Date(data.draftUpdatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}）。表示後の変更は「最新の保存内容から再生成」で反映します。</p>}
+  {saved?<div className="preview-actions" data-saved-course-actions><a href="/operator/courses">保存済み一覧へ</a><a href="/operator/draft">作業中の下書きへ（保存済みは変更しません）</a></div>:<div className="preview-actions"><a href="/operator/connections" data-preview-corrections>道路上の到達点を修正</a><a href="/operator/draft" data-preview-back>下書きを編集</a><a href="/operator/preview" data-preview-regenerate>最新の保存内容から再生成</a></div>}
+  {!saved&&<CourseSaveButton receipt={saveReceipt} unavailable={saveUnavailable}/>}
   <section className="preview-panel" aria-labelledby="preview-order-title"><h2 id="preview-order-title">訪問順と道路への候補</h2><p>下書きに並べた順で巡ります。各地点から道路までの直線距離は、道路上の距離に含めていません。</p>
    <ol className="preview-visits">{data.visits.map(v=><li key={v.id} data-preview-visit={v.id}><button type="button" onClick={()=>setIndex(v.komaIndex)}><small>{v.label}</small><strong>{v.name}</strong><span>道路まで直線 {Math.round(v.gap)}m · {v.mode==="manual"?"手動補正・未確認":"自動候補・未確認"}</span></button></li>)}</ol>
    <details><summary>区間別の距離を確認</summary><ol>{data.legs.map((l,i)=><li key={i} data-preview-leg={i+1}>{l.from} → {l.to}：{Math.round(l.meters)}m{l.meters===0?"（道路上の候補が同じ位置）":""}</li>)}</ol></details>
@@ -56,6 +59,6 @@ export default function RallyPreviewView({data}:{data:RallyPreview}){
    </div></div>
   </section>
   <section className="preview-panel" aria-labelledby="preview-list-title"><h2 id="preview-list-title">コマ一覧</h2><p>省略せず通過順に表示します。図が保留のコマは全体地図と根拠を確認してください。</p><div className="preview-card-grid">{data.cards.map((c,i)=><button type="button" key={i} aria-pressed={i===index} data-preview-card={i} onClick={()=>setIndex(i)}><b>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}</b><KomaFigure map={c.map} referenceGeometry={c.map.shortGeometry} name={c.stops.map(s=>s.name).join(" / ")||"分岐"} context={c.referenceContext??c.context} layers={{buildings:false,landmarks:false,details:false}} compact/><span>{c.map.shortGeometry?"近接分岐・拡大して確認":c.map.state==="held"?"図は確認待ち":"累積 "+Math.round(c.map.metersFromStart)+"m"}</span></button>)}</div></section>
-  <p className="preview-caption">道路・建物・目印 © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL 1.0。道路は{new Date(data.source.osmBaseTimestamp).toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"})}時点の固定データです。到達点の補正は下書きに保存します。生成結果は保存・公開していません。</p>
+  <p className="preview-caption">道路・建物・目印 © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL 1.0。道路は{new Date(data.source.osmBaseTimestamp).toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"})}時点の固定データです。{saved?"保存時の計算結果を表示しています。非公開・現地未確認です。":"保存は「この結果を保存」から行います。保存済みコースは非公開です。"}</p>
  </div>;
 }
