@@ -7,7 +7,7 @@ export function openOperatorDatabase(path:string){
     const db=new DatabaseSync(path,{timeout:2000});
     try {
       let version=Number(db.prepare("PRAGMA user_version").get()!.user_version);
-      if(version===0||version===1||version===2||version===3||version===4){
+      if(version===0||version===1||version===2||version===3||version===4||version===5){
         db.exec("BEGIN IMMEDIATE");
         try{
           // Another request may have initialized or migrated the file before this lock.
@@ -45,13 +45,23 @@ export function openOperatorDatabase(path:string){
             db.exec("CREATE TABLE saved_courses (id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL UNIQUE, value TEXT NOT NULL) STRICT; PRAGMA user_version=5;");
             version=5;
           }
+          if(version===5){
+            db.prepare("SELECT id,value FROM spot_edits LIMIT 0").all();
+            db.prepare("SELECT id,value FROM spot_deletions LIMIT 0").all();
+            db.prepare("SELECT slot,value FROM rally_draft LIMIT 0").all();
+            db.prepare("SELECT slot,value FROM rally_corrections LIMIT 0").all();
+            db.prepare("SELECT id,fingerprint,value FROM saved_courses LIMIT 0").all();
+            db.exec("CREATE TABLE course_publications (course_id TEXT PRIMARY KEY, fingerprint TEXT NOT NULL, published_at TEXT NOT NULL) STRICT; PRAGMA user_version=6;");
+            version=6;
+          }
           db.exec("COMMIT");
         }catch(error){try{db.exec("ROLLBACK")}catch{}throw error}
       }
-      if(version!==5)throw new SpotError("unavailable","未対応のスポット保存形式です。保存ファイルを確認してください。");
+      if(version!==6)throw new SpotError("unavailable","未対応のスポット保存形式です。保存ファイルを確認してください。");
       db.prepare("SELECT slot,value FROM rally_draft LIMIT 0").all();
       db.prepare("SELECT slot,value FROM rally_corrections LIMIT 0").all();
       db.prepare("SELECT id,fingerprint,value FROM saved_courses LIMIT 0").all();
+      db.prepare("SELECT course_id,fingerprint,published_at FROM course_publications LIMIT 0").all();
       return db;
     }catch(error){db.close();throw error}
   }

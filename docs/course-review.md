@@ -5,6 +5,8 @@
 - 基準：[要件R-05・M-04・A-04、6.3節](requirements.md)、[保存方針ADR-016](decisions/016-saved-course-snapshots.md)、[バックログ](backlog.md#course-review-task)。
 - 実装/検証：[運営画面17節](operator-app.md#p4-06c)。
 
+2026-11-10追記：公開版の固定と参加者の開始/閲覧は、後続のA案承認に基づき[ADR-018](decisions/018-published-participant-courses.md)で実装した。以下はP4-06c当時の確認案内の記録で、現地確認/掲載解除・更新/可変の達成条件は後続。
+
 ## 1. 今回の一つの価値
 
 保存済み詳細の「確認する箇所」から、見直すコマへ少ない操作で移る。既存の訪問順/候補・全体地図・コマ一覧と組み合わせ、入口や図形に残る注意を探しやすくする。

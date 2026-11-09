@@ -103,17 +103,16 @@ test("participant rally list and detail HTTP smoke check",async t=>{
   const rally=getDemoRally(),listResponse=await get("/"),list=await listResponse.text();
   const detailResponse=await get(rally.href),detail=await detailResponse.text();
   const plain=html=>html.replace(/<!--[\s\S]*?-->/g,"");
-  await t.test("serves one unpublished rally with a link to its detail",()=>{
+  await t.test("serves a publication-only catalog with an explicit retained demo link",()=>{
     assert.equal(listResponse.status,200);assert.match(list,/data-participant-page="list"/);
-    assert.equal([...list.matchAll(/data-rally-card=/g)].length,1);
-    assert.ok(list.includes('href="'+rally.href+'"'));
-    assert.ok(list.includes(rally.title));assert.ok(list.includes("開発用・未公開"));
-    assert.match(list,/<html\b[^>]*\blang="ja"/);assert.match(list,/<meta\b[^>]*\bname="robots"[^>]*noindex/);
+    assert.match(list,/data-published-course-count=/);assert.match(list,/data-fixed-demo-link/);
+    assert.equal([...list.matchAll(/data-rally-card=/g)].length,0);assert.ok(list.includes('href="'+rally.href+'"'));
+    assert.match(list,/data-published-empty|data-published-catalog/);assert.match(list,/name="robots"[^>]*noindex/);
   });
   await t.test("serves detail with the same route facts, stop order and return path",()=>{
     assert.equal(detailResponse.status,200);assert.match(detail,/data-participant-page="detail"/);
     assert.ok(detail.includes('data-rally-id="'+rally.id+'"'));
-    assert.ok(list.includes('data-rally-distance="'+rally.distanceMeters+'"'));
+
     assert.ok(detail.includes('data-rally-distance="'+rally.distanceMeters+'"'));
     assert.ok(detail.includes('data-rally-minutes="'+rally.walkingMinutes+'"'));
     assert.deepEqual([...detail.matchAll(/data-rally-stop="([^"]+)"/g)].map(m=>m[1]),rally.stops.map(s=>s.id));
@@ -122,7 +121,7 @@ test("participant rally list and detail HTTP smoke check",async t=>{
     assert.match(detail,/name="robots"[^>]*noindex/);
   });
   await t.test("distinguishes the development demo from public participation and future visit actions",()=>{
-    for(const html of [list,detail]){
+    for(const html of [detail]){
       assert.ok(plain(html).includes("参加は受け付けていません"));
       const actions=[...html.matchAll(/<(?:a|button)\b[^>]*>[\s\S]*?<\/(?:a|button)>/g)].map(m=>m[0]);
       assert.ok(!actions.some(action=>/参加する|ラリーを開始|チェックイン|QRを読み取る|クーポンを受け取る/.test(action)));
@@ -240,8 +239,8 @@ test("road correction API and editor expose versioned context and reject invalid
  }
 });
 
-test("saved course pages are private review views and unknown IDs return 404",async()=>{
- const r=await get("/operator/courses"),html=await r.text();assert.equal(r.status,200);assert.match(html,/data-operator-page="courses"/);assert.match(html,/非公開・現地未確認/);assert.match(html,/data-course-list(?:-empty|-error)?/);assert.match(html,/name="robots"[^>]*noindex/);
+test("saved course pages expose review views and unknown IDs return 404",async()=>{
+ const r=await get("/operator/courses"),html=await r.text();assert.equal(r.status,200);assert.match(html,/data-operator-page="courses"/);assert.match(html,/現地未確認/);assert.match(html,/data-course-list(?:-empty|-error)?/);assert.match(html,/name="robots"[^>]*noindex/);
  for(const id of ["invalid","course-00000000-0000-4000-8000-000000000000"]){const missing=await get("/operator/courses/"+id);assert.equal(missing.status,404);await missing.arrayBuffer()}
  const method=await get("/api/operator/courses");assert.equal(method.status,405);await method.arrayBuffer();
 });
@@ -257,4 +256,23 @@ test("saved course POST validates origin, JSON, size and strict receipt without 
  ]){
   const response=await fetch(new URL("/api/operator/courses",baseUrl),{method:"POST",headers,body});assert.equal(response.status,status);assert.equal(response.headers.get("cache-control"),"no-store");await response.arrayBuffer();
  }
+});
+
+test("unpublished and malformed course IDs cannot be opened by participants",async()=>{
+ for(const id of ["invalid","course-00000000-0000-4000-8000-000000000000"])for(const suffix of ["","/play"]){const r=await get("/rallies/"+id+suffix);assert.equal(r.status,404);await r.arrayBuffer()}
+});
+test("publication POST rejects missing origin, extra metadata and forged bodies",async()=>{
+ const valid={courseId:"course-00000000-0000-4000-8000-000000000000",fingerprint:"a".repeat(64)};
+ for(const [headers,body,status]of [
+  [{"Content-Type":"application/json"},JSON.stringify(valid),403],
+  [{"Content-Type":"application/json",Origin:"https://example.com"},JSON.stringify(valid),403],
+  [{"Content-Type":"text/plain",Origin:baseUrl.origin},"x",415],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"{bad",400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify({...valid,publishedAt:"2026-11-10T00:00:00.000Z"}),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"x".repeat(17000),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify(valid),404]
+ ]){
+  const r=await fetch(new URL("/api/operator/courses/publish",baseUrl),{method:"POST",headers,body});assert.equal(r.status,status);assert.equal(r.headers.get("cache-control"),"no-store");await r.arrayBuffer();
+ }
+ const r=await get("/api/operator/courses/publish");assert.equal(r.status,405);await r.arrayBuffer();
 });

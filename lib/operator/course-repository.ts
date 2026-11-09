@@ -14,6 +14,9 @@ function readRow(row:Record<string,unknown>):SavedCourse{
   return saved;
  }catch{throw new CourseError("unavailable","保存済みコースの形式・整合性を確認できません。保存ファイルを確認してください。")}
 }
+export function readCourseById(db:ReturnType<typeof openOperatorDatabase>,id:string){
+ const row=db.prepare("SELECT id,fingerprint,value FROM saved_courses WHERE id=?").get(id);return row?readRow(row):null;
+}
 export function courseSummary(course:SavedCourse){
  const p=course.payload.preview;
  return {id:course.id,createdAt:course.createdAt,title:p.title,meters:p.meters,cards:p.cards.length,nearby:p.cards.filter(c=>c.map.shortGeometry).length,held:p.cards.filter(c=>c.map.state==="held"&&!c.map.shortGeometry).length,sourceTime:p.source.osmBaseTimestamp};
@@ -26,7 +29,7 @@ export function createCourseRepository(path:string,now=()=>new Date().toISOStrin
   find(fingerprint:string){const db=openOperatorDatabase(path);try{return find(db,fingerprint)}finally{db.close()}},
   get(id:string){
    if(!validCourseId(id))return null;
-   const db=openOperatorDatabase(path);try{const row=db.prepare("SELECT id,fingerprint,value FROM saved_courses WHERE id=?").get(id);return row?readRow(row):null}finally{db.close()}
+   const db=openOperatorDatabase(path);try{return readCourseById(db,id)}finally{db.close()}
   },
   list(){
    const db=openOperatorDatabase(path);try{return db.prepare("SELECT id,fingerprint,value FROM saved_courses").all().map(readRow).sort((a,b)=>a.createdAt>b.createdAt?-1:a.createdAt<b.createdAt?1:a.id<b.id?-1:1).map(courseSummary)}finally{db.close()}

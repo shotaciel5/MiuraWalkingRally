@@ -91,13 +91,13 @@ test("SQLite v4 migration preserves edits, tombstones, draft and corrections",t=
  const f=fixture(t);edit(f.spots,f.state.spots.find(s=>![S,C,M].includes(s.id)),"移行前の編集");
  f.spots.remove({id:"osm-node-1211621029",expectedRevision:f.spots.list().find(s=>s.id==="osm-node-1211621029").revision});
  f.drafts.saveCorrection({expectedDraftRevision:1,expectedCorrectionRevision:0,spotId:S,spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.141,lon:139.621}});
- const before=f.drafts.load(),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; PRAGMA user_version=4");db.close();
+ const before=f.drafts.load(),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; PRAGMA user_version=4");db.close();
  assert.deepEqual(f.courses.list(),[]);assert.deepEqual(f.drafts.load(),before);
- const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,5);check.close();
+ const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,6);check.close();
  assert.ok(f.service.save(f.prepared().receipt));
 });
 test("foreign saved-course table rolls migration back and is never reset",t=>{
- const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; CREATE TABLE saved_courses(note TEXT); INSERT INTO saved_courses VALUES('keep'); PRAGMA user_version=4");db.close();
+ const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; CREATE TABLE saved_courses(note TEXT); INSERT INTO saved_courses VALUES('keep'); PRAGMA user_version=4");db.close();
  assert.throws(()=>f.courses.list());const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,4);assert.equal(check.prepare("SELECT note FROM saved_courses").get().note,"keep");check.close();
 });
 test("missing v5 table and unsupported DB version fail without recreating data",t=>{

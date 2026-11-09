@@ -7,7 +7,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: {default:"三浦市ウォーキングラリー",template:"%s | 三浦市ウォーキングラリー"},
   description:
-    "三崎下町の開発用ラリーの概要・地点順・歩行の目安と、コマ地図の検証画面を確認できます。",
+    "三浦市の公開コースを選び、地点順・歩行の目安とコマ地図を確認できます。",
   robots: { index: false, follow: false },
 };
 
