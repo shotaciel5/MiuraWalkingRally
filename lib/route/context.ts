@@ -1,6 +1,6 @@
 import { distanceMeters } from "./graph.ts";
 import { KOMA_VIEW, projectKomaPoint } from "./koma.ts";
-import type { KomaMap, DiagramPoint } from "./koma.ts";
+import type { KomaMap, KomaGeometry, DiagramPoint } from "./koma.ts";
 import type { Graph, Point, Snapshot, Tags } from "./types.ts";
 
 export type LandmarkSymbol = "signal"|"crossing"|"bus"|"shrine"|"temple"|"worship"|"toilet"|"water"|"parking"|"shop"|"food"|"historic"|"tourism"|"facility"|"stop-sign"|"stop-control"|"give-way-control"|"sign";
@@ -105,9 +105,10 @@ function segmentDistance(a:{x:number;y:number},b:{x:number;y:number}){
   const t=length===0?0:Math.max(0,Math.min(1,-(a.x*dx+a.y*dy)/length));
   return Math.hypot(a.x+dx*t,a.y+dy*t);
 }
-export function createKomaContext(graph:Graph,map:KomaMap,data:ContextData):KomaContext {
+export function createKomaContext(graph:Graph,map:KomaMap,data:ContextData,reference?:KomaGeometry):KomaContext {
   const empty={buildings:[],landmarks:[],roads:[],steps:[],availableLandmarks:0,availableBuildings:0};
-  if(map.state!=="ready"||map.headingDegrees===null)return empty;
+  if((map.state!=="ready"&&!reference)||map.headingDegrees===null)return empty;
+  const branches=reference?.branches??map.branches;
   const center=graph.nodes.get(map.nodeId);
   if(!center)throw new Error("Missing context center");
   const scale=KOMA_VIEW.radius/30;
@@ -122,9 +123,9 @@ export function createKomaContext(graph:Graph,map:KomaMap,data:ContextData):Koma
     for(let i=1;i<relative.length;i++){const a=relative[i-1],b=relative[i];if((a.y>0)!==(b.y>0)&&0<(b.x-a.x)*(-a.y)/(b.y-a.y)+a.x)inside=!inside}
     return {...building,distance,inside};
   }).filter(b=>b.inside||b.distance<=35).sort((a,b)=>a.distance-b.distance||a.id.localeCompare(b.id,"en"));
-  const roadIds=[...new Set(map.branches.flatMap(b=>b.sourceSegments.flatMap(s=>s.wayIds)))].sort((a,b)=>a-b);
+  const roadIds=[...new Set(branches.flatMap(b=>b.sourceSegments.flatMap(s=>s.wayIds)))].sort((a,b)=>a-b);
   const roads=roadIds.map(id=>({id,name:nameOf(graph.ways.get(id)?.tags??{})||graph.ways.get(id)?.tags?.ref||"",highway:graph.ways.get(id)?.tags?.highway??""}));
-  const steps=map.branches.flatMap(branch=>branch.sourceSegments.flatMap((segment,i)=>{
+  const steps=branches.flatMap(branch=>branch.sourceSegments.flatMap((segment,i)=>{
     const wayIds=segment.wayIds.filter(id=>graph.ways.get(id)?.tags?.highway==="steps");
     return wayIds.length?[{from:branch.points[i],to:branch.points[i+1],wayIds}]:[];
   }));

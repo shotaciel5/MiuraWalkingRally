@@ -1,6 +1,7 @@
 "use client";
 import {useEffect,useState} from "react";
 import KomaFigure from "./koma-figure";
+import OperatorKomaDisplay from "./operator-koma-display";
 import LandmarkIcon from "./landmark-icon";
 import type {RallyPreview} from "../lib/operator/rally-preview";
 
@@ -8,6 +9,7 @@ export default function RallyPreviewView({data}:{data:RallyPreview}){
  const [hydrated,setHydrated]=useState(false);useEffect(()=>setHydrated(true),[]);
  const [index,setIndex]=useState(0),[zoom,setZoom]=useState(1),[layers,setLayers]=useState({buildings:true,landmarks:true,details:true});
  const card=data.cards[index],map=card.map,next=data.cards[index+1];
+ const nearby=card.referenceContext??card.context;
  const name=card.stops.map(s=>s.name).join(" / ")||"道路の分岐";
  const extent=[...data.path,...data.visits.map(v=>v.facility)],lat=extent.reduce((sum,p)=>sum+p.lat,0)/extent.length,cos=Math.cos(lat*Math.PI/180);
  const xs=extent.map(p=>p.lon*cos),ys=extent.map(p=>p.lat),minX=Math.min(...xs)-.00035,maxX=Math.max(...xs)+.00035,minY=Math.min(...ys)-.00035,maxY=Math.max(...ys)+.00035;
@@ -44,16 +46,16 @@ export default function RallyPreviewView({data}:{data:RallyPreview}){
   </section>
   <section className="preview-panel" aria-labelledby="preview-koma-title" data-preview-koma={map.sequence}><h2 id="preview-koma-title">選択中のコマ {index+1} / {data.cards.length}</h2>
    <div className="preview-layer-controls">{(["buildings","landmarks","details"] as const).map(k=><label key={k}><input type="checkbox" checked={layers[k]} data-preview-layer={k} onChange={e=>setLayers(s=>({...s,[k]:e.target.checked}))}/>{{buildings:"建物",landmarks:"目印・標識",details:"道路名・階段"}[k]}</label>)}</div>
-   <div className="preview-koma-layout"><div><h3>{name}</h3><KomaFigure map={map} name={name} context={card.context} layers={layers}/><p className="preview-distance">{map.metersToNext===null?"終了地点":"次のコマまで "+Math.round(map.metersToNext)+" m"}<small>出発から {Math.round(map.metersFromStart)}m</small></p>
+   <div className="preview-koma-layout"><div><h3>{name}</h3><OperatorKomaDisplay key={map.sequence} map={map} name={name} context={card.context} referenceContext={card.referenceContext} layers={layers}/><p className="preview-distance">{map.metersToNext===null?"終了地点":"次のコマまで "+Math.round(map.metersToNext)+" m"}<small>出発から {Math.round(map.metersFromStart)}m</small></p>
     <div className="preview-navigation"><button type="button" disabled={index===0} data-preview-prev onClick={()=>setIndex(i=>i-1)}>← 前のコマ</button><button type="button" disabled={index===data.cards.length-1} data-preview-next onClick={()=>setIndex(i=>i+1)}>次のコマ →</button></div>
-   </div><div><label>通過順で選択<select value={index} data-preview-select onChange={e=>setIndex(Number(e.target.value))}>{data.cards.map((c,i)=><option key={i} value={i}>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}{c.map.state==="held"?"（図は確認待ち）":""}</option>)}</select></label>
+   </div><div><label>通過順で選択<select value={index} data-preview-select onChange={e=>setIndex(Number(e.target.value))}>{data.cards.map((c,i)=><option key={i} value={i}>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}{c.map.shortGeometry?"（近接分岐・拡大確認）":c.map.state==="held"?"（図は確認待ち）":""}</option>)}</select></label>
     {card.stops.map(s=><p className="preview-stop" key={s.id}><b>{data.visits.find(v=>v.id===s.id)?.label}</b> {s.name}<br/><small>未確認の道路上候補です。実際の入口とは限りません。</small></p>)}
-    {map.state==="ready"&&layers.landmarks&&<><h3>周辺の目印</h3>{card.context.landmarks.length?<ul className="preview-landmarks">{card.context.landmarks.map(l=><li key={l.id}><LandmarkIcon symbol={l.symbol}/><span><a href={"https://www.openstreetmap.org/"+l.id} target="_blank" rel="noopener noreferrer">{l.name}</a><small>{l.kind} · 約{Math.round(l.meters)}m{l.detail?" · "+l.detail:""}</small></span></li>)}</ul>:<p>この範囲に表示対象の目印はありません。</p>}</>}
-    {layers.details&&map.state==="ready"&&<p>道路名：{[...new Set(card.context.roads.map(r=>r.name).filter(Boolean))].join(" / ")||"OSMの記録なし"}</p>}
+    {(map.state==="ready"||map.shortGeometry)&&layers.landmarks&&<><h3>{map.shortGeometry?"周辺30mの目印":"周辺の目印"}</h3>{nearby.landmarks.length?<ul className="preview-landmarks">{nearby.landmarks.map(l=><li key={l.id}><LandmarkIcon symbol={l.symbol}/><span><a href={"https://www.openstreetmap.org/"+l.id} target="_blank" rel="noopener noreferrer">{l.name}</a><small>{l.kind} · 約{Math.round(l.meters)}m{l.detail?" · "+l.detail:""}</small></span></li>)}</ul>:<p>この範囲に表示対象の目印はありません。</p>}</>}
+    {layers.details&&(map.state==="ready"||map.shortGeometry)&&<p>道路名：{[...new Set(nearby.roads.map(r=>r.name).filter(Boolean))].join(" / ")||"OSMの記録なし"}</p>}
     <details><summary>形状・出典・確認事項</summary><p><a href={sourceUrl} target="_blank" rel="noopener noreferrer">OSMの元{card.evidence.kind==="way"?"道路":"地点"}を見る</a>{card.evidence.kind==="way"?" · 道路の途中に置いた一時的な候補点です。":""}</p><p>元データに接続する枝は{card.candidate.branches.length}本。元の角度と局所形状を使い、各枝30m以内を描画します。道幅や安全な横断位置は示しません。停止点・標識の対象方向は現地確認が必要です。</p>{map.issues.length>0&&<ul>{map.issues.map((s,i)=><li key={i}>{s}</li>)}</ul>}</details>
    </div></div>
   </section>
-  <section className="preview-panel" aria-labelledby="preview-list-title"><h2 id="preview-list-title">コマ一覧</h2><p>省略せず通過順に表示します。図が保留のコマは全体地図と根拠を確認してください。</p><div className="preview-card-grid">{data.cards.map((c,i)=><button type="button" key={i} aria-pressed={i===index} data-preview-card={i} onClick={()=>setIndex(i)}><b>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}</b><KomaFigure map={c.map} name={c.stops.map(s=>s.name).join(" / ")||"分岐"} context={c.context} layers={{buildings:false,landmarks:false,details:false}} compact/><span>{c.map.state==="held"?"図は確認待ち":"累積 "+Math.round(c.map.metersFromStart)+"m"}</span></button>)}</div></section>
+  <section className="preview-panel" aria-labelledby="preview-list-title"><h2 id="preview-list-title">コマ一覧</h2><p>省略せず通過順に表示します。図が保留のコマは全体地図と根拠を確認してください。</p><div className="preview-card-grid">{data.cards.map((c,i)=><button type="button" key={i} aria-pressed={i===index} data-preview-card={i} onClick={()=>setIndex(i)}><b>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}</b><KomaFigure map={c.map} referenceGeometry={c.map.shortGeometry} name={c.stops.map(s=>s.name).join(" / ")||"分岐"} context={c.referenceContext??c.context} layers={{buildings:false,landmarks:false,details:false}} compact/><span>{c.map.shortGeometry?"近接分岐・拡大して確認":c.map.state==="held"?"図は確認待ち":"累積 "+Math.round(c.map.metersFromStart)+"m"}</span></button>)}</div></section>
   <p className="preview-caption">道路・建物・目印 © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL 1.0。道路は{new Date(data.source.osmBaseTimestamp).toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"})}時点の固定データです。到達点の補正は下書きに保存します。生成結果は保存・公開していません。</p>
  </div>;
 }

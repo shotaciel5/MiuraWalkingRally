@@ -34,10 +34,10 @@ export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedS
   throw error;
  }
  if(route.meters===0)return blocked("zero-route","すべての地点の道路上候補が同じ位置で、移動距離が0mです。地点を変更して保存してください。");
- const analysis=extractJunctions(graph,route),maps=createKomaMaps(graph,analysis);
+ const analysis=extractJunctions(graph,route),maps=createKomaMaps(graph,analysis,30,{retainShortGeometry:true});
  const cards=bindKomaCards(route,analysis,maps).map(c=>{
   const split=splits.get(c.map.nodeId);
-  return {...c,context:expandedKomaContext(graph,c.map),evidence:split?{kind:"way" as const,id:split.wayId,fromNodeId:split.fromNodeId,toNodeId:split.toNodeId,fraction:split.fraction}:{kind:"node" as const,id:c.map.nodeId}};
+  return {...c,context:expandedKomaContext(graph,c.map),referenceContext:c.map.shortGeometry?expandedKomaContext(graph,c.map,c.map.shortGeometry):null,evidence:split?{kind:"way" as const,id:split.wayId,fromNodeId:split.fromNodeId,toNodeId:split.toNodeId,fraction:split.fraction}:{kind:"node" as const,id:c.map.nodeId}};
  });
  const legs=route.legs.map((l,i)=>({label:"区間"+(i+1),from:l.from.name,to:l.to.name,meters:l.meters,minutes:l.minutes,points:l.nodeIds.map(id=>({lat:graph.nodes.get(id)!.lat,lon:graph.nodes.get(id)!.lon}))}));
  const path=legs.flatMap((l,i)=>i?l.points.slice(1):l.points);

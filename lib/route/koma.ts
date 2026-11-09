@@ -11,12 +11,14 @@ export type KomaBranch = {
   arrival: boolean; departure: boolean; entry: RoadBranch["entry"]; exit: RoadBranch["exit"];
   endReason: "limit" | "junction" | "end"; pathPixels: number;
 };
+export type KomaGeometry = {headingDegrees:number;branches:KomaBranch[];issues:string[]};
 export type KomaMap = {
   sequence: number; nodeId: number; pathIndex: number; stopIds: string[];
   metersFromStart: number; metersToNext: number | null;
   kind: "start" | "finish" | "return" | "junction";
   headingDegrees: number | null; state: "ready" | "held"; issues: string[];
   branches: KomaBranch[];
+  shortGeometry?: KomaGeometry; // Opt-in reference geometry, never an approved navigation diagram.
 };
 
 // Local azimuthal projection, followed by rotation. Input heading faces the top of the SVG.
@@ -59,7 +61,7 @@ function traceBranch(graph: Graph, topology: Map<number, RoadBranch[]>, centerId
   }
 }
 
-export function createKomaMaps(graph: Graph, analysis: JunctionAnalysis, maxBranchMeters = 30): KomaMap[] {
+export function createKomaMaps(graph: Graph, analysis: JunctionAnalysis, maxBranchMeters = 30, options:{retainShortGeometry?:boolean} = {}): KomaMap[] {
   if (!Number.isFinite(maxBranchMeters) || maxBranchMeters <= 0) throw new Error("Invalid local drawing extent");
   const topology = buildRoadBranches(graph);
   const scale = KOMA_VIEW.radius / maxBranchMeters;
@@ -95,7 +97,10 @@ export function createKomaMaps(graph: Graph, analysis: JunctionAnalysis, maxBran
       }
       if ((candidate.arrival && !model.branches.some(b=>b.arrival)) || (candidate.departure && !model.branches.some(b=>b.departure))) throw new Error("Selected route arm missing");
       // Rendering clearance for the inlet dot and arrowhead, not a geographic accuracy threshold.
-      if (model.branches.some(b=>(b.arrival||b.departure)&&b.pathPixels<30)) throw new Error("Selected arms too short to distinguish symbols");
+      if (model.branches.some(b=>(b.arrival||b.departure)&&b.pathPixels<30)) {
+        if(options.retainShortGeometry)model.shortGeometry={headingDegrees:model.headingDegrees,branches:model.branches,issues:candidate.issues.length?["Source access or extract needs review"]:[]};
+        throw new Error("Selected arms too short to distinguish symbols");
+      }
       if (candidate.issues.length) model.issues.push("Source access or extract needs review");
     } catch (error) {
       model.state = "held";
