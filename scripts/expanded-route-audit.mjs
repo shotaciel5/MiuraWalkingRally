@@ -47,7 +47,7 @@ function weakGroups(graph){
  return groups;
 }
 // Diagnostic traces stop at the first physical fork; they do not extend or repair production diagrams.
-function traceBranch(graph,topology,centerId,neighbor){
+export function traceBranch(graph,topology,centerId,neighbor){
  const ids=[centerId],points=[point(graph.nodes.get(centerId))],segments=[],seen=new Set(ids);
  let from=centerId,to=neighbor,remaining=30,meters=0,endReason="limit";
  while(true){

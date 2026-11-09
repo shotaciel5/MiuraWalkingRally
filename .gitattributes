@@ -4,3 +4,4 @@ data/spots/*.json text eol=lf
 data/miura-expanded/*.json text eol=lf
 
 docs/reports/expanded-route-audit.* text eol=lf
+docs/reports/short-koma-comparison.* text eol=lf

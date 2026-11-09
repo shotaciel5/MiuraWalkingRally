@@ -1,0 +1,2537 @@
+{
+  "schemaVersion": 1,
+  "state": "proposal-not-adopted",
+  "source": {
+    "roadSha256": "136cee0ede7985d7abef29be66aab80b0fbc3454130999b0cf3502fee287e0f0",
+    "contextSha256": "7e9e599f0db76f35f173663b7fdc4d66960166fe74b295745ac35efdd092d77d",
+    "osmBaseTimestamp": "2026-11-08T16:11:34Z",
+    "bounds": {
+      "south": 35.122,
+      "west": 139.604,
+      "north": 35.16,
+      "east": 139.642
+    }
+  },
+  "totalHeld": 45,
+  "policy": {
+    "targetSelectedPixels": 36,
+    "otherBranchInspectionPixels": 12,
+    "scope": "Comparison only. A ready model means length-check passed, not readability or access approval."
+  },
+  "summary": {
+    "aLengthPass": 45,
+    "aNearOtherBranch": 0,
+    "bNearOtherBranch": 16,
+    "aWithoutVisibleLandmarks": 19,
+    "bWithoutVisibleLandmarks": 8,
+    "maxZoom": 9.980437405744064,
+    "minExtentMeters": 3.0058802816331505,
+    "maxExtentMeters": 24.164150654763578
+  },
+  "rows": [
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 1,
+      "nodeId": -1,
+      "kind": "start",
+      "point": {
+        "lat": 35.142680795248204,
+        "lon": 139.61882443987864
+      },
+      "branches": 2,
+      "shortestSelectedMeters": 8.406036778107545,
+      "sourceBranchIds": [
+        3289972120,
+        3289972121
+      ],
+      "sourceIssues": [],
+      "metersToNext": 8.406036772752154,
+      "a": {
+        "extentMeters": 22.88310011818165,
+        "zoomFactor": 1.3110111761545655,
+        "minimumSelectedPixels": 36.000000000000426,
+        "clearance": [
+          {
+            "role": "departure",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 27.359980323663624
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "departure",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 20.869372299262483
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 2,
+      "nodeId": 2845402200,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1426075,
+        "lon": 139.6188018
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 8.87662677113764,
+      "sourceBranchIds": [
+        1469287397,
+        3289972120,
+        3880329682,
+        3880329685
+      ],
+      "sourceIssues": [],
+      "metersToNext": 37.46968674756525,
+      "a": {
+        "extentMeters": 24.164150654763578,
+        "zoomFactor": 1.2415085648411142,
+        "minimumSelectedPixels": 36.000000000000846,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 35.94247633303027
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 1469287397,
+            "nearestOtherBranchPixels": 74.47349644783067
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 28.950647100553937
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 1469287397,
+            "nearestOtherBranchPixels": 74.47349749428234
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 21,
+      "nodeId": 2159251671,
+      "kind": "junction",
+      "point": {
+        "lat": 35.141529,
+        "lon": 139.6177997
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        355777210,
+        7706612108,
+        13785934757
+      ],
+      "sourceIssues": [],
+      "metersToNext": 5.39119011886919,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 83.88956005259051
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 27.14024759349046
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 41.03882184140499
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 13.277024995990326
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 22,
+      "nodeId": 7706612108,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1415437,
+        "lon": 139.6177432
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        2159251663,
+        2159251671,
+        7706612109
+      ],
+      "sourceIssues": [],
+      "metersToNext": 82.27590788049622,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 71.74208426984234
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 17.611221054972702
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 66.45975837240324
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 24,
+      "nodeId": 7706612114,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414433,
+        "lon": 139.6166129
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        7706612113,
+        7706612115,
+        7706612149
+      ],
+      "sourceIssues": [],
+      "metersToNext": 4.631376497828796,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 97.99998807221449
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 27.33949258629616
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 97.7642353649114
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 11.489546133239788
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 25,
+      "nodeId": 7706612149,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414097,
+        "lon": 139.6165828
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        470299935,
+        2046962403,
+        7706612114,
+        7706612148
+      ],
+      "sourceIssues": [],
+      "metersToNext": 53.49237383030959,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 35.92232099345473
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 73.92086229606069
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 15.096518035011188
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 74.0933683082099
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 27,
+      "nodeId": 7706612149,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414097,
+        "lon": 139.6165828
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        470299935,
+        2046962403,
+        7706612114,
+        7706612148
+      ],
+      "sourceIssues": [],
+      "metersToNext": 4.631376497828796,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 36.00000000000001,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 97.3582596053694
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 27.3009639550256
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 97.53076359178642
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 11.473353706608513
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 28,
+      "nodeId": 7706612114,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414433,
+        "lon": 139.6166129
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        7706612113,
+        7706612115,
+        7706612149
+      ],
+      "sourceIssues": [],
+      "metersToNext": 34.083843533810295,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 35.97301656091601
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 74.479990934883
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 15.117823859526023
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 74.38004939755474
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 30,
+      "nodeId": 7706612108,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1415437,
+        "lon": 139.6177432
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        2159251663,
+        2159251671,
+        7706612109
+      ],
+      "sourceIssues": [],
+      "metersToNext": 5.39119011886919,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 36.00000000000001,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 94.39747930242409
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 27.359999999999985
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 68.11003804394026
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 13.384528001779273
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 31,
+      "nodeId": 2159251671,
+      "kind": "junction",
+      "point": {
+        "lat": 35.141529,
+        "lon": 139.6177997
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        355777210,
+        7706612108,
+        13785934757
+      ],
+      "sourceIssues": [],
+      "metersToNext": 12.56290731230024,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 35.71085209669798
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 63.75606442216366
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 17.469769731566206
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 31.18950400371683
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 38,
+      "nodeId": 2845402200,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1426075,
+        "lon": 139.6188018
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 8.87662677113764,
+      "sourceBranchIds": [
+        1469287397,
+        3289972120,
+        3880329682,
+        3880329685
+      ],
+      "sourceIssues": [],
+      "metersToNext": 8.406036772752259,
+      "a": {
+        "extentMeters": 24.164150654763578,
+        "zoomFactor": 1.2415085648411142,
+        "minimumSelectedPixels": 36.00000000000086,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 1469287397,
+            "nearestOtherBranchPixels": 97.99144269451402
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 27.316957864546417
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 1469287397,
+            "nearestOtherBranchPixels": 97.9914440714241
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 22.003036175624267
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "misaki-loop",
+      "caseLabel": "三崎周回",
+      "sequence": 39,
+      "nodeId": -1,
+      "kind": "finish",
+      "point": {
+        "lat": 35.142680795248204,
+        "lon": 139.61882443987864
+      },
+      "branches": 2,
+      "shortestSelectedMeters": 8.406036778107545,
+      "sourceBranchIds": [
+        3289972120,
+        3289972121
+      ],
+      "sourceIssues": [],
+      "metersToNext": null,
+      "a": {
+        "extentMeters": 22.88310011818165,
+        "zoomFactor": 1.3110111761545655,
+        "minimumSelectedPixels": 36.00000000000041,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 35.9999752741916
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 3
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3289972120,
+            "nearestOtherBranchPixels": 27.459701281713027
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 2,
+      "nodeId": 7706612149,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414097,
+        "lon": 139.6165828
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        470299935,
+        2046962403,
+        7706612114,
+        7706612148
+      ],
+      "sourceIssues": [],
+      "metersToNext": 4.631376497828818,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 36.00000000000001,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 97.3582596053694
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 27.3009639550256
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 97.53076359178642
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 11.473353706608513
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 3,
+      "nodeId": 7706612114,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414433,
+        "lon": 139.6166129
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        7706612113,
+        7706612115,
+        7706612149
+      ],
+      "sourceIssues": [],
+      "metersToNext": 34.083843533810345,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 35.97301656091601
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 74.479990934883
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 15.117823859526023
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 74.38004939755474
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 5,
+      "nodeId": 7706612108,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1415437,
+        "lon": 139.6177432
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        2159251663,
+        2159251671,
+        7706612109
+      ],
+      "sourceIssues": [],
+      "metersToNext": 5.39119011886919,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 36.00000000000001,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 94.39747930242409
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 27.359999999999985
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 68.11003804394026
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 13.384528001779273
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 6,
+      "nodeId": 2159251671,
+      "kind": "junction",
+      "point": {
+        "lat": 35.141529,
+        "lon": 139.6177997
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        355777210,
+        7706612108,
+        13785934757
+      ],
+      "sourceIssues": [],
+      "metersToNext": 12.56290731230024,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 35.71085209669798
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 63.75606442216366
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 17.469769731566206
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 31.18950400371683
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 35,
+      "nodeId": 3325155338,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1413269,
+        "lon": 139.6242051
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.049344262064615,
+      "sourceBranchIds": [
+        255485017,
+        4947013098,
+        7155067080
+      ],
+      "sourceIssues": [],
+      "metersToNext": 5.049344262064551,
+      "a": {
+        "extentMeters": 13.745437157842563,
+        "zoomFactor": 2.182542443394263,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 255485017,
+            "nearestOtherBranchPixels": 97.9995589785994
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7155067080,
+            "nearestOtherBranchPixels": 25.594188082315004
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 255485017,
+            "nearestOtherBranchPixels": 97.99145772813698
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7155067080,
+            "nearestOtherBranchPixels": 11.726779775411222
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 36,
+      "nodeId": 7155067080,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1412949,
+        "lon": 139.6242445
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 5.049344262064615,
+      "sourceBranchIds": [
+        3325155332,
+        3325155338,
+        7155067081,
+        7366084213
+      ],
+      "sourceIssues": [],
+      "metersToNext": 801.613606570216,
+      "a": {
+        "extentMeters": 13.745437157842563,
+        "zoomFactor": 2.182542443394263,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3325155338,
+            "nearestOtherBranchPixels": 32.706305502665884
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7155067081,
+            "nearestOtherBranchPixels": 69.80973596425916
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3325155338,
+            "nearestOtherBranchPixels": 14.985415565069808
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7155067081,
+            "nearestOtherBranchPixels": 68.91235037209817
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 40,
+      "nodeId": 255485070,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1354351,
+        "lon": 139.6219475
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 6.550907141443906,
+      "sourceBranchIds": [
+        4202281664,
+        4202281705,
+        11891269206
+      ],
+      "sourceIssues": [],
+      "metersToNext": 6.550907141443986,
+      "a": {
+        "extentMeters": 17.833024996152854,
+        "zoomFactor": 1.6822720770296653,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 11891269206,
+            "nearestOtherBranchPixels": 97.89332643933118
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 4202281664,
+            "nearestOtherBranchPixels": 24.23491015367635
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 11891269206,
+            "nearestOtherBranchPixels": 97.81284167730315
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 4202281664,
+            "nearestOtherBranchPixels": 14.406054140066944
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 41,
+      "nodeId": 4202281664,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1354851,
+        "lon": 139.6219094
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 6.550907141443906,
+      "sourceBranchIds": [
+        255485070,
+        3837726065,
+        4202281668
+      ],
+      "sourceIssues": [],
+      "metersToNext": 107.83923301562072,
+      "a": {
+        "extentMeters": 17.833024996152854,
+        "zoomFactor": 1.6822720770296653,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 255485070,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3837726065,
+            "nearestOtherBranchPixels": 74.39774168851407
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 255485070,
+            "nearestOtherBranchPixels": 21.399629995383435
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3837726065,
+            "nearestOtherBranchPixels": 73.95119901350373
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 52,
+      "nodeId": 255485092,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1350147,
+        "lon": 139.6163973
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.635052616009815,
+      "sourceBranchIds": [
+        1469280507,
+        2159396748,
+        11357249205
+      ],
+      "sourceIssues": [],
+      "metersToNext": 4.6350526160099434,
+      "a": {
+        "extentMeters": 12.617643232471162,
+        "zoomFactor": 2.3776230986461733,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 11357249205,
+            "nearestOtherBranchPixels": 96.53710025597229
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159396748,
+            "nearestOtherBranchPixels": 27.36000000000001
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 11357249205,
+            "nearestOtherBranchPixels": 96.0782516000633
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159396748,
+            "nearestOtherBranchPixels": 11.507290628013699
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 1
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 53,
+      "nodeId": 2159396748,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1350062,
+        "lon": 139.6163474
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.635052616009815,
+      "sourceBranchIds": [
+        255485092,
+        2159394358,
+        2159396736
+      ],
+      "sourceIssues": [],
+      "metersToNext": 123.92759936092943,
+      "a": {
+        "extentMeters": 12.617643232471162,
+        "zoomFactor": 2.3776230986461733,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 255485092,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159394358,
+            "nearestOtherBranchPixels": 72.58860311226985
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 255485092,
+            "nearestOtherBranchPixels": 15.141171878965395
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159394358,
+            "nearestOtherBranchPixels": 73.66065522674158
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 61,
+      "nodeId": 13666656901,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1360477,
+        "lon": 139.6125277
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.1042009197836062,
+      "sourceBranchIds": [
+        13666656892,
+        13666656895,
+        13666656902
+      ],
+      "sourceIssues": [],
+      "metersToNext": 1.1042009197835796,
+      "a": {
+        "extentMeters": 3.0058802816331505,
+        "zoomFactor": 9.980437405744064,
+        "minimumSelectedPixels": 36.00000000000001,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656902,
+            "nearestOtherBranchPixels": 96.96464412208664
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656892,
+            "nearestOtherBranchPixels": 27.36000000000001
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656902,
+            "nearestOtherBranchPixels": 82.80534200712079
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656892,
+            "nearestOtherBranchPixels": 2.7413628168494166
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 62,
+      "nodeId": 13666656892,
+      "kind": "junction",
+      "point": {
+        "lat": 35.136038,
+        "lon": 139.6125251
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.1042009197836062,
+      "sourceBranchIds": [
+        1469280698,
+        13666656893,
+        13666656901
+      ],
+      "sourceIssues": [],
+      "metersToNext": 15.823196649424517,
+      "a": {
+        "extentMeters": 3.0058802816331505,
+        "zoomFactor": 9.980437405744064,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656901,
+            "nearestOtherBranchPixels": 35.999768710825144
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 1469280698,
+            "nearestOtherBranchPixels": 74.47999993497203
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656901,
+            "nearestOtherBranchPixels": 3.6070331551218713
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 1469280698,
+            "nearestOtherBranchPixels": 29.996367844876108
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 63,
+      "nodeId": 13666656908,
+      "kind": "junction",
+      "point": {
+        "lat": 35.135938,
+        "lon": 139.6124302
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.8509943716943411,
+      "sourceBranchIds": [
+        13666656876,
+        13666656907,
+        13666656909
+      ],
+      "sourceIssues": [],
+      "metersToNext": 1.850994371694469,
+      "a": {
+        "extentMeters": 5.0388180118345955,
+        "zoomFactor": 5.9537772409202825,
+        "minimumSelectedPixels": 36.00000000000001,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656876,
+            "nearestOtherBranchPixels": 91.83230038777252
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656907,
+            "nearestOtherBranchPixels": 27.360000000000014
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656876,
+            "nearestOtherBranchPixels": 41.73521917198861
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656907,
+            "nearestOtherBranchPixels": 4.595402026793161
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 64,
+      "nodeId": 13666656907,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1359241,
+        "lon": 139.612419
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.8509943716943411,
+      "sourceBranchIds": [
+        2159409195,
+        13666656906,
+        13666656908
+      ],
+      "sourceIssues": [],
+      "metersToNext": 57.140343951406976,
+      "a": {
+        "extentMeters": 5.0388180118345955,
+        "zoomFactor": 5.9537772409202825,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656908,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 69.35631858061492
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656908,
+            "nearestOtherBranchPixels": 6.0465816142015
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 72.917819549243
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 65,
+      "nodeId": 3988005802,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1354369,
+        "lon": 139.6122287
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 7.029534035562161,
+      "sourceBranchIds": [
+        1469280544,
+        2159409195,
+        8292057602
+      ],
+      "sourceIssues": [],
+      "metersToNext": 7.029534035561937,
+      "a": {
+        "extentMeters": 19.135953763474774,
+        "zoomFactor": 1.567729540466474,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 98.0000121088929
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 1469280544,
+            "nearestOtherBranchPixels": 27.34742583687545
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 98.00000794021211
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 1469280544,
+            "nearestOtherBranchPixels": 17.443969212150137
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      }
+    },
+    {
+      "caseId": "bridge-out",
+      "caseLabel": "三崎→城ヶ島灯台",
+      "sequence": 66,
+      "nodeId": 1469280544,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1353762,
+        "lon": 139.6122071
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 7.029534035562161,
+      "sourceBranchIds": [
+        1469280525,
+        3988005802,
+        8292057587
+      ],
+      "sourceIssues": [
+        "branch-access-or-extract-unresolved"
+      ],
+      "metersToNext": 29.255152333918886,
+      "a": {
+        "extentMeters": 19.135953763474774,
+        "zoomFactor": 1.567729540466474,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3988005802,
+            "nearestOtherBranchPixels": 35.917332088057876
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 8292057587,
+            "nearestOtherBranchPixels": 74.47999742002635
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3988005802,
+            "nearestOtherBranchPixels": 22.910413538148152
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 8292057587,
+            "nearestOtherBranchPixels": 72.24885924883121
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 4,
+      "nodeId": 1469280544,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1353762,
+        "lon": 139.6122071
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 7.029534035562161,
+      "sourceBranchIds": [
+        1469280525,
+        3988005802,
+        8292057587
+      ],
+      "sourceIssues": [
+        "branch-access-or-extract-unresolved"
+      ],
+      "metersToNext": 7.029534035562165,
+      "a": {
+        "extentMeters": 19.135953763474774,
+        "zoomFactor": 1.567729540466474,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 8292057587,
+            "nearestOtherBranchPixels": 97.59464305979505
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3988005802,
+            "nearestOtherBranchPixels": 27.297172386923986
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 8292057587,
+            "nearestOtherBranchPixels": 95.00203773045362
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3988005802,
+            "nearestOtherBranchPixels": 17.411914288992605
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 2
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 5,
+      "nodeId": 3988005802,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1354369,
+        "lon": 139.6122287
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 7.029534035562161,
+      "sourceBranchIds": [
+        1469280544,
+        2159409195,
+        8292057602
+      ],
+      "sourceIssues": [],
+      "metersToNext": 57.14034395140689,
+      "a": {
+        "extentMeters": 19.135953763474774,
+        "zoomFactor": 1.567729540466474,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 1469280544,
+            "nearestOtherBranchPixels": 35.98345504852032
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 74.48000920275861
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 1469280544,
+            "nearestOtherBranchPixels": 22.952591068618595
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 74.48000603456123
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 6,
+      "nodeId": 13666656907,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1359241,
+        "lon": 139.612419
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.8509943716943411,
+      "sourceBranchIds": [
+        2159409195,
+        13666656906,
+        13666656908
+      ],
+      "sourceIssues": [],
+      "metersToNext": 1.850994371694327,
+      "a": {
+        "extentMeters": 5.0388180118345955,
+        "zoomFactor": 5.9537772409202825,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 91.25831392186164
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656908,
+            "nearestOtherBranchPixels": 27.36
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159409195,
+            "nearestOtherBranchPixels": 96.38772593827622
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656908,
+            "nearestOtherBranchPixels": 4.595402026793134
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 7,
+      "nodeId": 13666656908,
+      "kind": "junction",
+      "point": {
+        "lat": 35.135938,
+        "lon": 139.6124302
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.8509943716943411,
+      "sourceBranchIds": [
+        13666656876,
+        13666656907,
+        13666656909
+      ],
+      "sourceIssues": [],
+      "metersToNext": 15.823196649424972,
+      "a": {
+        "extentMeters": 5.0388180118345955,
+        "zoomFactor": 5.9537772409202825,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656907,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656876,
+            "nearestOtherBranchPixels": 69.7925482947071
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656907,
+            "nearestOtherBranchPixels": 6.0465816142015
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656876,
+            "nearestOtherBranchPixels": 30.630071823786647
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 8,
+      "nodeId": 13666656892,
+      "kind": "junction",
+      "point": {
+        "lat": 35.136038,
+        "lon": 139.6125251
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.1042009197836062,
+      "sourceBranchIds": [
+        1469280698,
+        13666656893,
+        13666656901
+      ],
+      "sourceIssues": [],
+      "metersToNext": 1.104200919783608,
+      "a": {
+        "extentMeters": 3.0058802816331505,
+        "zoomFactor": 9.980437405744064,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 1469280698,
+            "nearestOtherBranchPixels": 97.99999991443684
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656901,
+            "nearestOtherBranchPixels": 27.3598242202271
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 1469280698,
+            "nearestOtherBranchPixels": 41.587867024632644
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656901,
+            "nearestOtherBranchPixels": 2.741345197892612
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 9,
+      "nodeId": 13666656901,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1360477,
+        "lon": 139.6125277
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 1.1042009197836062,
+      "sourceBranchIds": [
+        13666656892,
+        13666656895,
+        13666656902
+      ],
+      "sourceIssues": [],
+      "metersToNext": 48.88982977018074,
+      "a": {
+        "extentMeters": 3.0058802816331505,
+        "zoomFactor": 9.980437405744064,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656892,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656902,
+            "nearestOtherBranchPixels": 73.69312953278583
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13666656892,
+            "nearestOtherBranchPixels": 3.60705633795979
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 13666656902,
+            "nearestOtherBranchPixels": 62.088807449446726
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 17,
+      "nodeId": 2159396748,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1350062,
+        "lon": 139.6163474
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.635052616009815,
+      "sourceBranchIds": [
+        255485092,
+        2159394358,
+        2159396736
+      ],
+      "sourceIssues": [],
+      "metersToNext": 4.63505261600983,
+      "a": {
+        "extentMeters": 12.617643232471162,
+        "zoomFactor": 2.3776230986461733,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159394358,
+            "nearestOtherBranchPixels": 96.07601397315803
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 255485092,
+            "nearestOtherBranchPixels": 27.360000000000003
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159394358,
+            "nearestOtherBranchPixels": 97.17346839007223
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 255485092,
+            "nearestOtherBranchPixels": 11.507290628013688
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 1
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 18,
+      "nodeId": 255485092,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1350147,
+        "lon": 139.6163973
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.635052616009815,
+      "sourceBranchIds": [
+        1469280507,
+        2159396748,
+        11357249205
+      ],
+      "sourceIssues": [],
+      "metersToNext": 34.42682200717968,
+      "a": {
+        "extentMeters": 12.617643232471162,
+        "zoomFactor": 2.3776230986461733,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159396748,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 11357249205,
+            "nearestOtherBranchPixels": 73.55824391334184
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159396748,
+            "nearestOtherBranchPixels": 15.141171878965395
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 11357249205,
+            "nearestOtherBranchPixels": 73.09940401236986
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 29,
+      "nodeId": 4202281664,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1354851,
+        "lon": 139.6219094
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 6.550907141443906,
+      "sourceBranchIds": [
+        255485070,
+        3837726065,
+        4202281668
+      ],
+      "sourceIssues": [],
+      "metersToNext": 6.550907141443986,
+      "a": {
+        "extentMeters": 17.833024996152854,
+        "zoomFactor": 1.6822720770296653,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3837726065,
+            "nearestOtherBranchPixels": 97.49030110756142
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 255485070,
+            "nearestOtherBranchPixels": 27.36
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 3837726065,
+            "nearestOtherBranchPixels": 96.20407344521648
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 255485070,
+            "nearestOtherBranchPixels": 16.2637187964914
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 30,
+      "nodeId": 255485070,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1354351,
+        "lon": 139.6219475
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 6.550907141443906,
+      "sourceBranchIds": [
+        4202281664,
+        4202281705,
+        11891269206
+      ],
+      "sourceIssues": [],
+      "metersToNext": 47.79403204907203,
+      "a": {
+        "extentMeters": 17.833024996152854,
+        "zoomFactor": 1.6822720770296653,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 4202281664,
+            "nearestOtherBranchPixels": 31.888039675889956
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 11891269206,
+            "nearestOtherBranchPixels": 74.42462756059493
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 4202281664,
+            "nearestOtherBranchPixels": 18.95533439482494
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 11891269206,
+            "nearestOtherBranchPixels": 74.34116765771549
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 34,
+      "nodeId": 7155067080,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1412949,
+        "lon": 139.6242445
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 5.049344262064615,
+      "sourceBranchIds": [
+        3325155332,
+        3325155338,
+        7155067081,
+        7366084213
+      ],
+      "sourceIssues": [],
+      "metersToNext": 5.049344262064551,
+      "a": {
+        "extentMeters": 13.745437157842563,
+        "zoomFactor": 2.182542443394263,
+        "minimumSelectedPixels": 36.000000000000014,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7155067081,
+            "nearestOtherBranchPixels": 91.3318811105058
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3325155338,
+            "nearestOtherBranchPixels": 24.85679218202608
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7155067081,
+            "nearestOtherBranchPixels": 90.43450267592168
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 3325155338,
+            "nearestOtherBranchPixels": 11.388915829453062
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 35,
+      "nodeId": 3325155338,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1413269,
+        "lon": 139.6242051
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.049344262064615,
+      "sourceBranchIds": [
+        255485017,
+        4947013098,
+        7155067080
+      ],
+      "sourceIssues": [],
+      "metersToNext": 51.900063968467975,
+      "a": {
+        "extentMeters": 13.745437157842563,
+        "zoomFactor": 2.182542443394263,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7155067080,
+            "nearestOtherBranchPixels": 33.676563266203964
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 255485017,
+            "nearestOtherBranchPixels": 74.47964941810056
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7155067080,
+            "nearestOtherBranchPixels": 15.42997338869896
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 255485017,
+            "nearestOtherBranchPixels": 74.4762503565281
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 0
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 64,
+      "nodeId": 2159251671,
+      "kind": "junction",
+      "point": {
+        "lat": 35.141529,
+        "lon": 139.6177997
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        355777210,
+        7706612108,
+        13785934757
+      ],
+      "sourceIssues": [],
+      "metersToNext": 5.391190118869417,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 83.88956005259051
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 27.14024759349046
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 13785934757,
+            "nearestOtherBranchPixels": 41.03882184140499
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612108,
+            "nearestOtherBranchPixels": 13.277024995990326
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 65,
+      "nodeId": 7706612108,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1415437,
+        "lon": 139.6177432
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 5.3911901188692,
+      "sourceBranchIds": [
+        2159251663,
+        2159251671,
+        7706612109
+      ],
+      "sourceIssues": [],
+      "metersToNext": 82.2759078804961,
+      "a": {
+        "extentMeters": 14.676017545810598,
+        "zoomFactor": 2.044151276486023,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 36
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 71.74208426984234
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 2159251671,
+            "nearestOtherBranchPixels": 17.611221054972702
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612109,
+            "nearestOtherBranchPixels": 66.45975837240324
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 67,
+      "nodeId": 7706612114,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414433,
+        "lon": 139.6166129
+      },
+      "branches": 3,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        7706612113,
+        7706612115,
+        7706612149
+      ],
+      "sourceIssues": [],
+      "metersToNext": 4.631376497829024,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 35.99999999999999,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 97.99998807221449
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 27.33949258629616
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612113,
+            "nearestOtherBranchPixels": 97.7642353649114
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612149,
+            "nearestOtherBranchPixels": 11.489546133239788
+          }
+        ],
+        "nearOtherBranch": true,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "bridge-back",
+      "caseLabel": "城ヶ島灯台→三崎",
+      "sequence": 68,
+      "nodeId": 7706612149,
+      "kind": "junction",
+      "point": {
+        "lat": 35.1414097,
+        "lon": 139.6165828
+      },
+      "branches": 4,
+      "shortestSelectedMeters": 4.631376497828816,
+      "sourceBranchIds": [
+        470299935,
+        2046962403,
+        7706612114,
+        7706612148
+      ],
+      "sourceIssues": [],
+      "metersToNext": 53.49237383030959,
+      "a": {
+        "extentMeters": 12.607636021867332,
+        "zoomFactor": 2.3795103180299986,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 35.92232099345473
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 73.92086229606069
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "arrival",
+            "neighborNodeId": 7706612114,
+            "nearestOtherBranchPixels": 15.096518035011188
+          },
+          {
+            "role": "departure",
+            "neighborNodeId": 7706612148,
+            "nearestOtherBranchPixels": 74.0933683082099
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 4
+      }
+    },
+    {
+      "caseId": "east-park",
+      "caseLabel": "安房崎灯台→第２展望台",
+      "sequence": 1,
+      "nodeId": 9153452555,
+      "kind": "start",
+      "point": {
+        "lat": 35.1301726,
+        "lon": 139.6275089
+      },
+      "branches": 2,
+      "shortestSelectedMeters": 6.800354461300511,
+      "sourceBranchIds": [
+        2805227931,
+        2805227934
+      ],
+      "sourceIssues": [],
+      "metersToNext": 6.800354461300511,
+      "a": {
+        "extentMeters": 18.512076033540282,
+        "zoomFactor": 1.6205637847233252,
+        "minimumSelectedPixels": 36,
+        "clearance": [
+          {
+            "role": "departure",
+            "neighborNodeId": 2805227931,
+            "nearestOtherBranchPixels": 27.36
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      },
+      "b": {
+        "extentMeters": 30,
+        "clearance": [
+          {
+            "role": "departure",
+            "neighborNodeId": 2805227931,
+            "nearestOtherBranchPixels": 16.88301334258874
+          }
+        ],
+        "nearOtherBranch": false,
+        "visibleLandmarks": 1
+      }
+    }
+  ],
+  "limitations": [
+    "No application, walking rule, source data, participant course or stored correction changed.",
+    "Neither method is approved. Text readability, marker collisions and thumbnails still need review.",
+    "Nearby branch indication is a comparison aid, not a public-safety acceptance criterion."
+  ]
+}
