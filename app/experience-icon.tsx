@@ -1,0 +1,5 @@
+export default function ExperienceIcon({kind,className}:{kind:"map"|"walk"|"camera"|"pin"|"route"|"publish";className?:string}){
+ return <svg className={className} viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+  {kind==="map"?<><path d="m3 8 9-4 8 4 9-4v21l-9 4-8-4-9 4Zm9-4v21m8-17v21"/><circle cx="16" cy="16" r="2.5"/></>:kind==="walk"?<><path d="M6 28V14h17V4m-5 5 5-5 5 5"/><circle cx="6" cy="28" r="2.5" fill="currentColor" stroke="none"/><path d="m13 14 4 4m-4-4 4-4"/></>:kind==="camera"?<><path d="m9 8 2-4h10l2 4h6v20H3V8Z"/><circle cx="16" cy="17" r="6"/><path d="M24 12h1"/></>:kind==="pin"?<><path d="M25 12c0 8-9 16-9 16S7 20 7 12a9 9 0 1 1 18 0Z"/><circle cx="16" cy="12" r="3"/></>:kind==="route"?<><circle cx="6" cy="25" r="3"/><circle cx="26" cy="7" r="3"/><path d="M9 25h9a5 5 0 0 0 0-10h-4a4 4 0 0 1 0-8h9"/></>:<><path d="M16 3v17m-6-11 6-6 6 6M5 18v10h22V18"/><path d="m11 23 3 3 7-7"/></>}
+ </svg>;
+}

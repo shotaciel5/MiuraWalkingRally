@@ -50,10 +50,15 @@ test("welcome experience HTTP smoke check",async t=>{
   assert.match(html,/スマホのカメラ/);assert.match(html,/ゴールで写真/);assert.doesNotMatch(html,/data-published-start-link=/);
  });
  await t.test("renders a real generated sample with source attribution",async()=>{
-  const {createMisakiReviewPoc}=await import("../lib/misaki-review.ts"),card=createMisakiReviewPoc().koma.find(c=>c.map.kind==="junction"&&c.map.state==="ready"&&c.map.branches.length>=3);
+  const {createHomeDemo}=await import("../lib/home-demo.ts"),card=createHomeDemo().cards[0];
   assert.ok(card);assert.match(html,/data-home-koma/);assert.match(html,/コマ地図の表示例/);
-  assert.deepEqual([...html.matchAll(/data-koma-branch="(\d+)"/g)].map(m=>Number(m[1])),card.map.branches.map(b=>b.neighborNodeId));
+  const figure=html.match(/<figure class="home-koma"[\s\S]*?<\/figure>/)?.[0];assert.ok(figure);assert.deepEqual([...figure.matchAll(/data-koma-branch="(\d+)"/g)].map(m=>Number(m[1])),card.map.branches.map(b=>b.neighborNodeId));
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL/);
+ });
+ await t.test("serves an independent three-frame demo and the operator generation story",()=>{
+  assert.match(html,/data-home-demo/);for(const control of ["play","prev","next"])assert.ok(html.includes("data-demo-"+control));
+  assert.equal([...html.matchAll(/data-demo-dot=/g)].length,3);assert.equal([...html.matchAll(/data-demo-slide="current"/g)].length,1);
+  assert.match(html,/data-home-creation/);assert.match(html,/data-home-route/);assert.match(html,/青い矢印/);assert.doesNotMatch(html,/緑の矢印/);
  });
  await t.test("serves the supplied photographs unchanged",async()=>{
   const {readFileSync}=await import("node:fs");

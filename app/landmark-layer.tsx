@@ -14,7 +14,7 @@ export default function LandmarkLayer({features,width,height,roads=[],compact=fa
       <g data-landmark-label={feature.id} transform={`translate(${label.x} ${label.y})`}>
         <rect width={label.width} height={label.height} rx="5" fill="#fffef8" fillOpacity=".96" stroke="#d3c9af" strokeWidth=".7"/>
         <LandmarkIcon symbol={feature.symbol} size={22} x={2} y={(label.height-22)/2}/>
-        {label.lines.map((line,j)=><text key={j} x="28" y={label.height/2+(j-(label.lines.length-1)/2)*13+4} fontSize="11" fontWeight="600" fill="#405345" data-landmark-name={j===0?feature.id:undefined}>{line}</text>)}
+        {label.lines.map((line,j)=><text key={j} x="28" y={label.height/2+(j-(label.lines.length-1)/2)*13+4} fontSize="11" fontWeight="600" fill="#404c53" data-landmark-name={j===0?feature.id:undefined}>{line}</text>)}
       </g>
     </g>;
   })}</g>;

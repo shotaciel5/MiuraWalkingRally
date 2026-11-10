@@ -1,9 +1,7 @@
 import KomaFigure from "./koma-figure";
-import {createMisakiReviewPoc} from "../lib/misaki-review";
+import type {HomeDemoCard} from "../lib/home-demo";
 
-export default function HomeKoma(){
-  const card=createMisakiReviewPoc().koma.find(c=>c.map.kind==="junction"&&c.map.state==="ready"&&c.map.branches.length>=3);
-  if(!card)return null;
+export default function HomeKoma({card}:{card:HomeDemoCard}){
   return <figure className="home-koma" data-home-koma>
     <figcaption><span>コマ地図の表示例</span><strong>曲がり角が、ヒント。</strong></figcaption>
     <KomaFigure map={card.map} name="三崎の実際の道路から生成したコマ地図の例" context={card.context} layers={{buildings:true,landmarks:true,details:true}} minimal/>

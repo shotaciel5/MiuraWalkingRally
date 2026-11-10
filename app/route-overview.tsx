@@ -73,12 +73,12 @@ export default function RouteOverview({ data, selection, onSelect, layers, conte
       </p>
       <svg className="route-map" viewBox={`0 0 ${width} ${height}`} role="group" aria-labelledby="map-title map-description">
         <title id="map-title">三崎下町の徒歩経路候補と手動参照ルート</title>
-        <desc id="map-description">北が上の全体地図。緑は生成候補、オレンジの破線は生成前に固定した手動参照。道路の実際の通行可否は未確認です。</desc>
+        <desc id="map-description">北が上の全体地図。青は生成候補、オレンジの破線は生成前に固定した手動参照。道路の実際の通行可否は未確認です。</desc>
         <rect width={width} height={height} fill="#f3f2eb" />
         {layers.buildings&&<g fill="#e4dfcf" stroke="#d0c8b5" strokeWidth=".7" pointerEvents="none">{data.context.buildings.filter(b=>visible(b.points)).map(b=><polygon key={b.id} data-overview-building={b.id} points={line(b.points)}/>)}</g>}
         <g fill="none" strokeLinecap="round" strokeLinejoin="round">
           {data.roads.filter(road => visible(road.points)).map(road => (
-            <polyline key={road.id} points={line(road.points)} stroke={road.walking ? "#d1d5cc" : "#c7b6ae"} strokeWidth={road.walking ? 3 : 2} strokeDasharray={road.walking ? undefined : "3 4"} />
+            <polyline key={road.id} points={line(road.points)} stroke={road.walking ? "#ccd2d5" : "#c7b6ae"} strokeWidth={road.walking ? 3 : 2} strokeDasharray={road.walking ? undefined : "3 4"} />
           ))}
           {(showReference||junctionSource==="reference") && data.legs.map((leg, i) => (
             <polyline key={"ref" + i} data-reference-leg={i + 1} points={line(leg.reference)} stroke="#b86a28" strokeWidth={6} strokeDasharray="9 7" opacity={selected === -1 || selected === i ? 0.9 : 0.22} />
@@ -86,18 +86,18 @@ export default function RouteOverview({ data, selection, onSelect, layers, conte
           {data.legs.map((leg, i) => (
             <g key={i} opacity={selected === -1 || selected === i ? 1 : 0.16}>
               <polyline data-generated-leg={i + 1} points={line(leg.points)} stroke="#fff" strokeWidth={9} />
-              <polyline points={line(leg.points)} stroke="#17634f" strokeWidth={5} />
+              <polyline points={line(leg.points)} stroke="#174b66" strokeWidth={5} />
             </g>
           ))}
         </g>
-        {segment.length>1&&<g fill="none" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none"><polyline points={line(segment)} stroke="white" strokeWidth="12"/><polyline data-next-koma-segment={selectedJunction.sequence} points={line(segment)} stroke="#276bb4" strokeWidth="7"/></g>}
+        {segment.length>1&&<g fill="none" strokeLinecap="round" strokeLinejoin="round" pointerEvents="none"><polyline points={line(segment)} stroke="white" strokeWidth="12"/><polyline data-next-koma-segment={selectedJunction.sequence} points={line(segment)} stroke="var(--accent)" strokeWidth="7"/></g>}
         {layers.landmarks&&<LandmarkLayer features={mapLandmarks} width={width} height={height} roads={data.legs.map(leg=>leg.points.map(p=>{const [x,y]=xy(p);return {x,y}}))} overview/>}
         {data.stops.filter(stop => stop.id !== "G").map(stop => {
           const [x, y] = xy(stop.point);
           const [dx, dy] = labels[stop.id] ?? [16, -18];
           return (
             <g key={stop.id}>
-              <circle cx={x} cy={y} r={9} fill="#17634f" stroke="white" strokeWidth={3} />
+              <circle cx={x} cy={y} r={9} fill="#174b66" stroke="white" strokeWidth={3} />
               <text x={x + dx} y={y + dy} className="map-label">{stop.id === "S" ? "S / G 三崎港" : stop.id + " " + stop.name}</text>
             </g>
           );
@@ -108,14 +108,14 @@ export default function RouteOverview({ data, selection, onSelect, layers, conte
           const label=`コマ ${matches.map(c=>c.sequence).join("・")} の位置${matches.length>1?"。押すたびに再訪順に切替":""}`;
           return <g key={nodeId} role="button" tabIndex={0} aria-label={label} aria-pressed={active} data-map-pin={nodeId} onClick={()=>selectPin(nodeId)} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();selectPin(nodeId)}}} className="map-pin">
             <circle cx={x} cy={y} r="13" fill="transparent"/>
-            <circle cx={x} cy={y} r={active?13:5} fill={active?"#276bb4":"white"} stroke={active?"white":"#276bb4"} strokeWidth={active?3:2}/>
+            <circle cx={x} cy={y} r={active?13:5} fill={active?"var(--accent)":"white"} stroke={active?"white":"var(--accent)"} strokeWidth={active?3:2}/>
             {active&&<g data-junction-highlight={candidate.sequence} pointerEvents="none"><text x={x} y={y+4} textAnchor="middle" fontSize="11" fontWeight="700" fill="white">{candidate.sequence}</text></g>}
           </g>;
         })}
         <g className="map-annotations">
-          <path d="M758 60V28m-6 9 6-9 6 9" stroke="#506154" fill="none" strokeWidth="2" />
+          <path d="M758 60V28m-6 9 6-9 6 9" stroke="#505b61" fill="none" strokeWidth="2" />
           <text x={758} y={20} textAnchor="middle">N</text>
-          <path d={`M30 560v8h${100 * scale}v-8`} fill="none" stroke="#506154" strokeWidth={2} />
+          <path d={`M30 560v8h${100 * scale}v-8`} fill="none" stroke="#505b61" strokeWidth={2} />
           <text x={30} y={548}>100 m（概算）</text>
         </g>
       </svg>
