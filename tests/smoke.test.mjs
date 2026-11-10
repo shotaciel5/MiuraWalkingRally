@@ -262,7 +262,7 @@ test("unpublished and malformed course IDs cannot be opened by participants",asy
  for(const id of ["invalid","course-00000000-0000-4000-8000-000000000000"])for(const suffix of ["","/play"]){const r=await get("/rallies/"+id+suffix);assert.equal(r.status,404);await r.arrayBuffer()}
 });
 test("publication POST rejects missing origin, extra metadata and forged bodies",async()=>{
- const valid={courseId:"course-00000000-0000-4000-8000-000000000000",fingerprint:"a".repeat(64)};
+ const valid={courseId:"course-00000000-0000-4000-8000-000000000000",fingerprint:"a".repeat(64),expectedRevision:0};
  for(const [headers,body,status]of [
   [{"Content-Type":"application/json"},JSON.stringify(valid),403],
   [{"Content-Type":"application/json",Origin:"https://example.com"},JSON.stringify(valid),403],
@@ -275,4 +275,22 @@ test("publication POST rejects missing origin, extra metadata and forged bodies"
   const r=await fetch(new URL("/api/operator/courses/publish",baseUrl),{method:"POST",headers,body});assert.equal(r.status,status);assert.equal(r.headers.get("cache-control"),"no-store");await r.arrayBuffer();
  }
  const r=await get("/api/operator/courses/publish");assert.equal(r.status,405);await r.arrayBuffer();
+});
+
+test("publication stop API applies the same local mutation guards",async()=>{
+ const valid={courseId:"course-00000000-0000-4000-8000-000000000000",fingerprint:"a".repeat(64),expectedRevision:1};
+ for(const [headers,body,status]of [
+  [{"Content-Type":"application/json"},JSON.stringify(valid),403],
+  [{"Content-Type":"application/json",Origin:"https://example.com"},JSON.stringify(valid),403],
+  [{"Content-Type":"text/plain",Origin:baseUrl.origin},"x",415],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"{bad",400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify({...valid,changedAt:"2026-11-10T00:00:00.000Z"}),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"x".repeat(17000),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify(valid),404]
+ ]){const r=await fetch(new URL("/api/operator/courses/unpublish",baseUrl),{method:"POST",headers,body});assert.equal(r.status,status);assert.equal(r.headers.get("cache-control"),"no-store");await r.arrayBuffer()}
+ const r=await get("/api/operator/courses/unpublish");assert.equal(r.status,405);await r.arrayBuffer();
+});
+test("public availability hides unknown course content and disables caching",async()=>{
+ for(const id of ["invalid","course-00000000-0000-4000-8000-000000000000"]){const r=await get("/api/rallies/"+id+"/availability");assert.equal(r.status,404);assert.equal(r.headers.get("cache-control"),"no-store");assert.deepEqual(await r.json(),{status:"missing"})}
+ const r=await fetch(new URL("/api/rallies/invalid/availability",baseUrl),{method:"POST"});assert.equal(r.status,405);await r.arrayBuffer();
 });

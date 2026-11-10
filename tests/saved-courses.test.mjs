@@ -93,7 +93,7 @@ test("SQLite v4 migration preserves edits, tombstones, draft and corrections",t=
  f.drafts.saveCorrection({expectedDraftRevision:1,expectedCorrectionRevision:0,spotId:S,spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.141,lon:139.621}});
  const before=f.drafts.load(),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; PRAGMA user_version=4");db.close();
  assert.deepEqual(f.courses.list(),[]);assert.deepEqual(f.drafts.load(),before);
- const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,6);check.close();
+ const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,7);check.close();
  assert.ok(f.service.save(f.prepared().receipt));
 });
 test("foreign saved-course table rolls migration back and is never reset",t=>{

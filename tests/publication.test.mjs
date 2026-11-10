@@ -23,16 +23,16 @@ function fixture(t){
  t.after(()=>{assert.ok(resolve(dir).startsWith(parent+sep));rmSync(dir,{recursive:true,force:true})});
  const path=join(dir,"db.sqlite"),drafts=createDraftRepository(path),courses=createCourseRepository(path),publisher=createPublicationRepository(path,()=>"2026-11-10T01:00:00.000Z");
  const state=drafts.save({title:"公開する三崎周回",expectedRevision:0,start:{id:M,revision:0},finish:{id:M,revision:0},stops:[{kind:"checkpoint",spot:{id:S,revision:0}},{kind:"waypoint",spot:{id:W,revision:0}},{kind:"checkpoint",spot:{id:C,revision:0}}]});
- const ready=prepareCourseSave(state,createRallyPreview(state.draft,state.spots,state.corrections)),saved=createCourseService(path).save(ready.receipt),input={courseId:saved.id,fingerprint:saved.fingerprint};
+ const ready=prepareCourseSave(state,createRallyPreview(state.draft,state.spots,state.corrections)),saved=createCourseService(path).save(ready.receipt),input={courseId:saved.id,fingerprint:saved.fingerprint,expectedRevision:0};
  return {path,dir,drafts,courses,publisher,saved,input,state};
 }
 test("saved courses stay private until explicitly published and multiple public summaries are distinct",t=>{
  const f=fixture(t);assert.deepEqual(f.publisher.list(),[]);assert.equal(f.publisher.get(f.saved.id),null);
  const before=f.drafts.load(),publication=f.publisher.publish(f.input);
- assert.deepEqual(publication,{...f.input,publishedAt:"2026-11-10T01:00:00.000Z"});
+ assert.deepEqual(publication,{courseId:f.saved.id,fingerprint:f.saved.fingerprint,publishedAt:"2026-11-10T01:00:00.000Z",changedAt:"2026-11-10T01:00:00.000Z",status:"published",revision:1});
  const value=f.publisher.get(f.saved.id);assert.deepEqual(value.course,f.saved);assert.deepEqual(value.publication,publication);assert.deepEqual(f.drafts.load(),before);
  f.drafts.save({...draftInput(before.draft,1),title:"別の公開コース"});const c=f.drafts.load(),next=createCourseService(f.path).save(prepareCourseSave(c,createRallyPreview(c.draft,c.spots,c.corrections)).receipt);
- f.publisher.publish({courseId:next.id,fingerprint:next.fingerprint});const rows=f.publisher.list();assert.equal(rows.length,2);assert.ok(rows.every(r=>!r.cards&&!r.payload&&!r.input));assert.equal(new Set(rows.map(r=>r.id)).size,2);
+ f.publisher.publish({courseId:next.id,fingerprint:next.fingerprint,expectedRevision:0});const rows=f.publisher.list();assert.equal(rows.length,2);assert.ok(rows.every(r=>!r.cards&&!r.payload&&!r.input));assert.equal(new Set(rows.map(r=>r.id)).size,2);
 });
 test("retries keep the original publication date without rewriting the saved snapshot",t=>{
  const f=fixture(t),before=f.saved,p=f.publisher.publish(f.input),bytes=readFileSync(f.path);
@@ -55,19 +55,19 @@ test("strict publication input rejects forged metadata and stale fingerprints",t
  assert.throws(()=>f.publisher.publish({...f.input,fingerprint:"b".repeat(64)}),reason("conflict"));
  assert.throws(()=>f.publisher.publish({...f.input,courseId:"course-00000000-0000-4000-8000-000000000000"}),reason("missing"));assert.deepEqual(f.publisher.list(),[]);
 });
-test("v5 to v6 preserves all prior records and does not publish any course automatically",t=>{
+test("v5 to v7 preserves all prior records and does not publish any course automatically",t=>{
  const f=fixture(t),spots=createSpotRepository(f.path),s=f.state.spots.find(s=>![S,W,C,M].includes(s.id));
  spots.save({id:s.id,expectedRevision:s.revision,name:"保持する編集",category:s.category,position:{lat:s.position.lat,lon:s.position.lon},description:s.description});spots.remove({id:"osm-node-1211621029",expectedRevision:spots.list().find(s=>s.id==="osm-node-1211621029").revision});
  f.drafts.saveCorrection({expectedDraftRevision:1,expectedCorrectionRevision:0,spotId:S,spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.141,lon:139.621}});
  const db=new DatabaseSync(f.path),before={};for(const table of ["spot_edits","spot_deletions","rally_draft","rally_corrections","saved_courses"])before[table]=db.prepare("SELECT * FROM "+table).all();db.exec("DROP TABLE course_publications; PRAGMA user_version=5");db.close();
- assert.deepEqual(f.publisher.list(),[]);const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,6);
+ assert.deepEqual(f.publisher.list(),[]);const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,7);
  for(const table of Object.keys(before))assert.deepEqual(check.prepare("SELECT * FROM "+table).all(),before[table]);check.close();assert.deepEqual(f.courses.get(f.saved.id),f.saved);
 });
 test("a foreign publication table rolls migration back and is not reset",t=>{
  const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE course_publications; CREATE TABLE course_publications(note TEXT); INSERT INTO course_publications VALUES('keep'); PRAGMA user_version=5");db.close();
  assert.throws(()=>f.publisher.list());const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,5);assert.equal(check.prepare("SELECT note FROM course_publications").get().note,"keep");check.close();
 });
-test("missing v6 tables and unsupported versions never silently reset data",t=>{
+test("missing v7 tables and unsupported versions never silently reset data",t=>{
  for(const sql of ["DROP TABLE course_publications","PRAGMA user_version=99"]){const f=fixture(t),db=new DatabaseSync(f.path);db.exec(sql);db.close();const before=readFileSync(f.path);assert.throws(()=>f.publisher.get(f.saved.id));assert.deepEqual(readFileSync(f.path),before)}
 });
 test("locked writes fail and a later retry publishes only once",t=>{

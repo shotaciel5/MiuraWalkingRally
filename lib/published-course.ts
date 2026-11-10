@@ -1,7 +1,7 @@
 import {CourseError,type SavedCourse} from "./operator/course-format.ts";
 import type {CoursePublication} from "./operator/publication.ts";
 export function publishedSummary(saved:SavedCourse,publication:CoursePublication){
- if(publication.courseId!==saved.id||publication.fingerprint!==saved.fingerprint)throw new CourseError("unavailable","公開対象と保存済みコースが一致しません。");
+ if(publication.status!=="published"||publication.courseId!==saved.id||publication.fingerprint!==saved.fingerprint)throw new CourseError("unavailable","公開対象と保存済みコースが一致しません。");
  const p=saved.payload.preview,d=saved.payload.input.draft,areas=new Set([d.start.area,...d.stops.map(s=>s.spot.area),d.finish.area]);
  return {id:saved.id,revision:"published-v1-"+saved.fingerprint,href:"/rallies/"+saved.id,title:p.title,publishedAt:publication.publishedAt,
   distanceMeters:p.meters,walkingMinutes:Math.ceil(p.minutes),cardCount:p.cards.length,

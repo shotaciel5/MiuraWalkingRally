@@ -7,3 +7,5 @@ export function PublishedUnavailable({href="/"}:{href?:string}){return <section 
 export function LegacyDemoLink(){return <aside className="legacy-demo"><p>操作確認用の固定デモも利用できます。</p><Link href="/rallies/misaki-shitamachi" data-fixed-demo-link>固定デモ「三崎下町さんぽ」を開く →</Link></aside>}
 
 export function PublishedAttribution(){return <p className="map-attribution">スポット・道路・目印 © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL 1.0</a></p>}
+
+export function PublishedStopped({compact=false}={}){const Heading=compact?"h2":"h1";return <section className="participant-panel" role="status" data-published-stopped><Heading>このコースは公開を停止しています</Heading><p>現在はコースを開始・閲覧できません。</p><p>同じ内容が再公開された場合は、同じタブに残る開始記録を引き継げます。</p><a href="/" className="rally-secondary-link">公開コースへ戻る</a></section>}

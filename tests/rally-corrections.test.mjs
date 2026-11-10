@@ -76,7 +76,7 @@ test("version 3 migration preserves the draft, spot edits and tombstones",t=>{
  const {repo,path,state,spots}=fixture(t),s=state.spots.find(s=>s.id===C);
  spots.save({id:C,expectedRevision:0,name:"Edited",category:s.category,position:{lat:s.position.lat,lon:s.position.lon},description:"kept"});spots.remove({id:M,expectedRevision:0});
  const before=repo.load(),db=new DatabaseSync(path);db.exec("DROP TABLE rally_corrections; DROP TABLE saved_courses; DROP TABLE course_publications; PRAGMA user_version=3");db.close();
- const migrated=repo.load();assert.deepEqual(migrated,before);const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,6);assert.equal(check.prepare("SELECT count(*) AS n FROM rally_corrections").get().n,0);check.close();
+ const migrated=repo.load();assert.deepEqual(migrated,before);const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,7);assert.equal(check.prepare("SELECT count(*) AS n FROM rally_corrections").get().n,0);check.close();
 });
 test("failed migration rolls back and missing/corrupt correction data is never reset",t=>{
  const {repo,path,state}=fixture(t);let db=new DatabaseSync(path);db.exec("DROP TABLE rally_corrections; DROP TABLE saved_courses; DROP TABLE course_publications; CREATE TABLE rally_corrections(note TEXT); INSERT INTO rally_corrections VALUES ('keep'); PRAGMA user_version=3");db.close();

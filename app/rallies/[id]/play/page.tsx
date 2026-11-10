@@ -3,7 +3,7 @@ import Link from "next/link";
 import {notFound} from "next/navigation";
 import SiteHeader from "../../../site-header";
 import PublishedParticipation from "../../../published-participation";
-import {PublishedBadge,PublishedNotice,PublishedUnavailable,PublishedAttribution} from "../../../published-ui";
+import {PublishedStopped,PublishedBadge,PublishedNotice,PublishedUnavailable,PublishedAttribution} from "../../../published-ui";
 import {RallyFooter} from "../../../rally-ui";
 import {validCourseId} from "../../../../lib/operator/course-format";
 import {getPublicationRepository} from "../../../../lib/operator/publication-repository";
@@ -15,6 +15,7 @@ export default async function PublishedPlay({params}:{params:Promise<{id:string}
  let value;try{value=getPublicationRepository().get(id)}catch{value=undefined}
  if(value===null)notFound();
  if(!value)return <main className="participant-main" data-participant-page="published-play"><SiteHeader/><div id="page-content" tabIndex={-1}><PublishedUnavailable href={"/rallies/"+id+"/play"}/></div><PublishedAttribution/><RallyFooter/></main>;
+ if(!value.course)return <main className="participant-main" data-participant-page="published-play"><SiteHeader/><section id="page-content" tabIndex={-1}><PublishedStopped/></section><PublishedAttribution/><RallyFooter/></main>;
  const course=projectPublishedCourse(value.course,value.publication),rally=course.rally;
  return <main className="participant-main published-play" data-participant-page="published-play" data-published-course-id={id}>
   <SiteHeader/><nav className="rally-breadcrumb" aria-label="パンくずリスト"><Link href="/">公開コース</Link><span aria-hidden="true">/</span><Link href={rally.href}>{rally.title}</Link><span aria-hidden="true">/</span><span aria-current="page">コマ地図</span></nav>
