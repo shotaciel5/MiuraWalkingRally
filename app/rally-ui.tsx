@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type {DemoRally} from "../lib/demo-rally";
 
 export function DemoBadge(){return <span className="demo-badge">開発用・未公開</span>}
@@ -33,4 +34,4 @@ export function RallyArtwork({compact=false}:{compact?:boolean}){
     <span className="artwork-index">01</span>
   </div>;
 }
-export function RallyFooter(){return <footer className="rally-footer"><span>海とまちを、自分の足で。</span><span>三浦市ウォーキングラリー · 開発用プレビュー</span></footer>}
+export function RallyFooter(){return <footer className="rally-footer"><div><strong className="footer-brand">MIURA WALKING RALLY</strong><p>海とまちを、自分の足で。</p></div><nav className="footer-links" aria-label="フッターナビゲーション"><Link href="/">トップ</Link><Link href="/courses">コースを探す</Link><Link href="/operator">コースをつくる</Link></nav></footer>}

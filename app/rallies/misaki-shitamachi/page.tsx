@@ -12,7 +12,7 @@ export default function RallyDetail(){
   const rally=getDemoRally();
   return <main id="main-content" className="participant-main" data-participant-page="detail" data-rally-id={rally.id}>
     <SiteHeader/>
-    <nav className="rally-breadcrumb" aria-label="パンくずリスト"><Link href="/">コース一覧</Link><span aria-hidden="true">/</span><span aria-current="page">{rally.title}</span></nav>
+    <nav className="rally-breadcrumb" aria-label="パンくずリスト"><Link href="/courses">コース一覧</Link><span aria-hidden="true">/</span><span aria-current="page">{rally.title}</span></nav>
     <section className="rally-detail-hero" id="page-content" tabIndex={-1} aria-labelledby="rally-title">
       <div><p className="eyebrow">MISAKI / COURSE 01</p><DemoBadge/><h1 id="rally-title">{rally.title}</h1><p className="rally-detail-subtitle">{rally.subtitle}</p><p className="rally-detail-description">{rally.description}</p></div>
       <RallyArtwork compact/>
@@ -33,10 +33,10 @@ export default function RallyDetail(){
       <aside className="participant-panel rally-summary" aria-labelledby="summary-title">
         <p className="eyebrow">AT A GLANCE</p><h2 id="summary-title">コースの目安</h2><RallyFacts rally={rally}/><WalkingEstimateNote/>
         <dl className="rally-summary-list"><div><dt>エリア</dt><dd>{rally.area}</dd></div><div><dt>スタート・ゴール</dt><dd>{rally.stops[0].name}</dd></div><div><dt>道順の特徴</dt><dd>港に戻る周回の想定です。{rally.hasSteps?"階段区間の候補を含みます。":""}</dd></div></dl>
-        <Link href="/" className="rally-secondary-link" data-rally-back-link><ArrowIcon back/>コース一覧へ戻る</Link>
+        <Link href="/courses" className="rally-secondary-link" data-rally-back-link><ArrowIcon back/>コース一覧へ戻る</Link>
       </aside>
     </div>
-    <Link href="/" className="rally-secondary-link rally-bottom-back" data-rally-bottom-back><ArrowIcon back/>コース一覧へ戻る</Link>
+    <Link href="/courses" className="rally-secondary-link rally-bottom-back" data-rally-bottom-back><ArrowIcon back/>コース一覧へ戻る</Link>
     <RallyFooter/>
   </main>;
 }

@@ -3,11 +3,12 @@ import type { ReactNode } from "react";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "./globals.css";
+import "./experience.css";
 
 export const metadata: Metadata = {
   title: {default:"三浦市ウォーキングラリー",template:"%s | 三浦市ウォーキングラリー"},
   description:
-    "三浦市の公開コースを選び、地点順・歩行の目安とコマ地図を確認できます。",
+    "道のかたちと目印を頼りに、ひとコマずつ三浦を探検。コマ地図で楽しむウォーキングラリー。",
   robots: { index: false, follow: false },
 };
 

@@ -32,75 +32,51 @@ async function get(path) {
   }
 }
 
-test("retained route PoC HTTP smoke check", async (t) => {
-  const response = await get("/poc");
-  const html = await response.text();
-
-  await t.test("serves a Japanese HTML document with a main landmark", () => {
-    assert.equal(response.status, 200);
-    assert.match(response.headers.get("content-type") ?? "", /text\/html/i);
-    assert.match(html, /<html\b[^>]*\blang="ja"/i);
-    assert.match(html, /<main(?:\s|>)/i);
-    assert.match(html, /<meta\b[^>]*\bname="viewport"/i);
-  });
-
-  await t.test("serves the stylesheet referenced by the rendered document", async () => {
-    const links = [...html.matchAll(/<link\b[^>]*>/gi)].map(([tag]) => tag);
-    const stylesheet = links.find((tag) => /\brel="stylesheet"/i.test(tag));
-    assert.ok(stylesheet, "The rendered page must include a stylesheet.");
-    const href = stylesheet.match(/\bhref="([^"]+)"/i)?.[1];
-    assert.ok(href, "The stylesheet must have a URL.");
-    const stylesheetUrl = new URL(href.replaceAll("&amp;", "&"), baseUrl);
-    assert.equal(stylesheetUrl.origin, baseUrl.origin);
-    const cssResponse = await get(stylesheetUrl.pathname + stylesheetUrl.search);
-    assert.equal(cssResponse.status, 200);
-    assert.match(cssResponse.headers.get("content-type") ?? "", /text\/css/i);
-    assert.ok((await cssResponse.text()).length > 0);
-  });
-
-  await t.test("serves the generated route, reference geometry and review status", () => {
-    assert.equal([...html.matchAll(/data-generated-leg=/g)].length, 4);
-    assert.equal([...html.matchAll(/data-reference-leg=/g)].length, 4);
-    assert.match(html, /OpenStreetMap contributors/);
-    assert.match(html, /\u673a\u4e0a\u5019\u88dc\u30fb\u78ba\u8a8d\u5f85\u3061/);
-    assert.match(html.replace(/<!--[\s\S]*?-->/g, ""), /\u6642\u901f4/);
-  });
-
-  await t.test("serves the junction inspection controls and source counts", () => {
-    assert.match(html, /data-junction-count="31"/);
-    assert.match(html, /<select\b[^>]*\bid="junction-point"/);
-    assert.match(html, /data-junction-sequence="1"/);
-    assert.match(html, /data-junction-highlight="1"/);
-  });
-  await t.test("serves the first koma, stop binding and navigation controls", () => {
-    assert.match(html, /data-koma-count="31"/);
-    assert.match(html, /data-koma-svg="1"/);
-    assert.match(html, /data-koma-stop="S"/);
-    assert.match(html, /id="koma-select"/);
-  });
-  await t.test("serves all ordered thumbnails and linked selection with OSM context", () => {
-    assert.equal([...html.matchAll(/data-review-card=/g)].length,31);
-    assert.match(html,/data-review-card="1" aria-pressed="true"/);
-    assert.match(html,/data-map-pin=/);
-    assert.match(html,/data-next-koma-segment="1"/);
-    assert.match(html,/data-context-landmark=/);
-    assert.match(html,/data-context-building=/);
-    assert.match(html,/data-context-toggle="landmarks"/);
-    assert.match(html,/data-landmark-icon="bus"/);
-    assert.match(html,/data-landmark-label=/);
-    assert.match(html,/data-landmark-name=/);
-    assert.match(html,/class="landmark-details"/);
-  });
-  await t.test("returns 404 for an unknown route", async () => {
-    const missing = await get("/__smoke_missing_route__");
-    assert.equal(missing.status, 404);
-    await missing.arrayBuffer();
-  });
+test("welcome experience HTTP smoke check",async t=>{
+ const response=await get("/"),html=await response.text();
+ await t.test("serves a Japanese introduction with one main landmark and viewport",()=>{
+  assert.equal(response.status,200);assert.match(response.headers.get("content-type")??"",/text\/html/i);
+  assert.match(html,/<html\b[^>]*lang="ja"/);assert.equal([...html.matchAll(/<main(?:\s|>)/g)].length,1);
+  assert.match(html,/name="viewport"/);assert.match(html,/data-home-page/);assert.doesNotMatch(html,/data-published-catalog/);
+ });
+ await t.test("serves the local stylesheet",async()=>{
+  const href=[...html.matchAll(/<link\b[^>]*>/g)].map(m=>m[0]).find(s=>s.includes('rel="stylesheet"'))?.match(/href="([^"]+)"/)?.[1];
+  assert.ok(href);const url=new URL(href.replaceAll("&amp;","&"),baseUrl);assert.equal(url.origin,baseUrl.origin);
+  const r=await get(url.pathname+url.search);assert.equal(r.status,200);assert.match(r.headers.get("content-type")??"",/text\/css/);assert.ok((await r.text()).length);
+ });
+ await t.test("explains play and offers both real role entrances without PoC tabs",()=>{
+  assert.match(html,/id="how-it-works"/);assert.match(html,/data-home-participant/);assert.match(html,/data-home-operator/);
+  assert.match(html,/href="\/courses"/);assert.match(html,/href="\/operator"/);assert.doesNotMatch(html,/href="\/poc"|class="view-switch"/);
+  assert.match(html,/スマホのカメラ/);assert.match(html,/ゴールで写真/);assert.doesNotMatch(html,/data-published-start-link=/);
+ });
+ await t.test("renders a real generated sample with source attribution",async()=>{
+  const {createMisakiReviewPoc}=await import("../lib/misaki-review.ts"),card=createMisakiReviewPoc().koma.find(c=>c.map.kind==="junction"&&c.map.state==="ready"&&c.map.branches.length>=3);
+  assert.ok(card);assert.match(html,/data-home-koma/);assert.match(html,/コマ地図の表示例/);
+  assert.deepEqual([...html.matchAll(/data-koma-branch="(\d+)"/g)].map(m=>Number(m[1])),card.map.branches.map(b=>b.neighborNodeId));
+  assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL/);
+ });
+ await t.test("serves the supplied photographs unchanged",async()=>{
+  const {readFileSync}=await import("node:fs");
+  for(const file of ["hantoupic.jpg","shitamati.jpg","kainanshrine.jpg"]){
+   const r=await get("/mainphotos/"+file),bytes=Buffer.from(await r.arrayBuffer()),source=readFileSync(new URL("../public/mainphotos/"+file,import.meta.url));
+   assert.equal(r.status,200);assert.match(r.headers.get("content-type")??"",/image\/jpeg/);assert.equal(createHash("sha256").update(bytes).digest("hex"),createHash("sha256").update(source).digest("hex"));
+  }
+ });
+ await t.test("offers a usable operator workspace entrance",async()=>{
+  const r=await get("/operator"),body=await r.text();assert.equal(r.status,200);assert.match(body,/data-operator-page="home"/);
+  for(const route of ["spots","draft","courses"])assert.ok(body.includes('href="/operator/'+route+'"'));
+  assert.doesNotMatch(body,/href="\/poc"|class="view-switch"/);
+ });
+ await t.test("redirects the retired PoC to the operator entrance",async()=>{
+  const r=await fetch(new URL("/poc",baseUrl),{redirect:"manual"});assert.equal(r.status,307);assert.equal(r.headers.get("location"),"/operator");await r.arrayBuffer();
+ });
+ await t.test("returns 404 for an unknown route",async()=>{
+  const r=await get("/__smoke_missing_route__");assert.equal(r.status,404);await r.arrayBuffer();
+ });
 });
 
-
 test("participant rally list and detail HTTP smoke check",async t=>{
-  const rally=getDemoRally(),listResponse=await get("/"),list=await listResponse.text();
+  const rally=getDemoRally(),listResponse=await get("/courses"),list=await listResponse.text();
   const detailResponse=await get(rally.href),detail=await detailResponse.text();
   const plain=html=>html.replace(/<!--[\s\S]*?-->/g,"");
   await t.test("serves the publication-only photo-walk catalog",()=>{
@@ -117,7 +93,7 @@ test("participant rally list and detail HTTP smoke check",async t=>{
     assert.ok(detail.includes('data-rally-minutes="'+rally.walkingMinutes+'"'));
     assert.deepEqual([...detail.matchAll(/data-rally-stop="([^"]+)"/g)].map(m=>m[1]),rally.stops.map(s=>s.id));
     const anchors=[...detail.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]);
-    assert.ok(anchors.some(tag=>/data-rally-back-link/.test(tag)&&/href="\/"/.test(tag)),"Detail must link back to the rally list.");
+    assert.ok(anchors.some(tag=>/data-rally-back-link/.test(tag)&&/href="\/courses"/.test(tag)),"Detail must link back to the rally list.");
     assert.match(detail,/name="robots"[^>]*noindex/);
   });
   await t.test("distinguishes the development demo from public participation and future visit actions",()=>{
@@ -179,9 +155,9 @@ test("operator spot catalog HTTP smoke check",async t=>{
   assert.match(html,/コースへの追加は「ラリー下書き」で行います/);assert.match(html,/data-spot-add/);assert.doesNotMatch(html,/data-demo-start/);
   assert.match(html,/name="robots"[^>]*noindex/);
  });
- await t.test("keeps participant and route PoC navigation with a distinct active operator link",()=>{
-  const active=[...html.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]).find(tag=>tag.includes('href="/operator/spots"')); assert.ok(active?.includes('aria-current="true"'));
-  assert.match(html,/href="\/poc"/);assert.match(html,/href="\/"/);
+ await t.test("keeps a clear operator navigation and a participant link",()=>{
+  const active=[...html.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]).find(tag=>tag.includes('href="/operator/spots"'));
+  assert.ok(active?.includes('aria-current="page"'));assert.match(html,/href="\/courses"/);assert.match(html,/href="\/"/);assert.doesNotMatch(html,/href="\/poc"/);
  });
  await t.test("returns 404 for an unknown operator page",async()=>{
   const missing=await get("/operator/__missing__");assert.equal(missing.status,404);await missing.arrayBuffer();
