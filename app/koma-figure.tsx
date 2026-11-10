@@ -8,12 +8,12 @@ import type { KomaContext } from "../lib/route/context";
 export type ContextLayers={buildings:boolean;landmarks:boolean;details:boolean};
 
 function line(points: {x:number;y:number}[]) { return points.map(p=>p.x.toFixed(3)+","+p.y.toFixed(3)).join(" "); }
-export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean}) {
+export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean}) {
   const id=useId().replaceAll(":","");
   if(map.state==="held"&&!referenceGeometry)return (
     <div className="koma-held" data-koma-held={compact?undefined:map.sequence} role="note">
       <span aria-hidden="true">!</span><strong>このコマの図は確認待ちです</strong>
-      <p>近接した分岐や方向・形状の不足により、進む枝を確実に区別できません。全体地図と根拠を確認してください。</p>
+      <p>近接した分岐や方向・形状の不足により、進む枝を確実に区別できません。{minimal?"周囲の状況を確認し、案内を受けてください。":"全体地図と根拠を確認してください。"}</p>
     </div>
   );
   const branches=referenceGeometry?.branches??map.branches;
@@ -44,7 +44,7 @@ export default function KomaFigure({ map, name, context, layers, compact=false, 
 
       {inlet&&!referenceGeometry&&<circle cx={inlet.x} cy={inlet.y} r={6} fill="#263d34" data-koma-inlet-dot="true"/>}
       <circle cx={KOMA_VIEW.centerX} cy={KOMA_VIEW.centerY} r={map.kind==="start"?6:4} fill={map.kind==="start"?"#263d34":"white"} stroke="#263d34" strokeWidth={2}/>
-      {!compact&&<text x="150" y="263" textAnchor="middle" className="koma-orientation">{map.kind==="start"?"出る方向が上":map.kind==="finish"?"入ってきた道から、ここで終了":"入ってきた道が下"}</text>}
+      {!compact&&!minimal&&<text x="150" y="263" textAnchor="middle" className="koma-orientation">{map.kind==="start"?"出る方向が上":map.kind==="finish"?"入ってきた道から、ここで終了":"入ってきた道が下"}</text>}
     </svg>
   );
 }

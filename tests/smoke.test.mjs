@@ -103,10 +103,10 @@ test("participant rally list and detail HTTP smoke check",async t=>{
   const rally=getDemoRally(),listResponse=await get("/"),list=await listResponse.text();
   const detailResponse=await get(rally.href),detail=await detailResponse.text();
   const plain=html=>html.replace(/<!--[\s\S]*?-->/g,"");
-  await t.test("serves a publication-only catalog with an explicit retained demo link",()=>{
+  await t.test("serves the publication-only photo-walk catalog",()=>{
     assert.equal(listResponse.status,200);assert.match(list,/data-participant-page="list"/);
-    assert.match(list,/data-published-course-count=/);assert.match(list,/data-fixed-demo-link/);
-    assert.equal([...list.matchAll(/data-rally-card=/g)].length,0);assert.ok(list.includes('href="'+rally.href+'"'));
+    assert.match(list,/data-published-course-count=/);assert.doesNotMatch(list,/data-fixed-demo-link/);
+    assert.equal([...list.matchAll(/data-rally-card=/g)].length,0);
     assert.match(list,/data-published-empty|data-published-catalog/);assert.match(list,/name="robots"[^>]*noindex/);
   });
   await t.test("serves detail with the same route facts, stop order and return path",()=>{
@@ -293,4 +293,9 @@ test("publication stop API applies the same local mutation guards",async()=>{
 test("public availability hides unknown course content and disables caching",async()=>{
  for(const id of ["invalid","course-00000000-0000-4000-8000-000000000000"]){const r=await get("/api/rallies/"+id+"/availability");assert.equal(r.status,404);assert.equal(r.headers.get("cache-control"),"no-store");assert.deepEqual(await r.json(),{status:"missing"})}
  const r=await fetch(new URL("/api/rallies/invalid/availability",baseUrl),{method:"POST"});assert.equal(r.status,405);await r.arrayBuffer();
+});
+
+test("published detail URLs redirect straight to the map entry without an itinerary",async()=>{
+ const id="course-00000000-0000-4000-8000-000000000000",r=await fetch(new URL("/rallies/"+id,baseUrl),{redirect:"manual"});
+ assert.equal(r.status,307);assert.equal(r.headers.get("location"),"/rallies/"+id+"/play");await r.arrayBuffer();
 });
