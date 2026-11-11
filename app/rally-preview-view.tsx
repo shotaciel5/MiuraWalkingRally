@@ -27,6 +27,7 @@ export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavai
  function choosePin(id:number){const indices=data.cards.flatMap((c,i)=>c.map.nodeId===id?[i]:[]);setIndex(indices.find(i=>i>index)??indices[0])}
  const sourceUrl="https://www.openstreetmap.org/"+card.evidence.kind+"/"+card.evidence.id;
  return <div data-rally-preview data-preview-hydrated={hydrated} data-preview-revision={data.draftRevision} data-preview-count={data.cards.length}>
+  {!saved&&<p className="operator-lab-link"><a href="/operator/landmarks/review?source=draft">このルートの目印を選ぶ（PoC） →</a></p>}
   <section className="preview-summary" aria-label="生成結果">
    <div><p className="eyebrow">{saved?"SAVED COURSE / REVIEW":"GENERATED COURSE / REVIEW"}</p><h1>{data.title}</h1><p>{saved?"保存済みの計算結果・読取専用"+(saved.publication?.status==="published"?"（参加者向け公開済み）":saved.publication?.status==="withdrawn"?"（公開停止中）":saved.publication===null?"（参加者へ未掲載）":"（公開状態は確認待ち）"):"未確認の道路上候補を使った開発用プレビュー"}</p></div>
    <dl><div><dt>道路上の距離</dt><dd data-preview-meters>{Math.round(data.meters).toLocaleString("ja-JP")} m</dd></div><div><dt>歩行時間の概算</dt><dd>約{Math.ceil(data.minutes)}分</dd></div><div><dt>コマ数</dt><dd>{data.cards.length}枚</dd></div></dl>

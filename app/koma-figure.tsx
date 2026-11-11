@@ -1,6 +1,6 @@
 "use client";
 
-import { useId } from "react";
+import { useId, type ReactNode } from "react";
 import { arrowPath, KOMA_VIEW } from "../lib/route/koma";
 import type { KomaMap, KomaGeometry } from "../lib/route/koma";
 import LandmarkLayer from "./landmark-layer";
@@ -10,7 +10,7 @@ import type { KomaContext } from "../lib/route/context";
 export type ContextLayers={buildings:boolean;landmarks:boolean;details:boolean};
 
 function line(points: {x:number;y:number}[]) { return points.map(p=>p.x.toFixed(3)+","+p.y.toFixed(3)).join(" "); }
-export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false, presentation="source", symbolLimit=2 }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit}) {
+export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false, presentation="source", symbolLimit=2, children }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;children?:ReactNode}) {
   const id=useId().replaceAll(":","");
   if(map.state==="held"&&!referenceGeometry)return (
     <div className="koma-held" data-koma-held={compact?undefined:map.sequence} role="note">
@@ -45,6 +45,7 @@ export default function KomaFigure({ map, name, context, layers, compact=false, 
       {presentation==="source"&&layers.landmarks&&<LandmarkLayer features={context.landmarks} width={300} height={280} roads={branches.map(b=>b.points)} compact={compact}/>}
 
       {presentation==="symbols"&&layers.landmarks&&<SymbolLandmarkLayer context={context} branches={branches} limit={symbolLimit}/>}
+      {children}
       {inlet&&!referenceGeometry&&<circle cx={inlet.x} cy={inlet.y} r={6} fill="var(--route-inlet)" data-koma-inlet-dot="true"/>}
       <circle cx={KOMA_VIEW.centerX} cy={KOMA_VIEW.centerY} r={map.kind==="start"?6:4} fill={map.kind==="start"?"var(--route-inlet)":"white"} stroke="var(--route-inlet)" strokeWidth={2}/>
       {!compact&&!minimal&&<text x="150" y="263" textAnchor="middle" className="koma-orientation">{map.kind==="start"?"出る方向が上":map.kind==="finish"?"入ってきた道から、ここで終了":"入ってきた道が下"}</text>}

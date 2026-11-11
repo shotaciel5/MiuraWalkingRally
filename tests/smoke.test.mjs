@@ -290,3 +290,13 @@ test("key-free landmark comparison stays separate from normal courses",async()=>
  const hub=await get("/operator"),text=await hub.text();assert.equal(hub.status,200);assert.match(text,/href="\/operator\/landmarks"/);
  const old=await fetch(new URL("/poc",baseUrl),{redirect:"manual"});assert.equal(old.status,307);assert.equal(old.headers.get("location"),"/operator");await old.arrayBuffer();
 });
+
+test("route landmark workbench exposes local evidence and guards every mutation",async()=>{
+ const r=await get("/api/operator/landmarks"),state=await r.json();assert.equal(r.status,200);assert.equal(r.headers.get("cache-control"),"no-store");assert.equal(state.dataset.source,"sample");assert.equal(state.dataset.cards.length,31);assert.ok(typeof state.configured==="boolean");assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
+ const page=await get("/operator/landmarks/review"),html=await page.text();assert.equal(page.status,200);assert.match(html,/data-landmark-workbench/);assert.match(html,/data-save-landmarks/);
+ const wrong=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:"https://example.com"},body:"{}"});assert.equal(wrong.status,403);await wrong.arrayBuffer();
+ for(const [body,status]of [[{action:"prepare",source:"sample",datasetId:"wrong",targetKey:state.dataset.targets[0].key},409],[{action:"prepare",source:"sample",datasetId:state.dataset.id,targetKey:"invalid"},400],[{action:"save",source:"sample",datasetId:state.dataset.id,expectedRevision:0,choices:{forged:true}},400],[{action:"photo",source:"sample",datasetId:state.dataset.id,candidateId:"mapillary:unknown"},400]]){
+ const res=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:baseUrl.origin},body:JSON.stringify(body)});assert.equal(res.status,status);assert.equal(res.headers.get("cache-control"),"no-store");await res.arrayBuffer();
+ }
+ const bad=await get("/api/operator/landmarks/images/invalid");assert.equal(bad.status,404);await bad.arrayBuffer();
+});
