@@ -280,3 +280,13 @@ test("published detail URLs redirect straight to the map entry without an itiner
  const id="course-00000000-0000-4000-8000-000000000000",r=await fetch(new URL("/rallies/"+id,baseUrl),{redirect:"manual"});
  assert.equal(r.status,307);assert.equal(r.headers.get("location"),"/rallies/"+id+"/play");await r.arrayBuffer();
 });
+
+test("key-free landmark comparison stays separate from normal courses",async()=>{
+ const r=await get("/operator/landmarks"),html=await r.text();
+ assert.equal(r.status,200);assert.match(html,/data-operator-page="landmarks"/);
+ for(const mode of ["source","symbols","roads"])assert.match(html,new RegExp('data-compare-mode="'+mode+'"'));
+ assert.match(html,/data-crop-poc/);assert.match(html,/data-cache-plan/);assert.match(html,/実取得0件/);
+ assert.doesNotMatch(html,/https:\/\/graph\.mapillary\.com|MAPILLARY_ACCESS_TOKEN/);
+ const hub=await get("/operator"),text=await hub.text();assert.equal(hub.status,200);assert.match(text,/href="\/operator\/landmarks"/);
+ const old=await fetch(new URL("/poc",baseUrl),{redirect:"manual"});assert.equal(old.status,307);assert.equal(old.headers.get("location"),"/operator");await old.arrayBuffer();
+});
