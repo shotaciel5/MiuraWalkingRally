@@ -621,3 +621,7 @@ UI/API/repositoryの境界・同一Origin/JSON/no-storeとローカル/AWS不要
 ## 45. 地域の静的索引と外部取得の分離（P2-12）
 
 ユーザー承認に基づきMapillary取得とSharpの128×128生成を開発PCのCLIへ移した。Webは分岐に限らない座標を小区画索引で照合し、配布候補/画像だけを表示する。取得ボタン/自動取得を廃止し、トークンがあってもprepare/photoを403で拒否する。原画像/チェックポイントはGit対象外、公開用は地物/出典と内容ハッシュ付きPNG。OSM背景タイル・運営採否保存は継続。[仕様](region-landmarks.md)、[ADR-023](decisions/023-offline-region-landmarks.md)。
+
+## 46. 採用目印と写真の通常運営/保存/公開統合（P4-07）
+
+ユーザーの統合依頼に基づき、通常プレビューの選択中コマ枠に候補/採否を配置する。採用作業の保存後、payload v2に採用地物/写真の出典・128px静的参照を固定し、公開後も同じ共有描画を使う。旧v1と既存公開版は変更せず読む。階段必須・建物/名称省略、元の枝/角度・拡大と参照図を保つ。WebのMapillary取得禁止、SQLite v7・外部依存なしを維持。[仕様/検証](course-landmark-integration.md)、[ADR-024](decisions/024-course-landmark-integration.md)。

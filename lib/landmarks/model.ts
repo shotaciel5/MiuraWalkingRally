@@ -39,16 +39,16 @@ export function selectableCandidates(candidates:Candidate[],assets:Record<string
   return !!asset&&asset.featureId===id&&asset.crop?.size===128&&!!asset.crop.path;
  });
 }
-export function projectCandidate(card:WorkCard,c:Candidate){
+export function projectCandidate(card:Pick<WorkCard,"map"|"center">,c:Candidate,factor=1){
  const heading=card.map.shortGeometry?.headingDegrees??card.map.headingDegrees;
  if(heading===undefined||heading===null)return null;
  const p=projectKomaPoint(card.center,c.point,heading);
- return {x:Number((KOMA_VIEW.centerX+p.x*KOMA_VIEW.radius/30).toFixed(3)),y:Number((KOMA_VIEW.centerY+p.y*KOMA_VIEW.radius/30).toFixed(3))};
+ return {x:Number((KOMA_VIEW.centerX+p.x*KOMA_VIEW.radius/30*factor).toFixed(3)),y:Number((KOMA_VIEW.centerY+p.y*KOMA_VIEW.radius/30*factor).toFixed(3))};
 }
-export function layoutCandidates(card:WorkCard,items:Candidate[],branches:Pick<KomaBranch,"points">[]=card.map.branches){
+export function layoutCandidates(card:Pick<WorkCard,"map"|"center">,items:Candidate[],branches:Pick<KomaBranch,"points">[]=card.map.branches,factor=1){
  const placed:{candidate:Candidate;x:number;y:number;anchor:{x:number;y:number}}[]=[],unplaced:Candidate[]=[];
  for(const candidate of items){
-  const anchor=projectCandidate(card,candidate);if(!anchor){unplaced.push(candidate);continue}
+  const anchor=projectCandidate(card,candidate,factor);if(!anchor||factor>1&&(anchor.x<9||anchor.x>291||anchor.y<9||anchor.y>241)){unplaced.push(candidate);continue}
   const positions=[[12,-36],[-36,-36],[12,12],[-36,12],[-12,-48],[-12,24],[24,-12],[-48,-12],[-12,-72],[-12,48],[48,-12],[-72,-12]].map(([dx,dy])=>({x:Math.max(9,Math.min(267,anchor.x+dx)),y:Math.max(9,Math.min(217,anchor.y+dy))}));
   const clear=positions.find(p=>!placed.some(q=>p.x<q.x+29&&p.x+29>q.x&&p.y<q.y+29&&p.y+29>q.y)&&!branches.some(b=>b.points.slice(1).some((v,i)=>segmentBox(b.points[i],v,p))));
   if(clear)placed.push({candidate,...clear,anchor});else unplaced.push(candidate);

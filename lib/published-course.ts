@@ -18,6 +18,6 @@ export function projectPublishedCourse(saved:SavedCourse,publication:CoursePubli
   const visit=p.visits.find(v=>v.id===s.id);if(!visit)throw new CourseError("unavailable","公開コースの地点対応を確認できません。");
   return {id:s.id,kind:s.kind,name:s.spot.name,description:s.spot.description,role:{"start":"スタート","finish":"終了地点","checkpoint":"チェックポイント","waypoint":"経由地"}[s.kind],komaIndex:visit.komaIndex};
  });
- return {rally,stops,sourceTime:p.source.osmBaseTimestamp,cards:p.cards.map(c=>({map:c.map,context:c.context,referenceContext:c.referenceContext,stopIds:c.map.stopIds}))};
+ return {rally,stops,sourceTime:p.source.osmBaseTimestamp,...(saved.payload.formatVersion===2?{landmarks:saved.payload.landmarks,centers:p.cards.map(c=>c.candidate.point)}:{}),cards:p.cards.map(c=>({map:c.map,context:c.context,referenceContext:c.referenceContext,stopIds:c.map.stopIds}))};
 }
 export type PublishedCourse=ReturnType<typeof projectPublishedCourse>;

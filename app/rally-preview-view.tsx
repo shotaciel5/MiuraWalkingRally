@@ -1,4 +1,11 @@
 "use client";
+import CourseLandmarkPanel from "./course-landmark-panel";
+import CourseLandmarkCredits from "./course-landmark-credits";
+import ReviewedLandmarkLayer,{type ReviewedLandmarks} from "./reviewed-landmark-layer";
+import {freezeLandmarks,type LandmarkSnapshot} from "../lib/landmarks/course-snapshot";
+import {candidatesForCard,choiceKey,initialAccepted,type Candidate} from "../lib/landmarks/model";
+import type {WorkbenchState} from "../lib/landmarks/workbench";
+
 import {useEffect,useState} from "react";
 import KomaFigure from "./koma-figure";
 import OperatorKomaDisplay from "./operator-koma-display";
@@ -10,9 +17,22 @@ import type {SaveReceipt} from "../lib/operator/course-format";
 import LandmarkIcon from "./landmark-icon";
 import type {RallyPreview} from "../lib/operator/rally-preview";
 
-export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavailable}:{data:RallyPreview;saved?:{id:string;createdAt:string;fingerprint:string;publication?:CoursePublication|null};saveReceipt?:SaveReceipt|null;saveUnavailable?:string}){
+export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavailable,landmarkInitial,savedLandmarks}:{data:RallyPreview;saved?:{id:string;createdAt:string;fingerprint:string;publication?:CoursePublication|null};saveReceipt?:SaveReceipt|null;saveUnavailable?:string;landmarkInitial?:WorkbenchState;savedLandmarks?:LandmarkSnapshot}){
  const [hydrated,setHydrated]=useState(false);useEffect(()=>setHydrated(true),[]);
  const [index,setIndex]=useState(0),[zoom,setZoom]=useState(1),[layers,setLayers]=useState({buildings:true,landmarks:true,details:true});
+ const [landmarks,setLandmarks]=useState(landmarkInitial??null),[choices,setChoices]=useState(landmarkInitial?.review.choices??{}),[reviewRevision,setReviewRevision]=useState(landmarkInitial?.review.revision??0),[receipt,setReceipt]=useState(saveReceipt),[landmarkDirty,setLandmarkDirty]=useState(false),[landmarkBusy,setLandmarkBusy]=useState(false),[landmarkError,setLandmarkError]=useState(""),[landmarkNotice,setLandmarkNotice]=useState("");
+ useEffect(()=>{if(!landmarkDirty)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn)},[landmarkDirty]);
+ const snapshot=savedLandmarks??(landmarks?freezeLandmarks({...landmarks,review:{revision:reviewRevision,choices}}):undefined);
+ const target=landmarks?.dataset.targets.find(t=>t.sequences.includes(index+1)),items=landmarks?candidatesForCard(landmarks.dataset.cards[index],target?landmarks.targets[target.key]:undefined):savedLandmarks?.cards[index].candidates??[];
+ const reviewed:ReviewedLandmarks|undefined=snapshot?{center:data.cards[index].candidate.point,candidates:snapshot.cards[index].candidates,photos:snapshot.photos}:undefined;
+ function toggleLandmark(c:Candidate,value:boolean){setChoices(old=>({...old,[choiceKey(index+1,c.id)]:value}));setLandmarkDirty(true);setLandmarkNotice("")}
+ async function saveLandmarks(){if(!landmarks||landmarkBusy)return;setLandmarkBusy(true);setLandmarkError("");try{
+  const keys=new Set(landmarks.dataset.cards.flatMap(card=>{const t=landmarks.dataset.targets.find(t=>t.sequences.includes(card.map.sequence));return candidatesForCard(card,t?landmarks.targets[t.key]:undefined).map(c=>choiceKey(card.map.sequence,c.id))}));
+  const response=await fetch("/api/operator/landmarks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"save",source:"draft",datasetId:landmarks.dataset.id,expectedRevision:reviewRevision,choices:Object.fromEntries(Object.entries(choices).filter(([k])=>keys.has(k)))}),signal:AbortSignal.timeout(65000)}),next=await response.json();
+  if(!response.ok)throw Error(next.error??"目印を保存できませんでした。");
+  if(next.dataset.id!==landmarks.dataset.id||next.courseReceipt?.formatVersion!==2)throw Error("保存結果を確認できません。最新の下書きから再生成してください。");
+  setLandmarks(next);setChoices(next.review.choices);setReviewRevision(next.review.revision);setReceipt(next.courseReceipt);setLandmarkDirty(false);setLandmarkNotice("目印の採用を保存しました。「この結果を保存」でコースを固定できます。");
+ }catch(e){setLandmarkError(e instanceof Error?e.message:"目印を保存できませんでした。")}finally{setLandmarkBusy(false)}}
  const card=data.cards[index],map=card.map,next=data.cards[index+1];
  const nearby=card.referenceContext??card.context;
  const issues=saved?[...new Set([...card.candidate.issues,...map.issues])]:map.issues;
@@ -27,7 +47,6 @@ export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavai
  function choosePin(id:number){const indices=data.cards.flatMap((c,i)=>c.map.nodeId===id?[i]:[]);setIndex(indices.find(i=>i>index)??indices[0])}
  const sourceUrl="https://www.openstreetmap.org/"+card.evidence.kind+"/"+card.evidence.id;
  return <div data-rally-preview data-preview-hydrated={hydrated} data-preview-revision={data.draftRevision} data-preview-count={data.cards.length}>
-  {!saved&&<p className="operator-lab-link"><a href="/operator/landmarks/review?source=draft">このルートの目印を選ぶ（PoC） →</a></p>}
   <section className="preview-summary" aria-label="生成結果">
    <div><p className="eyebrow">{saved?"SAVED COURSE / REVIEW":"GENERATED COURSE / REVIEW"}</p><h1>{data.title}</h1><p>{saved?"保存済みの計算結果・読取専用"+(saved.publication?.status==="published"?"（参加者向け公開済み）":saved.publication?.status==="withdrawn"?"（公開停止中）":saved.publication===null?"（参加者へ未掲載）":"（公開状態は確認待ち）"):"未確認の道路上候補を使った開発用プレビュー"}</p></div>
    <dl><div><dt>道路上の距離</dt><dd data-preview-meters>{Math.round(data.meters).toLocaleString("ja-JP")} m</dd></div><div><dt>歩行時間の概算</dt><dd>約{Math.ceil(data.minutes)}分</dd></div><div><dt>コマ数</dt><dd>{data.cards.length}枚</dd></div></dl>
@@ -35,7 +54,7 @@ export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavai
   <p className="operator-scope"><span>現地未確認</span>入口・施設までの通路・通行・安全性は確認待ちです。道路上の移動時間は時速{data.speedKmh}kmの概算で、観光・施設への移動や滞在時間を含みません。</p>
   {saved?<p className="preview-version" data-saved-course-id={saved.id}>保存日時：<time dateTime={saved.createdAt}>{new Date(saved.createdAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time>。保存時の下書き版{data.draftRevision}・補正版{data.correctionRevision}の計算結果です。台帳や下書きの変更を自動反映しません。</p>:<p className="preview-version">保存済み下書きの版{data.draftRevision}・到達点の補正版{data.correctionRevision}から生成（下書き保存日時：{new Date(data.draftUpdatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}）。表示後の変更は「最新の保存内容から再生成」で反映します。</p>}
   {saved?<div className="preview-actions" data-saved-course-actions><a href="/operator/courses">保存済み一覧へ</a><a href="/operator/draft">作業中の下書きへ（保存済みは変更しません）</a></div>:<div className="preview-actions"><a href="/operator/connections" data-preview-corrections>道路上の到達点を修正</a><a href="/operator/draft" data-preview-back>下書きを編集</a><a href="/operator/preview" data-preview-regenerate>最新の保存内容から再生成</a></div>}
-  {!saved&&<CourseSaveButton receipt={saveReceipt} unavailable={saveUnavailable}/>}
+  {!saved&&<CourseSaveButton key={receipt?.fingerprint??"unavailable"} receipt={landmarkDirty||landmarkBusy?null:receipt} unavailable={landmarkDirty?"選択中のコマで「目印の採用を保存」してからコースを保存してください。":saveUnavailable}/>}
   {saved&&<CoursePublishPanel courseId={saved.id} fingerprint={saved.fingerprint} title={data.title} publication={saved.publication}/>}
   {saved&&<CourseReviewPanel data={data} selected={index} onSelect={i=>{setIndex(i);requestAnimationFrame(()=>{const heading=document.getElementById("preview-koma-title");heading?.focus({preventScroll:true});heading?.scrollIntoView({block:"start"})})}}/>}
   <section className="preview-panel" aria-labelledby="preview-order-title"><h2 id="preview-order-title" tabIndex={-1}>訪問順と道路への候補</h2><p>下書きに並べた順で巡ります。各地点から道路までの直線距離は、道路上の距離に含めていません。</p>
@@ -55,17 +74,18 @@ export default function RallyPreviewView({data,saved,saveReceipt=null,saveUnavai
    </svg><p className="preview-caption">背景の道路も固定OSMデータです。茶色の白丸は施設の代表位置、点線は道路候補との位置関係を示します。点線は歩ける経路ではありません。</p>
   </section>
   <section className="preview-panel" aria-labelledby="preview-koma-title" data-preview-koma={map.sequence}><h2 id="preview-koma-title" tabIndex={-1}>選択中のコマ {index+1} / {data.cards.length}</h2>
-   <div className="preview-layer-controls">{(["buildings","landmarks","details"] as const).map(k=><label key={k}><input type="checkbox" checked={layers[k]} data-preview-layer={k} onChange={e=>setLayers(s=>({...s,[k]:e.target.checked}))}/>{{buildings:"建物",landmarks:"目印・標識",details:"道路名・階段"}[k]}</label>)}</div>
-   <div className="preview-koma-layout"><div><h3>{name}</h3><OperatorKomaDisplay key={map.sequence} map={map} name={name} context={card.context} referenceContext={card.referenceContext} layers={layers}/><p className="preview-distance">{map.metersToNext===null?"終了地点":"次のコマまで "+Math.round(map.metersToNext)+" m"}<small>出発から {Math.round(map.metersFromStart)}m</small></p>
+   <div className="preview-layer-controls">{(reviewed?["landmarks"] as const:["buildings","landmarks","details"] as const).map(k=><label key={k}><input type="checkbox" checked={layers[k]} data-preview-layer={k} onChange={e=>setLayers(s=>({...s,[k]:e.target.checked}))}/>{{buildings:"建物",landmarks:"目印・標識",details:"道路名・階段"}[k]}</label>)}</div>
+   <div className="preview-koma-layout"><div><h3>{name}</h3><OperatorKomaDisplay key={map.sequence} map={map} name={name} context={card.context} referenceContext={card.referenceContext} layers={layers} reviewed={reviewed}/>{reviewed&&<CourseLandmarkCredits landmarks={reviewed}/>}<p className="preview-distance">{map.metersToNext===null?"終了地点":"次のコマまで "+Math.round(map.metersToNext)+" m"}<small>出発から {Math.round(map.metersFromStart)}m</small></p>
     <div className="preview-navigation"><button type="button" disabled={index===0} data-preview-prev onClick={()=>setIndex(i=>i-1)}>← 前のコマ</button><button type="button" disabled={index===data.cards.length-1} data-preview-next onClick={()=>setIndex(i=>i+1)}>次のコマ →</button></div>
    </div><div><label>通過順で選択<select value={index} data-preview-select onChange={e=>setIndex(Number(e.target.value))}>{data.cards.map((c,i)=><option key={i} value={i}>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}{c.map.shortGeometry?"（近接分岐・拡大確認）":c.map.state==="held"?"（図は確認待ち）":""}</option>)}</select></label>
     {card.stops.map(s=><p className="preview-stop" key={s.id}><b>{data.visits.find(v=>v.id===s.id)?.label}</b> {s.name}<br/><small>未確認の道路上候補です。実際の入口とは限りません。</small></p>)}
-    {(map.state==="ready"||map.shortGeometry)&&layers.landmarks&&<><h3>{map.shortGeometry?"周辺30mの目印":"周辺の目印"}</h3>{nearby.landmarks.length?<ul className="preview-landmarks">{nearby.landmarks.map(l=><li key={l.id}><LandmarkIcon symbol={l.symbol}/><span><a href={"https://www.openstreetmap.org/"+l.id} target="_blank" rel="noopener noreferrer">{l.name}</a><small>{l.kind} · 約{Math.round(l.meters)}m{l.detail?" · "+l.detail:""}</small></span></li>)}</ul>:<p>この範囲に表示対象の目印はありません。</p>}</>}
-    {layers.details&&(map.state==="ready"||map.shortGeometry)&&<p>道路名：{[...new Set(nearby.roads.map(r=>r.name).filter(Boolean))].join(" / ")||"OSMの記録なし"}</p>}
+    {!reviewed&&(map.state==="ready"||map.shortGeometry)&&layers.landmarks&&<><h3>{map.shortGeometry?"周辺30mの目印":"周辺の目印"}</h3>{nearby.landmarks.length?<ul className="preview-landmarks">{nearby.landmarks.map(l=><li key={l.id}><LandmarkIcon symbol={l.symbol}/><span><a href={"https://www.openstreetmap.org/"+l.id} target="_blank" rel="noopener noreferrer">{l.name}</a><small>{l.kind} · 約{Math.round(l.meters)}m{l.detail?" · "+l.detail:""}</small></span></li>)}</ul>:<p>この範囲に表示対象の目印はありません。</p>}</>}
+    {!reviewed&&layers.details&&(map.state==="ready"||map.shortGeometry)&&<p>道路名：{[...new Set(nearby.roads.map(r=>r.name).filter(Boolean))].join(" / ")||"OSMの記録なし"}</p>}
+    {(landmarks||savedLandmarks)&&<CourseLandmarkPanel items={items} photos={landmarks?.assets??savedLandmarks!.photos} review={{revision:reviewRevision,choices}} sequence={map.sequence} onToggle={toggleLandmark} onReset={()=>{setChoices(old=>({...old,...Object.fromEntries(items.map(c=>[choiceKey(map.sequence,c.id),initialAccepted(c)]))}));setLandmarkDirty(true);setLandmarkNotice("")}} onSave={()=>void saveLandmarks()} dirty={landmarkDirty} busy={landmarkBusy} error={landmarkError} notice={landmarkNotice} readOnly={!!saved}/>}
     <details><summary>形状・出典・確認事項</summary><p><a href={sourceUrl} target="_blank" rel="noopener noreferrer">OSMの元{card.evidence.kind==="way"?"道路":"地点"}を見る</a>{card.evidence.kind==="way"?" · 道路の途中に置いた一時的な候補点です。":""}</p><p>元データに接続する枝は{card.candidate.branches.length}本。元の角度と局所形状を使い、各枝30m以内を描画します。道幅や安全な横断位置は示しません。停止点・標識の対象方向は現地確認が必要です。</p>{issues.length>0&&<ul>{issues.map((s,i)=><li key={i}>{s}</li>)}</ul>}</details>
    </div></div>
   </section>
-  <section className="preview-panel" aria-labelledby="preview-list-title"><h2 id="preview-list-title">コマ一覧</h2><p>省略せず通過順に表示します。図が保留のコマは全体地図と根拠を確認してください。</p><div className="preview-card-grid">{data.cards.map((c,i)=><button type="button" key={i} aria-pressed={i===index} data-preview-card={i} onClick={()=>setIndex(i)}><b>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}</b><KomaFigure map={c.map} referenceGeometry={c.map.shortGeometry} name={c.stops.map(s=>s.name).join(" / ")||"分岐"} context={c.referenceContext??c.context} layers={{buildings:false,landmarks:false,details:false}} compact/><span>{c.map.shortGeometry?"近接分岐・拡大して確認":c.map.state==="held"?"図は確認待ち":"累積 "+Math.round(c.map.metersFromStart)+"m"}</span></button>)}</div></section>
+  <section className="preview-panel" aria-labelledby="preview-list-title"><h2 id="preview-list-title">コマ一覧</h2><p>省略せず通過順に表示します。図が保留のコマは全体地図と根拠を確認してください。</p><div className="preview-card-grid">{data.cards.map((c,i)=><button type="button" key={i} aria-pressed={i===index} data-preview-card={i} onClick={()=>setIndex(i)}><b>#{i+1} {c.stops.map(s=>s.name).join(" / ")||"分岐"}</b><KomaFigure map={c.map} referenceGeometry={c.map.shortGeometry} name={c.stops.map(s=>s.name).join(" / ")||"分岐"} context={c.referenceContext??c.context} layers={{buildings:false,landmarks:false,details:false}} presentation={snapshot?"roads":"source"} mandatorySteps={!!snapshot} compact>{snapshot&&<ReviewedLandmarkLayer map={c.map.shortGeometry?{...c.map,branches:c.map.shortGeometry.branches}:c.map} landmarks={{center:c.candidate.point,candidates:snapshot.cards[i].candidates,photos:snapshot.photos}}/>}</KomaFigure><span>{c.map.shortGeometry?"近接分岐・拡大して確認":c.map.state==="held"?"図は確認待ち":"累積 "+Math.round(c.map.metersFromStart)+"m"}</span></button>)}</div></section>
   <p className="preview-caption">道路・建物・目印 © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a> · ODbL 1.0。道路は{new Date(data.source.osmBaseTimestamp).toLocaleDateString("ja-JP",{timeZone:"Asia/Tokyo"})}時点の固定データです。{saved?"保存時の計算結果を表示しています。公開状態は「参加者への公開」で確認できます。現地確認は必要です。":"保存は「この結果を保存」から行います。保存済みコースは非公開です。"}</p>
  </div>;
 }

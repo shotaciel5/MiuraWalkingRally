@@ -1,3 +1,4 @@
+import {parseLandmarkSnapshot,validateSnapshotRoute} from "../landmarks/course-snapshot.ts";
 import {SpotError} from "../spots/editing.ts";
 export const COURSE_FORMAT_VERSION=1;
 export const COURSE_GENERATOR_VERSION="operator-preview-v1";
@@ -74,12 +75,14 @@ const draft=object({title:text,start:spot,finish:spot,stops:array(object({kind:c
 const roadSegment=object({wayId:positive,fromNodeId:positive,toNodeId:positive,from:point,to:point,forward:bool,backward:bool,name:text,highway:text});
 const connection=object({spotId,spotRevision:natural,facility:point,point,fraction,distanceMeters:nonneg,segment:roadSegment,snapshotSha256:hash,osmBaseTimestamp:osmTime});
 const corrections=object({revision:natural,updatedAt:nullable(iso),items:array(connection)});
-const payloadRule=object({formatVersion:choice(1),generatorVersion:choice("operator-preview-v1"),input:object({draft,corrections}),preview});
+const legacyPayloadRule=object({formatVersion:choice(1),generatorVersion:choice("operator-preview-v1"),input:object({draft,corrections}),preview});
+const landmarkPayloadRule=object({formatVersion:choice(2),generatorVersion:choice("operator-preview-v1"),input:object({draft,corrections}),preview,landmarks:parseLandmarkSnapshot});
+const payloadRule:Rule<ReturnType<typeof legacyPayloadRule>|ReturnType<typeof landmarkPayloadRule>>=v=>record(v)&&v.formatVersion===2?landmarkPayloadRule(v):legacyPayloadRule(v);
 export type CoursePayload=ReturnType<typeof payloadRule>;
 export type SavedPreviewV1=CoursePayload["preview"];
 const recordRule=object({id:courseId,createdAt:iso,fingerprint:hash,payload:payloadRule});
 export type SavedCourse=ReturnType<typeof recordRule>;
-const receiptRule=object({formatVersion:choice(1),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash});
+const receiptRule=object({formatVersion:choice(1,2),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash});
 export type SaveReceipt=ReturnType<typeof receiptRule>;
 const same=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
 export function canonicalJson(value:unknown):string{
@@ -90,7 +93,7 @@ export function parseSaveReceipt(value:unknown):SaveReceipt{
  try{return receiptRule(value)}catch{throw new CourseError("invalid","保存する生成結果の識別情報を確認してください。")}
 }
 export function courseReceipt(payload:CoursePayload,fingerprint:string):SaveReceipt{
- return {formatVersion:1,fingerprint,draftRevision:payload.input.draft.revision,correctionRevision:payload.input.corrections.revision,roadSha256:payload.preview.source.roadSnapshotSha256,contextSha256:payload.preview.source.snapshotSha256};
+ return {formatVersion:payload.formatVersion,fingerprint,draftRevision:payload.input.draft.revision,correctionRevision:payload.input.corrections.revision,roadSha256:payload.preview.source.roadSnapshotSha256,contextSha256:payload.preview.source.snapshotSha256};
 }
 export function parseCoursePayload(value:unknown):CoursePayload{
  const p=payloadRule(value),v=p.preview,d=p.input.draft,c=p.input.corrections;
@@ -132,6 +135,7 @@ export function parseCoursePayload(value:unknown):CoursePayload{
   if(m.shortGeometry&&(m.state!=="held"||m.shortGeometry.headingDegrees!==m.headingDegrees||m.issues.length!==1||m.issues[0]!=="Selected arms too short to distinguish symbols"))return fail();
 
  }
+ if(p.formatVersion===2)validateSnapshotRoute(p.landmarks,p.preview.cards);
  return p;
 }
 export function parseSavedCourse(value:unknown):SavedCourse{
