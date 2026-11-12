@@ -295,7 +295,7 @@ test("route landmark workbench exposes local evidence and guards every mutation"
  const r=await get("/api/operator/landmarks"),state=await r.json();assert.equal(r.status,200);assert.equal(r.headers.get("cache-control"),"no-store");assert.equal(state.dataset.source,"sample");assert.equal(state.dataset.cards.length,31);assert.ok(typeof state.configured==="boolean");assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
  const page=await get("/operator/landmarks/review"),html=await page.text();assert.equal(page.status,200);assert.match(html,/data-landmark-workbench/);assert.match(html,/data-save-landmarks/);
  const wrong=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:"https://example.com"},body:"{}"});assert.equal(wrong.status,403);await wrong.arrayBuffer();
- for(const [body,status]of [[{action:"prepare",source:"sample",datasetId:"wrong",targetKey:state.dataset.targets[0].key},409],[{action:"prepare",source:"sample",datasetId:state.dataset.id,targetKey:"invalid"},400],[{action:"save",source:"sample",datasetId:state.dataset.id,expectedRevision:0,choices:{forged:true}},400],[{action:"photo",source:"sample",datasetId:state.dataset.id,candidateId:"mapillary:unknown"},400]]){
+ for(const [body,status]of [[{action:"prepare",source:"sample",datasetId:"wrong",targetKey:state.dataset.targets[0].key},403],[{action:"prepare",source:"sample",datasetId:state.dataset.id,targetKey:"invalid"},403],[{action:"save",source:"sample",datasetId:state.dataset.id,expectedRevision:0,choices:{forged:true}},400],[{action:"photo",source:"sample",datasetId:state.dataset.id,candidateId:"mapillary:unknown"},403]]){
  const res=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:baseUrl.origin},body:JSON.stringify(body)});assert.equal(res.status,status);assert.equal(res.headers.get("cache-control"),"no-store");await res.arrayBuffer();
  }
  const bad=await get("/api/operator/landmarks/images/invalid");assert.equal(bad.status,404);await bad.arrayBuffer();
@@ -307,9 +307,9 @@ test("mandatory stairs and automatically prepared photo suggestions are exposed 
 });
 
 test("bundled demo photos and provenance are available without a writable cache or token",async()=>{
- const response=await get("/demo-landmarks/v1/manifest.json");assert.equal(response.status,200);const manifest=await response.json();assert.equal(manifest.version,1);assert.equal(manifest.photos.length,9);assert.equal(manifest.targets.length,44);
- const notice=await get("/demo-landmarks/v1/NOTICE.md");assert.equal(notice.status,200);assert.match(await notice.text(),/CC BY-SA 4.0/);
+ const response=await get("/landmarks/miura-v1/manifest.json");assert.equal(response.status,200);const manifest=await response.json();assert.equal(manifest.version,2);assert.ok(manifest.photos.length>=9);assert.equal(manifest.junctions.length,1326);assert.equal(manifest.stats.missing,0);
+ const notice=await get("/landmarks/miura-v1/NOTICE.md");assert.equal(notice.status,200);assert.match(await notice.text(),/CC BY-SA 4.0/);
  for(const photo of manifest.photos){const r=await get(photo.path);assert.equal(r.status,200);const bytes=new Uint8Array(await r.arrayBuffer());assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256);assert.match(r.headers.get("content-type"),/^image\//)}
  const state=await(await get("/api/operator/landmarks")).json();assert.equal(state.bundleId,manifest.id);assert.ok(Object.keys(state.assets).length>=3);assert.equal(Object.keys(state.targets).length,state.dataset.targets.length);
- const html=await(await get("/operator/landmarks/review")).text();assert.match(html,/data-bundled-landmarks="miura-demo-landmarks-v1"/);assert.match(html,/同梱データ・出典/);
+ const html=await(await get("/operator/landmarks/review")).text();assert.match(html,/data-bundled-landmarks="miura-region-landmarks-v1"/);assert.match(html,/同梱データ・出典/);
 });

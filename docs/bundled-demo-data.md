@@ -1,5 +1,7 @@
 # 同梱デモデータと環境間の再現（P2-11）
 
+P2-12で素材を地域全体の静的索引/128px切り抜きへ置き換えた。[現在の仕様](region-landmarks.md)。以下の9画像/44地点とCanvasの記述はP2-11時点の検証記録。初期コース2件とdemo:seedは継続。
+
 2026-11-12。ユーザーは、AWS移行の妨げにならない構成で少数の初期データをGitへ同梱することを承認した。AWSサービスや認証は追加せず、既存のSQLite/Mapillary保存境界を保つ。
 
 ## 同梱するもの
@@ -45,8 +47,8 @@ npm.cmd run dev
 ## ファイルと保存境界
 
 - [コース設定](../data/demo/courses.json)：固定ID・地点ID・訪問順・版/基準日時。SQLiteファイルを配布せず、既存の生成/検証処理で保存形式v1へ変換する。
-- [画像/地物の公開マニフェスト](../public/demo-landmarks/v1/manifest.json)：フラットなJSON。画像ファイルは同じpublicディレクトリに置く。
-- [素材の出典と利用条件](../public/demo-landmarks/v1/NOTICE.md)。
+- [画像/地物の公開マニフェスト](../public/landmarks/miura-v1/manifest.json)：フラットなJSON。画像ファイルは同じpublicディレクトリに置く。
+- [素材の出典と利用条件](../public/landmarks/miura-v1/NOTICE.md)。
 - [ローカル初期登録](../lib/demo/seed.ts)：既存のSQLite v7へトランザクションで登録。スキーマ変更なし。
 - [同梱データ読取](../lib/landmarks/bundled.ts)と[キャッシュ保存](../lib/landmarks/storage.ts)：読み取り専用の同梱データと書き込み可能な取得結果を分ける。
 

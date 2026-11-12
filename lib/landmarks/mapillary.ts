@@ -1,7 +1,7 @@
 import {distanceMeters} from "../route/graph.ts";
 import {mapillaryKind,validPoint,type Candidate,type Target,type PhotoAsset} from "./model.ts";
 import {detectionCrop} from "./detection-crop.ts";
-import {MAX_IMAGE_BYTES,type LandmarkStorage} from "./storage.ts";
+import {MAX_IMAGE_BYTES,type LandmarkStorage} from "./local-storage.ts";
 type Obj=Record<string,unknown>;
 const obj=(v:unknown):Obj=>v&&typeof v==="object"&&!Array.isArray(v)?v as Obj:{};
 const text=(v:unknown,max=200)=>typeof v==="string"?v.slice(0,max):"";

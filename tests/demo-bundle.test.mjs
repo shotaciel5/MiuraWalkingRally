@@ -6,7 +6,7 @@ import os from "node:os";
 import {createHash} from "node:crypto";
 import {execFileSync} from "node:child_process";
 import {getBundledLandmarks} from "../lib/landmarks/bundled.ts";
-import {createLandmarkStorage} from "../lib/landmarks/storage.ts";
+import {createLandmarkStorage,createBundledLandmarkStorage} from "../lib/landmarks/storage.ts";
 import {loadLandmarkDataset,landmarkDatasetFromPreview} from "../lib/landmarks/dataset.ts";
 import {workbenchState} from "../lib/landmarks/workbench.ts";
 import {photoSuggestions,runLandmarkPreparation} from "../lib/landmarks/preparation.ts";
@@ -21,9 +21,9 @@ const bundle=getBundledLandmarks(),courses=demoCourses();
 function temporary(t){const root=fs.mkdtempSync(path.join(os.tmpdir(),"miura-bundle-test-"));t.after(()=>{assert.equal(path.dirname(path.resolve(root)),path.resolve(os.tmpdir()));assert.ok(path.basename(root).startsWith("miura-bundle-test-"));fs.rmSync(root,{recursive:true,force:true})});return root}
 const sha=p=>createHash("sha256").update(fs.readFileSync(p)).digest("hex");
 test("shipped image files match their provenance manifest and remain a small finite bundle",()=>{
- assert.equal(bundle.version,1);assert.equal(bundle.targets.length,44);assert.equal(bundle.photos.length,9);
- let bytes=0;for(const photo of bundle.photos){assert.match(photo.path,/^\/demo-landmarks\/v1\/\d+-[a-f0-9]{16}\.(jpg|png|webp)$/);const p=path.join("public",photo.path.slice(1));assert.equal(sha(p),photo.sha256);assert.equal(fs.statSync(p).size,photo.bytes);assert.ok(photo.asset.creator);assert.equal(photo.asset.policyVersion,2);assert.ok(photo.asset.roi.width>0&&photo.asset.roi.height>0);bytes+=photo.bytes}
- assert.ok(bytes<1000000);const json=fs.readFileSync("public/demo-landmarks/v1/manifest.json","utf8");assert.match(json,/opendatacommons.org/);assert.match(json,/creativecommons.org/);assert.doesNotMatch(json,/MLY\||access_token|thumb_1024_url|fbcdn|[A-Z]:\\\\/);
+ assert.equal(bundle.version,1);assert.equal(bundle.targets.length,1326);assert.ok(bundle.photos.length>=9);
+ let bytes=0;for(const photo of bundle.photos){assert.match(photo.path,/^\/landmarks\/miura-v1\/[a-f0-9]{64}\.png$/);const p=path.join("public",photo.path.slice(1));assert.equal(sha(p),photo.sha256);assert.equal(fs.statSync(p).size,photo.bytes);assert.ok(photo.asset.creator);assert.equal(photo.asset.policyVersion,2);assert.ok(photo.asset.roi.width>0&&photo.asset.roi.height>0);bytes+=photo.bytes}
+ assert.ok(bytes<100000000);const json=fs.readFileSync("public/landmarks/miura-v1/manifest.json","utf8");assert.match(json,/opendatacommons.org/);assert.match(json,/creativecommons.org/);assert.doesNotMatch(json,/MLY\||access_token|thumb_1024_url|fbcdn|[A-Z]:\\\\/);
  assert.equal(new Set(bundle.targets.map(t=>t.key)).size,bundle.targets.length);assert.equal(new Set(bundle.photos.map(p=>p.asset.featureId)).size,bundle.photos.length);
 });
 test("read-only bundled fallback survives cache expiry without creating local files",t=>{
@@ -39,7 +39,7 @@ test("fresh writable results override demo data; expired results fall back and c
  assert.equal(createLandmarkStorage(path.join(root,"no-bundle")).target(bundle.targets[0].key),null);
 });
 test("fixed sample and both bundled course routes have offline targets and real photo suggestions",async t=>{
- const root=path.join(temporary(t),"absent"),store=createLandmarkStorage(root,bundle);
+ const root=path.join(temporary(t),"absent"),store=createBundledLandmarkStorage(root);
  for(const dataset of [loadLandmarkDataset("sample"),...courses.map(c=>landmarkDatasetFromPreview(c.payload.preview))]){
   const initial=workbenchState(dataset,store);assert.equal(Object.keys(initial.targets).length,dataset.targets.length);assert.ok(photoSuggestions(initial).length>=3);
   const result=await runLandmarkPreparation({initial,target:async()=>{throw Error("No external request allowed")},photo:async()=>{throw Error("No external request allowed")}});assert.deepEqual(result.report.errors,[]);assert.equal(result.report.photoRequests,0);

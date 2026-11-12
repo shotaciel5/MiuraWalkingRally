@@ -376,4 +376,17 @@ npm.cmd run landmarks:prepare -- --source draft --cache-only
 
 少数の初期コース2件、目印の地物44地点、Mapillary画像9枚（約0.86MB）と出典を同梱しています。上のdemo:seedはローカルDBへの明示登録で、既存の下書き・公開停止状態・台帳を上書きせず、再実行で重複しません。トークンなしで /courses の参加者フローと /operator/landmarks/review の切り抜き写真候補を試せます。写真の通常公開コースへの反映は後続です。
 
-同梱JSON/画像は読み取り専用、実DB/API取得キャッシュはGit対象外です。AWSの初期登録や共有ストレージを今回導入したものではありません。[初期データ・保存境界・移行時の注意](docs/bundled-demo-data.md)、[画像/データの利用条件](public/demo-landmarks/v1/NOTICE.md)。
+同梱JSON/画像は読み取り専用、実DB/API取得キャッシュはGit対象外です。AWSの初期登録や共有ストレージを今回導入したものではありません。[初期データ・保存境界・移行時の注意](docs/bundled-demo-data.md)、[画像/データの利用条件](public/landmarks/miura-v1/NOTICE.md)。
+
+### 地域全体の目印と128px切り抜き（P2-12）
+
+Webは静的索引だけを参照し、トークンがあってもMapillaryを呼びません。全1,326分岐・1,460地物・128×128切り抜き439件（約7.23MB）を同梱しました。OSM背景タイルは従来どおりネット接続を使います。
+
+開発PCで更新する場合のみ、.env.localのMAPILLARY_ACCESS_TOKENで次を実行します。
+
+~~~powershell
+npm.cmd run landmarks:region -- --fetch
+npm.cmd run landmarks:region -- --offline
+~~~
+
+landmarks:prepareは下書き/固定例を静的索引で照合するオフライン確認です。Web取得ボタンは廃止、採否の切替/保存は継続します。元写真はGit対象外、出典/検出範囲は索引へ残します。[実取得・手順・制限](docs/region-landmarks.md)。

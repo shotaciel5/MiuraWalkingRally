@@ -80,16 +80,16 @@ test("oversized images never enter the local image cache",async t=>{
 });
 test("route mismatch and forged selection fail before making external requests",async t=>{
  const store=temporary(t),client=createMapillaryClient("test",async()=>{throw Error("must not fetch")});
- await assert.rejects(()=>operateWorkbench({action:"prepare",source:"sample",datasetId:"wrong",targetKey:target.key},store,client),/dataset-conflict/);
+ await assert.rejects(()=>operateWorkbench({action:"prepare",source:"sample",datasetId:"wrong",targetKey:target.key},store,client),/external-fetch-disabled/);
  await assert.rejects(()=>operateWorkbench({action:"save",source:"sample",datasetId:data.id,expectedRevision:0,choices:{"1|mapillary:unknown":true}},store,client),/invalid-choices/);assert.equal(store.review(data.id).revision,0);
 });
 test("saved operator choices survive reload while target cache remains reusable",async t=>{
  const store=temporary(t),candidate=data.cards.flatMap(c=>c.osm)[0],card=data.cards.find(c=>c.osm.some(x=>x.id===candidate.id)),key=choiceKey(card.map.sequence,candidate.id);
  const state=await operateWorkbench({action:"save",source:"sample",datasetId:data.id,expectedRevision:0,choices:{[key]:!initialAccepted(candidate)}},store);assert.equal(state.review.revision,1);assert.equal(workbenchState(data,createLandmarkStorage(store.root)).review.choices[key],!initialAccepted(candidate));
 });
-test("completed targets do not repeat the API call",async t=>{
+test("runtime acquisition stays disabled even for parallel calls",async t=>{
  const store=temporary(t);let calls=0;const client=createMapillaryClient("test",async()=>{calls++;return response({data:[]})}),input={action:"prepare",source:"sample",datasetId:data.id,targetKey:target.key};
- await Promise.all([operateWorkbench(input,store,client),operateWorkbench(input,store,client)]);assert.equal(calls,1);await operateWorkbench(input,store,client);assert.equal(calls,1);
+ await Promise.all([assert.rejects(()=>operateWorkbench(input,store,client),/external-fetch-disabled/),assert.rejects(()=>operateWorkbench(input,store,client),/external-fetch-disabled/)]);assert.equal(calls,0);
 });
 
 test("tiny detections are rejected before downloading misleading blurry icons",async t=>{const store=temporary(t);let requests=0;const client=createMapillaryClient("test",async()=>{requests++;return response({data:[{value:f.classification,geometry:geometry(400,800,30,20),image:{id:"456",width:1024,height:512,thumb_1024_url:"https://scontent-test.fbcdn.net/a"}}]})});await assert.rejects(()=>client.photo(f,store),/no-usable-photo/);assert.equal(requests,1);assert.equal(store.asset("123"),null)});

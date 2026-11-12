@@ -8,7 +8,7 @@ export type WorkCard={map:KomaMap;center:Point;context:KomaContext;referenceCont
 export type Target={key:string;point:Point;sequences:number[];approaches:number[]};
 export type Dataset={id:string;source:"sample"|"draft";title:string;cards:WorkCard[];targets:Target[]};
 export type TargetCache={version:1;key:string;point:Point;fetchedAt:string;candidates:Candidate[];partial:boolean};
-export type PhotoAsset={version:1;policyVersion:2;featureId:string;imageId:string;creator:string;capturedAt:number;fetchedAt:string;roi:{left:number;top:number;width:number;height:number};contentType:string};
+export type PhotoAsset={version:1;policyVersion:2;featureId:string;imageId:string;creator:string;capturedAt:number;fetchedAt:string;roi:{left:number;top:number;width:number;height:number};contentType:string;crop?:{size:128;version:1;path:string;sha256:string;contentType:"image/png"}};
 export type PhotoFailure={version:1;policyVersion:2;featureId:string;fetchedAt:string;code:"no-usable-photo"};
 export type Review={revision:number;choices:Record<string,boolean>};
 export const initialAccepted=(candidate:Pick<Candidate,"kind">)=>["stop","control","crossing"].includes(candidate.kind);
@@ -36,7 +36,7 @@ export function projectCandidate(card:WorkCard,c:Candidate){
  const heading=card.map.shortGeometry?.headingDegrees??card.map.headingDegrees;
  if(heading===undefined||heading===null)return null;
  const p=projectKomaPoint(card.center,c.point,heading);
- return {x:KOMA_VIEW.centerX+p.x*KOMA_VIEW.radius/30,y:KOMA_VIEW.centerY+p.y*KOMA_VIEW.radius/30};
+ return {x:Number((KOMA_VIEW.centerX+p.x*KOMA_VIEW.radius/30).toFixed(3)),y:Number((KOMA_VIEW.centerY+p.y*KOMA_VIEW.radius/30).toFixed(3))};
 }
 export function layoutCandidates(card:WorkCard,items:Candidate[],branches:Pick<KomaBranch,"points">[]=card.map.branches){
  const placed:{candidate:Candidate;x:number;y:number;anchor:{x:number;y:number}}[]=[],unplaced:Candidate[]=[];
