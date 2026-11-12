@@ -32,6 +32,13 @@ export function candidatesForCard(card:WorkCard,cache:TargetCache|undefined){
  // Different providers remain separately reviewable; a nearby sign and crossing are not merged.
  return candidates.sort((a,b)=>Number(!initialAccepted(a))-Number(!initialAccepted(b))||distanceMeters(card.center,a.point)-distanceMeters(card.center,b.point)||a.id.localeCompare(b.id,"en"));
 }
+export function selectableCandidates(candidates:Candidate[],assets:Record<string,PhotoAsset>){
+ return candidates.filter(c=>{
+  if(c.kind!=="unique")return true;
+  const id=c.provider==="mapillary"?c.id.slice(10):"",asset=assets[id];
+  return !!asset&&asset.featureId===id&&asset.crop?.size===128&&!!asset.crop.path;
+ });
+}
 export function projectCandidate(card:WorkCard,c:Candidate){
  const heading=card.map.shortGeometry?.headingDegrees??card.map.headingDegrees;
  if(heading===undefined||heading===null)return null;

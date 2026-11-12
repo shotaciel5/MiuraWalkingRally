@@ -313,3 +313,10 @@ test("bundled demo photos and provenance are available without a writable cache 
  const state=await(await get("/api/operator/landmarks")).json();assert.equal(state.bundleId,manifest.id);assert.ok(Object.keys(state.assets).length>=3);assert.equal(Object.keys(state.targets).length,state.dataset.targets.length);
  const html=await(await get("/operator/landmarks/review")).text();assert.match(html,/data-bundled-landmarks="miura-region-landmarks-v1"/);assert.match(html,/同梱データ・出典/);
 });
+
+test("objects without cutout images are excluded from selectable landmark candidates",async()=>{
+ const r=await get("/api/operator/landmarks"),state=await r.json();assert.equal(r.status,200);
+ for(const c of Object.values(state.targets).flatMap(t=>t.candidates))if(c.kind==="unique"){const asset=state.assets[c.id.slice(10)];assert.ok(asset?.crop);assert.equal(asset.featureId,c.id.slice(10));assert.equal(asset.crop.size,128)}
+ const html=await(await get("/operator/landmarks/review")).text();assert.doesNotMatch(html,/写真未取得のため/);
+ for(const match of html.matchAll(/<article[^>]*data-candidate-row="[^"]+"[^>]*data-candidate-kind="unique"[^>]*>([\s\S]*?)<\/article>/g))assert.match(match[1],/data-prepared-crop/);
+});

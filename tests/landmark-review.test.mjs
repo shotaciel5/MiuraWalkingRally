@@ -4,8 +4,8 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import {loadLandmarkDataset} from "../lib/landmarks/dataset.ts";
-import {initialAccepted,accepted,choiceKey,mapillaryKind,candidatesForCard,layoutCandidates,projectCandidate} from "../lib/landmarks/model.ts";
-import {createLandmarkStorage,CACHE_DAYS,MAX_IMAGE_BYTES} from "../lib/landmarks/storage.ts";
+import {initialAccepted,accepted,choiceKey,mapillaryKind,selectableCandidates,candidatesForCard,layoutCandidates,projectCandidate} from "../lib/landmarks/model.ts";
+import {createLandmarkStorage,createBundledLandmarkStorage,CACHE_DAYS,MAX_IMAGE_BYTES} from "../lib/landmarks/storage.ts";
 import {createMapillaryClient,MapillaryError} from "../lib/landmarks/mapillary.ts";
 import {detectionCrop} from "../lib/landmarks/detection-crop.ts";
 import {operateWorkbench,workbenchState} from "../lib/landmarks/workbench.ts";
@@ -100,4 +100,22 @@ test("review count cap preserves already saved routes and prevents unbounded gro
 test("photo processing version changes invalidate previous exploratory crops",async t=>{
  const store=temporary(t);let calls=0;const client=createMapillaryClient("test",async url=>{calls++;return new URL(url).hostname==="graph.mapillary.com"?response({data:[{value:f.classification,geometry:geometry(),image:{id:"456",width:1024,height:512,thumb_1024_url:"https://scontent-test.fbcdn.net/a"}}]}):new Response(new Uint8Array([255,216,255,...Array(30).fill(0)]),{headers:{"Content-Type":"image/jpeg"}})});
  const meta=await client.photo(f,store);assert.equal(meta.policyVersion,2);const file=path.join(store.root,"asset-123.json");fs.writeFileSync(file,JSON.stringify({...meta,policyVersion:1}));assert.equal(store.asset("123"),null);await client.photo(f,store);assert.equal(calls,4);assert.equal(store.asset("123").policyVersion,2);
+});
+
+test("photo candidates need a prepared cutout while traffic symbols remain selectable",()=>{
+ const unique={...f},make=id=>({version:1,policyVersion:2,featureId:id,imageId:"456",creator:"tester",capturedAt:1,fetchedAt:new Date().toISOString(),roi:{left:0,top:0,width:50,height:50},contentType:"image/jpeg"}),base=make("123"),crop={size:128,version:1,path:"/landmarks/test.png",sha256:"a".repeat(64),contentType:"image/png"};
+ const symbols=["stop","control","crossing","signal","bus"].map((kind,i)=>({...f,id:"mapillary:"+i,kind}));
+ assert.deepEqual(selectableCandidates([unique,...symbols],{}),symbols);
+ assert.deepEqual(selectableCandidates([unique],{"123":base}),[]);
+ assert.deepEqual(selectableCandidates([unique],{"123":{...base,crop}}),[unique]);
+ assert.deepEqual(selectableCandidates([unique],{"123":{...base,featureId:"999",crop}}),[]);
+ assert.deepEqual(selectableCandidates([unique],{"123":{...base,crop:{...crop,path:""}}}),[]);
+});
+test("real cutout-less objects stay out of candidate rows, map selection and saved input",async t=>{
+ const dir=temporary(t).root,store=createBundledLandmarkStorage(dir),dataset=loadLandmarkDataset("sample");let missing;
+ for(const card of dataset.cards){const target=dataset.targets.find(t=>t.sequences.includes(card.map.sequence)),cache=store.target(target.key,target.point);for(const c of candidatesForCard(card,cache))if(c.kind==="unique"&&!store.asset(c.id.slice(10))?.crop){missing={card,c};break}if(missing)break}
+ assert.ok(missing,"The real sample should exercise an image-less object");const key=choiceKey(missing.card.map.sequence,missing.c.id);store.saveReview(dataset.id,0,{[key]:true});
+ const state=workbenchState(dataset,store);assert.equal(state.review.choices[key],true);for(const c of Object.values(state.targets).flatMap(t=>t.candidates))if(c.kind==="unique")assert.ok(state.assets[c.id.slice(10)]?.crop);
+ assert.equal(Object.values(state.targets).flatMap(t=>t.candidates).some(c=>c.id===missing.c.id),false);
+ await assert.rejects(()=>operateWorkbench({action:"save",source:"sample",datasetId:dataset.id,expectedRevision:1,choices:{[key]:true}},store),/invalid-choices/);assert.equal(store.review(dataset.id).revision,1);
 });

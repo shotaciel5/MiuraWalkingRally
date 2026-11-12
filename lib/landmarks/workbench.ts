@@ -1,11 +1,11 @@
 import {loadLandmarkDataset} from "./dataset.ts";
 import {getLandmarkStorage,type LandmarkStorage} from "./storage.ts";
 import {bundledRegionInfo} from "./bundled.ts";
-import {candidatesForCard,choiceKey,type Dataset,type Review,type TargetCache,type PhotoAsset,type PhotoFailure} from "./model.ts";
+import {candidatesForCard,selectableCandidates,choiceKey,type Dataset,type Review,type TargetCache,type PhotoAsset,type PhotoFailure} from "./model.ts";
 export type WorkbenchState={dataset:Dataset;review:Review;targets:Record<string,TargetCache>;assets:Record<string,PhotoAsset>;photoFailures:Record<string,PhotoFailure>;configured:boolean;bundleId:string|null;mode:"bundled-only";region:typeof bundledRegionInfo};
 export function workbenchState(dataset:Dataset,storage:LandmarkStorage=getLandmarkStorage()):WorkbenchState{
  const targets:Record<string,TargetCache>={},assets:Record<string,PhotoAsset>={};
- for(const t of dataset.targets){const c=storage.target(t.key,t.point);if(c){targets[t.key]=c;for(const candidate of c.candidates){const asset=storage.asset(candidate.id.slice(10));if(asset)assets[candidate.id.slice(10)]=asset}}}
+ for(const t of dataset.targets){const c=storage.target(t.key,t.point);if(c){for(const candidate of c.candidates){const asset=storage.asset(candidate.id.slice(10));if(asset)assets[candidate.id.slice(10)]=asset}targets[t.key]={...c,candidates:selectableCandidates(c.candidates,assets)}}}
  return {dataset,review:storage.review(dataset.id),targets,assets,photoFailures:{},configured:false,bundleId:storage.bundleId,mode:"bundled-only",region:bundledRegionInfo};
 }
 export async function operateWorkbench(input:unknown,storage=getLandmarkStorage()){
