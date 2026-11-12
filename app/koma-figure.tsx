@@ -3,6 +3,7 @@
 import { useId, type ReactNode } from "react";
 import { arrowPath, KOMA_VIEW } from "../lib/route/koma";
 import type { KomaMap, KomaGeometry } from "../lib/route/koma";
+import {stairTicks} from "../lib/route/stairs";
 import LandmarkLayer from "./landmark-layer";
 import SymbolLandmarkLayer from "./symbol-landmark-layer";
 import type {LandmarkPresentation,SymbolLimit} from "../lib/route/visual-landmarks";
@@ -10,7 +11,7 @@ import type { KomaContext } from "../lib/route/context";
 export type ContextLayers={buildings:boolean;landmarks:boolean;details:boolean};
 
 function line(points: {x:number;y:number}[]) { return points.map(p=>p.x.toFixed(3)+","+p.y.toFixed(3)).join(" "); }
-export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false, presentation="source", symbolLimit=2, children }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;children?:ReactNode}) {
+export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false, presentation="source", symbolLimit=2, children, mandatorySteps=false }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;children?:ReactNode;mandatorySteps?:boolean}) {
   const id=useId().replaceAll(":","");
   if(map.state==="held"&&!referenceGeometry)return (
     <div className="koma-held" data-koma-held={compact?undefined:map.sequence} role="note">
@@ -36,12 +37,7 @@ export default function KomaFigure({ map, name, context, layers, compact=false, 
         {incoming&&<polyline data-koma-inlet={incoming.neighborNodeId} points={line(incoming.points)} stroke="var(--route-inlet)" strokeWidth={7}/>}
         {outgoing&&<polyline data-koma-exit={outgoing.neighborNodeId} points={line(referenceGeometry?outgoing.points:arrowPath(outgoing.points))} stroke="var(--route-next)" strokeWidth={4} markerEnd={referenceGeometry?undefined:`url(#${id}-arrow)`}/>}
       </g>
-      {presentation!=="roads"&&layers.details&&<g stroke="#6b5541" strokeWidth="1.3" pointerEvents="none" clipPath={clipDetails?`url(#${id}-clip)`:undefined}>{context.steps.flatMap((s,i)=>{
-        const dx=s.to.x-s.from.x,dy=s.to.y-s.from.y,length=Math.hypot(dx,dy);
-        if(length<4)return [];
-        const count=Math.max(1,Math.floor(length/7));
-        return Array.from({length:count},(_,j)=>{const t=(j+.5)/count,x=s.from.x+dx*t,y=s.from.y+dy*t;return <line key={i+"-"+j} data-context-steps={s.wayIds.join(",")} x1={x-dy/length*5} y1={y+dx/length*5} x2={x+dy/length*5} y2={y-dx/length*5}/>});
-      })}</g>}
+      {((presentation!=="roads"&&layers.details)||mandatorySteps)&&<g stroke="#6b5541" strokeWidth="1.3" pointerEvents="none" clipPath={clipDetails?`url(#${id}-clip)`:undefined}>{stairTicks(context.steps,mandatorySteps).map(t=><line key={t.key} data-context-steps={t.wayIds.join(",")} x1={t.x1} y1={t.y1} x2={t.x2} y2={t.y2}/>)}</g>}
       {presentation==="source"&&layers.landmarks&&<LandmarkLayer features={context.landmarks} width={300} height={280} roads={branches.map(b=>b.points)} compact={compact}/>}
 
       {presentation==="symbols"&&layers.landmarks&&<SymbolLandmarkLayer context={context} branches={branches} limit={symbolLimit}/>}

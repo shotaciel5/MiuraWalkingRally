@@ -9,6 +9,7 @@ export type Target={key:string;point:Point;sequences:number[];approaches:number[
 export type Dataset={id:string;source:"sample"|"draft";title:string;cards:WorkCard[];targets:Target[]};
 export type TargetCache={version:1;key:string;point:Point;fetchedAt:string;candidates:Candidate[];partial:boolean};
 export type PhotoAsset={version:1;policyVersion:2;featureId:string;imageId:string;creator:string;capturedAt:number;fetchedAt:string;roi:{left:number;top:number;width:number;height:number};contentType:string};
+export type PhotoFailure={version:1;policyVersion:2;featureId:string;fetchedAt:string;code:"no-usable-photo"};
 export type Review={revision:number;choices:Record<string,boolean>};
 export const initialAccepted=(candidate:Pick<Candidate,"kind">)=>["stop","control","crossing"].includes(candidate.kind);
 export const choiceKey=(sequence:number,id:string)=>sequence+"|"+id;

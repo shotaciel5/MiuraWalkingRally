@@ -14,15 +14,17 @@ async function bytes(response:Response,limit:number){
  const result=new Uint8Array(length);let i=0;for(const p of parts){result.set(p,i);i+=p.length}return result;
 }
 export function createMapillaryClient(token:string|undefined,request:typeof fetch=fetch){
+ const requestCounts={graph:0,images:0};
  async function query(path:string,parameters:Record<string,string>){
   if(!token?.trim())throw new MapillaryError("not-configured");
   const url=new URL("https://graph.mapillary.com/"+path);url.search=new URLSearchParams(parameters).toString();
-  let response:Response;try{response=await request(url,{headers:{Authorization:"OAuth "+token.trim()},signal:AbortSignal.timeout(15000),redirect:"error",cache:"no-store"})}catch{throw new MapillaryError("network")}
+  let response:Response;try{requestCounts.graph++;response=await request(url,{headers:{Authorization:"OAuth "+token.trim()},signal:AbortSignal.timeout(15000),redirect:"error",cache:"no-store"})}catch{throw new MapillaryError("network")}
   if(!response.ok)throw new MapillaryError(response.status===401||response.status===403?"authorization":response.status===429?"rate-limit":"http-"+response.status);
   try{return obj(JSON.parse(new TextDecoder().decode(await bytes(response,2000000))))}catch(e){if(e instanceof MapillaryError)throw e;throw new MapillaryError("invalid-response")}
  }
  return {
   configured:!!token?.trim(),
+  get requestCounts(){return {...requestCounts}},
   async target(target:Target){
    const delta=32/111000,lon=delta/Math.cos(target.point.lat*Math.PI/180),bbox=[target.point.lon-lon,target.point.lat-delta,target.point.lon+lon,target.point.lat+delta].join(","),found=new Map<string,Candidate>();let after="",partial=false;
    for(let page=0;page<2;page++){
@@ -40,18 +42,22 @@ export function createMapillaryClient(token:string|undefined,request:typeof fetc
   async photo(feature:Candidate,storage:LandmarkStorage):Promise<PhotoAsset>{
    const featureId=feature.id.replace("mapillary:","");if(!id(featureId)||feature.provider!=="mapillary")throw new MapillaryError("invalid-feature");
    const cached=storage.asset(featureId);if(cached)return cached;
+   if(storage.photoFailure(featureId))throw new MapillaryError("no-usable-photo");
    const data=await query(featureId+"/detections",{fields:"id,geometry,value,image{id,thumb_1024_url,captured_at,creator,width,height}",limit:"10"});
    if(!Array.isArray(data.data))throw new MapillaryError("invalid-response");
    const options=data.data.slice(0,100).flatMap(raw=>{const d=obj(raw),image=obj(d.image);if(d.value!==feature.classification||!id(image.id)||typeof d.geometry!=="string")return [];try{const roi=detectionCrop(d.geometry),width=Number(image.width),height=Number(image.height),aspect=roi.width*width/(roi.height*height),scale=Math.min(1,1024/width,1024/height);if(!Number.isFinite(aspect)||aspect<.25||aspect>4||!Number.isFinite(scale)||width<=0||height<=0||roi.width/100*width*scale<20||roi.height/100*height*scale<12)return [];return [{image,roi}]}catch{return []}}).sort((a,b)=>b.roi.width*b.roi.height-a.roi.width*a.roi.height);
+   let networkFailed=false;
    for(const {image,roi}of options.slice(0,3)){
     let url:URL;try{url=new URL(String(image.thumb_1024_url))}catch{continue}
     if(url.protocol!=="https:"||url.username||url.password||url.port||!url.hostname.endsWith(".fbcdn.net"))continue;
-    let response:Response;try{response=await request(url,{signal:AbortSignal.timeout(15000),redirect:"error",cache:"no-store"})}catch{continue}
-    if(!response.ok)continue;const contentType=response.headers.get("content-type")?.split(";")[0]??"";if(!["image/jpeg","image/png","image/webp"].includes(contentType))continue;
+    let response:Response;try{requestCounts.images++;response=await request(url,{signal:AbortSignal.timeout(15000),redirect:"error",cache:"no-store"})}catch{networkFailed=true;continue}
+    if(!response.ok){networkFailed=true;continue}const contentType=response.headers.get("content-type")?.split(";")[0]??"";if(!["image/jpeg","image/png","image/webp"].includes(contentType))continue;
     const body=await bytes(response,MAX_IMAGE_BYTES);if(body.length<16||contentType==="image/jpeg"&&(body[0]!==255||body[1]!==216)||contentType==="image/png"&&(body[0]!==137||body[1]!==80)||contentType==="image/webp"&&new TextDecoder().decode(body.slice(8,12))!=="WEBP")continue;
     const meta:PhotoAsset={version:1,policyVersion:2,featureId,imageId:id(image.id),creator:text(obj(image.creator).username,100)||"Mapillary contributor",capturedAt:typeof image.captured_at==="number"?image.captured_at:0,fetchedAt:new Date().toISOString(),roi,contentType};
     storage.saveAsset(meta,body);return meta;
    }
+   if(networkFailed)throw new MapillaryError("network");
+   storage.savePhotoFailure({version:1,policyVersion:2,featureId,fetchedAt:new Date().toISOString(),code:"no-usable-photo"});
    throw new MapillaryError("no-usable-photo");
   }
  };

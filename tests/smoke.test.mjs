@@ -300,3 +300,8 @@ test("route landmark workbench exposes local evidence and guards every mutation"
  }
  const bad=await get("/api/operator/landmarks/images/invalid");assert.equal(bad.status,404);await bad.arrayBuffer();
 });
+
+test("mandatory stairs and automatically prepared photo suggestions are exposed by the PoC",async()=>{
+ const response=await get("/operator/landmarks/review"),html=await response.text();assert.equal(response.status,200);assert.match(html,/data-photo-suggestions/);assert.match(html,/data-mandatory-stairs/);assert.match(html,/階段 · 必須表示/);
+ const value=await get("/api/operator/landmarks"),state=await value.json();assert.equal(value.status,200);assert.equal(typeof state.photoFailures,"object");assert.ok(!Array.isArray(state.photoFailures));const first=Object.values(state.assets)[0];if(first){const ok=await get("/api/operator/landmarks/images/"+first.featureId+"?image="+first.imageId+"&policy="+first.policyVersion);assert.equal(ok.status,200);await ok.arrayBuffer();const mismatch=await get("/api/operator/landmarks/images/"+first.featureId+"?image=0&policy="+first.policyVersion);assert.equal(mismatch.status,404);assert.equal(mismatch.headers.get("cache-control"),"no-store");await mismatch.arrayBuffer()}assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
+});

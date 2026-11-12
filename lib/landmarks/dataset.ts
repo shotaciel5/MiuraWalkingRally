@@ -4,7 +4,7 @@ import roads from "../../data/miura-expanded/roads.json" with {type:"json"};
 import {buildWalkingGraph,distanceMeters} from "../route/graph.ts";
 import {extractContext,type Landmark} from "../route/context.ts";
 import {createMisakiReviewPoc} from "../misaki-review.ts";
-import {createRallyPreview} from "../operator/rally-preview.ts";
+import {createRallyPreview,type RallyPreview} from "../operator/rally-preview.ts";
 import {getDraftRepository} from "../operator/draft-repository.ts";
 import {osmCandidate,type Dataset,type WorkCard,type Target} from "./model.ts";
 import type {Snapshot} from "../route/types.ts";
@@ -22,6 +22,9 @@ function finish(source:"sample"|"draft",title:string,cards:WorkCard[]):Dataset{
 export function loadLandmarkDataset(source:"sample"|"draft"):Dataset{
  if(source==="sample"){if(!sample){const p=createMisakiReviewPoc();sample=finish(source,"三崎下町の表示サンプル",p.koma.map(c=>({map:c.map,center:c.candidate.point,context:c.context,referenceContext:null,osm:p.context.landmarks.filter(l=>distanceMeters(c.candidate.point,l.point)<=30).flatMap(l=>{const candidate=osmCandidate(l);return candidate?[candidate]:[]})})))}return sample}
  const current=getDraftRepository().load(),preview=createRallyPreview(current.draft,current.spots,current.corrections);if(preview.state!=="ready")throw new Error("draft-unavailable");
+ return landmarkDatasetFromPreview(preview);
+}
+export function landmarkDatasetFromPreview(preview:RallyPreview):Dataset{
  expandedLandmarks??=extractContext(expanded as Snapshot,buildWalkingGraph(roads as Snapshot)).landmarks;
- return finish(source,preview.title,preview.cards.map(c=>({map:c.map,center:c.candidate.point,context:c.context,referenceContext:c.referenceContext,osm:expandedLandmarks!.filter(l=>distanceMeters(c.candidate.point,l.point)<=30).flatMap(l=>{const candidate=osmCandidate(l);return candidate?[candidate]:[]})})));
+ return finish("draft",preview.title,preview.cards.map(c=>({map:c.map,center:c.candidate.point,context:c.context,referenceContext:c.referenceContext,osm:expandedLandmarks!.filter(l=>distanceMeters(c.candidate.point,l.point)<=30).flatMap(l=>{const candidate=osmCandidate(l);return candidate?[candidate]:[]})})));
 }
