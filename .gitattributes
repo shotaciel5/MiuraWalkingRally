@@ -5,3 +5,10 @@ data/miura-expanded/*.json text eol=lf
 
 docs/reports/expanded-route-audit.* text eol=lf
 docs/reports/short-koma-comparison.* text eol=lf
+
+# Preserve the verified third-party snapshots and their SHA-256 on every OS.
+tools/koma-omission-reference/** -text
+lib/route/omission/vendor/routing.cjs -text
+
+# Keep upstream CSV CRLF bytes while checking other whitespace errors normally.
+tools/koma-omission-reference/**/*.csv whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

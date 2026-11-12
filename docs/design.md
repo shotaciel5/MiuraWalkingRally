@@ -625,3 +625,9 @@ UI/API/repositoryの境界・同一Origin/JSON/no-storeとローカル/AWS不要
 ## 46. 採用目印と写真の通常運営/保存/公開統合（P4-07）
 
 ユーザーの統合依頼に基づき、通常プレビューの選択中コマ枠に候補/採否を配置する。採用作業の保存後、payload v2に採用地物/写真の出典・128px静的参照を固定し、公開後も同じ共有描画を使う。旧v1と既存公開版は変更せず読む。階段必須・建物/名称省略、元の枝/角度・拡大と参照図を保つ。WebのMapillary取得禁止、SQLite v7・外部依存なしを維持。[仕様/検証](course-landmark-integration.md)、[ADR-024](decisions/024-course-landmark-integration.md)。
+
+## 47. 道なり省略と表示対象の固定（P4-08）
+
+共同開発者の資料をtools/koma-omission-referenceに凍結保存し、元ルールの最小コピーとTypeScriptの形状互換/選別/投影をlib/route/omissionへ置く。従来の全候補と30m図を保ち、別の28m WGS84枝/実経路8m進入方向で判定する。通常は省略版、設定ダイアログだけに全交差点の切替を置く。
+
+新規payload v3に全候補/目印・ルール版/保持理由/類似関係・手動保護・選択モード/表示対象を固定する。元候補の番号に紐づく目印編集と表示番号を分け、共通投影で再採番・距離・CP・地図を整合させる。v1/v2・既存公開版/同梱デモ・SQLite v7を維持し、Python/外部API/実験AIはアプリ起動に追加しない。[仕様/検証](koma-omission-integration.md)、[ADR-025](decisions/025-koma-omission-integration.md)。

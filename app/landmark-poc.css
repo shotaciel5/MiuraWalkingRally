@@ -64,3 +64,7 @@
 .course-landmark-panel .course-landmark-actions{position:static;margin-top:12px}
 [data-course-landmark-editable]:focus{outline:none}
 [data-course-landmark-editable]:focus-visible>g>rect{stroke:var(--accent);stroke-width:3}
+
+.course-omission-controls{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0;font-size:12px;color:var(--muted)}.course-omission-controls button{padding:10px 14px;border:1px solid var(--line);border-radius:8px;background:white;color:var(--brand);font:inherit;cursor:pointer}
+.course-omission-dialog{box-sizing:border-box;width:min(560px,calc(100% - 28px));max-height:85vh;overflow:auto;padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--paper);color:var(--ink)}
+.course-omission-dialog::backdrop{background:#18394488}.course-omission-dialog h2{font-size:21px;margin:0}.course-omission-dialog p{font-size:13px;line-height:1.8}.course-omission-dialog fieldset{border:0;padding:0}.course-omission-dialog legend{font-size:12px;margin-bottom:10px}.course-omission-dialog label{display:flex;gap:12px;padding:14px;margin:10px 0;background:white;border:1px solid var(--line);border-radius:10px;cursor:pointer}.course-omission-dialog input{accent-color:var(--brand)}.course-omission-dialog small{display:block;font-size:11px;margin-top:6px;color:var(--muted)}

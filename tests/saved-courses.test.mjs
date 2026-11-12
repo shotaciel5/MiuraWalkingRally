@@ -54,7 +54,7 @@ test("saved replay works after process restart and never reads corrupt current w
 test("receipt is small, strict and cannot accept full client generated models",t=>{
  const f=fixture(t),p=f.prepared();assert.ok(Buffer.byteLength(JSON.stringify(p.receipt))<1024);
  assert.deepEqual(parseSaveReceipt(p.receipt),p.receipt);
- for(const value of [null,{},p.payload,{...p.receipt,published:true},{...p.receipt,fingerprint:"bad"},{...p.receipt,draftRevision:0},{...p.receipt,correctionRevision:-1},{...p.receipt,formatVersion:3}])assert.throws(()=>f.service.save(value),reason("invalid"));
+ for(const value of [null,{},p.payload,{...p.receipt,published:true},{...p.receipt,fingerprint:"bad"},{...p.receipt,draftRevision:0},{...p.receipt,correctionRevision:-1},{...p.receipt,formatVersion:4}])assert.throws(()=>f.service.save(value),reason("invalid"));
  assert.equal(f.courses.list().length,0);
 });
 test("stale draft, source or generation fingerprint is rejected rather than silently saved",t=>{

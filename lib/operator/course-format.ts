@@ -1,6 +1,7 @@
 import {parseLandmarkSnapshot,validateSnapshotRoute} from "../landmarks/course-snapshot.ts";
+import {parseOmissionSnapshot,validateOmissionRoute} from "../route/omission/selection.ts";
 import {SpotError} from "../spots/editing.ts";
-export const COURSE_FORMAT_VERSION=1;
+export const COURSE_FORMAT_VERSION=3;
 export const COURSE_GENERATOR_VERSION="operator-preview-v1";
 export const MAX_COURSE_BYTES=8*1024*1024;
 export class CourseError extends SpotError{
@@ -77,23 +78,25 @@ const connection=object({spotId,spotRevision:natural,facility:point,point,fracti
 const corrections=object({revision:natural,updatedAt:nullable(iso),items:array(connection)});
 const legacyPayloadRule=object({formatVersion:choice(1),generatorVersion:choice("operator-preview-v1"),input:object({draft,corrections}),preview});
 const landmarkPayloadRule=object({formatVersion:choice(2),generatorVersion:choice("operator-preview-v1"),input:object({draft,corrections}),preview,landmarks:parseLandmarkSnapshot});
-const payloadRule:Rule<ReturnType<typeof legacyPayloadRule>|ReturnType<typeof landmarkPayloadRule>>=v=>record(v)&&v.formatVersion===2?landmarkPayloadRule(v):legacyPayloadRule(v);
+const omissionPayloadRule=object({formatVersion:choice(3),generatorVersion:choice("operator-preview-v1"),input:object({draft,corrections}),preview,landmarks:parseLandmarkSnapshot,omission:parseOmissionSnapshot});
+const payloadRule:Rule<ReturnType<typeof legacyPayloadRule>|ReturnType<typeof landmarkPayloadRule>|ReturnType<typeof omissionPayloadRule>>=v=>record(v)&&v.formatVersion===3?omissionPayloadRule(v):record(v)&&v.formatVersion===2?landmarkPayloadRule(v):legacyPayloadRule(v);
 export type CoursePayload=ReturnType<typeof payloadRule>;
 export type SavedPreviewV1=CoursePayload["preview"];
 const recordRule=object({id:courseId,createdAt:iso,fingerprint:hash,payload:payloadRule});
 export type SavedCourse=ReturnType<typeof recordRule>;
 const receiptRule=object({formatVersion:choice(1,2),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash});
-export type SaveReceipt=ReturnType<typeof receiptRule>;
+const omissionReceiptRule=object({formatVersion:choice(3),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash,omissionMode:choice("rule","all")});
+export type SaveReceipt=ReturnType<typeof receiptRule>|ReturnType<typeof omissionReceiptRule>;
 const same=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
 export function canonicalJson(value:unknown):string{
  const normalize=(v:unknown):unknown=>Array.isArray(v)?v.map(normalize):record(v)?Object.fromEntries(Object.entries(v).filter(([,x])=>x!==undefined).sort(([a],[b])=>a<b?-1:a>b?1:0).map(([k,x])=>[k,normalize(x)])):v;
  return JSON.stringify(normalize(value));
 }
 export function parseSaveReceipt(value:unknown):SaveReceipt{
- try{return receiptRule(value)}catch{throw new CourseError("invalid","保存する生成結果の識別情報を確認してください。")}
+ try{return record(value)&&value.formatVersion===3?omissionReceiptRule(value):receiptRule(value)}catch{throw new CourseError("invalid","保存する生成結果の識別情報を確認してください。")}
 }
 export function courseReceipt(payload:CoursePayload,fingerprint:string):SaveReceipt{
- return {formatVersion:payload.formatVersion,fingerprint,draftRevision:payload.input.draft.revision,correctionRevision:payload.input.corrections.revision,roadSha256:payload.preview.source.roadSnapshotSha256,contextSha256:payload.preview.source.snapshotSha256};
+ return {formatVersion:payload.formatVersion,fingerprint,draftRevision:payload.input.draft.revision,correctionRevision:payload.input.corrections.revision,roadSha256:payload.preview.source.roadSnapshotSha256,contextSha256:payload.preview.source.snapshotSha256,...(payload.formatVersion===3?{omissionMode:payload.omission.mode}:{})} as SaveReceipt;
 }
 export function parseCoursePayload(value:unknown):CoursePayload{
  const p=payloadRule(value),v=p.preview,d=p.input.draft,c=p.input.corrections;
@@ -135,7 +138,8 @@ export function parseCoursePayload(value:unknown):CoursePayload{
   if(m.shortGeometry&&(m.state!=="held"||m.shortGeometry.headingDegrees!==m.headingDegrees||m.issues.length!==1||m.issues[0]!=="Selected arms too short to distinguish symbols"))return fail();
 
  }
- if(p.formatVersion===2)validateSnapshotRoute(p.landmarks,p.preview.cards);
+ if(p.formatVersion!==1)validateSnapshotRoute(p.landmarks,p.preview.cards);
+ if(p.formatVersion===3)validateOmissionRoute(p.omission,p.preview.cards);
  return p;
 }
 export function parseSavedCourse(value:unknown):SavedCourse{

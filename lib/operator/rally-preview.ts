@@ -1,3 +1,4 @@
+import {analyzeKomaOmission} from "../route/omission/analyze.ts";
 import {emptyCorrections,staleCorrections,type RallyCorrections} from "./rally-corrections.ts";
 import {draftIssues,draftVisits,decodeRallyDraft,type RallyDraft} from "./rally-draft.ts";
 import {prepareExpandedRoadConnections,expandedRoadSource} from "../miura-road-connections.ts";
@@ -9,7 +10,7 @@ import {expandedKomaContext} from "../expanded-context.ts";
 import type {ManagedSpot} from "../spots/editing.ts";
 import type {Point} from "../route/types.ts";
 
-export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedSpot[],corrections:RallyCorrections=emptyCorrections()){
+export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedSpot[],corrections:RallyCorrections=emptyCorrections(),options:{omission?:boolean}={}){
  const blocked=(reason:string,message:string)=>({state:"blocked" as const,reason,message});
  if(!input)return blocked("missing","保存済みの下書きがありません。地点を選んで保存してください。");
  const draft=decodeRallyDraft(input);if(!draft)return blocked("invalid","下書きの内容を確認してください。");
@@ -47,7 +48,7 @@ export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedS
  }).map(w=>({id:w.id,points:w.points.map(p=>({lat:p.lat,lon:p.lon}))}));
  const connections=new Map(prepared.connections.map(c=>[c.spotId,c]));
  return {state:"ready" as const,correctionRevision:corrections.revision,title:draft.title,draftRevision:draft.revision,draftUpdatedAt:draft.updatedAt,source:expandedRoadSource,
-  meters:route.meters,minutes:route.minutes,speedKmh:route.speedKmh,legs,path,roads,cards,
+  meters:route.meters,minutes:route.minutes,speedKmh:route.speedKmh,legs,path,roads,cards,...(options.omission?{omissionPlan:analyzeKomaOmission(graph,route,cards)}:{}),
   visits:visits.map((v,i)=>{const c=connections.get(v.spot.id)!;return {id:v.key,label:v.label,name:v.spot.name,spotId:v.spot.id,spotRevision:v.spot.revision,point:c.point as Point,facility:c.facility as Point,gap:c.distanceMeters,mode:corrections.items.some(m=>m.spotId===v.spot.id)?"manual" as const:"auto" as const,komaIndex:cards.findIndex(card=>card.map.stopIds.includes(stops[i].id))}})};
 }
 export type RallyPreview=Extract<ReturnType<typeof createRallyPreview>,{state:"ready"}>;

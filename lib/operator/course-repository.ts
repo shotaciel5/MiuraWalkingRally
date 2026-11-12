@@ -1,3 +1,4 @@
+import {projectOmittedPreview} from "../route/omission/projection.ts";
 import {createHash,randomUUID} from "node:crypto";
 import {openOperatorDatabase,getOperatorDatabasePath} from "./local-database.ts";
 import {canonicalJson,parseCoursePayload,parseSavedCourse,validCourseId,CourseError,MAX_COURSE_BYTES,type CoursePayload,type SavedCourse} from "./course-format.ts";
@@ -18,7 +19,7 @@ export function readCourseById(db:ReturnType<typeof openOperatorDatabase>,id:str
  const row=db.prepare("SELECT id,fingerprint,value FROM saved_courses WHERE id=?").get(id);return row?readRow(row):null;
 }
 export function courseSummary(course:SavedCourse){
- const p=course.payload.preview;
+ const p=course.payload.formatVersion===3?projectOmittedPreview(course.payload.preview,course.payload.omission.selected):course.payload.preview;
  return {id:course.id,createdAt:course.createdAt,title:p.title,meters:p.meters,cards:p.cards.length,nearby:p.cards.filter(c=>c.map.shortGeometry).length,held:p.cards.filter(c=>c.map.state==="held"&&!c.map.shortGeometry).length,sourceTime:p.source.osmBaseTimestamp};
 }
 export function createCourseRepository(path:string,now=()=>new Date().toISOString(),newId=()=>"course-"+randomUUID()){
