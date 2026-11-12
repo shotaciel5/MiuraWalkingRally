@@ -57,9 +57,10 @@ npm ci
 
 package-lock.jsonに従ってインストールします。Node.jsとnpmの対応版は前項を確認してください。
 
-### 2. 開発サーバーを起動
+### 2. 初期デモを登録して開発サーバーを起動
 
 ~~~text
+npm run demo:seed
 npm run dev
 ~~~
 
@@ -370,3 +371,9 @@ npm.cmd run landmarks:prepare -- --source draft --cache-only
 ```
 
 最初のコマンドを再実行し、requestCounts.graph / images が0になることで再利用を確認できます。トークンは既存の.env.localを使用し、引数には書きません。三崎/城ヶ島の新ルートで写真3件ずつ、階段を含む公園ルートで画像なしの結果も再現しました。[手順・入力例・制限](docs/landmark-preparation-poc.md)。地点キャッシュは200件、写真20件、採用状態50ルート、品質不足100件の有限保存です。通常公開/参加者への反映や現地の確認は含みません。
+
+### 別環境で同じデモを試す（P2-11）
+
+少数の初期コース2件、目印の地物44地点、Mapillary画像9枚（約0.86MB）と出典を同梱しています。上のdemo:seedはローカルDBへの明示登録で、既存の下書き・公開停止状態・台帳を上書きせず、再実行で重複しません。トークンなしで /courses の参加者フローと /operator/landmarks/review の切り抜き写真候補を試せます。写真の通常公開コースへの反映は後続です。
+
+同梱JSON/画像は読み取り専用、実DB/API取得キャッシュはGit対象外です。AWSの初期登録や共有ストレージを今回導入したものではありません。[初期データ・保存境界・移行時の注意](docs/bundled-demo-data.md)、[画像/データの利用条件](public/demo-landmarks/v1/NOTICE.md)。

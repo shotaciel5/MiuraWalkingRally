@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "id": "miura-demo-courses-v1",
+  "preparedAt": "2026-11-12T00:00:00.000Z",
+  "courses": [
+    {
+      "id": "course-38467633-8000-4000-8000-000000000001",
+      "title": "三崎のまち歩き（デモ）",
+      "start": "osm-way-384676338",
+      "finish": "osm-way-384676338",
+      "stops": [
+        {
+          "kind": "checkpoint",
+          "id": "osm-way-394752558"
+        },
+        {
+          "kind": "checkpoint",
+          "id": "osm-node-2046962408"
+        }
+      ]
+    },
+    {
+      "id": "course-12116210-2900-4000-8000-000000000002",
+      "title": "城ヶ島の灯台めぐり（デモ）",
+      "start": "osm-node-1211621029",
+      "finish": "osm-node-1211621029",
+      "stops": [
+        {
+          "kind": "checkpoint",
+          "id": "osm-node-1947514027"
+        }
+      ]
+    }
+  ]
+}

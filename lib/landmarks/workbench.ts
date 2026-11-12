@@ -1,16 +1,16 @@
 import {loadLandmarkDataset} from "./dataset.ts";
-import {createLandmarkStorage,type LandmarkStorage} from "./storage.ts";
+import {getLandmarkStorage,type LandmarkStorage} from "./storage.ts";
 import {createMapillaryClient,MapillaryError} from "./mapillary.ts";
 import {candidatesForCard,choiceKey,type Dataset,type Review,type TargetCache,type PhotoAsset,type PhotoFailure} from "./model.ts";
-export type WorkbenchState={dataset:Dataset;review:Review;targets:Record<string,TargetCache>;assets:Record<string,PhotoAsset>;photoFailures:Record<string,PhotoFailure>;configured:boolean};
-export function workbenchState(dataset:Dataset,storage:LandmarkStorage=createLandmarkStorage()):WorkbenchState{
+export type WorkbenchState={dataset:Dataset;review:Review;targets:Record<string,TargetCache>;assets:Record<string,PhotoAsset>;photoFailures:Record<string,PhotoFailure>;configured:boolean;bundleId:string|null};
+export function workbenchState(dataset:Dataset,storage:LandmarkStorage=getLandmarkStorage()):WorkbenchState{
  const targets:Record<string,TargetCache>={},assets:Record<string,PhotoAsset>={},photoFailures:Record<string,PhotoFailure>={};
  for(const t of dataset.targets){const c=storage.target(t.key);if(c){targets[t.key]=c;for(const candidate of c.candidates)if(candidate.provider==="mapillary"){const id=candidate.id.slice(10),asset=storage.asset(id);if(asset)assets[id]=asset;else{const failure=storage.photoFailure(id);if(failure)photoFailures[id]=failure}}}}
- return {dataset,review:storage.review(dataset.id),targets,assets,photoFailures,configured:!!process.env.MAPILLARY_ACCESS_TOKEN?.trim()};
+ return {dataset,review:storage.review(dataset.id),targets,assets,photoFailures,bundleId:storage.bundleId,configured:!!process.env.MAPILLARY_ACCESS_TOKEN?.trim()};
 }
 const inFlight=new Map<string,Promise<unknown>>();
 async function once<T>(key:string,run:()=>Promise<T>):Promise<T>{const pending=inFlight.get(key);if(pending)return pending as Promise<T>;const result=run();inFlight.set(key,result);try{return await result}finally{inFlight.delete(key)}}
-export async function operateWorkbench(input:unknown,storage=createLandmarkStorage(),client=createMapillaryClient(process.env.MAPILLARY_ACCESS_TOKEN)){
+export async function operateWorkbench(input:unknown,storage=getLandmarkStorage(),client=createMapillaryClient(process.env.MAPILLARY_ACCESS_TOKEN)){
  if(!input||typeof input!=="object"||Array.isArray(input))throw Error("invalid-input");
  const value=input as Record<string,unknown>,action=value.action;
  const allowed=action==="prepare"?["action","source","datasetId","targetKey"]:action==="photo"?["action","source","datasetId","candidateId","retry"]:action==="save"?["action","source","datasetId","expectedRevision","choices"]:[];

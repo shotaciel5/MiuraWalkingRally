@@ -1,0 +1,5102 @@
+{
+  "version": 1,
+  "id": "miura-demo-landmarks-v1",
+  "preparedAt": "2026-11-12T05:11:44.301Z",
+  "metadataLicense": "https://opendatacommons.org/licenses/odbl/1-0/",
+  "imageLicense": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source": "Mapillary",
+  "notice": "Contains information from Mapillary, available under ODbL 1.0. Images: CC BY-SA 4.0; authors and source image IDs are listed per photo. Detection boxes and classification are unverified. These are a fixed demonstration snapshot, not current on-site evidence.",
+  "targets": [
+    {
+      "version": 1,
+      "key": "0a9e09acc45539205a2d085c124f4ad5a0d7e2184bd926492b405b49a1825a0e",
+      "point": {
+        "lat": 35.1359241,
+        "lon": 139.612419
+      },
+      "fetchedAt": "2026-11-12T01:24:54.797Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1110428613983498",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428623983497",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61269,
+            "lat": 35.135788
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428627316830",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.135822
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428737316819",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428747316818",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6127,
+            "lat": 35.13578
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850688166292",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61238,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850694832958",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850741499620",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.1361
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850751499619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61221,
+            "lat": 35.13611
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850764832951",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850771499617",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13591
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850774832950",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61246,
+            "lat": 35.13614
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850808166280",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850811499613",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.136124
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "0af4467aa875ab113e49d00b1088ae1fa4a3e6af328d246f7bac389e46920fd6",
+      "point": {
+        "lat": 35.1350764,
+        "lon": 139.6115812
+      },
+      "fetchedAt": "2026-11-12T01:24:50.884Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "11c2d4be3a9ab48b6e16374c089e6a48a480bcd1e7e972c3a7b91a813ea4a501",
+      "point": {
+        "lat": 35.135938,
+        "lon": 139.6124302
+      },
+      "fetchedAt": "2026-11-12T01:24:55.472Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1110428613983498",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428623983497",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61269,
+            "lat": 35.135788
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428627316830",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.135822
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428737316819",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428747316818",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6127,
+            "lat": 35.13578
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850688166292",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61238,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850691499625",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.136154
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850694832958",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850741499620",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.1361
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850751499619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61221,
+            "lat": 35.13611
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850764832951",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850771499617",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13591
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850774832950",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61246,
+            "lat": 35.13614
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850808166280",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850811499613",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.136124
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "151a3a3e3e0dd80f42ef966adf0bbe5da5bbcd3443396d077d584881348b6594",
+      "point": {
+        "lat": 35.1414097,
+        "lon": 139.6165828
+      },
+      "fetchedAt": "2026-11-12T01:24:36.969Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:505222732203765",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61667,
+            "lat": 35.141346
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222762203762",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61638,
+            "lat": 35.141582
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222835537088",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61682,
+            "lat": 35.141228
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222958870409",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61635,
+            "lat": 35.141415
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222962203742",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61635,
+            "lat": 35.14145
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222968870408",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141453
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222972203741",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141445
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222975537074",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61635,
+            "lat": 35.141445
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505223022203736",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141422
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505223048870400",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61632,
+            "lat": 35.141422
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:530505944658898",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61679,
+            "lat": 35.141502
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:530637787979047",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61667,
+            "lat": 35.141483
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860625562515",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61656,
+            "lat": 35.141403
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:962554364575183",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6165,
+            "lat": 35.141277
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "1bdba42e5bb6490a8a408249457cd6dbf91d3686bbfe63b67a3c667103cb2194",
+      "point": {
+        "lat": 35.141529,
+        "lon": 139.6177997
+      },
+      "fetchedAt": "2026-11-12T01:24:33.994Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:168100551919587",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.141453
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215405700164619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61801,
+            "lat": 35.141666
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215461636825692",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.14138
+          },
+          "classification": "object--traffic-light--general-horizontal",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215498153488707",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61763,
+            "lat": 35.14145
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:216100626761793",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61778,
+            "lat": 35.14159
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377023870377118",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61775,
+            "lat": 35.141373
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377068907039281",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61751,
+            "lat": 35.14156
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377089727037199",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61765,
+            "lat": 35.141476
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377209513691887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.141438
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377224050357100",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6176,
+            "lat": 35.141434
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860705562507",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61754,
+            "lat": 35.14138
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860712229173",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61774,
+            "lat": 35.141354
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860722229172",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6176,
+            "lat": 35.141407
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860735562504",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61772,
+            "lat": 35.14155
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860738895837",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6177,
+            "lat": 35.141537
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860832229161",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61758,
+            "lat": 35.141384
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860862229158",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61777,
+            "lat": 35.141243
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860872229157",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61758,
+            "lat": 35.141384
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860878895823",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.14132
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860885562489",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.141346
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860888895822",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61757,
+            "lat": 35.141315
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861065562471",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61766,
+            "lat": 35.14143
+          },
+          "classification": "object--traffic-light--general-horizontal-front",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861105562467",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61787,
+            "lat": 35.141415
+          },
+          "classification": "object--traffic-light--general-horizontal-side",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:822983041975919",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61766,
+            "lat": 35.14149
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:823122091962014",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.14151
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:932843586450469",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61798,
+            "lat": 35.141758
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:932843739783787",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61806,
+            "lat": 35.14166
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "22311dba65071df44680cc3571051f959eb49e853c01eb5ec3988c5bef066c1f",
+      "point": {
+        "lat": 35.1417702,
+        "lon": 139.6198595
+      },
+      "fetchedAt": "2026-11-12T01:24:29.092Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "24d61351103954d887e81a2db08ada3f6eabd8db28ca0b3e806d928786f7eca7",
+      "point": {
+        "lat": 35.1365826,
+        "lon": 139.6126755
+      },
+      "fetchedAt": "2026-11-12T01:25:00.110Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1600634807419507",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6126,
+            "lat": 35.13678
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883821578601233",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.13637
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883874258595965",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61267,
+            "lat": 35.136486
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899534926811887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61275,
+            "lat": 35.13658
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899678870130826",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13664
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3902994803132566",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61282,
+            "lat": 35.13675
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3903286059770107",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61273,
+            "lat": 35.136597
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "269c72d3afeb7271ee90fffb386ceca294cbcf3de06061648dd63e738ab46fef",
+      "point": {
+        "lat": 35.1418239,
+        "lon": 139.6183242
+      },
+      "fetchedAt": "2026-11-12T01:24:31.053Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:215479870157202",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61842,
+            "lat": 35.141953
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497358145029332",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61821,
+            "lat": 35.14156
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497393591692454",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61816,
+            "lat": 35.141575
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497412808357199",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6182,
+            "lat": 35.141556
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497420328356447",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61818,
+            "lat": 35.14158
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557585168560959",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61848,
+            "lat": 35.141808
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557634308556045",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61816,
+            "lat": 35.14188
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557698911882918",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61838,
+            "lat": 35.141773
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:558305358488940",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61829,
+            "lat": 35.141674
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "33bf03d24d9efc7a13844fdfd2f317490420114d3f59727803f6889b41d4ebe2",
+      "point": {
+        "lat": 35.1416025,
+        "lon": 139.6196124
+      },
+      "fetchedAt": "2026-11-12T01:24:28.659Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "36c7fa03f9c8cee4dc18283a0b3115b6259fb30ed99835b3cc8804c2877381f3",
+      "point": {
+        "lat": 35.1411593,
+        "lon": 139.6179146
+      },
+      "fetchedAt": "2026-11-11T15:34:24.250Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:377023870377118",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61775,
+            "lat": 35.141373
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377124653700373",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6181,
+            "lat": 35.141094
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860628895848",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61789,
+            "lat": 35.14122
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860712229173",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61774,
+            "lat": 35.141354
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860862229158",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61777,
+            "lat": 35.141243
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860878895823",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.14132
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860885562489",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.141346
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861102229134",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61777,
+            "lat": 35.14124
+          },
+          "classification": "object--traffic-light--general-horizontal-back",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861105562467",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61787,
+            "lat": 35.141415
+          },
+          "classification": "object--traffic-light--general-horizontal-side",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "39e672a6be7dd552ee7c422f88e3aa3c4aa52f50391c787e8c429252a4c7f4c7",
+      "point": {
+        "lat": 35.1351477,
+        "lon": 139.6120515
+      },
+      "fetchedAt": "2026-11-12T01:24:51.875Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:2883840208599370",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.135357
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:451432736106979",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61194,
+            "lat": 35.134983
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940900343408050",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61217,
+            "lat": 35.13529
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940957280069023",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.13526
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:941011213396963",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6121,
+            "lat": 35.135292
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:941034916727926",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61201,
+            "lat": 35.13521
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "3a59324acb1c2aadfcb0bd80cdb60b44f10e2010c59cb58576b0ed00f73238fb",
+      "point": {
+        "lat": 35.136038,
+        "lon": 139.6125251
+      },
+      "fetchedAt": "2026-11-12T01:24:56.166Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1110428613983498",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428623983497",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61269,
+            "lat": 35.135788
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428627316830",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.135822
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428737316819",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850688166292",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61238,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850694832958",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850741499620",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.1361
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850751499619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61221,
+            "lat": 35.13611
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850764832951",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850771499617",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13591
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850774832950",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61246,
+            "lat": 35.13614
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850808166280",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850811499613",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.136124
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "3ce36ecbee2790525bc13870c916542ecc4d1fd7afdd9e5c66da6c3c45a7e75f",
+      "point": {
+        "lat": 35.1415261,
+        "lon": 139.6190959
+      },
+      "fetchedAt": "2026-11-12T01:24:27.235Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:168786468582329",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6191,
+            "lat": 35.14156
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2871853933058086",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61891,
+            "lat": 35.141674
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2871867933056686",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61902,
+            "lat": 35.141575
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2871959546380858",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6189,
+            "lat": 35.141613
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2871987509711395",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61888,
+            "lat": 35.14161
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2872035773039902",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61894,
+            "lat": 35.141594
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557515245234618",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61906,
+            "lat": 35.141586
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "3f0b8fb1f345e183bdb89bbbbcd9b5c43a841b008db4374c174e2608bf381a96",
+      "point": {
+        "lat": 35.1420707,
+        "lon": 139.6198529
+      },
+      "fetchedAt": "2026-11-11T15:34:32.074Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "40722085064d6ea6b51984406ca2b4d9ffb81cb600ab55ad65fdb3e1ab21b085",
+      "point": {
+        "lat": 35.1422772,
+        "lon": 139.6187202
+      },
+      "fetchedAt": "2026-11-12T01:24:24.238Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "484d75d1aa0582bc468464b48a8de02243d7b11f0847ba01f100935461746d74",
+      "point": {
+        "lat": 35.1416312,
+        "lon": 139.6178586
+      },
+      "fetchedAt": "2026-11-12T01:24:33.014Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:168100551919587",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.141453
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215405700164619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61801,
+            "lat": 35.141666
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215498153488707",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61763,
+            "lat": 35.14145
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:216100626761793",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61778,
+            "lat": 35.14159
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377023870377118",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61775,
+            "lat": 35.141373
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377089727037199",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61765,
+            "lat": 35.141476
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377209513691887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.141438
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860735562504",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61772,
+            "lat": 35.14155
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860738895837",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6177,
+            "lat": 35.141537
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861065562471",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61766,
+            "lat": 35.14143
+          },
+          "classification": "object--traffic-light--general-horizontal-front",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861105562467",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61787,
+            "lat": 35.141415
+          },
+          "classification": "object--traffic-light--general-horizontal-side",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:822983041975919",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61766,
+            "lat": 35.14149
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:823122091962014",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.14151
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:932843586450469",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61798,
+            "lat": 35.141758
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:932843739783787",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61806,
+            "lat": 35.14166
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "4bfa272d9569a4112b99284037c972f4946a3f4d8f1646d45fcb3727f651d36e",
+      "point": {
+        "lat": 35.1419105,
+        "lon": 139.6180245
+      },
+      "fetchedAt": "2026-11-12T01:24:32.255Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:187080566622410",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61786,
+            "lat": 35.141735
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215405700164619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61801,
+            "lat": 35.141666
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "57fc54d3d5f24d856de8c792329cf3407481c5f6d561508afdfa9f92f1d5cbc7",
+      "point": {
+        "lat": 35.142110864247094,
+        "lon": 139.62076479746906
+      },
+      "fetchedAt": "2026-11-12T01:24:30.378Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "68aa7910ba900ce22b72cbf6cde585dc357b737f069cc8c603de51f48ccff7b3",
+      "point": {
+        "lat": 35.142680795248204,
+        "lon": 139.61882443987864
+      },
+      "fetchedAt": "2026-11-12T01:24:22.254Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1180221232451171",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6187,
+            "lat": 35.142426
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:198385822133345",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61876,
+            "lat": 35.1424
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:276874217451702",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61877,
+            "lat": 35.1426
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852013089079623",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61862,
+            "lat": 35.142544
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852029425744656",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61865,
+            "lat": 35.142597
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852029875744611",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61879,
+            "lat": 35.14263
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852195202394745",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61864,
+            "lat": 35.142586
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852247532389512",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61876,
+            "lat": 35.142696
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852279392386326",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61877,
+            "lat": 35.142624
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "6abf9f61b8f5c00b84f56d7d0fa657e0a6b967e2d88851d2621ba3569709d3de",
+      "point": {
+        "lat": 35.1413648,
+        "lon": 139.618125
+      },
+      "fetchedAt": "2026-11-11T15:34:25.412Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:377124653700373",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6181,
+            "lat": 35.141094
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860628895848",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61789,
+            "lat": 35.14122
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861105562467",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61787,
+            "lat": 35.141415
+          },
+          "classification": "object--traffic-light--general-horizontal-side",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "711ba1e8b80d9c9a9a8f295b0c0d99a45df9b63cfcbaa495db12090d77abee6a",
+      "point": {
+        "lat": 35.1410358,
+        "lon": 139.6180342
+      },
+      "fetchedAt": "2026-11-11T15:34:24.741Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:377124653700373",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6181,
+            "lat": 35.141094
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860628895848",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61789,
+            "lat": 35.14122
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "8aa38b6304e76401d1fe8eada69f6eec67f6a3d1ae8a4a34c38e8b0ad823660e",
+      "point": {
+        "lat": 35.1363011,
+        "lon": 139.6125959
+      },
+      "fetchedAt": "2026-11-12T01:24:57.499Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1524850688166292",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61238,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850694832958",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850774832950",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61246,
+            "lat": 35.13614
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850778166283",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61288,
+            "lat": 35.136204
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883821578601233",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.13637
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883832218600169",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6128,
+            "lat": 35.13627
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883833845266673",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61269,
+            "lat": 35.136158
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883874258595965",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61267,
+            "lat": 35.136486
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883987608584630",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61285,
+            "lat": 35.136158
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2884001688583222",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61249,
+            "lat": 35.136154
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2884046815245376",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61272,
+            "lat": 35.136265
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "8f3819037dff3388328f7a29deed424ff3dc6a48b3ceaa59d2d37f3b1c75a817",
+      "point": {
+        "lat": 35.1417285,
+        "lon": 139.6194827
+      },
+      "fetchedAt": "2026-11-12T01:24:27.833Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "94a01ffc0e2d4c38bdf63466250fa146dc67835d21f18e67657ec16d3d9e6a6b",
+      "point": {
+        "lat": 35.141037795578356,
+        "lon": 139.61620977310824
+      },
+      "fetchedAt": "2026-11-12T01:24:37.654Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "94f5b33593497279381c0a47ca2808e776df9ffe2e3855dae8c0a400520b7ae6",
+      "point": {
+        "lat": 35.1413447,
+        "lon": 139.6169668
+      },
+      "fetchedAt": "2026-11-12T01:24:35.497Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:505222732203765",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61667,
+            "lat": 35.141346
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222835537088",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61682,
+            "lat": 35.141228
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222848870420",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61699,
+            "lat": 35.141186
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505223032203735",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61726,
+            "lat": 35.141365
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:530505944658898",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61679,
+            "lat": 35.141502
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860835562494",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61687,
+            "lat": 35.141087
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860842229160",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61679,
+            "lat": 35.141117
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860875562490",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61684,
+            "lat": 35.141224
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860995562478",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61682,
+            "lat": 35.141113
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "a1898d6823f01d458933c4fb3d014e51b7c973b8f511b2a0bab9be0dd2487521",
+      "point": {
+        "lat": 35.1364497,
+        "lon": 139.6126388
+      },
+      "fetchedAt": "2026-11-12T01:24:58.825Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:2883821578601233",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.13637
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883832218600169",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6128,
+            "lat": 35.13627
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883874258595965",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61267,
+            "lat": 35.136486
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2884046815245376",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61272,
+            "lat": 35.136265
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899534926811887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61275,
+            "lat": 35.13658
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899678870130826",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13664
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3903286059770107",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61273,
+            "lat": 35.136597
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "a1eadfda6d454bed4e24e9ceb6fe08d8e2adeff6fa79587e42c0b73f37e754aa",
+      "point": {
+        "lat": 35.1354369,
+        "lon": 139.6122287
+      },
+      "fetchedAt": "2026-11-12T01:24:53.898Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:2883840208599370",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.135357
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883989715251086",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61212,
+            "lat": 35.13533
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940900343408050",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61217,
+            "lat": 35.13529
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940952033402881",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6123,
+            "lat": 35.135586
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940957280069023",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.13526
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:941011213396963",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6121,
+            "lat": 35.135292
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "a8d58cee104e004af4d21ed79fcf7c8e01edfa911d2bf95ac191b5f6461f5337",
+      "point": {
+        "lat": 35.1421238,
+        "lon": 139.6180805
+      },
+      "fetchedAt": "2026-11-12T01:24:38.802Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:557586228560853",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.618,
+            "lat": 35.142113
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557634308556045",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61816,
+            "lat": 35.14188
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "aa35e731639a48f332b8ec02fbd2ee4e67b867f214c9d80e1cec47d8c3b94d3a",
+      "point": {
+        "lat": 35.1420629,
+        "lon": 139.6186439
+      },
+      "fetchedAt": "2026-11-12T01:24:25.089Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:215479870157202",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61842,
+            "lat": 35.141953
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557554828563993",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61873,
+            "lat": 35.14192
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:558388318480644",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6188,
+            "lat": 35.141838
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "ab6264a68563089ba2e5e89a22a1f58da1dbe6baa4ff93282de7b2038a251033",
+      "point": {
+        "lat": 35.1426075,
+        "lon": 139.6188018
+      },
+      "fetchedAt": "2026-11-12T01:24:23.192Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1180221232451171",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6187,
+            "lat": 35.142426
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:198385822133345",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61876,
+            "lat": 35.1424
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:276874217451702",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61877,
+            "lat": 35.1426
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:493640835309926",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61865,
+            "lat": 35.142406
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852013089079623",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61862,
+            "lat": 35.142544
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852029425744656",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61865,
+            "lat": 35.142597
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852029875744611",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61879,
+            "lat": 35.14263
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852195202394745",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61864,
+            "lat": 35.142586
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852247532389512",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61876,
+            "lat": 35.142696
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:852279392386326",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61877,
+            "lat": 35.142624
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "ab8f27bef3d2a752db154bc2f07d5710246cd0f759f1bc922be133ac87ffa367",
+      "point": {
+        "lat": 35.1414433,
+        "lon": 139.6166129
+      },
+      "fetchedAt": "2026-11-12T01:24:36.280Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:505222732203765",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61667,
+            "lat": 35.141346
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222762203762",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61638,
+            "lat": 35.141582
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222835537088",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61682,
+            "lat": 35.141228
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222958870409",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61635,
+            "lat": 35.141415
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222962203742",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61635,
+            "lat": 35.14145
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222968870408",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141453
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222972203741",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141445
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505222975537074",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61635,
+            "lat": 35.141445
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505223018870403",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141613
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505223022203736",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61633,
+            "lat": 35.141422
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:505223048870400",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61632,
+            "lat": 35.141422
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:530505944658898",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61679,
+            "lat": 35.141502
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:530637787979047",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61667,
+            "lat": 35.141483
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860625562515",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61656,
+            "lat": 35.141403
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860875562490",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61684,
+            "lat": 35.141224
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:962554364575183",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6165,
+            "lat": 35.141277
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "b5d414c1a468c47c943ccfebae027d4985b70e062ad312d8a6a647d1aafc8c80",
+      "point": {
+        "lat": 35.1415437,
+        "lon": 139.6177432
+      },
+      "fetchedAt": "2026-11-12T01:24:34.743Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:168100551919587",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.141453
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215405700164619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61801,
+            "lat": 35.141666
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215461636825692",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.14138
+          },
+          "classification": "object--traffic-light--general-horizontal",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:215498153488707",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61763,
+            "lat": 35.14145
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:216100626761793",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61778,
+            "lat": 35.14159
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377023870377118",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61775,
+            "lat": 35.141373
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377068907039281",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61751,
+            "lat": 35.14156
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377089727037199",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61765,
+            "lat": 35.141476
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377209513691887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61761,
+            "lat": 35.141438
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:377224050357100",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6176,
+            "lat": 35.141434
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860705562507",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61754,
+            "lat": 35.14138
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860712229173",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61774,
+            "lat": 35.141354
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860722229172",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6176,
+            "lat": 35.141407
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860735562504",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61772,
+            "lat": 35.14155
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860738895837",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6177,
+            "lat": 35.141537
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860832229161",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61758,
+            "lat": 35.141384
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860855562492",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61748,
+            "lat": 35.141365
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860872229157",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61758,
+            "lat": 35.141384
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860878895823",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.14132
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860885562489",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.141346
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534860888895822",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61757,
+            "lat": 35.141315
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861065562471",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61766,
+            "lat": 35.14143
+          },
+          "classification": "object--traffic-light--general-horizontal-front",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861105562467",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61787,
+            "lat": 35.141415
+          },
+          "classification": "object--traffic-light--general-horizontal-side",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:822983041975919",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61766,
+            "lat": 35.14149
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:823122091962014",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61768,
+            "lat": 35.14151
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:932843739783787",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61806,
+            "lat": 35.14166
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "b7fbbc730a21732cdbe7ad3b847a64b21d2d9348f789212472a6df6d2a59acf7",
+      "point": {
+        "lat": 35.1413926,
+        "lon": 139.6183435
+      },
+      "fetchedAt": "2026-11-11T15:34:26.761Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:497325231699290",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.6181,
+            "lat": 35.141365
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497358145029332",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61821,
+            "lat": 35.14156
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497392571692556",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61829,
+            "lat": 35.141342
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497393591692454",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61816,
+            "lat": 35.141575
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497412808357199",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6182,
+            "lat": 35.141556
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:497420328356447",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61818,
+            "lat": 35.14158
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "bc1e06c9e02db72b34ddbc548a6c33dcc0d972a3e2e58166dafc5366a82e5f39",
+      "point": {
+        "lat": 35.13654848548878,
+        "lon": 139.61282411658024
+      },
+      "fetchedAt": "2026-11-12T01:25:00.698Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:2883821578601233",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.13637
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883832218600169",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6128,
+            "lat": 35.13627
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883874258595965",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61267,
+            "lat": 35.136486
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899534926811887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61275,
+            "lat": 35.13658
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899678870130826",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13664
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3902994803132566",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61282,
+            "lat": 35.13675
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3903286059770107",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61273,
+            "lat": 35.136597
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "c3627f120ac6bc2f87ddefb18f7bfcf86999a0e73ce132e9214ecb87fbb8dd5e",
+      "point": {
+        "lat": 35.1414705,
+        "lon": 139.6181222
+      },
+      "fetchedAt": "2026-11-11T15:34:26.065Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:215405700164619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61801,
+            "lat": 35.141666
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:534861105562467",
+          "provider": "mapillary",
+          "kind": "signal",
+          "symbol": "signal",
+          "label": "信号",
+          "point": {
+            "lon": 139.61787,
+            "lat": 35.141415
+          },
+          "classification": "object--traffic-light--general-horizontal-side",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "c8da90fcd3ea0b4d84f9970d7bcc6c1c76b151be22d805dd5e4e3b3004d22629",
+      "point": {
+        "lat": 35.1360477,
+        "lon": 139.6125277
+      },
+      "fetchedAt": "2026-11-12T01:24:56.747Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1110428613983498",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428627316830",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.135822
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1110428737316819",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61266,
+            "lat": 35.13585
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850688166292",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61238,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850694832958",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850741499620",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.1361
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850751499619",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61221,
+            "lat": 35.13611
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850764832951",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850771499617",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13591
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850774832950",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61246,
+            "lat": 35.13614
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850808166280",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61223,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850811499613",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.136124
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "cacf23db3ec11fd760092bc066c2c6d822a94d1fa66965af5fbec506d61e4462",
+      "point": {
+        "lat": 35.1353762,
+        "lon": 139.6122071
+      },
+      "fetchedAt": "2026-11-12T01:24:52.945Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:2883840208599370",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61224,
+            "lat": 35.135357
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883989715251086",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61212,
+            "lat": 35.13533
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940900343408050",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61217,
+            "lat": 35.13529
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940952033402881",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6123,
+            "lat": 35.135586
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:940957280069023",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6122,
+            "lat": 35.13526
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:941011213396963",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6121,
+            "lat": 35.135292
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:941034916727926",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61201,
+            "lat": 35.13521
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "cfce38341663970fc9d2e56479855c7aa9798aca5259b75182121b0bde4af1cf",
+      "point": {
+        "lat": 35.1363234,
+        "lon": 139.6126019
+      },
+      "fetchedAt": "2026-11-12T01:24:58.166Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:1524850688166292",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61238,
+            "lat": 35.136127
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850694832958",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.136158
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850774832950",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61246,
+            "lat": 35.13614
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:1524850778166283",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61288,
+            "lat": 35.136204
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883821578601233",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.13637
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883832218600169",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6128,
+            "lat": 35.13627
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883833845266673",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61269,
+            "lat": 35.136158
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883874258595965",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61267,
+            "lat": 35.136486
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883987608584630",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61285,
+            "lat": 35.136158
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2884001688583222",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61249,
+            "lat": 35.136154
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2884046815245376",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61272,
+            "lat": 35.136265
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899534926811887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61275,
+            "lat": 35.13658
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "d3dbfbcb924bf0775eec696a7eb3d75aa6da102386341e3e5db0eb184ddf76b6",
+      "point": {
+        "lat": 35.1421305,
+        "lon": 139.6183156
+      },
+      "fetchedAt": "2026-11-12T01:24:39.500Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:215479870157202",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61842,
+            "lat": 35.141953
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557586228560853",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.618,
+            "lat": 35.142113
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557634308556045",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61816,
+            "lat": 35.14188
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:964784769868508",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61829,
+            "lat": 35.142273
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:964784836535168",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61826,
+            "lat": 35.142204
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:964784863201832",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61813,
+            "lat": 35.142082
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:964784866535165",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61826,
+            "lat": 35.14216
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "d49df0219a02ede3732f0caebd511872e4d1a41bb89896729bbb1f2e855e271a",
+      "point": {
+        "lat": 35.13502767432764,
+        "lon": 139.6111347020243
+      },
+      "fetchedAt": "2026-11-12T01:24:49.775Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:582596293132847",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61081,
+            "lat": 35.134968
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "dd04bcec9ca90ba8060fadafd7dab30d6f661fe25bfe6b9b92639c6af378906d",
+      "point": {
+        "lat": 35.1418464,
+        "lon": 139.6199854
+      },
+      "fetchedAt": "2026-11-12T01:24:29.511Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "e24d2efcf23ccc8321456a89ec949c490800448cbc17ef751c25c31ad1dc5b01",
+      "point": {
+        "lat": 35.1417691,
+        "lon": 139.6185412
+      },
+      "fetchedAt": "2026-11-12T01:24:25.890Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:215479870157202",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61842,
+            "lat": 35.141953
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:468343914239162",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6184,
+            "lat": 35.141533
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557476571905152",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6187,
+            "lat": 35.14174
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557554828563993",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61873,
+            "lat": 35.14192
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557585168560959",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61848,
+            "lat": 35.141808
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557631215223021",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61876,
+            "lat": 35.141697
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557698911882918",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61838,
+            "lat": 35.141773
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:557703761882433",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61874,
+            "lat": 35.1417
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:558305358488940",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61829,
+            "lat": 35.141674
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:558388318480644",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.6188,
+            "lat": 35.141838
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    },
+    {
+      "version": 1,
+      "key": "e3d6f582da942c6ea84a06396779e4fbbacc38693fd08399cba287aa4dc5f364",
+      "point": {
+        "lat": 35.1421079,
+        "lon": 139.6209242
+      },
+      "fetchedAt": "2026-11-11T15:34:32.732Z",
+      "partial": false,
+      "candidates": []
+    },
+    {
+      "version": 1,
+      "key": "f8ea9c1776d30eb9f6917f13998ea846cce2806ec6da2c2f02e86a2aa1292ae3",
+      "point": {
+        "lat": 35.1364822,
+        "lon": 139.612648
+      },
+      "fetchedAt": "2026-11-12T01:24:59.490Z",
+      "partial": false,
+      "candidates": [
+        {
+          "id": "mapillary:2883821578601233",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61255,
+            "lat": 35.13637
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883832218600169",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.6128,
+            "lat": 35.13627
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2883874258595965",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "店舗看板",
+          "point": {
+            "lon": 139.61267,
+            "lat": 35.136486
+          },
+          "classification": "object--sign--store",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:2884046815245376",
+          "provider": "mapillary",
+          "kind": "crossing",
+          "symbol": "crossing",
+          "label": "横断歩道の路面表示",
+          "point": {
+            "lon": 139.61272,
+            "lat": 35.136265
+          },
+          "classification": "marking--discrete--crosswalk-zebra",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899534926811887",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61275,
+            "lat": 35.13658
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3899678870130826",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "広告看板",
+          "point": {
+            "lon": 139.61258,
+            "lat": 35.13664
+          },
+          "classification": "object--sign--advertisement",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        },
+        {
+          "id": "mapillary:3903286059770107",
+          "provider": "mapillary",
+          "kind": "unique",
+          "symbol": "sign",
+          "label": "旗・バナー",
+          "point": {
+            "lon": 139.61273,
+            "lat": 35.136597
+          },
+          "classification": "object--banner",
+          "sourceUrl": "https://www.mapillary.com/",
+          "note": "Mapillaryの自動検出・推定位置。現地と進入方向からの見え方は未確認です。"
+        }
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "1180221232451171",
+        "imageId": "1406211946378470",
+        "creator": "mura",
+        "capturedAt": 1594470146175,
+        "fetchedAt": "2026-11-12T01:24:41.310Z",
+        "roi": {
+          "left": 1.171875,
+          "top": 30.56640625,
+          "width": 5.126953125,
+          "height": 6.640625
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/1406211946378470-b5be5fd38633b890.jpg",
+      "sha256": "b5be5fd38633b89076241c940768df7011cc5e28fee23f7bc51cc1634bbeefcb",
+      "bytes": 92983
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "1524850774832950",
+        "imageId": "922496969324279",
+        "creator": "musashino5",
+        "capturedAt": 1731816565902,
+        "fetchedAt": "2026-11-12T01:25:05.523Z",
+        "roi": {
+          "left": 5.3955078125,
+          "top": 53.125,
+          "width": 4.5166015625,
+          "height": 2.2705078125
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/922496969324279-daba4f2e1eb03636.jpg",
+      "sha256": "daba4f2e1eb036368028e8a6c4d16453b7653f598da7fb290c44fb44c6991e83",
+      "bytes": 106513
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "216100626761793",
+        "imageId": "323986479296920",
+        "creator": "mura",
+        "capturedAt": 1594468037459,
+        "fetchedAt": "2026-11-12T01:24:45.936Z",
+        "roi": {
+          "left": 14.8681640625,
+          "top": 13.8916015625,
+          "width": 11.8408203125,
+          "height": 31.93359375
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/323986479296920-1dafc79f1cff29a9.jpg",
+      "sha256": "1dafc79f1cff29a983470dbb02fa439426dd7111827dee17d75ce1af9e397019",
+      "bytes": 94681
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "2883874258595965",
+        "imageId": "1385407041825123",
+        "creator": "mura",
+        "capturedAt": 1521976284340,
+        "fetchedAt": "2026-11-12T01:25:04.192Z",
+        "roi": {
+          "left": 75.439453125,
+          "top": 34.8876953125,
+          "width": 8.4228515625,
+          "height": 8.30078125
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/1385407041825123-43ebb908d82e267f.jpg",
+      "sha256": "43ebb908d82e267f3ef6c7cde024b62aa97a3dae9860f13f60aebf1053daa7d7",
+      "bytes": 71690
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "468343914239162",
+        "imageId": "776002479787051",
+        "creator": "mura",
+        "capturedAt": 1521980794228,
+        "fetchedAt": "2026-11-11T15:51:23.370Z",
+        "roi": {
+          "left": 59.375,
+          "top": 36.42578125,
+          "width": 8.349609375,
+          "height": 6.982421875
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/776002479787051-3d825498c1c6beb4.jpg",
+      "sha256": "3d825498c1c6beb485134e2c921d894fd155e3b0513d9789779f0683b59ed69b",
+      "bytes": 99475
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "497392571692556",
+        "imageId": "905011253679967",
+        "creator": "mura",
+        "capturedAt": 1537097402863,
+        "fetchedAt": "2026-11-11T15:51:20.753Z",
+        "roi": {
+          "left": 72.216796875,
+          "top": 35.400390625,
+          "width": 20.068359375,
+          "height": 13.2568359375
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/905011253679967-6c51a6bca59faa3e.jpg",
+      "sha256": "6c51a6bca59faa3e9b63a6ff81f917fc93e99a1d0906cdac04e792aeaa64b01f",
+      "bytes": 88517
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "497393591692454",
+        "imageId": "3836865473035404",
+        "creator": "mura",
+        "capturedAt": 1537097416855,
+        "fetchedAt": "2026-11-11T15:51:21.165Z",
+        "roi": {
+          "left": 17.1142578125,
+          "top": 46.7529296875,
+          "width": 3.7353515625,
+          "height": 4.7607421875
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/3836865473035404-ca2762ca4217f68e.jpg",
+      "sha256": "ca2762ca4217f68e7bde264985b9b2257ba70ed8eecf244e4ab43c7338a587e7",
+      "bytes": 88266
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "530505944658898",
+        "imageId": "1132725990525087",
+        "creator": "mura",
+        "capturedAt": 1594468482420,
+        "fetchedAt": "2026-11-12T01:24:43.480Z",
+        "roi": {
+          "left": 52.587890625,
+          "top": 37.109375,
+          "width": 6.9580078125,
+          "height": 5.17578125
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/1132725990525087-115a4b185192309f.jpg",
+      "sha256": "115a4b185192309f8ee7641f0fa88d38abfbeb092e7264e1f9f088dd4baface4",
+      "bytes": 90165
+    },
+    {
+      "asset": {
+        "version": 1,
+        "policyVersion": 2,
+        "featureId": "941011213396963",
+        "imageId": "733858710622847",
+        "creator": "mura",
+        "capturedAt": 1473498920000,
+        "fetchedAt": "2026-11-12T01:25:02.492Z",
+        "roi": {
+          "left": 35.4248046875,
+          "top": 11.767578125,
+          "width": 23.681640625,
+          "height": 12.5
+        },
+        "contentType": "image/jpeg"
+      },
+      "path": "/demo-landmarks/v1/733858710622847-12105e4958f3e22f.jpg",
+      "sha256": "12105e4958f3e22f29a1d06111096be236a3b14952cd83036b5b968bdb93d9d4",
+      "bytes": 125992
+    }
+  ]
+}

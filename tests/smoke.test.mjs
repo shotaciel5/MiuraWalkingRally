@@ -305,3 +305,11 @@ test("mandatory stairs and automatically prepared photo suggestions are exposed 
  const response=await get("/operator/landmarks/review"),html=await response.text();assert.equal(response.status,200);assert.match(html,/data-photo-suggestions/);assert.match(html,/data-mandatory-stairs/);assert.match(html,/階段 · 必須表示/);
  const value=await get("/api/operator/landmarks"),state=await value.json();assert.equal(value.status,200);assert.equal(typeof state.photoFailures,"object");assert.ok(!Array.isArray(state.photoFailures));const first=Object.values(state.assets)[0];if(first){const ok=await get("/api/operator/landmarks/images/"+first.featureId+"?image="+first.imageId+"&policy="+first.policyVersion);assert.equal(ok.status,200);await ok.arrayBuffer();const mismatch=await get("/api/operator/landmarks/images/"+first.featureId+"?image=0&policy="+first.policyVersion);assert.equal(mismatch.status,404);assert.equal(mismatch.headers.get("cache-control"),"no-store");await mismatch.arrayBuffer()}assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
 });
+
+test("bundled demo photos and provenance are available without a writable cache or token",async()=>{
+ const response=await get("/demo-landmarks/v1/manifest.json");assert.equal(response.status,200);const manifest=await response.json();assert.equal(manifest.version,1);assert.equal(manifest.photos.length,9);assert.equal(manifest.targets.length,44);
+ const notice=await get("/demo-landmarks/v1/NOTICE.md");assert.equal(notice.status,200);assert.match(await notice.text(),/CC BY-SA 4.0/);
+ for(const photo of manifest.photos){const r=await get(photo.path);assert.equal(r.status,200);const bytes=new Uint8Array(await r.arrayBuffer());assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256);assert.match(r.headers.get("content-type"),/^image\//)}
+ const state=await(await get("/api/operator/landmarks")).json();assert.equal(state.bundleId,manifest.id);assert.ok(Object.keys(state.assets).length>=3);assert.equal(Object.keys(state.targets).length,state.dataset.targets.length);
+ const html=await(await get("/operator/landmarks/review")).text();assert.match(html,/data-bundled-landmarks="miura-demo-landmarks-v1"/);assert.match(html,/同梱データ・出典/);
+});
