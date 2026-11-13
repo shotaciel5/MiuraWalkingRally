@@ -1,4 +1,4 @@
-import {freezeOmission,manualLandmarkSequences,type OmissionMode} from "../route/omission/selection.ts";
+import {freezeOmission,manualLandmarkSequences,defaultOmissionMode,type OmissionMode} from "../route/omission/selection.ts";
 import {freezeLandmarks,type LandmarkSnapshot} from "../landmarks/course-snapshot.ts";
 import {landmarkDatasetFromPreview} from "../landmarks/dataset.ts";
 import {workbenchState} from "../landmarks/workbench.ts";
@@ -11,10 +11,10 @@ import {createCourseRepository,checkedCoursePayload,courseFingerprint} from "./c
 import {canonicalJson,courseReceipt,parseSaveReceipt,CourseError,COURSE_GENERATOR_VERSION,type CoursePayload} from "./course-format.ts";
 import {getOperatorDatabasePath} from "./local-database.ts";
 type Context=ReturnType<ReturnType<typeof createDraftRepository>["load"]>;
-export function prepareCourseSave(context:Context,result:ReturnType<typeof createRallyPreview>,landmarks?:LandmarkSnapshot,selection:{mode:OmissionMode;manualSequences:number[]}={mode:"rule",manualSequences:[]}){
+export function prepareCourseSave(context:Context,result:ReturnType<typeof createRallyPreview>,landmarks?:LandmarkSnapshot,selection:{mode?:OmissionMode;manualSequences:number[]}={manualSequences:[]}){
  if(!context.draft||result.state!=="ready")throw new CourseError("conflict",result.state==="blocked"?result.message:"保存済みの下書きを確認してください。");
  const {omissionPlan,...preview}=result;
- const omission=omissionPlan?freezeOmission(omissionPlan,selection.mode,selection.manualSequences):undefined;
+ const omission=omissionPlan?freezeOmission(omissionPlan,selection.mode??defaultOmissionMode(omissionPlan),selection.manualSequences):undefined;
  if(omission&&!landmarks)throw new CourseError("unavailable","目印と省略条件の保存準備を確認してください。");
  const payload=checkedCoursePayload({formatVersion:omission?3:landmarks?2:1,generatorVersion:COURSE_GENERATOR_VERSION,input:{draft:context.draft,corrections:context.corrections},preview,...(landmarks?{landmarks}:{}),...(omission?{omission}:{})});
  return {payload,receipt:courseReceipt(payload,courseFingerprint(payload))};

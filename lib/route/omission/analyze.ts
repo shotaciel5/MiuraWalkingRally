@@ -1,10 +1,12 @@
+import {predictHybridPair,type PairInput} from "./inference.ts";
+import {HYBRID_VERSION,HYBRID_MODEL,type HybridEvidence,type HybridPrediction} from "./hybrid-contract.ts";
 import engine from "./vendor/routing.cjs";
 import {buildRoadBranches,type JunctionCandidate} from "../junctions.ts";
 import type {Graph,Point,WalkingRoute} from "../types.ts";
 import type {KomaMap} from "../koma.ts";
-import {OMISSION_VERSION,type OmissionPlan,type OmissionReason} from "./selection.ts";
+import {OMISSION_VERSION,parseHybridEvidence,type OmissionPlan,type OmissionReason} from "./selection.ts";
 type Shape=Parameters<typeof engine.similarJunctions>[0];
-export function analyzeKomaOmission(graph:Graph,route:WalkingRoute,cards:{map:KomaMap;candidate:JunctionCandidate}[]):OmissionPlan{
+export function analyzeKomaOmission(graph:Graph,route:WalkingRoute,cards:{map:KomaMap;candidate:JunctionCandidate}[],options:{method?:"rule"|"hybrid";scorePair?:(input:PairInput)=>HybridPrediction}={}):OmissionPlan{
  const ids=route.legs.flatMap((leg,i)=>i?leg.nodeIds.slice(1):leg.nodeIds);
  const topology=buildRoadBranches(graph);
  const g=engine.graph({nodes:[...graph.nodes.values()],ways:[...graph.ways.values()]});
@@ -62,5 +64,16 @@ export function analyzeKomaOmission(graph:Graph,route:WalkingRoute,cards:{map:Ko
   // Unavailable compatibility geometry cannot justify deleting an earlier frame.
   if(!shapes[i]||!shapes[j]||engine.similarJunctions(shapes[i]!,shapes[j]!))f.similarTo.push(j+1);
  }
- return {version:1,algorithm:OMISSION_VERSION,frames};
+ if(options.method==="rule")return {version:1,algorithm:OMISSION_VERSION,frames};
+ const scorePair=options.scorePair??predictHybridPair;
+ return {version:2,algorithm:HYBRID_VERSION,model:{...HYBRID_MODEL},frames:frames.map((f,i)=>{
+  const hybridPairs:HybridEvidence[]=[];
+  if(f.canOmit)for(let j=i+1;j<frames.length;j++)if(!f.similarTo.includes(j+1)){
+   let verdict:HybridPrediction;
+   try{if(!shapes[i]||!shapes[j])throw Error("Unavailable geometry");verdict=scorePair({candidate:shapes[i]!,target:shapes[j]!,entryIndex:shapes[i]!.incomingBranchIndex,targetEntryIndex:shapes[j]!.incomingBranchIndex});verdict=parseHybridEvidence({...verdict,targetSequence:j+1})}
+   catch{verdict={decision:"keep",reason:"inference-unavailable",keepScore:null,maxAngleDegrees:null,counts:null}}
+   hybridPairs.push({...verdict,targetSequence:j+1});
+  }
+  return {...f,hybridPairs};
+ })};
 }

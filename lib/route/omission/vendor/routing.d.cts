@@ -6,6 +6,8 @@ type Graph={nodes:Map<number,Node>;visual:Map<number,Edge[]>;adj:Map<number,Edge
 type Frame={id:string;at:number;center:Point;heading:number;branches:Point[][];canOmit:boolean;label:string;retainedForStraightSignal?:boolean;checkpoints?:unknown[];incomingBranchIndex?:number};
 declare const engine:{
  RULE_VERSION:string;
+ angle(value:number):number;
+ incomingBranchIndex(frame:{center:Point;branches:Point[][];routeIn?:Point[]}):number|null;
  graph(data:{nodes:Node[];ways:Way[]}):Graph;
  distance(a:Point,b:Point):number;
  bearing(a:Point,b:Point):number;

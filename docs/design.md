@@ -631,3 +631,9 @@ UI/API/repositoryの境界・同一Origin/JSON/no-storeとローカル/AWS不要
 共同開発者の資料をtools/koma-omission-referenceに凍結保存し、元ルールの最小コピーとTypeScriptの形状互換/選別/投影をlib/route/omissionへ置く。従来の全候補と30m図を保ち、別の28m WGS84枝/実経路8m進入方向で判定する。通常は省略版、設定ダイアログだけに全交差点の切替を置く。
 
 新規payload v3に全候補/目印・ルール版/保持理由/類似関係・手動保護・選択モード/表示対象を固定する。元候補の番号に紐づく目印編集と表示番号を分け、共通投影で再採番・距離・CP・地図を整合させる。v1/v2・既存公開版/同梱デモ・SQLite v7を維持し、Python/外部API/実験AIはアプリ起動に追加しない。[仕様/検証](koma-omission-integration.md)、[ADR-025](decisions/025-koma-omission-integration.md)。
+
+## 48. ③ ルール＋機械学習による追加保持（P4-08a）
+
+ユーザーの明示指示で[ADR-026](decisions/026-hybrid-koma-omission.md)を採用。新規はルール保護の後に、350特徴/200木の学習済みRandomForestで追加保持する。同枝数/30度以内/スコア0.2以上を資料どおり使い、不明/推論失敗は保持する。TypeScript/Nodeで推論し、Pythonは検証用だけ。外部API・クラウド・新npm依存を追加しない。
+
+新しい省略plan v2にモデル指紋/条件と完全なペア判断を固定する。payload v3/SQLite v7は維持し、旧plan v1と既存公開版を再推論しない。標準AI補助/ルール比較/全交差点は設定内で切替え、保存時の検証票も方式を区別する。697例の独立オラクル照合は移植一致だけを保証し、旧1.5%や学習例の一致を三浦市の精度としない。[仕様・検証](hybrid-koma-omission.md)。

@@ -1,6 +1,6 @@
 "use client";
 import CourseOmissionSettings from "./course-omission-settings";
-import {manualLandmarkSequences,selectOmission,type OmissionSnapshot} from "../lib/route/omission/selection";
+import {manualLandmarkSequences,selectOmission,defaultOmissionMode,hybridFailureCount,type OmissionSnapshot} from "../lib/route/omission/selection";
 import {projectOmittedPreview} from "../lib/route/omission/projection";
 import CourseLandmarkPanel from "./course-landmark-panel";
 import CourseLandmarkCredits from "./course-landmark-credits";
@@ -20,9 +20,9 @@ import type {SaveReceipt} from "../lib/operator/course-format";
 import LandmarkIcon from "./landmark-icon";
 import type {RallyPreview} from "../lib/operator/rally-preview";
 
-export default function RallyPreviewView({data:source,saved,saveReceipt=null,saveReceipts,saveUnavailable,landmarkInitial,savedLandmarks,savedOmission}:{data:RallyPreview;saved?:{id:string;createdAt:string;fingerprint:string;publication?:CoursePublication|null};saveReceipt?:SaveReceipt|null;saveUnavailable?:string;landmarkInitial?:WorkbenchState;savedLandmarks?:LandmarkSnapshot;savedOmission?:OmissionSnapshot;saveReceipts?:{rule:SaveReceipt;all:SaveReceipt}}){
+export default function RallyPreviewView({data:source,saved,saveReceipt=null,saveReceipts,saveUnavailable,landmarkInitial,savedLandmarks,savedOmission}:{data:RallyPreview;saved?:{id:string;createdAt:string;fingerprint:string;publication?:CoursePublication|null};saveReceipt?:SaveReceipt|null;saveUnavailable?:string;landmarkInitial?:WorkbenchState;savedLandmarks?:LandmarkSnapshot;savedOmission?:OmissionSnapshot;saveReceipts?:{hybrid?:SaveReceipt;rule:SaveReceipt;all:SaveReceipt}}){
  const [hydrated,setHydrated]=useState(false);useEffect(()=>setHydrated(true),[]);
- const [selectedPathIndex,setSelectedPathIndex]=useState(source.cards[0].map.pathIndex),[mode,setMode]=useState(savedOmission?.mode??"rule"),[zoom,setZoom]=useState(1),[layers,setLayers]=useState({buildings:true,landmarks:true,details:true});
+ const [selectedPathIndex,setSelectedPathIndex]=useState(source.cards[0].map.pathIndex),[mode,setMode]=useState(savedOmission?.mode??defaultOmissionMode(source.omissionPlan)),[zoom,setZoom]=useState(1),[layers,setLayers]=useState({buildings:true,landmarks:true,details:true});
  const [landmarks,setLandmarks]=useState(landmarkInitial??null),[choices,setChoices]=useState(landmarkInitial?.review.choices??{}),[reviewRevision,setReviewRevision]=useState(landmarkInitial?.review.revision??0),[baseReceipt,setReceipt]=useState(saveReceipt),[receipts,setReceipts]=useState(saveReceipts),[landmarkDirty,setLandmarkDirty]=useState(false),[landmarkBusy,setLandmarkBusy]=useState(false),[landmarkError,setLandmarkError]=useState(""),[landmarkNotice,setLandmarkNotice]=useState("");
  useEffect(()=>{if(!landmarkDirty)return;const warn=(e:BeforeUnloadEvent)=>{e.preventDefault();e.returnValue=""};window.addEventListener("beforeunload",warn);return()=>window.removeEventListener("beforeunload",warn)},[landmarkDirty]);
  const plan=source.omissionPlan??savedOmission?.plan,manualSequences=landmarks?manualLandmarkSequences(choices,source.cards.length):savedOmission?.manualSequences??[];
@@ -30,7 +30,7 @@ export default function RallyPreviewView({data:source,saved,saveReceipt=null,sav
  const data=plan?projectOmittedPreview(source,selected):source;
  const exact=data.cards.findIndex(c=>c.map.pathIndex===selectedPathIndex),index=exact>=0?exact:Math.max(0,data.cards.findLastIndex(c=>c.map.pathIndex<selectedPathIndex));
  function setIndex(value:number|((i:number)=>number)){const i=typeof value==="function"?value(index):value;setSelectedPathIndex(data.cards[Math.max(0,Math.min(data.cards.length-1,i))].map.pathIndex)}
- const fullIndex=selected[index]-1,receipt=receipts?.[mode]??baseReceipt;
+ const fullIndex=selected[index]-1,receipt=plan?receipts?.[mode]??null:baseReceipt;
  const snapshot=savedLandmarks??(landmarks?freezeLandmarks({...landmarks,review:{revision:reviewRevision,choices}}):undefined);
  const target=landmarks?.dataset.targets.find(t=>t.sequences.includes(fullIndex+1)),items=landmarks?candidatesForCard(landmarks.dataset.cards[fullIndex],target?landmarks.targets[target.key]:undefined):savedLandmarks?.cards[fullIndex].candidates??[];
  const reviewed:ReviewedLandmarks|undefined=snapshot?{center:data.cards[index].candidate.point,candidates:snapshot.cards[fullIndex].candidates,photos:snapshot.photos}:undefined;
@@ -39,7 +39,7 @@ export default function RallyPreviewView({data:source,saved,saveReceipt=null,sav
   const keys=new Set(landmarks.dataset.cards.flatMap(card=>{const t=landmarks.dataset.targets.find(t=>t.sequences.includes(card.map.sequence));return candidatesForCard(card,t?landmarks.targets[t.key]:undefined).map(c=>choiceKey(card.map.sequence,c.id))}));
   const response=await fetch("/api/operator/landmarks",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({action:"save",source:"draft",datasetId:landmarks.dataset.id,expectedRevision:reviewRevision,choices:Object.fromEntries(Object.entries(choices).filter(([k])=>keys.has(k)))}),signal:AbortSignal.timeout(65000)}),next=await response.json();
   if(!response.ok)throw Error(next.error??"目印を保存できませんでした。");
-  if(next.dataset.id!==landmarks.dataset.id||![2,3].includes(next.courseReceipt?.formatVersion))throw Error("保存結果を確認できません。最新の下書きから再生成してください。");
+  if(next.dataset.id!==landmarks.dataset.id||![2,3].includes(next.courseReceipt?.formatVersion)||plan&&["rule","all",...(plan.version===2?["hybrid"]:[])].some(m=>next.courseReceipts?.[m]?.omissionMode!==m))throw Error("保存結果を確認できません。最新の下書きから再生成してください。");
   setLandmarks(next);setChoices(next.review.choices);setReviewRevision(next.review.revision);setReceipt(next.courseReceipt);setReceipts(next.courseReceipts);setLandmarkDirty(false);setLandmarkNotice("目印の採用を保存しました。「この結果を保存」でコースを固定できます。");
  }catch(e){setLandmarkError(e instanceof Error?e.message:"目印を保存できませんでした。")}finally{setLandmarkBusy(false)}}
  const card=data.cards[index],map=card.map,next=data.cards[index+1];
@@ -63,7 +63,7 @@ export default function RallyPreviewView({data:source,saved,saveReceipt=null,sav
   <p className="operator-scope"><span>現地未確認</span>入口・施設までの通路・通行・安全性は確認待ちです。道路上の移動時間は時速{data.speedKmh}kmの概算で、観光・施設への移動や滞在時間を含みません。</p>
   {saved?<p className="preview-version" data-saved-course-id={saved.id}>保存日時：<time dateTime={saved.createdAt}>{new Date(saved.createdAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time>。保存時の下書き版{data.draftRevision}・補正版{data.correctionRevision}の計算結果です。台帳や下書きの変更を自動反映しません。</p>:<p className="preview-version">保存済み下書きの版{data.draftRevision}・到達点の補正版{data.correctionRevision}から生成（下書き保存日時：{new Date(data.draftUpdatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}）。表示後の変更は「最新の保存内容から再生成」で反映します。</p>}
   {saved?<div className="preview-actions" data-saved-course-actions><a href="/operator/courses">保存済み一覧へ</a><a href="/operator/draft">作業中の下書きへ（保存済みは変更しません）</a></div>:<div className="preview-actions"><a href="/operator/connections" data-preview-corrections>道路上の到達点を修正</a><a href="/operator/draft" data-preview-back>下書きを編集</a><a href="/operator/preview" data-preview-regenerate>最新の保存内容から再生成</a></div>}
-  {plan&&<CourseOmissionSettings mode={mode} onChange={setMode} total={source.cards.length} shown={data.cards.length} disabled={landmarkBusy} saved={!!saved}/>}
+  {plan&&<CourseOmissionSettings mode={mode} onChange={setMode} hybridAvailable={plan.version===2} failureCount={hybridFailureCount(plan)} total={source.cards.length} shown={data.cards.length} disabled={landmarkBusy} saved={!!saved}/>}
   {!saved&&<CourseSaveButton key={receipt?.fingerprint??"unavailable"} receipt={landmarkDirty||landmarkBusy?null:receipt} unavailable={landmarkDirty?"選択中のコマで「目印の採用を保存」してからコースを保存してください。":saveUnavailable}/>}
   {saved&&<CoursePublishPanel courseId={saved.id} fingerprint={saved.fingerprint} title={data.title} publication={saved.publication}/>}
   {saved&&<CourseReviewPanel data={data} selected={index} onSelect={i=>{setIndex(i);requestAnimationFrame(()=>{const heading=document.getElementById("preview-koma-title");heading?.focus({preventScroll:true});heading?.scrollIntoView({block:"start"})})}}/>}

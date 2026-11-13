@@ -85,7 +85,7 @@ export type SavedPreviewV1=CoursePayload["preview"];
 const recordRule=object({id:courseId,createdAt:iso,fingerprint:hash,payload:payloadRule});
 export type SavedCourse=ReturnType<typeof recordRule>;
 const receiptRule=object({formatVersion:choice(1,2),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash});
-const omissionReceiptRule=object({formatVersion:choice(3),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash,omissionMode:choice("rule","all")});
+const omissionReceiptRule=object({formatVersion:choice(3),fingerprint:hash,draftRevision:positive,correctionRevision:natural,roadSha256:hash,contextSha256:hash,omissionMode:choice("hybrid","rule","all")});
 export type SaveReceipt=ReturnType<typeof receiptRule>|ReturnType<typeof omissionReceiptRule>;
 const same=(a:unknown,b:unknown)=>JSON.stringify(a)===JSON.stringify(b);
 export function canonicalJson(value:unknown):string{
