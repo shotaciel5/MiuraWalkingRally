@@ -401,4 +401,4 @@ PoC専用画面・旧固定デモと、スポットのデモ表示切替を終�
 
 ホームのスマホ3枚は `npm run home:gallery` で候補を見て選べます。設定の反映方法と紹介写真の対応地点は [ホームの写真とコマ表示例](docs/home-photo-examples.md) を参照してください。
 
-ホーム改善案は `/home-preview` で現行と比較できます（未採用）。単独表示は `/home-preview/proposal`。既定の `/` は保持しています。[比較方法と提案内容](docs/home-comparison.md)。
+ホーム改善案を採用しました。通常の `/` で、AI補助の説明とタップ→ルート描画→コマ出現の連続演出を確認できます。旧比較URLはホームへ案内します。[仕様・検証](docs/home-adoption-motion.md)。
