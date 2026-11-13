@@ -1,0 +1,36 @@
+/* The home preview uses the current player skin, contained inside its phone frame. */
+.home-demo.walk-player{min-height:0;gap:8px;background:transparent;color:var(--walk-text)}
+.home-demo.walk-player::before{position:absolute;inset:0;z-index:-1;width:auto;height:auto;margin:0;border-radius:0;background:var(--walk-backdrop);content:""}
+.home-demo .walk-surroundings{position:absolute;inset:0}
+.home-demo-speaker{width:38px;height:4px;border-radius:4px;margin:0 auto 2px;background:#203744}
+.home-demo.walk-player .walk-toolbar{height:38px;min-height:38px;padding:0;margin:0;grid-template-columns:minmax(0,1fr) auto 32px;gap:7px}
+.home-demo-heading>.home-demo-example{font-size:9px;font-weight:650;display:flex;align-items:center;gap:5px;color:var(--walk-text)}
+.home-demo .walk-counter{font-size:10px;margin:0;letter-spacing:.04em}
+.home-demo.walk-player .walk-counter strong{font-size:17px}
+.home-demo.walk-player .walk-counter{padding:3px 10px}
+.home-demo .home-demo-help{width:30px;height:30px;font-size:17px;justify-self:end;pointer-events:none}
+.home-demo .tsuna-adventure{min-height:104px;gap:7px;margin:0}
+.home-demo .tsuna-hero{width:80px;height:98px;flex-basis:80px}
+.home-demo .tsuna-hero img{width:76px;height:91px}
+.home-demo .tsuna-hero-rays{width:82px;height:82px}
+.home-demo .tsuna-adventure-copy strong{font-size:18px}
+.home-demo .tsuna-adventure-copy strong>span{font-size:11px}
+.home-demo .tsuna-kicker{font-size:6px;letter-spacing:.04em;margin-bottom:4px}
+.home-demo .tsuna-spark{font-size:18px}
+.home-demo .tsuna-spark-two{font-size:22px}
+.home-demo .tsuna-map-pennant{margin:0 4px -2px;font-size:8px;padding:4px 8px 5px;letter-spacing:.06em}
+.home-demo .home-demo-viewport{position:relative;border-radius:10px;overflow:hidden}
+.home-demo .home-demo-slide .operator-koma-primary{max-width:none}
+.home-demo .home-demo-caption{min-height:43px;padding:5px 3px 0}
+.home-demo .home-demo-caption p{font-size:11px;color:var(--walk-text)}
+.home-demo .home-demo-caption>span{font-size:8px;color:var(--walk-secondary)}
+.home-demo.walk-player .home-demo-controls{gap:10px;margin:0}
+.home-demo.walk-player .home-demo-controls>button{flex:1;width:auto;height:42px;min-height:42px;border-radius:10px;font-size:10px;gap:6px;padding:7px 4px}
+.home-demo.walk-player .home-demo-controls>.walk-previous{background:var(--walk-surface);color:var(--brand);border:1px solid var(--walk-border)}
+.home-demo.walk-player .home-demo-controls>.walk-next{background:var(--walk-button);color:var(--walk-on-button);border:2px solid #fff2cb}
+.home-demo-playback{display:flex;align-items:center;justify-content:center;gap:12px}
+.home-demo .home-demo-playback .home-demo-play{width:30px;height:30px;min-width:30px;min-height:30px}
+.home-demo .home-demo-playback .home-demo-dots button{width:30px;min-width:30px;min-height:30px}
+.home-demo .home-demo-progress{margin:0 5px}
+.home-demo .home-demo-source{font-size:7px;color:var(--walk-secondary)}
+@media(max-width:700px){.home-demo.walk-player{gap:7px}.home-demo .tsuna-adventure{min-height:96px}.home-demo .tsuna-adventure-copy strong{font-size:16px}.home-demo .tsuna-adventure-copy strong>span{font-size:10px}.home-demo .tsuna-hero{width:70px;height:86px;flex-basis:70px}.home-demo .tsuna-hero img{width:67px;height:80px}.home-demo .tsuna-hero-rays{width:72px;height:72px}.home-demo .home-demo-caption p{font-size:10px}}

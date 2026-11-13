@@ -55,7 +55,7 @@ test("welcome experience HTTP smoke check",async t=>{
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL/);
  });
  await t.test("serves an independent three-frame demo and the operator generation story",()=>{
-  assert.match(html,/data-home-demo/);for(const control of ["play","prev","next"])assert.ok(html.includes("data-demo-"+control));
+  assert.match(html,/data-home-demo/);assert.match(html,/class="home-demo walk-player"[^>]*data-walk-design="tsunosuke"/);assert.match(html,/class="tsuna-map-pennant"/);for(const control of ["play","prev","next"])assert.ok(html.includes("data-demo-"+control));
   assert.equal([...html.matchAll(/data-demo-dot=/g)].length,3);assert.equal([...html.matchAll(/data-demo-slide="current"/g)].length,1);
   assert.match(html,/data-home-creation/);assert.match(html,/data-home-route/);assert.match(html,/青い矢印/);assert.doesNotMatch(html,/緑の矢印/);
  });
