@@ -1,0 +1,32 @@
+{
+    "sourceArchive":  "%E3%83%9B%E3%83%BC%E3%83%A0%E7%94%BB%E9%9D%A2%E6%94%B9%E5%96%84%E6%8F%90%E6%A1%88_%E7%94%BB%E5%83%8F%E4%BB%98%E3%81%8D.zip",
+    "providedOn":  "2026-11-14",
+    "files":  [
+                  {
+                      "originalEntry":  "home_improvement/ホーム画面改善提案.md",
+                      "file":  "proposal.md",
+                      "bytes":  9405,
+                      "sha256":  "d1d273290b0aaee47398d1760e28e8473ac8ba4cf1fbdf85b1e2bf7b04bd8d27"
+                  },
+                  {
+                      "originalEntry":  "home_improvement/assets/01_home_concept.png",
+                      "file":  "assets/01_home_concept.png",
+                      "bytes":  101409,
+                      "sha256":  "641db1b2d09081c7e37322c5525f7f64876d6937619a7f260027d301af298e00"
+                  },
+                  {
+                      "originalEntry":  "home_improvement/assets/02_generation_flow.png",
+                      "file":  "assets/02_generation_flow.png",
+                      "bytes":  50546,
+                      "sha256":  "97bc1ca5d5adf0d5e7365699511a7463534363516ab50844960e769cd26513a0"
+                  },
+                  {
+                      "originalEntry":  "home_improvement/assets/03_page_structure.png",
+                      "file":  "assets/03_page_structure.png",
+                      "bytes":  81744,
+                      "sha256":  "458963741fee1afb15cfe8f10ad0f614d34e9bb4b5e65d26b4e4ed1f67c24bf6"
+                  }
+              ],
+    "archiveSha256":  "9ad42568164cfd2c43a6237b08cddb2d3e5c6c9b34fac69ca1aa0e4c0e5d3c4f",
+    "note":  "User-provided concept documents. Original ZIP deleted at user request after byte verification."
+}

@@ -246,3 +246,36 @@ test("bundled regional crops and provenance still serve production courses",asyn
 test("shared participant design assets are bundled locally with their recorded source bytes",async()=>{
  const {default:provenance}=await import("../data/ui/koma-ui-provenance.json",{with:{type:"json"}});for(const asset of provenance.assets){const r=await get(asset.path);assert.equal(r.status,200);const bytes=new Uint8Array(await r.arrayBuffer());assert.equal(bytes.length,asset.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),asset.sha256)}
 });
+
+test("home design comparison is available without replacing the current home",async t=>{
+ const current=await(await get("/")).text(),comparison=await(await get("/home-preview")).text();
+ const response=await get("/home-preview/proposal"),proposal=await response.text();
+ await t.test("offers current proposal and comparison controls with distinct frame titles",()=>{
+  assert.match(comparison,/data-home-comparison/);
+  for(const mode of ["current","proposal","both"])assert.ok(comparison.includes('data-compare-mode="'+mode+'"'));
+  for(const width of ["normal","mobile"])assert.ok(comparison.includes('data-compare-width="'+width+'"'));
+  assert.match(comparison,/src="\/"/);assert.match(comparison,/src="\/home-preview\/proposal"/);
+  assert.match(comparison,/title="現行のホーム画面"/);assert.match(comparison,/title="改善案のホーム画面"/);
+  assert.match(comparison,/改善案は未採用/);
+ });
+ await t.test("preserves current home while proposing the five sections and real entrances",()=>{
+  assert.equal(response.status,200);assert.match(current,/data-home-page/);assert.doesNotMatch(current,/data-home-proposal|data-home-comparison/);
+  assert.match(proposal,/data-home-proposal/);
+  assert.deepEqual([...proposal.matchAll(/data-proposal-section="([^"]+)"/g)].map(m=>m[1]),["hero","how","generation","value","entry"]);
+  assert.match(proposal,/スポットから、ルートとコマ地図を自動生成/);
+  assert.match(proposal,/href="\/courses"/);assert.match(proposal,/href="\/operator"/);
+  assert.match(proposal,/href="\/home-preview\/proposal#how-it-works"/);
+  assert.match(proposal,/固定データの生成結果を使った表示例/);assert.match(proposal,/ゴールで写真/);
+  assert.doesNotMatch(proposal,/AI生成|ログインボタン|href="\/poc"/);
+ });
+ await t.test("uses unchanged home geometry and the selected maps for the generation examples",async()=>{
+  const {createHomeDemo}=await import("../lib/home-demo.ts"),demo=createHomeDemo();
+  assert.match(proposal,/data-koma-node="2159253432"/);
+  const route=proposal.match(/<svg[^>]*data-proposal-route[^>]*>[\s\S]*?<\/svg>/)?.[0];assert.ok(route);
+  assert.ok(route.includes('points="'+demo.route.points.map(p=>p.x+","+p.y).join(" ")+'"'));
+  for(const [i,card]of demo.cards.entries()){
+   const figure=proposal.match(new RegExp('<figure[^>]*data-proposal-output="'+i+'"[^>]*>[\\s\\S]*?<\\/figure>'))?.[0];assert.ok(figure);
+   assert.deepEqual([...figure.matchAll(/data-koma-branch="(\d+)"/g)].map(m=>Number(m[1])),card.map.branches.map(b=>b.neighborNodeId));
+  }
+ });
+});

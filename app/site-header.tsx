@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {ArrowIcon} from "./rally-ui";
 
-export default function SiteHeader({view="participant"}:{view?:"home"|"participant"|"operator"}){
+export default function SiteHeader({view="participant",storyHref="/#how-it-works"}:{view?:"home"|"participant"|"operator";storyHref?:string}){
   return <>
     <a className="skip-link" href="#page-content">本文へ移動</a>
     <header className="site-header experience-header" data-site-header={view}>
@@ -11,7 +11,7 @@ export default function SiteHeader({view="participant"}:{view?:"home"|"participa
       </Link>
       <nav className="experience-header-links" aria-label="メインナビゲーション">
         {view==="home"?<>
-          <Link className="header-story" href="/#how-it-works">楽しみ方</Link>
+          <Link className="header-story" href={storyHref}>楽しみ方</Link>
           <Link className="header-operator" href="/operator">コースをつくる</Link>
           <Link className="header-action" href="/courses">参加する<ArrowIcon/></Link>
         </>:<>
