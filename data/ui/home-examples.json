@@ -1,9 +1,5 @@
 {
   "schemaVersion": 1,
-  "phoneSequences": [
-    2,
-    3,
-    4
-  ],
+  "phoneSequences": [2, 13, 12],
   "introductionSequence": 5
 }
