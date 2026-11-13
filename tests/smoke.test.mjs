@@ -49,8 +49,8 @@ test("welcome experience HTTP smoke check",async t=>{
   assert.match(html,/スマホのカメラ/);assert.match(html,/ゴールで写真/);assert.doesNotMatch(html,/data-published-start-link=/);
  });
  await t.test("renders a real generated sample with source attribution",async()=>{
-  const {createHomeDemo}=await import("../lib/home-demo.ts"),card=createHomeDemo().cards[0];
-  assert.ok(card);assert.match(html,/data-home-koma/);assert.match(html,/コマ地図の表示例/);
+  const {createHomeDemo}=await import("../lib/home-demo.ts"),card=createHomeDemo().introduction;
+  assert.ok(card);assert.match(html,/data-home-playing-photo/);assert.match(html,/data-koma-node="2159253432"/);assert.match(html,/data-home-koma/);assert.match(html,/コマ地図の表示例/);
   const figure=html.match(/<figure class="home-koma"[\s\S]*?<\/figure>/)?.[0];assert.ok(figure);assert.deepEqual([...figure.matchAll(/data-koma-branch="(\d+)"/g)].map(m=>Number(m[1])),card.map.branches.map(b=>b.neighborNodeId));
   assert.match(html,/OpenStreetMap contributors/);assert.match(html,/ODbL/);
  });
@@ -61,9 +61,9 @@ test("welcome experience HTTP smoke check",async t=>{
  });
  await t.test("serves the supplied photographs unchanged",async()=>{
   const {readFileSync}=await import("node:fs");
-  for(const file of ["hantoupic.jpg","shitamati.jpg","kainanshrine.jpg"]){
+  for(const file of ["hantoupic.jpg","shitamati.jpg","kainanshrine.jpg","walking-together.png"]){
    const r=await get("/mainphotos/"+file),bytes=Buffer.from(await r.arrayBuffer()),source=readFileSync(new URL("../public/mainphotos/"+file,import.meta.url));
-   assert.equal(r.status,200);assert.match(r.headers.get("content-type")??"",/image\/jpeg/);assert.equal(createHash("sha256").update(bytes).digest("hex"),createHash("sha256").update(source).digest("hex"));
+   assert.equal(r.status,200);assert.match(r.headers.get("content-type")??"",/image\/(jpeg|png)/);assert.equal(createHash("sha256").update(bytes).digest("hex"),createHash("sha256").update(source).digest("hex"));
   }
  });
  await t.test("offers a usable operator workspace entrance",async()=>{

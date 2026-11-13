@@ -32,7 +32,7 @@ export default function HomePage(){
 
       <section className="home-introduction experience-section" id="how-it-works" aria-labelledby="introduction-title">
         <div className="home-section-heading"><p className="eyebrow">A LITTLE ADVENTURE</p><h2 id="introduction-title">いつもの散歩が、<br/>ちいさな冒険に。</h2><p>「次は、どっちだろう？」<br/>曲がり角のかたち、まちの目印。<br/>ひとコマずつ読み解けば、見慣れない路地も旅のつづきに。</p></div>
-        <div className="home-koma-scene"><div className="home-scene-photo"><Image src="/mainphotos/shitamati.jpg" alt="昔ながらの店が並ぶ三崎の路地" fill sizes="(max-width: 700px) 90vw, 45vw"/></div><HomeKoma card={demo.cards[0]}/><span className="home-scene-caption">地図を見て、まちを見て。自分で見つける道。</span></div>
+        <div className="home-koma-scene"><div className="home-scene-photo"><Image src="/mainphotos/shitamati.jpg" alt="昔ながらの店が並ぶ三崎の路地" fill sizes="(max-width: 700px) 90vw, 45vw"/></div><figure className="home-playing-photo" data-home-playing-photo><div className="home-playing-photo-image"><Image src="/mainphotos/walking-together.png" alt="スマホを手に海辺の道を見比べる二人の体験イメージ" fill sizes="(max-width: 700px) 45vw, 280px"/></div><figcaption>体験イメージ</figcaption></figure><HomeKoma card={demo.introduction}/><span className="home-scene-caption">地図を見て、まちを見て。自分で見つける道。</span></div>
       </section>
 
       <section className="home-how experience-section" aria-labelledby="how-title">

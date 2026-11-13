@@ -8,6 +8,7 @@ import "./coastal-theme.css";
 import "./walk-design.css";
 import "./course-landmarks.css";
 import "./home-phone.css";
+import "./home-scene.css";
 
 export const metadata: Metadata = {
   title: {default:"三浦市ウォーキングラリー",template:"%s | 三浦市ウォーキングラリー"},

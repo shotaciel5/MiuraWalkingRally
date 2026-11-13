@@ -14,6 +14,7 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "node --test tests/route.test.mjs tests/misaki.test.mjs tests/junctions.test.mjs tests/koma.test.mjs tests/review.test.mjs tests/demo-rally.test.mjs tests/participation.test.mjs tests/participant-course.test.mjs tests/checkpoint-progress.test.mjs tests/goal.test.mjs tests/initial-spots.test.mjs tests/spot-browser.test.mjs tests/spot-curation.test.mjs tests/spot-editing.test.mjs tests/spot-deletion.test.mjs tests/rally-draft.test.mjs tests/road-connection.test.mjs tests/attach-road-connections.test.mjs tests/rally-preview.test.mjs tests/rally-corrections.test.mjs tests/expanded-route-audit.test.mjs tests/short-koma-comparison.test.mjs tests/koma-display.test.mjs tests/saved-courses.test.mjs tests/course-review.test.mjs tests/publication.test.mjs tests/publication-controls.test.mjs tests/participant-walk.test.mjs tests/participant-design.test.mjs tests/home-demo.test.mjs tests/visual-landmarks.test.mjs tests/landmark-cache-plan.test.mjs tests/landmark-crop.test.mjs tests/landmark-review.test.mjs tests/landmark-preparation.test.mjs tests/demo-bundle.test.mjs tests/region-landmarks.test.mjs tests/course-landmarks.test.mjs tests/koma-omission.test.mjs tests/koma-hybrid.test.mjs",
     "test:smoke": "node --test tests/smoke.test.mjs",
+    "home:gallery": "node scripts/home-koma-gallery.mjs",
     "route:report": "node scripts/route-report.mjs",
     "junction:report": "node scripts/junction-report.mjs",
     "koma:report": "node scripts/koma-report.mjs",

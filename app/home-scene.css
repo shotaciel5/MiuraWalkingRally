@@ -1,0 +1,8 @@
+/* Photo collage stays inside the existing introduction scene. */
+.home-playing-photo{position:absolute;top:-52px;right:-4px;width:45%;aspect-ratio:1.12;margin:0;z-index:1;transform:rotate(5deg);pointer-events:none}
+.home-playing-photo-image{position:absolute;inset:0;overflow:hidden;border:5px solid var(--paper);border-radius:46% 46% 15% 15%;box-shadow:0 12px 28px #12394f30;background:var(--sea-light)}
+.home-playing-photo img{object-fit:cover;object-position:50% 62%}
+.home-playing-photo figcaption{position:absolute;right:16px;top:-7px;margin:0;padding:5px 10px;border-radius:30px;background:var(--brand);color:#fff;font-size:8px;letter-spacing:.04em;transform:rotate(-5deg)}
+.home-koma-scene>.home-koma{z-index:2}
+@media(max-width:1000px){.home-playing-photo{width:47%;top:-30px;right:0}.home-playing-photo-image{border-width:4px}}
+@media(max-width:700px){.home-playing-photo{width:49%;top:-12px;right:0;aspect-ratio:1.05}.home-playing-photo figcaption{font-size:7px;padding:4px 8px}.home-playing-photo-image{border-width:4px}}
