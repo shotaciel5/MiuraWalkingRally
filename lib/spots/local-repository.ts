@@ -1,3 +1,4 @@
+import {curateManagedSpots} from "./curation.ts";
 import type {DatabaseSync} from "node:sqlite";
 import type {InitialSpot} from "./initial-catalog.ts";
 import {getBrowserSpots} from "./browser-catalog.ts";
@@ -20,7 +21,9 @@ export function readSpotState(db:DatabaseSync,loadInitial:()=>InitialSpot[]|null
       return deletion;
     });
     const all=mergeSpotEdits(initial,edits);
-    return {all,deletions,active:activeSpots(all,deletions)};
+    // Injected loaders supply their own catalog; the default source applies the reviewed selection.
+    const candidates=loadInitial===getBrowserSpots?curateManagedSpots(all,initial):all;
+    return {all,deletions,active:activeSpots(candidates,deletions)};
   }
 
 // This boundary is local-only. Replace this repository when a cloud persistence service is selected.

@@ -36,7 +36,7 @@ test("an empty edit store exposes all 178 initial spots without writing seed row
 test("new spots persist across repository instances and an independent Node process",t=>{
  const {path,repository}=fixture(t);const saved=repository.save(input());
  assert.equal(saved.id,id);assert.equal(saved.revision,1);assert.equal(saved.source,null);assert.equal(saved.position.kind,"operator");assert.equal(saved.reviewStatus,"unverified");
- assert.equal(createSpotRepository(path).list().length,179);
+ assert.equal(createSpotRepository(path).list().length,90);
  const code="import {createSpotRepository} from './lib/spots/local-repository.ts';const s=createSpotRepository("+JSON.stringify(path)+").list().find(s=>s.id==="+JSON.stringify(id)+");console.log(JSON.stringify(s));";
  const restored=JSON.parse(execFileSync(process.execPath,["--input-type=module","-e",code],{encoding:"utf8"}));assert.deepEqual(restored,saved);
 });

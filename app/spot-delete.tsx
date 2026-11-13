@@ -2,9 +2,8 @@
 import {useEffect,useRef,useState} from "react";
 import type {ManagedSpot} from "../lib/spots/editing";
 import {parseSpotDeletion,type SpotDeletion} from "../lib/spots/deletion";
-import type {FixedCourseUse} from "../lib/spots/fixed-course-usage";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog";
-export default function SpotDelete({spot,uses,refreshing,onCancel,onDeleted,onRefresh}:{spot:ManagedSpot;uses:FixedCourseUse[];refreshing:boolean;onCancel:()=>void;onDeleted:(d:SpotDeletion)=>void;onRefresh:()=>Promise<boolean>}){
+export default function SpotDelete({spot,refreshing,onCancel,onDeleted,onRefresh}:{spot:ManagedSpot;refreshing:boolean;onCancel:()=>void;onDeleted:(d:SpotDeletion)=>void;onRefresh:()=>Promise<boolean>}){
   const dialog=useRef<HTMLDialogElement>(null),cancel=useRef<HTMLButtonElement>(null),submitting=useRef(false),alive=useRef(true),request=useRef<AbortController|null>(null);
   const [busy,setBusy]=useState(false),[error,setError]=useState(""),[conflict,setConflict]=useState(false);
   useEffect(()=>{
@@ -37,7 +36,7 @@ export default function SpotDelete({spot,uses,refreshing,onCancel,onDeleted,onRe
     <p className="eyebrow">DELETE SPOT</p><h2 id="spot-delete-title">このスポットを削除しますか？</h2>
     <div className="spot-delete-target"><strong data-delete-target-name>{spot.name}</strong><span>{SPOT_CATEGORIES[spot.category]} · {spot.position.lat.toFixed(6)}, {spot.position.lon.toFixed(6)}</span><small>{spot.id}</small></div>
     <p id="spot-delete-description">一覧と地図から外し、今後のコース候補には表示しません。初期データを読み直しても復活しません。</p>
-    {uses.length>0?<div className="spot-delete-usage" data-delete-course-use><strong>既存の固定デモコースで使用中</strong>{uses.map(use=><p key={use.stopId}>{use.courseTitle} · {use.role}「{use.stopName}」</p>)}<p>既存コースの内容・参加記録は保持します。台帳からの削除は現在のコースを変更しません。</p></div>:<p className="spot-detail-note" data-delete-unused>現在の固定デモコースでは使用していません。</p>}
+    <p className="spot-detail-note">保存・公開済みコースの内容は保持されます。作業中の下書きで使っている場合は、削除後に地点を選び直してください。</p>
     <p className="spot-detail-note">削除済みとして記録を保持します。この画面からの復元・完全消去には対応していません。</p>
     {error&&<div className="spot-edit-error" role="alert" data-spot-delete-error><strong>{conflict?"削除対象を確認し直してください":"削除を確認できませんでした"}</strong><p>{error}</p>{conflict&&<button type="button" disabled={busy||refreshing} onClick={async()=>{if(!await onRefresh()&&alive.current)setError("最新の台帳を読み込めませんでした。削除せずに再試行してください。")}} data-delete-refresh>{refreshing?"読込み中…":"最新の台帳を読み込む"}</button>}</div>}
     {refreshing&&<p role="status">最新の台帳を読み込んでいます…</p>}

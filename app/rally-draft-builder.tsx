@@ -30,7 +30,7 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
   if(window.innerWidth<900)choice.current?.scrollIntoView({block:"nearest"});
  },[selected?.id]);
  const select=useCallback((id:string)=>{if(!busy)setSelectedId(id)},[busy]);
- function show(spot:ManagedSpot){if(!spots.some(s=>s.id===spot.id))return;setFilters({...DEFAULT_FILTERS,mode:"all"});setSelectedId(spot.id)}
+ function show(spot:ManagedSpot){if(!spots.some(s=>s.id===spot.id))return;setFilters(DEFAULT_FILTERS);setSelectedId(spot.id)}
  function assign(role:"start"|"finish"|StopKind){
   if(!selected||busy)return;
   setError("");setNotice("");
@@ -68,13 +68,12 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
  return <div data-draft-builder data-draft-revision={saved?.revision??0} data-draft-dirty={dirty}>
   <div className="draft-catalog-filters"><label>スポット名<input type="search" value={filters.query} disabled={busy} data-draft-search onChange={e=>setFilters(f=>({...f,query:e.target.value}))}/></label>
    <label>エリア<select value={filters.area} disabled={busy} data-draft-area onChange={e=>setFilters(f=>({...f,area:e.target.value as SpotFilters["area"]}))}><option value="all">すべて</option>{Object.entries(AREA_LABELS).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>
-   <div className="draft-display-modes">{(["demo","all"] as const).map(mode=><button type="button" key={mode} disabled={busy} aria-pressed={filters.mode===mode} data-draft-mode={mode} onClick={()=>setFilters(f=>({...f,mode}))}>{mode==="demo"?"デモ表示":"全候補"} {filterSpots(spots,{...DEFAULT_FILTERS,mode}).length}</button>)}</div>
    <div className="draft-group-filters">{(["all",...Object.keys(SPOT_GROUPS)] as ("all"|SpotGroup)[]).map(group=><button type="button" key={group} disabled={busy} aria-pressed={filters.group===group} data-draft-group={group} onClick={()=>setFilters(f=>({...f,group}))}>{group==="all"?"すべて":SPOT_GROUPS[group].label}</button>)}</div>
   </div>
   <div className="draft-workspace">
    <div className="draft-map"><SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} connection={connectionMatchesSpot(connection,selected)?connection:null}/></div>
    <section className="draft-configuration" aria-label="作業中の下書き">
-    <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="spot-routing-state">既存PoC基準：{ROUTING_LABELS[selected.routing.state]}</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"開始にする",finish:"終了にする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div><SpotConnection spot={selected} override={manual} onConnection={setConnection}/></>:<p>地図のピンや一覧から、割り当てる地点を選びます。</p>}</section>
+    <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="spot-routing-state">初期の確認記録：{ROUTING_LABELS[selected.routing.state]}</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"開始にする",finish:"終了にする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div><SpotConnection spot={selected} override={manual} onConnection={setConnection}/></>:<p>地図のピンや一覧から、割り当てる地点を選びます。</p>}</section>
     <form onSubmit={e=>{e.preventDefault();void operate("save")}}><fieldset disabled={busy}>
      <div className="draft-form-heading"><h2>作業中の下書き</h2><span>{dirty?"未保存の変更あり":saved?"保存済み":"未保存"}</span></div>
      <label className="draft-title">下書き名<input required maxLength={100} value={form.title} data-draft-title onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="例：三崎のまち歩き"/></label>
@@ -95,7 +94,7 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
     </form>
    </section>
    <section className="draft-candidates" aria-label="スポット候補"><div className="spot-list-heading"><h2>スポット候補</h2><span data-draft-count>{visible.length}件</span></div>
-    {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=><li key={spot.id}><button type="button" data-draft-candidate={spot.id} aria-pressed={selected?.id===spot.id} className={selected?.id===spot.id?"is-selected":""} disabled={busy} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:SPOT_GROUPS[groupFor(spot.category)].color}}>{SPOT_GROUPS[groupFor(spot.category)].glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">既存PoC：{ROUTING_LABELS[spot.routing.state]}</span></span></button></li>)}</ul>:<p className="spot-empty" data-draft-empty>条件に合う候補がありません。全候補や別の条件で探してください。</p>}
+    {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=><li key={spot.id}><button type="button" data-draft-candidate={spot.id} aria-pressed={selected?.id===spot.id} className={selected?.id===spot.id?"is-selected":""} disabled={busy} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:SPOT_GROUPS[groupFor(spot.category)].color}}>{SPOT_GROUPS[groupFor(spot.category)].glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">初期の確認記録：{ROUTING_LABELS[spot.routing.state]}</span></span></button></li>)}</ul>:<p className="spot-empty" data-draft-empty>条件に合う候補がありません。検索名・エリア・ジャンルを変えて探してください。</p>}
    </section>
   </div>
  </div>;

@@ -1,16 +1,4 @@
 import Link from "next/link";
-import type {DemoRally} from "../lib/demo-rally";
-
-export function DemoBadge(){return <span className="demo-badge">開発用・未公開</span>}
-export function DemoNotice(){
-  return <aside className="demo-notice" aria-label="公開・参加受付の状態"><span aria-hidden="true" className="demo-notice-mark">i</span><div><strong>開発用コースのデモです</strong><p>現地の入口・通行・横断などは未確認です。開発用デモのみ試せます。一般の参加は受け付けていません。</p></div></aside>;
-}
-export function RallyFacts({rally}:{rally:DemoRally}){
-  return <dl className="rally-facts" aria-label="歩行の目安">
-    <div><dt>歩行距離の概算</dt><dd data-rally-distance={rally.distanceMeters}>約 <strong>{rally.distanceKm}</strong> km</dd></div>
-    <div><dt>歩行のみの目安</dt><dd data-rally-minutes={rally.walkingMinutes}>約 <strong>{rally.walkingMinutes}</strong> 分</dd></div>
-  </dl>;
-}
 export function WalkingEstimateNote(){return <p className="walking-estimate-note">見学・休憩・信号待ちを含まない概算です。坂や階段、歩く速さによって変わります。</p>}
 export function ArrowIcon({back=false}:{back?:boolean}){
   return <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" className={back?"back-arrow":undefined}><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>;

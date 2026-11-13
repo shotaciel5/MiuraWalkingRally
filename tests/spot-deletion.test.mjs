@@ -44,7 +44,7 @@ test("deleting an initial spot hides it without removing the immutable source an
  const deleted=remove(repository);assert.equal(deleted.id,firstId);assert.equal(deleted.deletedFromRevision,0);assert.equal(deleted.revision,1);
  assert.equal(repository.list().length,177);assert.equal(repository.list().some(s=>s.id===firstId),false);
  const code="import {createSpotRepository} from './lib/spots/local-repository.ts';console.log(JSON.stringify(createSpotRepository("+JSON.stringify(path)+").list().map(s=>s.id)));";
- const ids=JSON.parse(execFileSync(process.execPath,["--input-type=module","-e",code],{encoding:"utf8"}));assert.equal(ids.length,177);assert.ok(!ids.includes(firstId));
+ const ids=JSON.parse(execFileSync(process.execPath,["--input-type=module","-e",code],{encoding:"utf8"}));assert.equal(ids.length,88);assert.ok(!ids.includes(firstId));
  const db=new DatabaseSync(path);assert.equal(db.prepare("SELECT count(*) AS n FROM spot_edits").get().n,0);assert.equal(db.prepare("SELECT count(*) AS n FROM spot_deletions").get().n,1);db.close();
  assert.deepEqual(readFileSync(new URL("../data/spots/initial-spots.json",import.meta.url)),before);
 });
@@ -96,24 +96,25 @@ test("same-named places retain separate identities when one is deleted",t=>{
 test("known fixed-course places may be deleted while the original course and its revision remain intact",t=>{
  const {repository}=fixture(t),rally=getDemoRally(),before=JSON.stringify(rally);
  for(const use of getFixedCourseUses())remove(repository,use.spotId);
- assert.equal(repository.list().length,175);assert.equal(filterSpots(repository.list(),DEFAULT_FILTERS).length,21);
+ assert.equal(repository.list().length,175);assert.equal(filterSpots(repository.list(),DEFAULT_FILTERS).length,175);
  assert.equal(JSON.stringify(getDemoRally()),before);assert.equal(getDemoRally().revision,rally.revision);
 });
-test("all demo sample spots may be hidden and the sample then reports zero rather than phantom entries",t=>{
- const {repository}=fixture(t);for(const spot of filterSpots(repository.list(),DEFAULT_FILTERS))remove(repository,spot.id,spot.revision);
- assert.equal(filterSpots(repository.list(),DEFAULT_FILTERS).length,0);assert.equal(repository.list().length,154);
+test("deleting every record leaves no phantom entries in the list filters",t=>{
+ const {repository}=fixture(t,()=>seed.slice(0,3));for(const spot of repository.list())remove(repository,spot.id,spot.revision);
+ assert.equal(filterSpots(repository.list(),DEFAULT_FILTERS).length,0);assert.equal(repository.list().length,0);
 });
+
 test("version 1 databases migrate transactionally and preserve existing seed edits and added rows",t=>{
  const {path}=fixture(t),db=new DatabaseSync(path),base=seed.find(s=>s.id===firstId);
  db.exec("CREATE TABLE spot_edits (id TEXT PRIMARY KEY,value TEXT NOT NULL) STRICT; PRAGMA user_version=1");
  const rows=[{...added(),positionOverride:true,revision:1,updatedAt:"2026-11-08T03:00:00.000Z"},
   {...added({id:firstId,name:"Earlier edit",category:base.category,position:{lat:base.position.lat,lon:base.position.lon}}),positionOverride:false,revision:1,updatedAt:"2026-11-08T03:00:00.000Z"}];
  for(const row of rows){delete row.expectedRevision;db.prepare("INSERT INTO spot_edits VALUES (?,?)").run(row.id,JSON.stringify(row))}db.close();
- const repository=createSpotRepository(path);assert.equal(repository.list().length,179);assert.equal(repository.list().find(s=>s.id===firstId).name,"Earlier edit");
+ const repository=createSpotRepository(path);assert.equal(repository.list().length,90);assert.equal(repository.list().find(s=>s.id===firstId).name,"Earlier edit");
  const migrated=new DatabaseSync(path);assert.equal(migrated.prepare("PRAGMA user_version").get().user_version,7);
  for(const row of rows)assert.deepEqual(JSON.parse(migrated.prepare("SELECT value FROM spot_edits WHERE id=?").get(row.id).value),row);
  assert.equal(migrated.prepare("SELECT count(*) AS n FROM spot_deletions").get().n,0);migrated.close();
- assert.equal(remove(repository,localId,1).revision,2);assert.equal(repository.list().length,178);
+ assert.equal(remove(repository,localId,1).revision,2);assert.equal(repository.list().length,89);
 });
 test("failed version 1 migrations roll back and do not overwrite an unexpected table",t=>{
  const {path}=fixture(t),db=new DatabaseSync(path);

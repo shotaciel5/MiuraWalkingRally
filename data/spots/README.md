@@ -52,3 +52,7 @@ node scripts/fetch-initial-spots.mjs --refresh
 ~~~
 
 このコマンドはosm.json/source.jsonを更新するため、通常の再現確認では実行しません。更新後は採否記録・位置・重複・ハッシュを再レビューし、spots:build → spots:check → テストを実行してください。保留/到達点の元IDがなくなった場合は生成を止めます。P4-01cの運営者による追加/編集は、初期JSONとは別のSQLiteへ保存してIDで重ねます。spots:buildはSQLiteを更新せず、再適用で編集を取り消しません。編集済みの初期IDが新しい基礎データからなくなる場合は台帳の読込みを止めるため、無断で削除/ID変更せず移行を別途具体化してください。削除済みのIDは別の削除記録で保持し、再適用でも復活させません。完全消去・復元画面は今回作らず、既存の固定コース/参加記録を保持します。[削除方針](../../docs/decisions/010-spot-deletion.md)を参照してください。[保存方針](../../docs/decisions/009-local-spot-editing.md)を参照してください。
+
+## アプリの初期候補（P4-09）
+
+initial-spots.jsonの178件は取得/監査用の原本として保持します。アプリの既定repositoryはcuration.jsonの89件（三崎58・城ヶ島31、13カテゴリ）を採用します。既存の追加/編集と削除記録を保持し、台帳・下書きに同じ集合を返します。spots:buildは原本の再現であり、全件をアプリへ戻す操作ではありません。採用ID・除外理由・代表対応と原本SHAはcuration.json、一覧/検証は[選定仕様](../../docs/spot-curation.md)を参照してください。

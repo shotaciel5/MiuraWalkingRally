@@ -91,7 +91,7 @@ test("version 2 migration preserves edited and deleted spot records",t=>{
  const edit={id:s,name:"Earlier name",category:base.category,position:{lat:base.position.lat,lon:base.position.lon},description:"Earlier edit",positionOverride:false,revision:1,updatedAt:"2026-11-08T04:00:00.000Z"};
  const deletion={id:a,name:"Deleted",deletedFromRevision:0,revision:1,deletedAt:"2026-11-08T04:00:00.000Z"};
  db.prepare("INSERT INTO spot_edits VALUES (?,?)").run(s,JSON.stringify(edit));db.prepare("INSERT INTO spot_deletions VALUES (?,?)").run(a,JSON.stringify(deletion));db.close();
- const state=createDraftRepository(path).load();assert.equal(state.draft,null);assert.equal(state.spots.length,177);assert.equal(state.spots.find(v=>v.id===s).name,"Earlier name");
+ const state=createDraftRepository(path).load();assert.equal(state.draft,null);assert.equal(state.spots.length,88);assert.equal(state.spots.find(v=>v.id===s).name,"Earlier name");
  const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,7);
  assert.deepEqual(JSON.parse(check.prepare("SELECT value FROM spot_edits WHERE id=?").get(s).value),edit);assert.deepEqual(JSON.parse(check.prepare("SELECT value FROM spot_deletions WHERE id=?").get(a).value),deletion);check.close();
 });

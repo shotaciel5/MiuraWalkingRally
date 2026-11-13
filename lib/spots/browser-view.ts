@@ -10,17 +10,6 @@ export const SPOT_GROUPS = {
 export type SpotGroup = keyof typeof SPOT_GROUPS;
 export const AREA_LABELS = {"misaki-vicinity":"三崎周辺","jogashima-vicinity":"城ヶ島周辺"} as const;
 export const ROUTING_LABELS = {"poc-reference":"既存コースの仮到達点","entrance-unverified":"入口・接続の確認待ち","outside-road-snapshot":"道路データの範囲外"} as const;
-// A development display sample, not a recommendation or field approval. IDs/coordinates stay unchanged.
-export const DEMO_SPOT_IDS = [
-  "osm-way-384676338","osm-way-394752554","osm-way-394752558",
-  "osm-node-2046962408","osm-node-9653105765","osm-node-4394291555",
-  "osm-node-3880329702","osm-node-4200247042","osm-node-3880329336",
-  "osm-node-3880329337","osm-node-3988005814","osm-node-3988005815",
-  "osm-node-1211621029","osm-node-4200311204","osm-node-12364319660",
-  "osm-way-395998646","osm-node-4200311006","osm-node-10230120491",
-  "osm-way-384827683","osm-way-384827687","osm-node-3988006050",
-  "osm-node-4200311002","osm-way-420045013","osm-node-4200311003",
-] as const;
 const object=(v:unknown):v is Record<string,unknown>=>!!v&&typeof v==="object"&&!Array.isArray(v);
 export function decodeBrowserSpots(value:unknown):InitialSpot[]|null {
   if(!object(value)||value.schemaVersion!==1||!Array.isArray(value.spots)) return null;
@@ -51,12 +40,12 @@ export function decodeBrowserSpots(value:unknown):InitialSpot[]|null {
 export function groupFor(category:SpotCategory):SpotGroup {
   return (Object.keys(SPOT_GROUPS) as SpotGroup[]).find(k=>(SPOT_GROUPS[k].categories as readonly string[]).includes(category))!;
 }
-export type SpotFilters={mode:"demo"|"all";group:"all"|SpotGroup;area:"all"|InitialSpot["area"];query:string};
-export const DEFAULT_FILTERS:SpotFilters={mode:"demo",group:"all",area:"all",query:""};
+export type SpotFilters={group:"all"|SpotGroup;area:"all"|InitialSpot["area"];query:string};
+export const DEFAULT_FILTERS:SpotFilters={group:"all",area:"all",query:""};
 const searchable=(s:string)=>s.normalize("NFKC").replace(/\s/g,"").toLocaleLowerCase("ja-JP");
 export function filterSpots<T extends Pick<InitialSpot,"id"|"name"|"category"|"area">>(spots:readonly T[],filters:SpotFilters) {
-  const demo=new Set<string>(DEMO_SPOT_IDS),query=searchable(filters.query);
-  return spots.filter(s=>(filters.mode==="all"||demo.has(s.id))&&(filters.group==="all"||groupFor(s.category)===filters.group)
+  const query=searchable(filters.query);
+  return spots.filter(s=>(filters.group==="all"||groupFor(s.category)===filters.group)
     &&(filters.area==="all"||s.area===filters.area)&&searchable(s.name).includes(query));
 }
 export function visibleSelection<T extends {id:string}>(spots:readonly T[],id:string|null){return spots.find(s=>s.id===id)??null}

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import data from "../data/spots/initial-spots.json" with {type:"json"};
 import {getBrowserSpots} from "../lib/spots/browser-catalog.ts";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog.ts";
-import {decodeBrowserSpots,DEFAULT_FILTERS,DEMO_SPOT_IDS,SPOT_GROUPS,filterSpots,groupFor,visibleSelection} from "../lib/spots/browser-view.ts";
+import {decodeBrowserSpots,DEFAULT_FILTERS,SPOT_GROUPS,filterSpots,groupFor,visibleSelection} from "../lib/spots/browser-view.ts";
 const spots=getBrowserSpots(),clone=v=>structuredClone(v);
 test("the browser model preserves every admitted source identity, coordinate and review state",()=>{
  assert.equal(spots.length,178);
@@ -12,19 +12,10 @@ test("the browser model preserves every admitted source identity, coordinate and
  assert.equal(spots.filter(s=>s.routing.state==="poc-reference").length,3);
  assert.equal(spots.filter(s=>s.routing.state==="outside-road-snapshot").length,92);
 });
-test("the default sample is 24 existing places with both regions and all 13 source categories",()=>{
- const demo=filterSpots(spots,DEFAULT_FILTERS);
- assert.equal(DEMO_SPOT_IDS.length,24);assert.equal(new Set(DEMO_SPOT_IDS).size,24);
- assert.equal(demo.length,24);assert.equal(demo.filter(s=>s.area==="misaki-vicinity").length,12);
- assert.equal(demo.filter(s=>s.area==="jogashima-vicinity").length,12);
- assert.equal(new Set(demo.map(s=>s.category)).size,13);
- assert.ok(DEMO_SPOT_IDS.every(id=>spots.some(s=>s.id===id)));
+test("filters display the supplied operational catalog without a demo mode",()=>{
+ assert.equal(Object.hasOwn(DEFAULT_FILTERS,"mode"),false);const before=JSON.stringify(spots);assert.equal(filterSpots(spots,DEFAULT_FILTERS).length,178);assert.equal(JSON.stringify(spots),before);
 });
-test("switching from the demo to all candidates restores all entries without modifying the source",()=>{
- const before=JSON.stringify(spots);
- assert.equal(filterSpots(spots,{...DEFAULT_FILTERS,mode:"all"}).length,178);
- assert.equal(filterSpots(spots,DEFAULT_FILTERS).length,24);assert.equal(JSON.stringify(spots),before);
-});
+
 test("every source category belongs to exactly one visible group",()=>{
  for(const category of Object.keys(SPOT_CATEGORIES)){
   const groups=Object.entries(SPOT_GROUPS).filter(([,g])=>g.categories.includes(category));
@@ -32,15 +23,15 @@ test("every source category belongs to exactly one visible group",()=>{
  }
 });
 test("genre, region and text filters compose and do not change unverified routing states",()=>{
- const filtered=filterSpots(spots,{mode:"all",group:"cafe",area:"misaki-vicinity",query:"ミサキプレッソ"});
+ const filtered=filterSpots(spots,{group:"cafe",area:"misaki-vicinity",query:"ミサキプレッソ"});
  assert.equal(filtered.length,1);assert.equal(filtered[0].name,"ミサキプレッソ");
  assert.deepEqual(filtered[0],spots.find(s=>s.id===filtered[0].id));
- assert.equal(filterSpots(spots,{mode:"all",group:"cafe",area:"jogashima-vicinity",query:""}).length,0);
+ assert.equal(filterSpots(spots,{group:"cafe",area:"jogashima-vicinity",query:""}).length,0);
  assert.equal(filterSpots(spots,{...DEFAULT_FILTERS,group:"shopping",query:"風致亭"}).length,1);
 });
 test("search normalizes width, case and whitespace without changing original display names",()=>{
  const base={...spots[0],name:"Ｃａｆｅ A"};
- const result=filterSpots([base],{mode:"all",group:"all",area:"all",query:" cafe　a "});
+ const result=filterSpots([base],{group:"all",area:"all",query:" cafe　a "});
  assert.equal(result.length,1);assert.equal(result[0].name,"Ｃａｆｅ A");
  assert.equal(filterSpots(spots,{...DEFAULT_FILTERS,query:"存在しない候補"}).length,0);
 });
@@ -51,7 +42,7 @@ test("a hidden selection is absent rather than selecting a different spot or ret
  const valid=visibleSelection(filtered,"osm-node-3988005814");assert.equal(valid.name,"風致亭");
 });
 test("duplicate names keep separate selectable identities and coordinates",()=>{
- const shrines=filterSpots(spots,{mode:"all",group:"all",area:"all",query:"海南神社"});
+ const shrines=filterSpots(spots,{group:"all",area:"all",query:"海南神社"});
  assert.ok(shrines.length>=2);
  const a=shrines.find(s=>s.id==="osm-way-384676338"),b=shrines.find(s=>s.id==="osm-way-395998657");
  assert.notDeepEqual(a.position,b.position);assert.notEqual(a.id,b.id);

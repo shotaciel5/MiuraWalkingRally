@@ -6,7 +6,6 @@ import {filterSpots,DEFAULT_FILTERS,ROUTING_LABELS} from "../lib/spots/browser-v
 import assert from "node:assert/strict";
 import {createHash} from "node:crypto";
 import test from "node:test";
-import {getDemoRally} from "../lib/demo-rally.ts";
 
 const baseUrl = new URL(
   process.env.SMOKE_BASE_URL ?? "http://127.0.0.1:3000",
@@ -70,7 +69,7 @@ test("welcome experience HTTP smoke check",async t=>{
  await t.test("offers a usable operator workspace entrance",async()=>{
   const r=await get("/operator"),body=await r.text();assert.equal(r.status,200);assert.match(body,/data-operator-page="home"/);
   for(const route of ["spots","draft","courses"])assert.ok(body.includes('href="/operator/'+route+'"'));
-  assert.doesNotMatch(body,/href="\/poc"|class="view-switch"/);
+  assert.doesNotMatch(body,/href="\/poc"|href="\/operator\/landmarks|class="view-switch"|PoC/);
  });
  await t.test("redirects the retired PoC to the operator entrance",async()=>{
   const r=await fetch(new URL("/poc",baseUrl),{redirect:"manual"});assert.equal(r.status,307);assert.equal(r.headers.get("location"),"/operator");await r.arrayBuffer();
@@ -80,63 +79,11 @@ test("welcome experience HTTP smoke check",async t=>{
  });
 });
 
-test("participant rally list and detail HTTP smoke check",async t=>{
-  const rally=getDemoRally(),listResponse=await get("/courses"),list=await listResponse.text();
-  const detailResponse=await get(rally.href),detail=await detailResponse.text();
-  const plain=html=>html.replace(/<!--[\s\S]*?-->/g,"");
-  await t.test("serves the publication-only photo-walk catalog",()=>{
-    assert.equal(listResponse.status,200);assert.match(list,/data-participant-page="list"/);
-    assert.match(list,/data-published-course-count=/);assert.doesNotMatch(list,/data-fixed-demo-link/);
-    assert.equal([...list.matchAll(/data-rally-card=/g)].length,0);
-    assert.match(list,/data-published-empty|data-published-catalog/);assert.match(list,/name="robots"[^>]*noindex/);
-  });
-  await t.test("serves detail with the same route facts, stop order and return path",()=>{
-    assert.equal(detailResponse.status,200);assert.match(detail,/data-participant-page="detail"/);
-    assert.ok(detail.includes('data-rally-id="'+rally.id+'"'));
-
-    assert.ok(detail.includes('data-rally-distance="'+rally.distanceMeters+'"'));
-    assert.ok(detail.includes('data-rally-minutes="'+rally.walkingMinutes+'"'));
-    assert.deepEqual([...detail.matchAll(/data-rally-stop="([^"]+)"/g)].map(m=>m[1]),rally.stops.map(s=>s.id));
-    const anchors=[...detail.matchAll(/<a\b[^>]*>/g)].map(m=>m[0]);
-    assert.ok(anchors.some(tag=>/data-rally-back-link/.test(tag)&&/href="\/courses"/.test(tag)),"Detail must link back to the rally list.");
-    assert.match(detail,/name="robots"[^>]*noindex/);
-  });
-  await t.test("distinguishes the development demo from public participation and future visit actions",()=>{
-    for(const html of [detail]){
-      assert.ok(plain(html).includes("参加は受け付けていません"));
-      const actions=[...html.matchAll(/<(?:a|button)\b[^>]*>[\s\S]*?<\/(?:a|button)>/g)].map(m=>m[0]);
-      assert.ok(!actions.some(action=>/参加する|ラリーを開始|チェックイン|QRを読み取る|クーポンを受け取る/.test(action)));
-    }
-    assert.ok(detail.includes("両チェックポイント達成後"));assert.ok(detail.includes("実利用の条件・特典は未定"));
-  });
-  await t.test("serves a demo start page with a matching edition and detail link",async()=>{
-    const response=await get(rally.href+"/play"),html=await response.text();
-    assert.equal(response.status,200);assert.match(html,/data-participant-page="play"/);
-    assert.match(html,/data-participation-state="loading"/);
-    assert.ok(html.includes(rally.revision));assert.ok(html.includes('href="'+rally.href+'"'));
-    assert.match(html,/name="robots"[^>]*noindex/);
-  });
-  await t.test("server HTML never invents a per-tab participation",()=>{
-    assert.match(detail,/data-participation-state="loading"/);
-    assert.doesNotMatch(detail,/data-participation-id=/);
-    assert.doesNotMatch(detail,/data-participation-state="active"/);
-  });
-  await t.test("serves the two local reference photos with their recorded bytes",async()=>{
-    for(const spot of rally.stops.filter(s=>s.photo)){
-      const photo=spot.photo,response=await get(photo.path),bytes=Buffer.from(await response.arrayBuffer());
-      assert.equal(response.status,200);assert.match(response.headers.get("content-type")??"",/image\/jpeg/);
-      assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256);
-    }
-  });
-  await t.test("does not render an active navigator before the tab explicitly starts",async()=>{
-    const response=await get(rally.href+"/play"),html=await response.text();
-    assert.doesNotMatch(html,/<section\b[^>]*data-participant-navigator/);
-    assert.match(html,/data-participation-state="loading"/);
-  });
-  await t.test("returns 404 for an unknown rally",async()=>{
-    const response=await get("/rallies/__unknown_rally__");
-    assert.equal(response.status,404);await response.arrayBuffer();
-  });
+test("retired demo and PoC URLs lead to current workflows",async()=>{
+ for(const [route,destination]of [["/rallies/misaki-shitamachi","/courses"],["/rallies/misaki-shitamachi/play","/courses"],["/operator/landmarks","/operator/preview"],["/operator/landmarks/review","/operator/preview"]]){
+  const r=await fetch(new URL(route,baseUrl),{redirect:"manual"});assert.equal(r.status,307);assert.equal(r.headers.get("location"),destination);await r.arrayBuffer();
+ }
+ const html=await(await get("/courses")).text();assert.match(html,/data-published-course-count=/);assert.doesNotMatch(html,/data-fixed-demo-link|data-demo-start/);
 });
 
 test("operator spot catalog HTTP smoke check",async t=>{
@@ -147,12 +94,12 @@ test("operator spot catalog HTTP smoke check",async t=>{
  assert.equal(new Set(spots.map(s=>s.id)).size,spots.length);
  const visible=filterSpots(spots,DEFAULT_FILTERS);
  const response=await get("/operator/spots"),html=await response.text();
- await t.test("serves active sample entries and an all-candidate option after edits or deletions",()=>{
+ await t.test("serves the curated catalog without demo/all display modes",()=>{
   assert.equal(response.status,200);assert.match(html,/data-operator-page="spots"/);assert.match(html,/data-spot-browser/);
   assert.ok(html.includes('data-visible-count="'+visible.length+'"'));
   assert.equal([...html.matchAll(/data-spot-list-id="/g)].length,visible.length);
   const displayed=[...html.matchAll(/data-spot-list-id="([^"]+)"/g)].map(m=>m[1]);assert.deepEqual(displayed,visible.map(s=>s.id));
-  assert.match(html,/data-spot-mode="all"/);
+  assert.doesNotMatch(html,/data-spot-mode=|デモ表示/);
  });
  await t.test("shows current review states, attribution and management without route creation",()=>{
   for(const state of new Set(visible.map(s=>s.routing.state)))assert.ok(html.includes(ROUTING_LABELS[state]));
@@ -281,42 +228,17 @@ test("published detail URLs redirect straight to the map entry without an itiner
  assert.equal(r.status,307);assert.equal(r.headers.get("location"),"/rallies/"+id+"/play");await r.arrayBuffer();
 });
 
-test("key-free landmark comparison stays separate from normal courses",async()=>{
- const r=await get("/operator/landmarks"),html=await r.text();
- assert.equal(r.status,200);assert.match(html,/data-operator-page="landmarks"/);
- for(const mode of ["source","symbols","roads"])assert.match(html,new RegExp('data-compare-mode="'+mode+'"'));
- assert.match(html,/data-crop-poc/);assert.match(html,/data-cache-plan/);assert.match(html,/実取得0件/);
- assert.doesNotMatch(html,/https:\/\/graph\.mapillary\.com|MAPILLARY_ACCESS_TOKEN/);
- const hub=await get("/operator"),text=await hub.text();assert.equal(hub.status,200);assert.match(text,/href="\/operator\/landmarks"/);
- const old=await fetch(new URL("/poc",baseUrl),{redirect:"manual"});assert.equal(old.status,307);assert.equal(old.headers.get("location"),"/operator");await old.arrayBuffer();
-});
-
-test("route landmark workbench exposes local evidence and guards every mutation",async()=>{
- const r=await get("/api/operator/landmarks"),state=await r.json();assert.equal(r.status,200);assert.equal(r.headers.get("cache-control"),"no-store");assert.equal(state.dataset.source,"sample");assert.equal(state.dataset.cards.length,31);assert.ok(typeof state.configured==="boolean");assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
- const page=await get("/operator/landmarks/review"),html=await page.text();assert.equal(page.status,200);assert.match(html,/data-landmark-workbench/);assert.match(html,/data-save-landmarks/);
- const wrong=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:"https://example.com"},body:"{}"});assert.equal(wrong.status,403);await wrong.arrayBuffer();
- for(const [body,status]of [[{action:"prepare",source:"sample",datasetId:"wrong",targetKey:state.dataset.targets[0].key},403],[{action:"prepare",source:"sample",datasetId:state.dataset.id,targetKey:"invalid"},403],[{action:"save",source:"sample",datasetId:state.dataset.id,expectedRevision:0,choices:{forged:true}},400],[{action:"photo",source:"sample",datasetId:state.dataset.id,candidateId:"mapillary:unknown"},403]]){
- const res=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:baseUrl.origin},body:JSON.stringify(body)});assert.equal(res.status,status);assert.equal(res.headers.get("cache-control"),"no-store");await res.arrayBuffer();
+test("only the real draft landmark API remains available, with external acquisition disabled",async()=>{
+ const invalid=await get("/api/operator/landmarks?source=sample");assert.equal(invalid.status,400);assert.equal(invalid.headers.get("cache-control"),"no-store");await invalid.arrayBuffer();
+ const r=await get("/api/operator/landmarks"),state=await r.json();const context=await(await get("/api/operator/draft")).json();assert.equal(r.status,context.draft?200:503);assert.equal(r.headers.get("cache-control"),"no-store");if(r.status===200){assert.equal(state.dataset.source,"draft");assert.ok(state.dataset.cards.length);for(const c of Object.values(state.targets).flatMap(t=>t.candidates))if(c.kind==="unique")assert.equal(state.assets[c.id.slice(10)]?.crop?.size,128)}assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
+ for(const [body,status]of [[{action:"save",source:"sample"},400],[{action:"prepare",source:"draft"},403],[{action:"photo",source:"draft"},403],[{action:"save",source:"draft",datasetId:"wrong",expectedRevision:0,choices:{}},context.draft?409:503]]){
+  const res=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:baseUrl.origin},body:JSON.stringify(body)});assert.equal(res.status,status);await res.arrayBuffer();
  }
- const bad=await get("/api/operator/landmarks/images/invalid");assert.equal(bad.status,404);await bad.arrayBuffer();
+ const wrong=await fetch(new URL("/api/operator/landmarks",baseUrl),{method:"POST",headers:{"Content-Type":"application/json",Origin:"https://example.com"},body:"{}"});assert.equal(wrong.status,403);await wrong.arrayBuffer();
+ const image=await get("/api/operator/landmarks/images/invalid");assert.equal(image.status,404);await image.arrayBuffer();
 });
-
-test("mandatory stairs and automatically prepared photo suggestions are exposed by the PoC",async()=>{
- const response=await get("/operator/landmarks/review"),html=await response.text();assert.equal(response.status,200);assert.match(html,/data-photo-suggestions/);assert.match(html,/data-mandatory-stairs/);assert.match(html,/階段 · 必須表示/);
- const value=await get("/api/operator/landmarks"),state=await value.json();assert.equal(value.status,200);assert.equal(typeof state.photoFailures,"object");assert.ok(!Array.isArray(state.photoFailures));const first=Object.values(state.assets)[0];if(first){const ok=await get("/api/operator/landmarks/images/"+first.featureId+"?image="+first.imageId+"&policy="+first.policyVersion);assert.equal(ok.status,200);await ok.arrayBuffer();const mismatch=await get("/api/operator/landmarks/images/"+first.featureId+"?image=0&policy="+first.policyVersion);assert.equal(mismatch.status,404);assert.equal(mismatch.headers.get("cache-control"),"no-store");await mismatch.arrayBuffer()}assert.doesNotMatch(JSON.stringify(state),/thumb_1024_url|access_token=|MLY\|/);
-});
-
-test("bundled demo photos and provenance are available without a writable cache or token",async()=>{
- const response=await get("/landmarks/miura-v1/manifest.json");assert.equal(response.status,200);const manifest=await response.json();assert.equal(manifest.version,2);assert.ok(manifest.photos.length>=9);assert.equal(manifest.junctions.length,1326);assert.equal(manifest.stats.missing,0);
+test("bundled regional crops and provenance still serve production courses",async()=>{
+ const r=await get("/landmarks/miura-v1/manifest.json");assert.equal(r.status,200);const manifest=await r.json();assert.equal(manifest.version,2);assert.equal(manifest.junctions.length,1326);assert.equal(manifest.stats.missing,0);
  const notice=await get("/landmarks/miura-v1/NOTICE.md");assert.equal(notice.status,200);assert.match(await notice.text(),/CC BY-SA 4.0/);
- for(const photo of manifest.photos){const r=await get(photo.path);assert.equal(r.status,200);const bytes=new Uint8Array(await r.arrayBuffer());assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256);assert.match(r.headers.get("content-type"),/^image\//)}
- const state=await(await get("/api/operator/landmarks")).json();assert.equal(state.bundleId,manifest.id);assert.ok(Object.keys(state.assets).length>=3);assert.equal(Object.keys(state.targets).length,state.dataset.targets.length);
- const html=await(await get("/operator/landmarks/review")).text();assert.match(html,/data-bundled-landmarks="miura-region-landmarks-v1"/);assert.match(html,/同梱データ・出典/);
-});
-
-test("objects without cutout images are excluded from selectable landmark candidates",async()=>{
- const r=await get("/api/operator/landmarks"),state=await r.json();assert.equal(r.status,200);
- for(const c of Object.values(state.targets).flatMap(t=>t.candidates))if(c.kind==="unique"){const asset=state.assets[c.id.slice(10)];assert.ok(asset?.crop);assert.equal(asset.featureId,c.id.slice(10));assert.equal(asset.crop.size,128)}
- const html=await(await get("/operator/landmarks/review")).text();assert.doesNotMatch(html,/写真未取得のため/);
- for(const match of html.matchAll(/<article[^>]*data-candidate-row="[^"]+"[^>]*data-candidate-kind="unique"[^>]*>([\s\S]*?)<\/article>/g))assert.match(match[1],/data-prepared-crop/);
+ for(const photo of manifest.photos){const res=await get(photo.path);assert.equal(res.status,200);const bytes=new Uint8Array(await res.arrayBuffer());assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256)}
 });

@@ -18,7 +18,7 @@ export default function OperatorHome(){
         <Link href="/operator/courses"><ExperienceIcon className="operator-entry-icon" kind="publish"/><span className="operator-entry-number">03 / PUBLISH</span><h3>保存したコースを届ける</h3><p>生成した内容を確認して参加者に公開。公開停止・再公開も操作できます。</p><span className="operator-entry-link">保存済みコースへ<ArrowIcon/></span></Link>
       </div>
       <aside className="operator-workflow"><h2>コースができるまで</h2><ol><li>スポットを選ぶ</li><li>ルート・コマを生成</li><li>確認して保存</li><li>参加者に公開</li></ol><p>公開前に、入口・通行・横断など現地の状況を確認してください。画面を切り替えるだけで利用でき、ログインによるアクセス制限はありません。</p></aside>
-      <p className="operator-lab-link"><Link prefetch={false} href="/operator/landmarks/review?source=draft">ルート上の目印を選ぶ（PoC） →</Link><br/><Link prefetch={false} href="/operator/landmarks">目印の表示を検証する →</Link><small>建物や名称を省いたコマ図と、写真の切り出しを比べる検証ページです。</small></p>
+
     </section><RallyFooter/>
   </main>;
 }
