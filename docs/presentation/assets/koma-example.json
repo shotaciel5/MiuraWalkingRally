@@ -1,0 +1,428 @@
+{
+  "source": "createMisakiReviewPoc",
+  "introductionSequence": 5,
+  "cards": [
+    {
+      "map": {
+        "sequence": 5,
+        "nodeId": 2159253432,
+        "pathIndex": 9,
+        "stopIds": [],
+        "metersFromStart": 88.95249886785528,
+        "metersToNext": 46.05947564269671,
+        "kind": "junction",
+        "headingDegrees": 123.035249303694,
+        "state": "ready",
+        "issues": [],
+        "branches": [
+          {
+            "neighborNodeId": 1469284822,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 2159253432
+              },
+              {
+                "x": 167.4761153448262,
+                "y": 117.36848354610413,
+                "nodeId": 1469284822
+              },
+              {
+                "x": 207.9508519519171,
+                "y": 65.00649935445034,
+                "nodeId": 1469284190
+              },
+              {
+                "x": 209.78667575439036,
+                "y": 62.35518288177914,
+                "nodeId": null
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 2159253432,
+                "to": 1469284822,
+                "wayIds": [
+                  133523771
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 1469284822,
+                "to": 1469284190,
+                "wayIds": [
+                  133523771
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 1469284190,
+                "to": 2247834463,
+                "wayIds": [
+                  133523771
+                ],
+                "fraction": 0.02773855483361546
+              }
+            ],
+            "arrival": false,
+            "departure": false,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "limit",
+            "pathPixels": 97.99999918082743
+          },
+          {
+            "neighborNodeId": 2159253908,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 2159253432
+              },
+              {
+                "x": 124.2939203296896,
+                "y": 136.44963664570471,
+                "nodeId": 2159253908
+              },
+              {
+                "x": 66.01415568778366,
+                "y": 147.172400712855,
+                "nodeId": 13785934758
+              },
+              {
+                "x": 53.727195966628955,
+                "y": 150.73102467694628,
+                "nodeId": null
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 2159253432,
+                "to": 2159253908,
+                "wayIds": [
+                  133523642
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 2159253908,
+                "to": 13785934758,
+                "wayIds": [
+                  133523642
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 13785934758,
+                "to": 1469285921,
+                "wayIds": [
+                  133523642
+                ],
+                "fraction": 0.1960360896072212
+              }
+            ],
+            "arrival": false,
+            "departure": true,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "limit",
+            "pathPixels": 98.00000091548449
+          },
+          {
+            "neighborNodeId": 6017293026,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 2159253432
+              },
+              {
+                "x": 150,
+                "y": 163.9868491921194,
+                "nodeId": 6017293026
+              },
+              {
+                "x": 153.28316455858925,
+                "y": 183.96085298885464,
+                "nodeId": 6017293027
+              },
+              {
+                "x": 162.11291940375978,
+                "y": 210.53214502248483,
+                "nodeId": 1469285048
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 2159253432,
+                "to": 6017293026,
+                "wayIds": [
+                  825104412
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 6017293026,
+                "to": 6017293027,
+                "wayIds": [
+                  825104412
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 6017293027,
+                "to": 1469285048,
+                "wayIds": [
+                  825104412
+                ],
+                "fraction": 1
+              }
+            ],
+            "arrival": true,
+            "departure": false,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "junction",
+            "pathPixels": 72.22885121780699
+          }
+        ]
+      },
+      "arrows": [
+        [
+          {
+            "x": 150,
+            "y": 140,
+            "nodeId": 2159253432
+          },
+          {
+            "x": 124.2939203296896,
+            "y": 136.44963664570471,
+            "nodeId": 2159253908
+          },
+          {
+            "x": 76.56514016926634,
+            "y": 145.2311485824414,
+            "nodeId": null
+          }
+        ]
+      ],
+      "nodeId": 2159253432,
+      "point": {
+        "lat": 35.1413926,
+        "lon": 139.6183435
+      }
+    },
+    {
+      "map": {
+        "sequence": 6,
+        "nodeId": 1469285921,
+        "pathIndex": 12,
+        "stopIds": [],
+        "metersFromStart": 135.011974510552,
+        "metersToNext": 33.97754984834941,
+        "kind": "junction",
+        "headingDegrees": 16.882939890037107,
+        "state": "ready",
+        "issues": [],
+        "branches": [
+          {
+            "neighborNodeId": 2845403904,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 1469285921
+              },
+              {
+                "x": 148.40812014890335,
+                "y": 42.012928275901956,
+                "nodeId": null
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 1469285921,
+                "to": 2845403904,
+                "wayIds": [
+                  133523562
+                ],
+                "fraction": 0.8829359425237471
+              }
+            ],
+            "arrival": false,
+            "departure": true,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "limit",
+            "pathPixels": 98.00000156389724
+          },
+          {
+            "neighborNodeId": 13785934758,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 1469285921
+              },
+              {
+                "x": 150,
+                "y": 205.25287153811752,
+                "nodeId": 13785934758
+              },
+              {
+                "x": 146.73205268895424,
+                "y": 237.83653019917432,
+                "nodeId": null
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 1469285921,
+                "to": 13785934758,
+                "wayIds": [
+                  133523642
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 13785934758,
+                "to": 2159253908,
+                "wayIds": [
+                  133523642
+                ],
+                "fraction": 0.5526196876710484
+              }
+            ],
+            "arrival": true,
+            "departure": false,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "limit",
+            "pathPixels": 97.99999799782438
+          },
+          {
+            "neighborNodeId": 13785960265,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 1469285921
+              },
+              {
+                "x": 140.6145833132076,
+                "y": 139.96350995711515,
+                "nodeId": 13785960265
+              },
+              {
+                "x": 82.54163919875212,
+                "y": 139.671440883817,
+                "nodeId": 6094970267
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 1469285921,
+                "to": 13785960265,
+                "wayIds": [
+                  1412777204
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 13785960265,
+                "to": 6094970267,
+                "wayIds": [
+                  1412777204
+                ],
+                "fraction": 1
+              }
+            ],
+            "arrival": false,
+            "departure": false,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "junction",
+            "pathPixels": 67.4591661906652
+          },
+          {
+            "neighborNodeId": 13785960266,
+            "points": [
+              {
+                "x": 150,
+                "y": 140,
+                "nodeId": 1469285921
+              },
+              {
+                "x": 161.79522449725272,
+                "y": 141.4308628365503,
+                "nodeId": 13785960266
+              },
+              {
+                "x": 235.34532853351877,
+                "y": 150.27343169609597,
+                "nodeId": 1469285798
+              },
+              {
+                "x": 246.9709161959939,
+                "y": 153.39951936226487,
+                "nodeId": null
+              }
+            ],
+            "sourceSegments": [
+              {
+                "from": 1469285921,
+                "to": 13785960266,
+                "wayIds": [
+                  133522831
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 13785960266,
+                "to": 1469285798,
+                "wayIds": [
+                  133522831
+                ],
+                "fraction": 1
+              },
+              {
+                "from": 1469285798,
+                "to": 1469285653,
+                "wayIds": [
+                  133522831
+                ],
+                "fraction": 0.11868848297296371
+              }
+            ],
+            "arrival": false,
+            "departure": false,
+            "entry": "candidate",
+            "exit": "candidate",
+            "endReason": "limit",
+            "pathPixels": 97.99999306839385
+          }
+        ]
+      },
+      "arrows": [
+        [
+          {
+            "x": 150,
+            "y": 140,
+            "nodeId": 1469285921
+          },
+          {
+            "x": 148.79017131316655,
+            "y": 65.52982548968548,
+            "nodeId": null
+          }
+        ]
+      ],
+      "nodeId": 1469285921,
+      "point": {
+        "lat": 35.1417691,
+        "lon": 139.6185412
+      }
+    }
+  ]
+}

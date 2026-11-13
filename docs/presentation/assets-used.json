@@ -1,0 +1,50 @@
+{
+  "slides": 10,
+  "images": [
+    {
+      "path": "docs/presentation/assets/operator-landmarks.png",
+      "sha256": "2412bf595351889aa93043f6aa2da241bd78aa701956c7a85df66ff63d2af747",
+      "size": 176397
+    },
+    {
+      "path": "docs/presentation/assets/operator-published.png",
+      "sha256": "dae45dce265e2345a331d0ea042f1f0028746cfa5566cb011c6281b08b366edf",
+      "size": 27589
+    },
+    {
+      "path": "docs/presentation/assets/participant-before-checkpoint.png",
+      "sha256": "8b5150d3a9b789f0b98ff39de290c24ba3f0f0071d06a507b8787d51cba3532a",
+      "size": 113359
+    },
+    {
+      "path": "docs/presentation/assets/participant-checkpoint.png",
+      "sha256": "991ae9a816904809423f8e98b39d5553e818d4b4d52c789d76639b5411e7ea36",
+      "size": 120153
+    },
+    {
+      "path": "docs/presentation/assets/participant-course-card.png",
+      "sha256": "643d9e86ef65de11fc191bfde62179b9e5a6813aeb10a52837969b51bff485e5",
+      "size": 523110
+    },
+    {
+      "path": "docs/presentation/assets/participant-goal.png",
+      "sha256": "b96bf06262d2322ff0ef9706399cc432ed64f1485197f461d90575202805501d",
+      "size": 124124
+    },
+    {
+      "path": "docs/presentation/assets/participant-map.png",
+      "sha256": "292cbd4015a188a0e74ed0ba5ba4d425bfdc08d6d6df90374148c1e464a32080",
+      "size": 115101
+    },
+    {
+      "path": "public/mainphotos/hantoupic.jpg",
+      "sha256": "ef886eda5f5aeed7f97e3bde0dc7d4160e332c1b5bf46aa2e5bee895785eedac",
+      "size": 2204533
+    },
+    {
+      "path": "public/mainphotos/shitamati.jpg",
+      "sha256": "9ccf6deb0503f7e0b677a58f957c80c5a8d88510fa98659b4cbc11bc0e74b4a0",
+      "size": 3780269
+    }
+  ]
+}

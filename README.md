@@ -6,6 +6,8 @@
 
 開発の背景・目的、対象者、期待効果と構成図は [企画・ソリューション概要](docs/project-overview.md) にまとめています。
 
+読むだけで分かる [10枚のハッカソン審査資料（PPTX/PDF）](docs/presentation/README.md) も用意しています。
+
 要件は [docs/requirements.md](docs/requirements.md)、設計は [docs/design.md](docs/design.md)、進捗は [docs/backlog.md](docs/backlog.md)、PoCの検証記録は [docs/poc-route-map.md](docs/poc-route-map.md) を参照してください。
 
 [P2-07の総合レビュー](docs/poc-route-map.md#p2-07)後、2026-11-07のユーザー指示で、固定データを使うPhase 3のローカル画面開発とP3-01への着手を承認済みです。[参加者画面の実装・検証記録](docs/participant-app.md)に今回の範囲を記録しています。現地安全性・入口・実測精度/読解と手動参照10コマは保留を継続します。現在の公開はローカルアプリ内への掲載で、AWS/インターネットへのデプロイはしていません。
