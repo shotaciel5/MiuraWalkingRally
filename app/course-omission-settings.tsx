@@ -10,6 +10,6 @@ export default function CourseOmissionSettings({mode,onChange,total,shown,disabl
  <p>道なりが明確な交差点を省略し、次のコマと紛らわしい交差点は残します。チェックポイント・折り返し・確認待ちの図・目印を編集したコマは省略しません。</p>
  <fieldset disabled={disabled}><legend>表示するコマ</legend>{options.map(value=><label key={value}><input type="radio" name="course-omission-mode" value={value} checked={mode===value} data-omission-option={value} onChange={()=>onChange(value)}/><span><strong>{label(value)}</strong><small>{value==="hybrid"?"学習モデルで省略候補を再確認し、紛らわしい地点を追加で残します。":value==="rule"?"道路形状のルールで残すコマを確認します。":"省略候補も含め、元の全コマを確認します。"}</small></span></label>)}</fieldset>
  {mode==="hybrid"&&failureCount>0&&<p role="status" data-hybrid-unavailable>一部のAI判定を確認できないため、該当するコマは残しています。</p>}
- <p>{saved?"この切替は確認用です。保存済みコース・参加者の表示は変更しません。":"選択した表示方法を「この結果を保存」でコースに固定し、参加者へ公開します。"}</p><p className="preview-caption">実際の入口・通行・道なりの分かりやすさは現地確認が必要です。全交差点表示へいつでも戻せます。</p>
+ <p>{saved?"この切替は確認用です。保存済みコース・参加者の表示は変更しません。":"選択した表示方法を「この内容を保存して、公開設定へ」でコースに固定し、参加者へ公開します。"}</p><p className="preview-caption">実際の入口・通行・道なりの分かりやすさは現地確認が必要です。全交差点表示へいつでも戻せます。</p>
  </dialog></div>;
 }

@@ -1,0 +1,73 @@
+/* Task guidance is scoped to operator pages. */
+.operator-main .operator-workflow-nav{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:0;background:none;border:0;margin:22px 0 30px}
+.operator-main .operator-workflow-nav>a{min-height:44px;padding:8px 5px;background:transparent;border:0;color:var(--muted);font-size:11px;text-decoration:none}
+.operator-main .operator-workflow-nav>a[aria-current]{color:var(--brand);background:#deeaee;border:1px solid #c6dae3;border-radius:8px;font-weight:750}
+.operator-main .operator-work-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;list-style:none;margin:0;padding:5px;background:#eaf0f1;border-radius:12px}
+.operator-main .operator-work-steps li{min-width:0}
+.operator-main .operator-work-steps a{display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:8px;min-height:47px;padding:9px 7px;background:transparent;color:var(--muted);font-size:11px;text-decoration:none;font-weight:650;line-height:1.5}
+.operator-main .operator-work-steps a>span{display:grid;place-items:center;width:23px;height:23px;border-radius:50%;background:#fff;color:var(--brand);font-size:10px;flex-shrink:0}
+.operator-main .operator-work-steps a[aria-current]{background:var(--brand);color:white}
+.operator-main .operator-work-steps a[aria-current]>span{background:#ffffff28;color:white}
+.operator-main .operator-workflow-nav a:hover{background:#dce9ee}
+.operator-main .operator-work-steps a[aria-current]:hover{background:var(--brand-deep)}
+.operator-main .operator-task-welcome{grid-template-columns:1.35fr .65fr;gap:50px;margin:35px 0 42px}
+.operator-main .operator-task-welcome h1{font-size:clamp(30px,3.6vw,43px);line-height:1.5;margin-bottom:18px}
+.operator-main .operator-task-welcome .participant-lead{font-size:13px;line-height:2}
+.operator-main .operator-task-welcome .operator-welcome-photo{height:310px}
+.operator-main .operator-start-note{font-size:10px;color:var(--muted);line-height:1.9;margin-top:14px;max-width:550px}
+.operator-main .operator-resume{display:flex;flex-direction:column;gap:3px;background:#e8f0f1;border-left:3px solid var(--brand);border-radius:0 8px 8px 0;padding:12px 15px;margin:19px 0 0;max-width:500px}
+.operator-main .operator-resume span,.operator-main .operator-resume small{font-size:10px;color:var(--muted)}
+.operator-main .operator-resume strong{font-size:16px;overflow-wrap:anywhere}
+.operator-main .operator-task-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.operator-main .operator-task-grid>a{display:flex;gap:18px;background:#fffefb;border:1px solid var(--line);border-radius:12px;padding:26px;color:var(--ink);text-decoration:none}
+.operator-main .operator-task-grid>a:hover{border-color:#9ab8c5;box-shadow:0 5px 20px #12394f0a}
+.operator-main .operator-task-grid>a>svg{width:30px;height:30px;color:var(--brand);flex-shrink:0}
+.operator-main .operator-task-grid h3{font-size:18px;margin:0 0 10px}
+.operator-main .operator-task-grid p{font-size:12px;line-height:1.9;color:var(--muted);margin:0 0 18px}
+.operator-main .operator-task-grid span{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:700;color:var(--brand)}
+.operator-main .operator-next-action{display:flex;align-items:center;justify-content:space-between;gap:24px;background:#e8f1f3;border:1px solid #ccdde3;border-left:4px solid var(--brand);border-radius:12px;padding:22px 25px;margin:20px 0 24px}
+.operator-main .operator-next-action .eyebrow{font-size:9px;margin:0 0 7px}
+.operator-main .operator-next-action h2{font-size:20px;line-height:1.6;margin:0 0 8px}
+.operator-main .operator-next-action p:not(.eyebrow){font-size:12px;line-height:1.9;color:var(--muted);margin:0;max-width:680px}
+.operator-main .operator-next-action>a{flex-shrink:0}
+.operator-main .operator-draft-checks{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:7px;list-style:none;margin:0;padding:0;max-width:275px;flex-shrink:0}
+.operator-main .operator-draft-checks li{display:flex;align-items:center;gap:6px;border:1px solid #c9d7df;border-radius:30px;padding:6px 10px;font-size:10px;color:var(--muted);background:#f9fbfa}
+.operator-main .operator-draft-checks li.is-done{color:var(--brand);border-color:#9dbcc8;background:white}
+.operator-main .operator-task-primary{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:46px;padding:12px 19px;border:1px solid var(--brand);border-radius:8px;background:var(--brand);color:white;font:inherit;font-size:12px;font-weight:700;text-decoration:none;cursor:pointer;text-align:center;line-height:1.6}
+.operator-main .operator-task-primary:hover{background:var(--brand-deep)}
+.operator-main .operator-task-secondary{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:9px 13px;border:1px solid #bfd0d9;border-radius:8px;background:white;color:var(--brand);font:inherit;font-size:11px;text-decoration:none;cursor:pointer;text-align:center;line-height:1.6}
+.operator-main button:disabled{cursor:default}
+.operator-main .operator-task-primary:disabled,.operator-main .operator-task-secondary:disabled{opacity:.5}
+.operator-main .operator-secondary-details{border:1px solid var(--line);border-radius:9px;padding:12px 15px;margin:15px 0;background:#fbfcfa}
+.operator-main .operator-secondary-details>summary{font-size:11px;font-weight:650;color:var(--brand);cursor:pointer;min-height:26px;line-height:1.8}
+.operator-main .operator-secondary-details[open]>summary{margin-bottom:14px}
+.operator-main .operator-secondary-details .preview-actions{margin-bottom:0}
+.operator-main .operator-inline-details{margin-top:5px;color:var(--muted)}
+.operator-main .operator-inline-details>summary{cursor:pointer;font-size:9px}
+.operator-main .operator-action-hint,.operator-main .operator-role-help{font-size:11px;color:var(--muted);line-height:1.9}
+.operator-main .operator-status-error{padding:15px 18px;background:#fff0e8;border:1px solid #d8ab96;border-radius:9px;font-size:12px}
+.operator-main .draft-choice>.operator-action-hint{font-size:12px;color:var(--brand);font-weight:650}
+.operator-main .draft-assign-actions button.is-suggested{background:var(--brand);border-color:var(--brand);color:white}
+.operator-main .draft-choice .operator-secondary-details{margin-bottom:0}
+.operator-main .operator-draft-primary-actions{display:grid;grid-template-columns:1fr;margin-top:18px}
+.operator-main .operator-draft-primary-actions .rally-primary-link{font-size:12px;border-radius:8px;min-height:46px}
+.operator-main .operator-draft-primary-actions .preview-generate{margin:0;padding:12px 10px;width:100%}
+.operator-main .operator-draft-primary-actions .operator-task-secondary{font-size:10px}
+.operator-main .operator-task-panel{border-radius:12px;padding:22px 25px}
+.operator-main .course-save-panel h2{font-size:18px;margin:0 0 9px}
+.operator-main .course-save-panel .operator-task-primary{margin-top:7px}
+.operator-main .operator-empty-state{padding:35px;max-width:720px;background:#f0f6f6}
+.operator-main .operator-empty-state h2{font-size:23px;margin-top:0}
+.operator-main .operator-empty-state>.operator-task-primary{margin-top:10px}
+.operator-main .operator-course-open{display:block;font-size:12px;font-weight:700;color:var(--brand);margin-top:18px}
+.operator-main .operator-publication-heading{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.operator-main .operator-publication-heading h2{margin:0}
+.operator-main .operator-publication-state{display:inline-flex;align-items:center;border:1px solid #b7cbd4;background:#e7f0f3;color:var(--brand);font-size:10px;font-weight:700;border-radius:30px;padding:4px 10px}
+.operator-main .course-publication .operator-action-hint{font-size:10px;margin-top:16px}
+.operator-main .preview-summary h1{font-size:30px}
+.operator-main .preview-panel,.operator-main .course-review{border-radius:12px}
+@media(max-width:1000px){.operator-main .operator-workflow-nav{grid-template-columns:1fr auto;gap:8px;margin-bottom:23px}.operator-main .operator-work-steps{grid-column:1/-1;grid-row:2}.operator-main .operator-task-welcome{gap:25px;grid-template-columns:1fr .55fr}.operator-main .operator-task-welcome .operator-welcome-photo{height:290px}.operator-main .operator-next-action{align-items:flex-start}.operator-main .operator-draft-checks{max-width:200px}.operator-main .operator-task-grid h3{font-size:16px}}
+@media(max-width:700px){.operator-main .operator-task-welcome{display:block;margin:25px 0 32px}.operator-main .operator-task-welcome h1{font-size:29px}.operator-main .operator-task-welcome .operator-welcome-photo{display:none}.operator-main .operator-task-welcome .participant-lead{font-size:12px}.operator-main .operator-task-welcome .experience-button{width:100%;justify-content:center;gap:20px}.operator-main .operator-task-grid{grid-template-columns:1fr;gap:13px}.operator-main .operator-task-grid>a{padding:22px;gap:14px}.operator-main .operator-task-grid p{font-size:11px}.operator-main .operator-next-action{display:block;padding:18px;margin:18px 0 20px}.operator-main .operator-next-action h2{font-size:17px}.operator-main .operator-next-action p:not(.eyebrow){font-size:11px}.operator-main .operator-next-action>a{margin-top:15px}.operator-main .operator-draft-checks{justify-content:flex-start;max-width:none;margin-top:14px}.operator-main .operator-draft-checks li{font-size:9px;padding:5px 8px}.operator-main .operator-task-panel{padding:19px}.operator-main .operator-empty-state{padding:25px}.operator-main .operator-empty-state h2{font-size:20px}.operator-main .operator-publication-heading{gap:10px}.operator-main .preview-summary h1{font-size:25px}.operator-main .operator-catalog-link{font-size:10px}.operator-main .preview-navigation button{min-height:44px}}
+@media(max-width:600px){.operator-main .operator-work-steps a{flex-direction:column;font-size:10px;padding:8px 2px;gap:4px}.operator-main .operator-work-steps{gap:3px}.operator-main .operator-workflow-nav{gap:6px}}
+
+.operator-main .draft-candidates .spot-list-state{display:none}

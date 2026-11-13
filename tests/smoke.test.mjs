@@ -271,3 +271,21 @@ test("adopted home presents the approved flow and AI assistance",async t=>{
   }
  });
 });
+
+test("operator tasks show a guided course creation and publication path",async t=>{
+ const [home,draft,courses]=await Promise.all(["/operator","/operator/draft","/operator/courses"].map(async route=>{const r=await get(route);assert.equal(r.status,200);return r.text()}));
+ await t.test("starts with course creation and keeps spot maintenance as a separate task",()=>{
+  assert.match(home,/data-operator-start/);assert.match(home,/登録済みのスポット/);assert.match(home,/保存しただけでは公開されません/);
+  assert.match(home,/data-operator-workflow/);assert.match(home,/地点を選ぶ/);assert.match(home,/コマを確認・保存/);assert.match(home,/参加者へ公開/);
+  assert.doesNotMatch(home,/01 \/ SPOTS|02 \/ COURSE/);
+ });
+ await t.test("explains the next draft action and keeps management operations in details",()=>{
+  assert.match(draft,/data-draft-guidance/);assert.match(draft,/コース名/);
+  assert.match(draft,/<details[^>]*data-draft-management/);assert.match(draft,/data-draft-save/);assert.match(draft,/data-preview-generate/);
+  assert.match(draft,/href="\/operator\/draft#draft-next-action"/);
+ });
+ await t.test("saved courses lead to review and publishing or first creation",()=>{
+  assert.match(courses,/保存したコースを確認・公開する/);
+  assert.ok(courses.includes("data-course-list-empty")?courses.includes("最初のコースをつくる"):courses.includes("コマを確認・公開する"));
+ });
+});

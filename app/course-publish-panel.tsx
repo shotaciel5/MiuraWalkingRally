@@ -17,18 +17,19 @@ export default function CoursePublishPanel({courseId,fingerprint,title,publicati
   finally{window.clearTimeout(timer);request.current=null;running.current=false;if(alive.current)setBusy(false)}
  }
  const operation=stopping?"公開を停止":reopening?"同じ内容を再公開":"参加者向けに公開";
- return <section className="preview-panel course-publication" aria-labelledby="course-publication-title" data-course-publication={publication===undefined?"unavailable":publication?.status??"unpublished"} data-publication-revision={revision}>
-  <h2 id="course-publication-title">参加者への公開</h2>
-  {publication===undefined?<><p role="alert">公開状態を確認できませんでした。開き直して再試行してください。</p><a href={"/operator/courses/"+courseId}>公開状態を確認する</a></>:<>
-   <p>{publication?.status==="published"?"この保存版を参加者向けに公開しています。":reopening?"このコースの公開を停止しています。保存済みの内容は保持しています。":"参加者には未掲載です。この保存版を公開すると、参加者のコース一覧から選べるようになります。"}</p>
+ return <section className="preview-panel course-publication operator-task-panel" aria-labelledby="course-publication-title" data-course-publication={publication===undefined?"unavailable":publication?.status??"unpublished"} data-publication-revision={revision}>
+  <div className="operator-publication-heading"><div><p className="eyebrow">PUBLISH YOUR COURSE</p><h2 id="course-publication-title">参加者への公開</h2></div><span className="operator-publication-state">{publication===undefined?"公開状態を確認":publication?.status==="published"?"公開中":reopening?"公開停止中":"未公開"}</span></div>
+  {publication===undefined?<><p role="alert">公開状態を確認できませんでした。開き直して再試行してください。</p><a className="operator-task-secondary" href={"/operator/courses/"+courseId}>公開状態を確認する</a></>:<>
+   <p>{publication?.status==="published"?"このコースは公開中です。参加者の画面を開いて、表示を確認できます。":reopening?"このコースの公開を停止しています。保存済みの内容を確認して、同じ内容を再公開できます。":"このコースは保存済み・未公開です。コマ地図と現地の状況を確認したら、参加者向けに公開できます。"}</p>
    {publication&&<p className="preview-caption">{reopening?"公開停止日時":"公開日時"}：<time dateTime={publication.changedAt}>{new Date(publication.changedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time></p>}
-   {publication?.status==="published"&&<p><a className="rally-primary-link" data-publication-participant-link href={"/rallies/"+courseId}>参加者のコマ画面を開く →</a></p>}
-   {!confirm?<button type="button" disabled={!ready||conflict} data-publication-open={publication===null?"":undefined} data-publication-stop-open={stopping?"":undefined} data-publication-reopen-open={reopening?"":undefined} onClick={()=>setConfirm(true)}>{ready?operation:"操作を準備しています…"}</button>:<div className="publication-confirm" data-publication-confirm data-publication-target={target}>
+   {publication?.status==="published"&&<p><a className="rally-primary-link operator-task-primary" data-publication-participant-link href={"/rallies/"+courseId}>参加者の画面で確認する →</a></p>}
+   {!confirm&&<p className="operator-action-hint">{stopping?"公開を止める場合は、次の確認画面で停止の範囲を確かめてください。":"次に公開内容の確認画面を開きます。そこで確定するまで公開されません。"}</p>}
+   {!confirm?<button type="button" className={stopping?"operator-task-secondary":"operator-task-primary"} disabled={!ready||conflict} data-publication-open={publication===null?"":undefined} data-publication-stop-open={stopping?"":undefined} data-publication-reopen-open={reopening?"":undefined} onClick={()=>setConfirm(true)}>{ready?operation:"操作を準備しています…"}</button>:<div className="publication-confirm" data-publication-confirm data-publication-target={target}>
     <h3>「{title}」の{stopping?"公開を停止します":reopening?"同じ内容を再公開します":"保存版を公開します"}</h3>
     {stopping?<><p>参加者一覧から外し、開始済みの人も次回の読み込みからコマを開けなくします。すでに開いている画面は再読込みまで残り得ます。</p><p>保存済みコースと開始記録は残します。同じ内容を再公開すれば、同じタブに残る開始記録を引き継げます。</p></>:<><p>このアプリの参加者一覧へ掲載します。内容はこの保存版に固定され、下書きの編集を自動反映しません。</p>{reopening&&<p>同じタブに残る、このコースの開始記録を引き継げます。</p>}<p className="preview-caption">現地の入口・通行・安全性は確認待ちです。内容の変更は、下書きから再生成して別の結果として保存してください。</p></>}
-    <div className="publication-actions"><button type="button" disabled={busy||conflict} data-publication-submit data-publication-action={target} onClick={()=>void change()}>{busy?"変更しています…":error?"同じ操作を再試行":stopping?"このコースの公開を停止":reopening?"同じ内容で再公開":"この内容を参加者側に公開"}</button><button type="button" disabled={busy} data-publication-cancel onClick={()=>{setConfirm(false);setError("")}}>戻る</button></div>
+    <div className="publication-actions"><button type="button" className="operator-task-primary" disabled={busy||conflict} data-publication-submit data-publication-action={target} onClick={()=>void change()}>{busy?"変更しています…":error?"同じ操作を再試行":stopping?"このコースの公開を停止":reopening?"同じ内容で再公開":"この内容を参加者側に公開"}</button><button type="button" className="operator-task-secondary" disabled={busy} data-publication-cancel onClick={()=>{setConfirm(false);setError("")}}>戻る</button></div>
    </div>}
-   {error&&<p role="alert" data-publication-error>{error}</p>}{conflict&&<a href={"/operator/courses/"+courseId}>公開状態を開き直して確認する</a>}
+   {error&&<p role="alert" data-publication-error>{error}</p>}{conflict&&<a className="operator-task-secondary" href={"/operator/courses/"+courseId}>公開状態を開き直して確認する</a>}
   </>}
  </section>;
 }

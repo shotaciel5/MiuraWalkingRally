@@ -17,11 +17,11 @@ export default function CourseSaveButton({receipt,unavailable}:{receipt:SaveRece
   }catch(cause){if(alive.current)setError(cause instanceof Error&&cause.name!=="AbortError"?cause.message:"保存結果を確認できません。表示を残しています。同じ結果で再試行できます。")}
   finally{window.clearTimeout(timer);request.current=null;running.current=false;if(alive.current)setBusy(false)}
  }
- return <div className="course-save-panel" data-course-save-panel>
-  <p>この生成結果を、非公開の確認用コースとして保存します。下書きはそのまま編集を続けられます。</p>
-  <button type="button" disabled={busy||!receipt||conflict} data-course-save onClick={()=>void save()}>{busy?"保存しています…":conflict?"再生成してから保存":error?"同じ結果の保存を再試行":"この結果を保存"}</button>
+ return <div className="course-save-panel operator-task-panel" data-course-save-panel>
+  <h2>確認できたら、保存して次へ</h2><p>この内容を保存すると、公開の設定画面へ進みます。保存だけでは参加者に公開されません。下書きは引き続き編集できます。</p>
+  <button type="button" className="operator-task-primary" disabled={busy||!receipt||conflict} data-course-save onClick={()=>void save()}>{busy?"保存しています…":conflict?"再生成してから保存":error?"同じ結果の保存を再試行":"この内容を保存して、公開設定へ"}</button>
   {!receipt&&<p role="alert">{unavailable??"保存の準備ができません。内容を確認して再生成してください。"}</p>}
   {error&&<p role="alert" data-course-save-error>{error}</p>}
-  {conflict&&<a href="/operator/preview">最新の保存内容から再生成する</a>}
+  {conflict&&<a className="operator-task-secondary" href="/operator/preview">最新の保存内容から再生成する</a>}
  </div>;
 }
