@@ -242,3 +242,7 @@ test("bundled regional crops and provenance still serve production courses",asyn
  const notice=await get("/landmarks/miura-v1/NOTICE.md");assert.equal(notice.status,200);assert.match(await notice.text(),/CC BY-SA 4.0/);
  for(const photo of manifest.photos){const res=await get(photo.path);assert.equal(res.status,200);const bytes=new Uint8Array(await res.arrayBuffer());assert.equal(bytes.length,photo.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),photo.sha256)}
 });
+
+test("shared participant design assets are bundled locally with their recorded source bytes",async()=>{
+ const {default:provenance}=await import("../data/ui/koma-ui-provenance.json",{with:{type:"json"}});for(const asset of provenance.assets){const r=await get(asset.path);assert.equal(r.status,200);const bytes=new Uint8Array(await r.arrayBuffer());assert.equal(bytes.length,asset.bytes);assert.equal(createHash("sha256").update(bytes).digest("hex"),asset.sha256)}
+});

@@ -1,0 +1,261 @@
+/* Photo walk: only the current diagram and navigation stay visible. */
+.walk-sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+main.walk-main{max-width:520px;min-height:100svh;padding:10px 18px 12px;margin:0 auto}
+.walk-player{min-height:calc(100svh - 22px);display:flex;flex-direction:column;gap:12px}
+.walk-toolbar{height:48px;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}.walk-toolbar>[data-walk-help]{justify-self:end}
+.walk-icon-button{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid var(--line);border-radius:50%;background:#fffefb;color:var(--brand);font:inherit;font-size:21px;text-decoration:none;cursor:pointer}
+.walk-counter{margin:0;text-align:center;color:var(--muted);font-size:13px;font-variant-numeric:tabular-nums;letter-spacing:.08em}.walk-counter strong{color:var(--brand);font-size:20px;font-weight:650}
+.walk-stage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;min-width:0}
+.walk-canvas{width:min(100%,440px,max(240px,calc(100svh - 210px)));touch-action:pan-y pinch-zoom;border-radius:18px;min-width:0}
+.has-walk-notice .walk-canvas{width:min(100%,440px,max(240px,calc(100svh - 340px)))}
+.walk-canvas .koma-figure{display:block;width:100%;height:auto;margin:0}.walk-card-motion{animation:walk-appear .18s ease-out}
+.walk-canvas .operator-koma-display{border:0;padding:0;background:transparent}.walk-canvas .operator-koma-primary{width:100%}.walk-canvas details{margin-top:8px;text-align:center}.walk-canvas summary{cursor:pointer;color:var(--muted);font-size:11px;display:inline-block;padding:5px 12px;border:1px solid var(--line);border-radius:30px}.walk-canvas .koma-held{min-height:180px;font-size:12px;padding:18px}
+.walk-notice{display:flex;gap:12px;width:100%;padding:17px 18px;border:1px solid #cdd9df;border-radius:16px;background:#e7eff4;overflow-wrap:anywhere}.walk-notice-icon{flex:0 0 auto;color:var(--brand);padding-top:4px}.walk-notice h2{font-size:20px;line-height:1.5;margin:3px 0 8px;letter-spacing:.01em}.walk-notice p{font-size:11px;line-height:1.8;margin:0;color:#52626b}.walk-notice .walk-notice-label{font-size:10px;letter-spacing:.08em;color:var(--brand)}.walk-notice.is-goal{background:#f5efdF;border-color:#e4d7b5}
+.walk-navigation{display:flex;gap:14px;align-items:center;margin-top:6px}.walk-navigation button,.walk-navigation a{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;min-height:56px;border-radius:14px;border:1px solid var(--brand);font:inherit;cursor:pointer;text-decoration:none;font-size:14px;font-weight:650}.walk-previous{min-width:0;flex:1;background:#fffefb;color:var(--brand)}.walk-next{flex:1;background:var(--brand);color:white}.walk-navigation button:disabled{opacity:.28;cursor:default}.walk-attribution{font-size:9px;color:var(--muted);text-align:center;margin:0;line-height:1.6}.walk-attribution a{color:inherit}
+.walk-help{width:min(calc(100vw - 28px),440px);max-height:calc(100svh - 32px);border:1px solid var(--line);border-radius:20px;padding:22px;color:var(--ink);background:var(--paper);font:inherit;box-shadow:0 18px 80px #20313a2d}.walk-help::backdrop{background:#20313a70;backdrop-filter:blur(3px)}.walk-help-heading{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:16px}.walk-help-heading h2{font-size:22px;margin:0}.walk-help p,.walk-help li{font-size:12px;line-height:1.9}.walk-help-safety{padding:12px 14px;background:#f2eedf;border-radius:8px;font-size:11px;line-height:1.9}.walk-help fieldset{margin:18px 0;border:1px solid var(--line);border-radius:9px;padding:12px}.walk-help legend{font-size:12px}.walk-help label{font-size:12px}.walk-help fieldset label{display:flex;align-items:center;gap:10px;min-height:36px}.walk-help input{accent-color:var(--brand);width:18px;height:18px}.walk-jump{display:block}.walk-jump select{display:block;width:100%;padding:12px;border:1px solid var(--line);background:white;border-radius:8px;font:inherit;margin:6px 0 18px}.walk-help .walk-help-source{font-size:10px;color:var(--muted)}
+.walk-entry{max-width:440px;margin:auto;padding:16px 0 24px}.walk-return{display:inline-block;padding:10px 0;margin-bottom:20px;text-decoration:none;font-size:12px}.walk-start-panel{padding:28px 24px;border:1px solid var(--line);border-radius:20px;background:#fffefb}.walk-start-mark{display:grid;place-items:center;width:48px;height:48px;margin-bottom:24px;border-radius:50%;background:var(--brand);color:white;font-size:24px}.walk-start-panel h2{font-size:26px;overflow-wrap:anywhere;line-height:1.5}.walk-start-panel p{font-size:12px}.walk-start-panel .walk-start-count{color:var(--brand);font-size:12px;font-weight:650}.walk-start-panel .rally-primary-link{width:100%;justify-content:center;margin-top:12px}.walk-start-panel .walk-start-storage{font-size:10px;color:var(--muted);margin:16px 0 0}.walk-unavailable{padding-top:60px!important}.walk-unavailable h1{font-size:28px}
+@keyframes walk-appear{from{opacity:.65;transform:translateX(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.walk-card-motion{animation:none}.walk-help::backdrop{backdrop-filter:none}}
+@media(max-width:360px){main.walk-main{padding:8px 14px 12px}.walk-player{gap:9px}.walk-notice{padding:13px;gap:10px}.walk-notice h2{font-size:18px}.walk-help{padding:18px}.walk-start-panel{padding:24px 20px}}
+
+/* Separate leaving the course from stepping through its cards. */
+.walk-player[data-walk-design] .walk-toolbar .walk-catalog-link{justify-self:start;width:auto;min-height:44px;padding:8px 4px;gap:6px;border:0;border-radius:6px;background:transparent;color:var(--walk-text);box-shadow:none;font-size:12px;font-weight:600;white-space:nowrap}
+.walk-catalog-link svg,.walk-navigation svg{flex-shrink:0}
+.walk-catalog-link:hover span{text-decoration:underline}
+.walk-catalog-link:focus-visible,.walk-goal-exit:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+.walk-goal-exit{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:9px 12px;margin-top:12px;border:1px solid var(--walk-border,var(--line));border-radius:8px;background:var(--walk-surface,#fffefb);color:var(--brand);font-size:13px;font-weight:650;text-decoration:none}
+
+
+/* Participant-only themes. Route geometry and the blue direction arrow stay shared. */
+.walk-player[data-walk-design]{--walk-surface:#fffef9;--walk-button:#bf523b;--walk-button-hover:#a64330;--walk-on-button:#fff;--walk-text:#203744;--walk-secondary:#576b77;--walk-border:#d5e1e6;color:var(--walk-text);isolation:isolate}
+.walk-player[data-walk-design]::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--walk-backdrop,#faf7f0)}
+.walk-player[data-walk-design] .walk-toolbar{position:relative;z-index:1}
+.walk-player[data-walk-design] .walk-icon-button{background:var(--walk-surface);color:var(--brand);border-color:var(--walk-border)}
+.walk-player[data-walk-design] .walk-counter{color:var(--walk-secondary)}
+.walk-player[data-walk-design] .walk-counter strong{color:var(--walk-text)}
+.walk-player[data-walk-design] .walk-next{background:var(--walk-button);border-color:var(--walk-button);color:var(--walk-on-button);box-shadow:0 5px 18px #163b4d12}
+.walk-player[data-walk-design] .walk-next:hover{background:var(--walk-button-hover)}
+.walk-player[data-walk-design] .walk-previous{background:var(--walk-surface);border-color:var(--walk-border);color:var(--brand)}
+.walk-player[data-walk-design] .walk-attribution{color:var(--walk-secondary)}
+.walk-player[data-walk-design] .walk-help{--ink:#203744;--muted:#576b77;--line:#d5e1e6;--paper:#faf7f0;color:var(--ink)}
+.walk-player[data-walk-design] .walk-notice{color:#203744}
+.walk-player[data-walk-design] .walk-canvas{position:relative}
+.walk-player[data-walk-design] .walk-canvas summary{background:var(--walk-surface);color:var(--brand);border-color:var(--walk-border)}
+.walk-player[data-walk-design="sea"]{--walk-backdrop:radial-gradient(ellipse at 95% 0%,#fff8d7 0,transparent 35%),linear-gradient(170deg,#eaf8fc 15%,#d3edf3 66%,#b7dfe9);--walk-surface:#ffffffed;--walk-button:#08738a;--walk-button-hover:#07596d;--walk-text:#123e54;--walk-secondary:#365f70;--walk-border:#b8dbe4;--route-background:#f7fcfd;--route-road:#b5d1da;--route-building:#e6e9df;--route-building-line:#cfd9d4}
+.walk-player[data-walk-design="sea"] .walk-toolbar{background:#ffffff72;border:1px solid #fff;border-radius:36px;padding:3px 6px;height:56px}
+.walk-player[data-walk-design="sea"] .walk-canvas .koma-figure{filter:drop-shadow(0 12px 16px #20677c14)}
+.walk-player[data-walk-design="sea"] .walk-navigation button,.walk-player[data-walk-design="sea"] .walk-navigation a{border-radius:30px}
+.walk-player[data-walk-design="sea"] .walk-notice{background:#f5fcff;border-color:#a6ceda}
+.walk-player[data-walk-design="tuna"]{--walk-backdrop:radial-gradient(ellipse at 5% 40%,#1e465d 0,transparent 60%),linear-gradient(160deg,#142f42,#0c2234);--walk-surface:#fff9ef;--walk-button:#ca4c40;--walk-button-hover:#ad3c33;--walk-text:#fff8eb;--walk-secondary:#c2d5df;--walk-border:#517085;--route-background:#fff9ef;--route-road:#b9c7cd;--route-building:#ebdfca;--route-building-line:#d9c8ad}
+.walk-player[data-walk-design="tuna"] .walk-toolbar{border-bottom:1px solid #5d788b;padding-bottom:10px;height:60px}
+.walk-player[data-walk-design="tuna"] .walk-counter{letter-spacing:.15em}.walk-player[data-walk-design="tuna"] .walk-counter strong{font-family:Georgia,serif;font-size:28px}
+.walk-player[data-walk-design="tuna"] .walk-canvas .koma-figure{filter:drop-shadow(0 14px 20px #020d1a40)}
+.walk-player[data-walk-design="tuna"] .walk-navigation button,.walk-player[data-walk-design="tuna"] .walk-navigation a{border-radius:7px}
+.walk-player[data-walk-design="tuna"] .walk-notice{background:#fff6e9;border-color:#d6bba0}
+.walk-player[data-walk-design="site"]{--walk-backdrop:radial-gradient(ellipse at 100% 0%,#ddecf066,transparent 45%),#faf7f0}
+.walk-player[data-walk-design="site"] .walk-toolbar{border-bottom:1px solid #d5e1e680;height:58px;padding-bottom:10px}
+.walk-design-stamp{height:34px;display:flex;align-items:center;justify-content:center;gap:9px;color:var(--walk-secondary);font-size:9px;letter-spacing:.2em;margin-bottom:-16px;pointer-events:none}
+.walk-design-stamp svg{width:46px;height:26px}.walk-design-stamp span{font-weight:600}
+.walk-player[data-walk-design="tuna"] .walk-design-stamp{color:#e8b49c}
+/* The chooser is intentionally light in every theme for reliable reading. */
+.walk-help fieldset.walk-design-selector{padding:0;margin:22px 0;border:0}
+.walk-design-selector legend{font-size:14px;font-weight:700;margin-bottom:4px}
+.walk-help .walk-design-intro{font-size:11px;color:#576b77;margin:0 0 12px}
+.walk-design-options{display:grid;gap:9px}
+.walk-help .walk-design-option{position:relative;display:grid;grid-template-columns:92px minmax(0,1fr) 22px;gap:12px;align-items:center;padding:8px;min-height:92px;border:1px solid #d5e1e6;border-radius:12px;background:#fffefa;cursor:pointer}
+.walk-design-option:has(input:checked){border-color:#174b66;box-shadow:0 0 0 1px #174b66;background:#edf4f5}
+.walk-design-option:has(input:focus-visible){outline:3px solid #bf523b;outline-offset:3px}
+.walk-help .walk-design-option input{position:absolute;opacity:0;width:1px;height:1px;margin:0}
+.walk-design-preview{--preview-paper:#e4f4f8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;align-self:stretch;min-height:76px;background:var(--preview-paper);border-radius:7px;color:#08738a;overflow:hidden}
+.walk-design-preview>span:first-child{font-size:6px;font-weight:700;letter-spacing:.13em}.walk-design-preview svg{width:65px;height:30px}
+.walk-design-mini-button{width:43px;height:5px;border-radius:5px;background:currentColor}
+.design-tuna .walk-design-preview{--preview-paper:#142f42;color:#e9967e}.design-tuna .walk-design-mini-button{background:#ca4c40;border-radius:1px}
+.design-site .walk-design-preview{--preview-paper:#f4edde;color:#174b66}.design-site .walk-design-mini-button{background:#bf523b;border-radius:2px}
+.walk-design-copy{display:flex;flex-direction:column;gap:4px;min-width:0}.walk-design-copy strong{font-size:13px;color:#203744}.walk-design-copy>span{font-size:10px;line-height:1.6;color:#576b77}
+.walk-design-check{display:grid;place-items:center;width:20px;height:20px;border:1px solid #b3c4cc;border-radius:50%;font-size:12px;color:transparent;background:white}
+.walk-design-option:has(input:checked) .walk-design-check{background:#174b66;border-color:#174b66;color:white}
+.walk-help .walk-design-current{font-size:10px;color:#576b77;margin:9px 0 0}
+@media(max-width:360px){.walk-help .walk-design-option{grid-template-columns:72px minmax(0,1fr) 20px;gap:9px}.walk-design-copy strong{font-size:12px}}
+/* Independent diagram palettes, also used by the chooser's miniature maps. */
+.walk-player[data-map-design="sea"] .koma-figure,.design-sea .map-design-preview{--route-background:#f2fbff;--route-road:#a6cbd8;--route-building:#d4edf0;--route-building-line:#9bc9ce;--map-label:#fff;--map-label-line:#84b8ca;--map-name:#174b66;--map-symbol:#08738a;--map-leader:#74a5b5;--map-radius:7px;--map-frame:#c1e3ec}
+.walk-player[data-map-design="tuna"] .koma-figure,.design-tuna .map-design-preview{--route-background:#fff6e7;--route-road:#b0bec7;--route-building:#e9dcc4;--route-building-line:#bdae95;--map-label:#19384b;--map-label-line:#19384b;--map-name:#fff7e8;--map-symbol:#eea58d;--map-leader:#a37960;--map-radius:2px;--map-frame:#d8c2a1}
+.walk-player[data-map-design="site"] .koma-figure,.design-site .map-design-preview{--route-background:#f2f4f1;--route-road:#b4c6cf;--route-building:#e8e0d4;--route-building-line:#d6ccbe;--map-label:#fffef8;--map-label-line:#d3c9af;--map-name:#404c53;--map-symbol:#79551d;--map-leader:#9a885f;--map-radius:5px;--map-frame:#d5e1e6}
+.walk-player[data-map-design] .koma-figure{--route-inlet:#203744;--route-next:#174b66}
+.walk-player[data-map-design] .koma-figure>rect{stroke:var(--map-frame);stroke-width:.65}
+.walk-player[data-map-design] .landmark-layer>[data-landmark-symbol]>circle{fill:var(--map-leader)}
+.walk-player[data-map-design] .landmark-layer>[data-landmark-symbol]>path{stroke:var(--map-leader)}
+.walk-player[data-map-design] [data-landmark-label]>rect{fill:var(--map-label);stroke:var(--map-label-line);fill-opacity:1;rx:var(--map-radius)}
+.walk-player[data-map-design] [data-landmark-label]>text{fill:var(--map-name)}
+/* Keep traffic-sign colors and shapes; recolor only place/amenity pictograms. */
+.walk-player[data-map-design] .landmark-icon[data-landmark-icon="shrine"]>g{stroke:var(--map-symbol)}
+.walk-player[data-map-design] .landmark-icon[data-landmark-icon="temple"]>text{fill:var(--map-symbol)}
+.walk-player[data-map-design] .landmark-icon[data-landmark-icon="historic"]>g{stroke:var(--map-symbol);fill:var(--route-building)}
+.walk-player[data-map-design] .landmark-icon:is([data-landmark-icon="shop"],[data-landmark-icon="food"])>path{stroke:var(--map-symbol)}
+.walk-player[data-map-design] .landmark-icon:is([data-landmark-icon="shop"],[data-landmark-icon="food"])>path:nth-child(2){fill:var(--map-symbol)}
+.walk-player[data-map-design="sea"] [data-context-building]{stroke-width:1.2;stroke-linejoin:round}
+.walk-player[data-map-design="sea"] [data-koma-branch]{stroke-width:6;stroke-linecap:round}
+.walk-player[data-map-design="tuna"] [data-context-building]{stroke-width:.85}
+.walk-player[data-map-design="tuna"] [data-koma-branch]{stroke-width:6;stroke-linecap:square;stroke-linejoin:miter}
+.walk-player[data-map-design="tuna"] [data-landmark-label]>text{font-weight:700}
+.walk-help .map-design-follow{display:flex;align-items:center;gap:9px;margin:0 0 12px;min-height:44px;padding:8px 10px;border-radius:8px;background:#edf3f4}
+.map-design-preview{background:var(--route-background)!important;--preview-paper:var(--route-background)}
+.walk-design-preview.map-design-preview svg{width:100%;height:76px}
+.map-preview-building{fill:var(--route-building);stroke:var(--route-building-line);stroke-width:1}
+.map-preview-road{fill:none;stroke:var(--route-road);stroke-width:4;stroke-linecap:round}
+.map-preview-route{fill:none;stroke:#203744;stroke-width:3;stroke-linejoin:round}
+.map-preview-arrow{fill:#174b66}.map-preview-dot{fill:#203744}
+.map-preview-label{fill:var(--map-label);stroke:var(--map-label-line);stroke-width:.7;rx:var(--map-radius)}
+.map-preview-symbol{fill:none;stroke:var(--map-symbol);stroke-width:1.5}
+.map-preview-name{fill:none;stroke:var(--map-name);stroke-width:1.5}
+/* Official local character illustrations; keep the original drawings intact. */
+.walk-character-art{display:block;object-fit:contain;mix-blend-mode:multiply}
+.walk-design-preview .walk-character-art{width:56px;height:52px}
+.design-tsunosuke .walk-design-preview{--preview-paper:#edf3fc;color:#244c7c}.design-tsunosuke .walk-design-mini-button{background:#b73932}
+.design-miuran .walk-design-preview{--preview-paper:#fff0f6;color:#95345f}.design-miuran .walk-design-mini-button{background:#95345f}
+.walk-player[data-walk-design="tsunosuke"]{--walk-backdrop:radial-gradient(ellipse at 90% 10%,#fff9df,transparent 42%),linear-gradient(160deg,#edf4ff,#d5e3f5);--walk-surface:#fffefa;--walk-button:#b73932;--walk-button-hover:#962e28;--walk-text:#17385e;--walk-secondary:#435d7b;--walk-border:#a6bbd3}
+.walk-player[data-walk-design="tsunosuke"] .walk-toolbar{height:58px;padding-bottom:9px;border-bottom:2px solid #244c7c}
+.walk-player[data-walk-design="tsunosuke"] .walk-navigation button,.walk-player[data-walk-design="tsunosuke"] .walk-navigation a{border-radius:9px}
+.walk-player[data-walk-design="tsunosuke"] .walk-notice{background:#fff9ed;border-color:#c6a878}
+.walk-player[data-walk-design="miuran"]{--walk-backdrop:radial-gradient(ellipse at 85% 0%,#fff9dc 0,transparent 38%),radial-gradient(ellipse at 0% 100%,#e2efdc 0,transparent 40%),#fcebf3;--walk-surface:#fffefa;--walk-button:#96345f;--walk-button-hover:#79294c;--walk-text:#573146;--walk-secondary:#735564;--walk-border:#d6b2c4}
+.walk-player[data-walk-design="miuran"] .walk-toolbar{height:56px;padding:3px 6px;border:1px solid #fff;border-radius:30px;background:#ffffff8c}
+.walk-player[data-walk-design="miuran"] .walk-navigation button,.walk-player[data-walk-design="miuran"] .walk-navigation a{border-radius:28px}
+.walk-player[data-walk-design="miuran"] .walk-notice{background:#fff7fa;border-color:#dbb5c8}.walk-player[data-walk-design="miuran"] .walk-notice.is-goal{background:#f2f8e9;border-color:#c7d8ad}
+.walk-player:is([data-walk-design="tsunosuke"],[data-walk-design="miuran"]) .walk-design-stamp{height:68px;margin-bottom:-10px;font-size:11px;letter-spacing:.08em;gap:12px}
+.walk-design-stamp .walk-character-art{height:62px;width:60px}
+.walk-map-character{display:flex;align-items:center;justify-content:center;gap:8px;font-size:10px;letter-spacing:.06em;color:var(--walk-text);padding:6px 0 0}
+.walk-map-character .walk-character-art{width:34px;height:38px;mix-blend-mode:normal;border-radius:5px;background:white}
+.walk-help .walk-character-credit{font-size:10px;color:#576b77}.walk-character-credit a{color:#174b66}
+.walk-player[data-map-design="tsunosuke"] .koma-figure,.design-tsunosuke .map-design-preview{--route-background:#f4f7fb;--route-road:#a9bdd7;--route-building:#dbe6f5;--route-building-line:#9bafc9;--map-label:#fffdf7;--map-label-line:#7898bb;--map-name:#17385e;--map-symbol:#b73932;--map-leader:#6e88a5;--map-radius:3px;--map-frame:#a9bdd7}
+.walk-player[data-map-design="miuran"] .koma-figure,.design-miuran .map-design-preview{--route-background:#fff8fb;--route-road:#c6b2c3;--route-building:#f3dfeb;--route-building-line:#d3a8bf;--map-label:#fffefa;--map-label-line:#d7a5be;--map-name:#573146;--map-symbol:#96345f;--map-leader:#a46b87;--map-radius:8px;--map-frame:#e4c4d4}
+.walk-player[data-map-design="tsunosuke"] [data-context-building]{stroke-width:1.1}.walk-player[data-map-design="miuran"] [data-context-building]{stroke-linejoin:round}
+.map-design-preview{position:relative}.map-preview-character{position:absolute;bottom:2px;right:2px;background:#fffefa;border-radius:5px;padding:1px;box-shadow:0 1px 3px #20374414}
+.map-preview-character .walk-character-art{width:26px;height:29px}
+/* A world around the character, plus scenery beneath the map's actual features. */
+.walk-surroundings{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.walk-surroundings>svg{display:block;width:100%;height:100%}
+.walk-ocean-scenery,.walk-sakura-scenery,.map-atmosphere-ocean,.map-atmosphere-sakura{display:none}
+.walk-player:is([data-walk-design="sea"],[data-walk-design="tuna"],[data-walk-design="tsunosuke"]) .walk-ocean-scenery{display:initial}
+.walk-player[data-walk-design="miuran"] .walk-sakura-scenery{display:initial}
+.walk-player[data-walk-design="tsunosuke"]{--walk-backdrop:radial-gradient(ellipse at 85% 0%,#fff5cd 0,transparent 35%),linear-gradient(165deg,#e5f6ff,#b5dce9)}
+.walk-player[data-walk-design="miuran"]{--walk-backdrop:radial-gradient(ellipse at 85% 0%,#fff5d9,transparent 40%),linear-gradient(160deg,#fff2f7,#f8ddea 75%,#e4edd7)}
+.walk-player:is([data-walk-design="tsunosuke"],[data-walk-design="miuran"]) .walk-design-stamp{height:104px;gap:14px;margin-bottom:-8px}
+.walk-player:is([data-walk-design="tsunosuke"],[data-walk-design="miuran"]) .walk-design-stamp .walk-character-art{width:90px;height:100px}
+.walk-design-stamp>span:has(strong){display:flex;flex-direction:column;align-items:flex-start;gap:6px;letter-spacing:.03em}
+.walk-design-stamp strong{font-size:17px;color:var(--walk-text)}.walk-design-stamp small{font-size:10px;font-weight:400;letter-spacing:.02em}
+.walk-player[data-walk-design="tsunosuke"] .walk-toolbar{border-bottom:2px solid #1d6087}
+.walk-player[data-walk-design="tsunosuke"] .walk-next{box-shadow:0 5px 0 #8e302b,0 10px 22px #234f6b19}
+.walk-player[data-walk-design="miuran"] .walk-next{box-shadow:0 5px 0 #75274c,0 10px 22px #8a47631a}
+.walk-player:is([data-map-design="sea"],[data-map-design="tuna"],[data-map-design="tsunosuke"]) .map-atmosphere-ocean{display:initial}
+.walk-player[data-map-design="miuran"] .map-atmosphere-sakura{display:initial}
+.walk-player:is([data-map-design="sea"],[data-map-design="tuna"],[data-map-design="tsunosuke"]) .koma-figure{--scene-wave-light:#d3ebf2;--scene-wave:#b1d8e5;--scene-foam:#fff;--scene-bubble:#91bdcb;--scene-eye:#f3fbfe}
+.map-atmosphere-fish{color:#7aaabc;opacity:.65}
+.walk-player[data-map-design="tsunosuke"] .koma-figure{--route-background:#f1faff;--route-building:#d8e8f3;--route-building-line:#96b6ce;--map-frame:#79a4be;--scene-wave-light:#c9e8f1;--scene-wave:#9dcedd}
+.walk-player[data-map-design="tuna"] .koma-figure{--scene-wave-light:#d9e9e8;--scene-wave:#bbd3d7;--scene-eye:#fff6e7}
+.walk-player[data-map-design="miuran"] .koma-figure{--route-background:#fff9fc;--scene-branch:#d7b1bb;--scene-petal:#edb4cf;--scene-petal-bed:#f5deea;--scene-center:#d9a54d;--map-frame:#d995b7}
+.map-atmosphere-blossoms{color:#eaa0c1;opacity:.8}
+.walk-player:is([data-map-design="tsunosuke"],[data-map-design="miuran"]) .koma-figure>rect{stroke-width:1.3}
+.walk-player[data-map-design="miuran"] [data-landmark-label]>rect{stroke:#d58bad;stroke-width:.9}
+.walk-player[data-map-design="tsunosuke"] [data-landmark-label]>rect{stroke:#7199b4;stroke-width:.9}
+@media(max-width:360px){.walk-player:is([data-walk-design="tsunosuke"],[data-walk-design="miuran"]) .walk-design-stamp{gap:9px}.walk-design-stamp strong{font-size:15px}.walk-design-stamp small{font-size:9px}}
+/* Local food, streets and traditional arts: independent screen/map themes. */
+.design-farm .walk-design-preview{--preview-paper:#edf3df;color:#416139}.design-farm .walk-design-mini-button{background:#476d3b}
+.design-retro .walk-design-preview{--preview-paper:#f3e6cc;color:#75533c}.design-retro .walk-design-mini-button{background:#944b3e}
+.design-festival .walk-design-preview{--preview-paper:#1e304d;color:#efd8a2}.design-festival .walk-design-mini-button{background:#bf4b39}
+.walk-player[data-walk-design="farm"]{--walk-backdrop:radial-gradient(ellipse at 90% 0%,#fff9d8,transparent 45%),linear-gradient(165deg,#f2f6e9,#dce8cc);--walk-surface:#fffef4;--walk-button:#456a37;--walk-button-hover:#34522a;--walk-text:#344d2b;--walk-secondary:#566b49;--walk-border:#b4c69c}
+.walk-player[data-walk-design="retro"]{--walk-backdrop:repeating-linear-gradient(0deg,#bca37a08 0px,#bca37a08 1px,transparent 1px,transparent 4px),linear-gradient(155deg,#fbf2dd,#e9d7b6);--walk-surface:#fff6e5;--walk-button:#934b3c;--walk-button-hover:#783c30;--walk-text:#654732;--walk-secondary:#79614b;--walk-border:#c5ab83}
+.walk-player[data-walk-design="festival"]{--walk-backdrop:radial-gradient(ellipse at 0% 50%,#2b4267,transparent 75%),#14233c;--walk-surface:#fff7e7;--walk-button:#bd4736;--walk-button-hover:#a13a2c;--walk-text:#fff1d5;--walk-secondary:#dbcbab;--walk-border:#b59b66}
+.walk-player:is([data-walk-design="farm"],[data-walk-design="retro"],[data-walk-design="festival"]) .walk-toolbar{height:58px;border-bottom:1px solid var(--walk-border);padding-bottom:9px}
+.walk-player[data-walk-design="farm"] .walk-navigation :is(button,a){border-radius:24px}.walk-player[data-walk-design="retro"] .walk-navigation :is(button,a){border-radius:5px}.walk-player[data-walk-design="festival"] .walk-navigation :is(button,a){border-radius:8px}
+.walk-player[data-walk-design="retro"] .walk-counter strong{font-family:Georgia,serif}
+.walk-player[data-walk-design="farm"] .walk-notice{background:#f5f9e8;border-color:#b6ca99}.walk-player[data-walk-design="retro"] .walk-notice{background:#fff2d9;border-color:#c5ab83}.walk-player[data-walk-design="festival"] .walk-notice{background:#fff5df;border-color:#c7a565}
+.walk-player:is([data-walk-design="farm"],[data-walk-design="retro"],[data-walk-design="festival"]) .walk-design-stamp{height:88px;gap:12px;margin-bottom:-8px}
+.walk-player:is([data-walk-design="farm"],[data-walk-design="retro"],[data-walk-design="festival"]) .walk-design-stamp>svg{width:100px;height:66px;flex:0 0 100px}
+.walk-player:is([data-walk-design="farm"],[data-walk-design="retro"],[data-walk-design="festival"]) .walk-design-stamp>span{min-width:0;max-width:260px}.walk-player[data-walk-design="festival"] .walk-design-stamp strong{font-size:15px}
+.walk-farm-scenery,.walk-retro-scenery,.walk-festival-scenery,.map-atmosphere-farm,.map-atmosphere-retro,.map-atmosphere-festival{display:none}
+.walk-player[data-walk-design="farm"] .walk-farm-scenery,.walk-player[data-walk-design="retro"] .walk-retro-scenery,.walk-player[data-walk-design="festival"] .walk-festival-scenery{display:initial}
+.walk-player[data-map-design="farm"] .map-atmosphere-farm,.walk-player[data-map-design="retro"] .map-atmosphere-retro,.walk-player[data-map-design="festival"] .map-atmosphere-festival{display:initial}
+.walk-player[data-map-design="farm"] .koma-figure,.design-farm .map-design-preview{--route-background:#fbfdf4;--route-road:#b0bea2;--route-building:#dce6ca;--route-building-line:#a5b68c;--map-label:#fffef3;--map-label-line:#a5b68c;--map-name:#3d5430;--map-symbol:#507b3e;--map-leader:#91a477;--map-radius:3px;--map-frame:#9db685}
+.walk-player[data-map-design="retro"] .koma-figure,.design-retro .map-design-preview{--route-background:#fcf2de;--route-road:#c7b69c;--route-building:#e8d7b8;--route-building-line:#c0a680;--map-label:#fff4db;--map-label-line:#a3815c;--map-name:#654732;--map-symbol:#944b3e;--map-leader:#ac8d65;--map-radius:1px;--map-frame:#af8d60}
+.walk-player[data-map-design="festival"] .koma-figure,.design-festival .map-design-preview{--route-background:#fff8e9;--route-road:#b4bdce;--route-building:#dce2ec;--route-building-line:#9faec2;--map-label:#fffbef;--map-label-line:#c6a56c;--map-name:#253d5b;--map-symbol:#b74436;--map-leader:#b79a68;--map-radius:3px;--map-frame:#c6a56c}
+.walk-player[data-map-design="retro"] [data-landmark-label]>rect{stroke-width:1.2}.walk-player[data-map-design="retro"] [data-landmark-label]>text{font-family:Georgia,"Yu Mincho",serif}
+.walk-player[data-map-design="festival"] .koma-figure>rect{stroke-width:1.5}.walk-player[data-map-design="farm"] [data-context-building]{stroke-linejoin:round}
+.map-preview-character>svg{width:34px!important;height:24px!important}
+@media(max-width:360px){.walk-player:is([data-walk-design="farm"],[data-walk-design="retro"],[data-walk-design="festival"]) .walk-design-stamp{gap:7px}.walk-player:is([data-walk-design="farm"],[data-walk-design="retro"],[data-walk-design="festival"]) .walk-design-stamp>svg{width:80px;flex-basis:80px}.walk-player[data-walk-design="festival"] .walk-design-stamp strong{font-size:13px}}
+
+/* Jogashima, summer fruit and Koajiro: decorative scenery below real map features. */
+.walk-player[data-walk-design="lighthouse"]{--walk-backdrop:radial-gradient(ellipse at 95% 20%,#365568,transparent 65%),#142c40;--walk-surface:#fff8e8;--walk-button:#e5c175;--walk-button-hover:#d2ac5d;--walk-on-button:#21394a;--walk-text:#fff5df;--walk-secondary:#c4d5db;--walk-border:#78929e}
+.design-lighthouse .walk-design-preview{--preview-paper:#19364c;color:#fff5df}
+.design-lighthouse .walk-design-mini-button{background:#e5c175}
+.walk-player[data-map-design="lighthouse"] .koma-figure,.design-lighthouse .map-design-preview{--route-background:#faf6e9;--route-road:#acbdc1;--route-building:#e0e1d7;--route-building-line:#aeb8b3;--map-label:#fffbed;--map-label-line:#aeb8b3;--map-name:#324e5d;--map-symbol:#7b653b;--map-leader:#aeb8b3;--map-radius:3px;--map-frame:#aeb8b3}
+.walk-lighthouse-scenery,.map-atmosphere-lighthouse{display:none}
+.walk-player[data-walk-design="lighthouse"] .walk-lighthouse-scenery,.walk-player[data-map-design="lighthouse"] .map-atmosphere-lighthouse{display:initial}
+.walk-player[data-walk-design="watermelon"]{--walk-backdrop:radial-gradient(ellipse at 95% 0%,#fff1b9,transparent 50%),linear-gradient(165deg,#fff9e7,#f8ead6);--walk-surface:#fffdf1;--walk-button:#ad403e;--walk-button-hover:#913432;--walk-on-button:#fff;--walk-text:#3e5942;--walk-secondary:#626b4d;--walk-border:#b4c393}
+.design-watermelon .walk-design-preview{--preview-paper:#fff2ce;color:#3f5b40}
+.design-watermelon .walk-design-mini-button{background:#ad403e}
+.walk-player[data-map-design="watermelon"] .koma-figure,.design-watermelon .map-design-preview{--route-background:#fffdf0;--route-road:#b7c7a5;--route-building:#e4ebc9;--route-building-line:#b4c093;--map-label:#fff9df;--map-label-line:#b4c093;--map-name:#3f5b40;--map-symbol:#ad403e;--map-leader:#b4c093;--map-radius:8px;--map-frame:#b4c093}
+.walk-watermelon-scenery,.map-atmosphere-watermelon{display:none}
+.walk-player[data-walk-design="watermelon"] .walk-watermelon-scenery,.walk-player[data-map-design="watermelon"] .map-atmosphere-watermelon{display:initial}
+.walk-player[data-walk-design="forest"]{--walk-backdrop:radial-gradient(ellipse at 80% 0%,#395e4e,transparent 65%),linear-gradient(160deg,#173d34,#102e29);--walk-surface:#f7f3df;--walk-button:#ba503a;--walk-button-hover:#9c412f;--walk-on-button:#fff;--walk-text:#f4f1d8;--walk-secondary:#c5d6c6;--walk-border:#7e9b81}
+.design-forest .walk-design-preview{--preview-paper:#1e4539;color:#f4f1d8}
+.design-forest .walk-design-mini-button{background:#ba503a}
+.walk-player[data-map-design="forest"] .koma-figure,.design-forest .map-design-preview{--route-background:#f4f7e9;--route-road:#a7bcb0;--route-building:#d7e2ca;--route-building-line:#9cb49c;--map-label:#f2e5c8;--map-label-line:#9cb49c;--map-name:#344f3e;--map-symbol:#a3422e;--map-leader:#9cb49c;--map-radius:2px;--map-frame:#9cb49c}
+.walk-forest-scenery,.map-atmosphere-forest{display:none}
+.walk-player[data-walk-design="forest"] .walk-forest-scenery,.walk-player[data-map-design="forest"] .map-atmosphere-forest{display:initial}
+.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-toolbar{height:58px;border-bottom:1px solid var(--walk-border);padding-bottom:9px}
+.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp{height:88px;gap:10px;margin-bottom:-8px}
+.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp>svg{width:90px;height:70px;flex:0 0 90px}
+.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp strong{font-size:15px}.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp small{font-size:9px}
+.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-notice{background:#fff9e8;border-color:var(--walk-border)}
+.walk-player[data-walk-design="watermelon"] .walk-navigation :is(button,a){border-radius:28px}
+.walk-player[data-walk-design="lighthouse"] .walk-next{box-shadow:0 4px 0 #8a713f,0 9px 24px #f4ca7012}
+.walk-player[data-walk-design="forest"] .walk-navigation :is(button,a){border-radius:8px}
+.walk-player[data-map-design="forest"] [data-landmark-label]>rect{stroke-width:1.2}
+@media(max-width:360px){.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp{gap:6px}.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp>svg{width:68px;flex-basis:68px}.walk-player:is([data-walk-design="lighthouse"],[data-walk-design="watermelon"],[data-walk-design="forest"]) .walk-design-stamp strong{font-size:13px}}
+/* A bowl of tuna rice: warm rice paper, lacquer red, nori and wasabi. */
+.walk-player[data-walk-design="donburi"]{--walk-backdrop:radial-gradient(ellipse at 90% 0%,#fff8d9,transparent 45%),repeating-linear-gradient(0deg,#b7a17d08 0px,#b7a17d08 1px,transparent 1px,transparent 5px),#f3e7cf;--walk-surface:#fffdf1;--walk-button:#ad3936;--walk-button-hover:#902d2b;--walk-text:#343e35;--walk-secondary:#6c6752;--walk-border:#b9a37b}
+.walk-player[data-walk-design="donburi"] .walk-toolbar{height:58px;padding-bottom:9px;border-bottom:2px solid #b64138}
+.walk-player[data-walk-design="donburi"] .walk-design-stamp{height:100px;gap:10px;margin-bottom:-8px}
+.walk-player[data-walk-design="donburi"] .walk-design-stamp>svg{width:110px;height:80px;flex:0 0 110px}
+.walk-player[data-walk-design="donburi"] .walk-design-stamp strong{font-size:19px;font-family:"Yu Mincho","Hiragino Mincho ProN",serif}
+.walk-player[data-walk-design="donburi"] .walk-next{border-radius:12px;box-shadow:0 4px 0 #7e2a2a,0 8px 20px #82423218}
+.walk-player[data-walk-design="donburi"] .walk-previous{border-radius:12px}
+.walk-player[data-walk-design="donburi"] .walk-notice{background:#fff8e5;border-color:#c4aa7c}
+.design-donburi .walk-design-preview{--preview-paper:#f5e9d1;color:#ad3936}.design-donburi .walk-design-mini-button{background:#ad3936}
+.walk-player[data-map-design="donburi"] .koma-figure,.design-donburi .map-design-preview{--route-background:#fffbed;--route-road:#b9bda5;--route-building:#e8dfc7;--route-building-line:#bbb18f;--map-label:#fffdf2;--map-label-line:#bb9b76;--map-name:#364338;--map-symbol:#a53b35;--map-leader:#aa9471;--map-radius:5px;--map-frame:#a94339}
+.walk-player[data-map-design="donburi"] .koma-figure>rect{stroke-width:2.2}
+.walk-player[data-map-design="donburi"] [data-landmark-label]>rect{stroke-width:1}
+.walk-donburi-scenery,.map-atmosphere-donburi{display:none}
+.walk-player[data-walk-design="donburi"] .walk-donburi-scenery,.walk-player[data-map-design="donburi"] .map-atmosphere-donburi{display:initial}
+@media(max-width:360px){.walk-player[data-walk-design="donburi"] .walk-design-stamp{gap:6px}.walk-player[data-walk-design="donburi"] .walk-design-stamp>svg{width:88px;flex-basis:88px}.walk-player[data-walk-design="donburi"] .walk-design-stamp strong{font-size:17px}.walk-player[data-walk-design="donburi"] .walk-design-stamp small{font-size:9px}}
+/* Tsunosuke takes the lead: armor red, ocean blue and the original character art. */
+.walk-player[data-walk-design="tsunosuke"]{--walk-backdrop:radial-gradient(ellipse at 50% 9%,#fff6c5 0,transparent 37%),linear-gradient(165deg,#dff5ff,#b5ddea 75%,#8fc8dc);--walk-button:#b62f30;--walk-button-hover:#97292a;--walk-text:#153e5c;--walk-secondary:#345d75;--walk-border:#72a6bd}
+.walk-player[data-walk-design="tsunosuke"] .walk-toolbar{height:58px;border-bottom:0;padding:0}
+.walk-player[data-walk-design="tsunosuke"] .walk-counter{background:#1c4f72;color:#d7eaf3;border:2px solid #fff4cc;box-shadow:0 3px 0 #113c59;border-radius:8px;padding:5px 16px;transform:rotate(-2deg)}
+.walk-player[data-walk-design="tsunosuke"] .walk-counter strong{color:#fff5c9;font-size:23px}
+.walk-player[data-walk-design="tsunosuke"] .walk-icon-button{border:2px solid #427995;box-shadow:0 3px 0 #427995}
+.tsuna-adventure{display:flex;align-items:center;justify-content:center;gap:13px;min-height:142px;margin:-3px 0 -8px;pointer-events:none}
+.tsuna-hero{position:relative;width:110px;height:132px;flex:0 0 110px;display:grid;place-items:center}
+.tsuna-hero img{position:relative;width:103px;height:123px;object-fit:contain;mix-blend-mode:normal;opacity:1;animation:tsuna-bob 3.5s ease-in-out infinite}
+.tsuna-hero-rays{position:absolute;width:112px;height:112px;border-radius:50%;background:repeating-conic-gradient(from 5deg,#edbd5740 0deg 12deg,transparent 12deg 30deg);border:1px dashed #d4b96e}
+.tsuna-spark{position:absolute;color:#b74434;font-size:24px}.tsuna-spark-one{left:-2px;top:13px}.tsuna-spark-two{right:-5px;bottom:9px;font-size:30px}
+.tsuna-adventure-copy{max-width:245px;min-width:0}.tsuna-kicker{display:block;font-size:9px;font-weight:700;letter-spacing:.09em;color:#41667a;margin-bottom:5px}
+.tsuna-adventure-copy strong{display:block;font-size:24px;font-weight:900;line-height:1.25;letter-spacing:.02em;color:#184a6a;text-shadow:1px 2px 0 #fffef2}
+.tsuna-adventure-copy strong>span{display:block;font-size:15px;color:#aa3032;margin-top:3px}
+.walk-player[data-walk-design="tsunosuke"] .walk-next{border:2px solid #fff2cb;border-radius:14px;box-shadow:0 5px 0 #7e272a,0 9px 16px #234f6b21;gap:9px;position:relative}
+.walk-tsuna-adventure-scenery,.map-atmosphere-tsuna-adventure{display:none}
+.walk-player[data-walk-design="tsunosuke"] .walk-tsuna-adventure-scenery,.walk-player[data-map-design="tsunosuke"] .map-atmosphere-tsuna-adventure{display:initial}
+.walk-player[data-map-design="tsunosuke"] .koma-figure{--map-frame:#286681;--map-label:#fffdf0;--map-label-line:#457e9c;--map-name:#193f5a;--map-symbol:#b53430;--scene-wave:#92c9db;--scene-wave-light:#c1e5f0}
+.walk-player[data-map-design="tsunosuke"] .koma-figure>rect{stroke-width:2}
+.tsuna-map-pennant{display:flex;justify-content:space-between;align-items:center;margin:0 12px -2px;padding:5px 12px 7px;background:#1e5679;color:#fff7d5;border:2px solid #fff2ce;border-bottom:0;border-radius:9px 9px 0 0;font-size:10px;font-weight:750;letter-spacing:.1em;pointer-events:none}
+.tsuna-map-emblem{color:#f2c565}
+@keyframes tsuna-bob{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-4px) rotate(1deg)}}
+@media(prefers-reduced-motion:reduce){.tsuna-hero img{animation:none}}
+@media(max-width:360px){.tsuna-adventure{gap:9px;min-height:124px}.tsuna-hero{width:90px;height:115px;flex-basis:90px}.tsuna-hero img{width:88px;height:105px}.tsuna-hero-rays{width:91px;height:91px}.tsuna-adventure-copy strong{font-size:21px}.tsuna-adventure-copy strong>span{font-size:13px}.walk-player[data-walk-design="tsunosuke"] .walk-next{font-size:12px}}
+
+/* Keep the character corner clear; the remaining fish stay behind the character scenery. */
+.walk-player[data-map-design="tsunosuke"] .map-atmosphere-fish-corner{display:none}
+
+
+/* Integration: keep controls fluid and decoration below the real map features. */
+.walk-player[data-walk-design] .walk-toolbar{grid-template-columns:minmax(0,1fr) auto minmax(44px,1fr);gap:8px}.walk-player .walk-toolbar>button{justify-self:end}.walk-player .walk-previous{width:auto;flex:1}.walk-player .walk-next{flex:1}.walk-navigation button{min-width:0}.walk-player .operator-koma-primary{max-width:300px}.walk-canvas .map-atmosphere{pointer-events:none}.walk-help .walk-design-option{min-width:0}.walk-help .walk-design-copy{overflow-wrap:anywhere}
+@media(max-width:360px){.walk-player .walk-toolbar .walk-catalog-link{font-size:10px}.walk-player .walk-navigation button{gap:7px;font-size:12px}}

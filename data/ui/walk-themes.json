@@ -1,0 +1,86 @@
+[
+  {
+    "id": "sea",
+    "name": "海",
+    "caption": "波と光の、さわやかな青",
+    "eyebrow": "SEASIDE",
+    "icon": "wave"
+  },
+  {
+    "id": "tuna",
+    "name": "マグロ",
+    "caption": "港の紺と、マグロの朱色",
+    "eyebrow": "MISAKI TUNA",
+    "icon": "fish"
+  },
+  {
+    "id": "site",
+    "name": "サイトの世界観",
+    "caption": "アイボリーと青、あたたかな朱色",
+    "eyebrow": "MIURA WALK",
+    "icon": "route"
+  },
+  {
+    "id": "tsunosuke",
+    "name": "三浦ツナ之介",
+    "caption": "ツナ之介と出陣！まぐろパワーで三崎探検",
+    "eyebrow": "TSUNANOSUKE",
+    "icon": "tsunosuke"
+  },
+  {
+    "id": "miuran",
+    "name": "みうらん",
+    "caption": "満開の桜と花びら、春色のおさんぽ",
+    "eyebrow": "MIURAN",
+    "icon": "miuran"
+  },
+  {
+    "id": "farm",
+    "name": "三浦やさい畑",
+    "caption": "大根とキャベツ、緑いっぱいの畑へ",
+    "eyebrow": "MIURA FARM",
+    "icon": "farm"
+  },
+  {
+    "id": "retro",
+    "name": "三崎レトロさんぽ",
+    "caption": "絵はがきのような、懐かしい街歩き",
+    "eyebrow": "MISAKI RETRO",
+    "icon": "retro"
+  },
+  {
+    "id": "festival",
+    "name": "チャッキラコ・和のおまつり",
+    "caption": "扇と五色の飾り、華やかな和の世界",
+    "eyebrow": "CHAKKIRAKO",
+    "icon": "festival"
+  },
+  {
+    "id": "lighthouse",
+    "name": "城ヶ島・灯台のあかり",
+    "caption": "白い灯台と岩礁、あかりをたどる旅",
+    "eyebrow": "JOGASHIMA LIGHT",
+    "icon": "lighthouse"
+  },
+  {
+    "id": "watermelon",
+    "name": "三浦すいか・夏やすみ",
+    "caption": "すいかとメロン、夏色いっぱいの冒険",
+    "eyebrow": "MIURA SUMMER",
+    "icon": "watermelon"
+  },
+  {
+    "id": "forest",
+    "name": "小網代の森・カニの探検隊",
+    "caption": "木漏れ日とアカテガニ、森の探検へ",
+    "eyebrow": "KOAJIRO FOREST",
+    "icon": "forest"
+  },
+  {
+    "id": "donburi",
+    "name": "三崎マグロ丼",
+    "caption": "まぐろの赤と炊きたてご飯、おいしい三崎",
+    "eyebrow": "MISAKI MAGURO DON",
+    "icon": "donburi"
+  }
+]

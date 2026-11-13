@@ -11,7 +11,7 @@ import type { KomaContext } from "../lib/route/context";
 export type ContextLayers={buildings:boolean;landmarks:boolean;details:boolean};
 
 function line(points: {x:number;y:number}[]) { return points.map(p=>p.x.toFixed(3)+","+p.y.toFixed(3)).join(" "); }
-export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false, presentation="source", symbolLimit=2, children, mandatorySteps=false, interactive=false }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;children?:ReactNode;mandatorySteps?:boolean;interactive?:boolean}) {
+export default function KomaFigure({ map, name, context, layers, compact=false, referenceGeometry, clipDetails=false, minimal=false, presentation="source", symbolLimit=2, children, mandatorySteps=false, interactive=false, decoration }: {map:KomaMap;name:string;context:KomaContext;layers:ContextLayers;compact?:boolean;referenceGeometry?:KomaGeometry;clipDetails?:boolean;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;children?:ReactNode;mandatorySteps?:boolean;interactive?:boolean;decoration?:ReactNode}) {
   const id=useId().replaceAll(":","");
   if(map.state==="held"&&!referenceGeometry)return (
     <div className="koma-held" data-koma-held={compact?undefined:map.sequence} role="note">
@@ -29,6 +29,7 @@ export default function KomaFigure({ map, name, context, layers, compact=false, 
       <desc id={id+"-desc"}>{referenceGeometry?"周辺30mの参照図です。短い枝には進入点・矢印を置きません。":map.kind==="return"?"入ってきた同じ道を戻ります。":map.kind==="start"?"出発点から青い矢印へ進みます。":map.kind==="finish"?"このコマが終了地点です。":"黒点のある道から入り、青い矢印の枝へ進みます。"} 元データに接続する枝は{branches.length}本。現地の通行・安全性は未確認です。</desc>
       <defs><clipPath id={id+"-clip"}><rect x="9" y="9" width="282" height="232" rx="7"/></clipPath><marker id={id+"-arrow"} markerWidth="16" markerHeight="16" viewBox="0 0 10 10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0L10 5L0 10Z" fill="var(--route-next)"/></marker></defs>
       <rect x="1" y="1" width="298" height="278" rx="14" fill="var(--route-background)"/>
+      {decoration}
       <g clipPath={`url(#${id}-clip)`} pointerEvents="none">
         {presentation==="source"&&layers.buildings&&context.buildings.map(b=><polygon key={b.id} data-context-building={b.id} points={line(b.points)} fill="var(--route-building)" stroke="var(--route-building-line)" strokeWidth="1"/>)}
       </g>

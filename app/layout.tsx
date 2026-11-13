@@ -5,6 +5,7 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "./globals.css";
 import "./experience.css";
 import "./coastal-theme.css";
+import "./walk-design.css";
 import "./course-landmarks.css";
 
 export const metadata: Metadata = {

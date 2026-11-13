@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "source": "User-provided koma-ui-share/koma-ui.html",
+  "sourceSha256": "23b92e8d72b32ab5ec5bbebed2c48b1cefff0bd670bfee39911b8799f15521aa",
+  "themes": 12,
+  "scope": "Participant display only; no bundled course data or React runtime copied",
+  "assets": [
+    {
+      "path": "/characters/tsunosuke.jpg",
+      "bytes": 29611,
+      "sha256": "fd6d085f5dfa5c64a9aceef2c67743d5f7747e74017cf2c43eec9b0f767d95b0"
+    },
+    {
+      "path": "/characters/miuran.jpg",
+      "bytes": 21659,
+      "sha256": "6cb6b95f4302512f1026dc2f38cdca7f5a9effed9a603d7dde13c6e11fe667ca"
+    },
+    {
+      "path": "/characters/tsunosuke-cutout.png",
+      "bytes": 1118973,
+      "sha256": "aedbf9c379efd2f2981966f65b62395b76b5af261a8521f6f3f4502b6c5403a7"
+    }
+  ]
+}

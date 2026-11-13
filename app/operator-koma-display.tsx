@@ -1,12 +1,12 @@
 "use client";
-import {useEffect,useRef,useState} from "react";
+import {useEffect,useRef,useState,type ReactNode} from "react";
 import ReviewedLandmarkLayer,{ReviewedLandmarkNotice,type ReviewedLandmarks,type LandmarkEditor} from "./reviewed-landmark-layer";
 import KomaFigure,{type ContextLayers} from "./koma-figure";
 import {expandShortKoma} from "../lib/route/koma-display";
 import type {KomaMap} from "../lib/route/koma";
 import type {KomaContext} from "../lib/route/context";
 import type {LandmarkPresentation,SymbolLimit} from "../lib/route/visual-landmarks";
-export default function OperatorKomaDisplay({map,context,referenceContext,name,layers,minimal=false,presentation="source",symbolLimit=2,reviewed,editor}:{map:KomaMap;context:KomaContext;referenceContext:KomaContext|null;name:string;layers:ContextLayers;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;reviewed?:ReviewedLandmarks;editor?:LandmarkEditor}){
+export default function OperatorKomaDisplay({map,context,referenceContext,name,layers,minimal=false,presentation="source",symbolLimit=2,reviewed,editor,decoration}:{map:KomaMap;context:KomaContext;referenceContext:KomaContext|null;name:string;layers:ContextLayers;minimal?:boolean;presentation?:LandmarkPresentation;symbolLimit?:SymbolLimit;reviewed?:ReviewedLandmarks;editor?:LandmarkEditor;decoration?:ReactNode}){
  const primary=useRef<HTMLDivElement>(null),[width,setWidth]=useState<number|null>(null);
  useEffect(()=>{
   if(!map.shortGeometry||!primary.current)return;
@@ -14,7 +14,7 @@ export default function OperatorKomaDisplay({map,context,referenceContext,name,l
   measure();if(typeof ResizeObserver==="undefined")return;
   const observer=new ResizeObserver(measure);observer.observe(element);return()=>observer.disconnect();
  },[map.shortGeometry]);
- const figure=(m:KomaMap,c:KomaContext,reference=false,factor=1,clip=false)=><><KomaFigure map={m} referenceGeometry={reference?map.shortGeometry:undefined} name={name} context={c} layers={layers} minimal={minimal} presentation={reviewed?"roads":presentation} symbolLimit={symbolLimit} mandatorySteps={!!reviewed} interactive={!!editor} clipDetails={clip}>{reviewed&&layers.landmarks&&<ReviewedLandmarkLayer map={reference?{...m,branches:map.shortGeometry!.branches}:m} landmarks={reviewed} factor={factor} editor={editor}/>}</KomaFigure>{reviewed&&!minimal&&layers.landmarks&&(m.state==="ready"||reference)&&<ReviewedLandmarkNotice map={reference?{...m,branches:map.shortGeometry!.branches}:m} landmarks={reviewed} factor={factor}/>}</>;
+ const figure=(m:KomaMap,c:KomaContext,reference=false,factor=1,clip=false)=><><KomaFigure decoration={decoration} map={m} referenceGeometry={reference?map.shortGeometry:undefined} name={name} context={c} layers={layers} minimal={minimal} presentation={reviewed?"roads":presentation} symbolLimit={symbolLimit} mandatorySteps={!!reviewed} interactive={!!editor} clipDetails={clip}>{reviewed&&layers.landmarks&&<ReviewedLandmarkLayer map={reference?{...m,branches:map.shortGeometry!.branches}:m} landmarks={reviewed} factor={factor} editor={editor}/>}</KomaFigure>{reviewed&&!minimal&&layers.landmarks&&(m.state==="ready"||reference)&&<ReviewedLandmarkNotice map={reference?{...m,branches:map.shortGeometry!.branches}:m} landmarks={reviewed} factor={factor}/>}</>;
  if(!map.shortGeometry||!referenceContext)return figure(map,context);
  const display=width===null?null:expandShortKoma(map,referenceContext,width);
  return <div className="operator-koma-display" data-koma-expansion={width===null?"measuring":display?"ready":"held"} data-koma-width={width??undefined} data-koma-factor={display?.zoomFactor}>
