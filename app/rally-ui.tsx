@@ -1,5 +1,6 @@
 import Link from "next/link";
-export function WalkingEstimateNote(){return <p className="walking-estimate-note">見学・休憩・信号待ちを含まない概算です。坂や階段、歩く速さによって変わります。</p>}
+import {WALKING_SPEED_KMH} from "../lib/walking-estimate";
+export function WalkingEstimateNote(){return <p className="walking-estimate-note">時速{WALKING_SPEED_KMH}kmでの概算です。見学・休憩・信号待ちは含みません。坂や階段、歩く速さによって変わります。</p>}
 export function ArrowIcon({back=false}:{back?:boolean}){
   return <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" className={back?"back-arrow":undefined}><path d="M4 12h15m-6-6 6 6-6 6" stroke="currentColor" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round"/></svg>;
 }

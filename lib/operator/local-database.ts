@@ -7,7 +7,7 @@ export function openOperatorDatabase(path:string){
     const db=new DatabaseSync(path,{timeout:2000});
     try {
       let version=Number(db.prepare("PRAGMA user_version").get()!.user_version);
-      if(version===0||version===1||version===2||version===3||version===4||version===5||version===6){
+      if(version===0||version===1||version===2||version===3||version===4||version===5||version===6||version===7){
         db.exec("BEGIN IMMEDIATE");
         try{
           // Another request may have initialized or migrated the file before this lock.
@@ -64,14 +64,24 @@ export function openOperatorDatabase(path:string){
             db.exec("ALTER TABLE course_publications ADD COLUMN status TEXT NOT NULL DEFAULT 'published' CHECK(status IN ('published','withdrawn')); ALTER TABLE course_publications ADD COLUMN revision INTEGER NOT NULL DEFAULT 1 CHECK(revision>=1); ALTER TABLE course_publications ADD COLUMN changed_at TEXT NOT NULL DEFAULT ''; UPDATE course_publications SET changed_at=published_at; PRAGMA user_version=7;");
             version=7;
           }
+          if(version===7){
+            db.prepare("SELECT slot,value FROM rally_draft LIMIT 0").all();
+            db.prepare("SELECT slot,value FROM rally_corrections LIMIT 0").all();
+            db.prepare("SELECT id,fingerprint,value FROM saved_courses LIMIT 0").all();
+            db.prepare("SELECT course_id,fingerprint,published_at,status,revision,changed_at FROM course_publications LIMIT 0").all();
+            db.exec("CREATE TABLE course_deletions (course_id TEXT PRIMARY KEY, value TEXT NOT NULL) STRICT; CREATE TABLE working_draft_state (slot TEXT PRIMARY KEY CHECK(slot='working'), last_revision INTEGER NOT NULL CHECK(last_revision>=1)) STRICT; PRAGMA user_version=8;");
+            version=8;
+          }
           db.exec("COMMIT");
         }catch(error){try{db.exec("ROLLBACK")}catch{}throw error}
       }
-      if(version!==7)throw new SpotError("unavailable","未対応のスポット保存形式です。保存ファイルを確認してください。");
+      if(version!==8)throw new SpotError("unavailable","未対応のスポット保存形式です。保存ファイルを確認してください。");
       db.prepare("SELECT slot,value FROM rally_draft LIMIT 0").all();
       db.prepare("SELECT slot,value FROM rally_corrections LIMIT 0").all();
       db.prepare("SELECT id,fingerprint,value FROM saved_courses LIMIT 0").all();
       db.prepare("SELECT course_id,fingerprint,published_at,status,revision,changed_at FROM course_publications LIMIT 0").all();
+      db.prepare("SELECT course_id,value FROM course_deletions LIMIT 0").all();
+      db.prepare("SELECT slot,last_revision FROM working_draft_state LIMIT 0").all();
       return db;
     }catch(error){db.close();throw error}
   }

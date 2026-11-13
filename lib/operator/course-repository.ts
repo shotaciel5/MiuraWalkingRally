@@ -28,6 +28,11 @@ export function createCourseRepository(path:string,now=()=>new Date().toISOStrin
  }
  return {
   find(fingerprint:string){const db=openOperatorDatabase(path);try{return find(db,fingerprint)}finally{db.close()}},
+  completeExisting(fingerprint:string,complete:(db:ReturnType<typeof openOperatorDatabase>,saved:SavedCourse)=>void){
+   const db=openOperatorDatabase(path);
+   try{db.exec("BEGIN IMMEDIATE");const saved=find(db,fingerprint);if(saved)complete(db,saved);db.exec("COMMIT");return saved}
+   catch(error){try{db.exec("ROLLBACK")}catch{}throw error}finally{db.close()}
+  },
   get(id:string){
    if(!validCourseId(id))return null;
    const db=openOperatorDatabase(path);try{return readCourseById(db,id)}finally{db.close()}
@@ -35,15 +40,16 @@ export function createCourseRepository(path:string,now=()=>new Date().toISOStrin
   list(){
    const db=openOperatorDatabase(path);try{return db.prepare("SELECT id,fingerprint,value FROM saved_courses").all().map(readRow).sort((a,b)=>a.createdAt>b.createdAt?-1:a.createdAt<b.createdAt?1:a.id<b.id?-1:1).map(courseSummary)}finally{db.close()}
   },
-  store(value:unknown,verifyCurrent:(db:ReturnType<typeof openOperatorDatabase>)=>void){
+  store(value:unknown,verifyCurrent:(db:ReturnType<typeof openOperatorDatabase>)=>void,complete?:(db:ReturnType<typeof openOperatorDatabase>,saved:SavedCourse,created:boolean)=>void){
    const payload=checkedCoursePayload(value),fingerprint=courseFingerprint(payload),db=openOperatorDatabase(path);
    try{
     db.exec("BEGIN IMMEDIATE");
-    const existing=find(db,fingerprint);if(existing){db.exec("COMMIT");return existing}
+    const existing=find(db,fingerprint);if(existing){complete?.(db,existing,false);db.exec("COMMIT");return existing}
     verifyCurrent(db);
     const saved=parseSavedCourse({id:newId(),createdAt:now(),fingerprint,payload});
     db.prepare("INSERT INTO saved_courses(id,fingerprint,value) VALUES (?,?,?)").run(saved.id,fingerprint,canonicalJson(saved));
     const read=find(db,fingerprint);if(!read)throw new CourseError("unavailable","コースの保存結果を確認できません。同じ結果で再試行してください。");
+    complete?.(db,read,true);
     db.exec("COMMIT");return read;
    }catch(error){try{db.exec("ROLLBACK")}catch{}throw error}finally{db.close()}
   }

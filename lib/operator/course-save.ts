@@ -5,7 +5,7 @@ import {workbenchState} from "../landmarks/workbench.ts";
 import {getLandmarkStorage,type LandmarkStorage} from "../landmarks/storage.ts";
 import {getBrowserSpots} from "../spots/browser-catalog.ts";
 import type {InitialSpot} from "../spots/initial-catalog.ts";
-import {createDraftRepository,readDraftContext} from "./draft-repository.ts";
+import {createDraftRepository,readDraftContext,clearSavedWorkingDraft} from "./draft-repository.ts";
 import {createRallyPreview} from "./rally-preview.ts";
 import {createCourseRepository,checkedCoursePayload,courseFingerprint} from "./course-repository.ts";
 import {canonicalJson,courseReceipt,parseSaveReceipt,CourseError,COURSE_GENERATOR_VERSION,type CoursePayload} from "./course-format.ts";
@@ -26,9 +26,13 @@ function basis(context:Context){
 export function createCourseService(path:string,options:{loadInitial?:()=>InitialSpot[]|null;generate?:typeof createRallyPreview;now?:()=>string;newId?:()=>string;landmarks?:boolean;omission?:boolean;landmarkStorage?:LandmarkStorage}={}){
  const loadInitial=options.loadInitial??getBrowserSpots,generate=options.generate??createRallyPreview,drafts=createDraftRepository(path,loadInitial),courses=createCourseRepository(path,options.now,options.newId);
  return {save(value:unknown){
-  const requested=parseSaveReceipt(value),existing=courses.find(requested.fingerprint);
+  const requested=parseSaveReceipt(value);
   const matches=(payload:CoursePayload,fingerprint:string)=>canonicalJson(courseReceipt(payload,fingerprint))===canonicalJson(requested);
-  if(existing){if(!matches(existing.payload,existing.fingerprint))throw new CourseError("invalid","保存済みコースと要求の識別情報が一致しません。");return existing}
+  const existing=courses.completeExisting(requested.fingerprint,(db,saved)=>{
+   if(!matches(saved.payload,saved.fingerprint))throw new CourseError("invalid","保存済みコースと要求の識別情報が一致しません。");
+   clearSavedWorkingDraft(db,saved.payload.input,options.now??(()=>new Date().toISOString()));
+  });
+  if(existing)return existing;
   const current=drafts.load(),result=generate(current.draft,current.spots,current.corrections,{omission:options.omission});
   const snapshot=()=>{if(!options.landmarks||result.state!=="ready")return {landmarks:undefined,manualSequences:[]};const state=workbenchState(landmarkDatasetFromPreview(result),options.landmarkStorage??getLandmarkStorage());return {landmarks:freezeLandmarks(state),manualSequences:options.omission?manualLandmarkSequences(state.review.choices,result.cards.length):[]}};
   const capture=snapshot(),candidate=prepareCourseSave(current,result,capture.landmarks,{mode:requested.formatVersion===3?requested.omissionMode:"rule",manualSequences:capture.manualSequences});
@@ -37,7 +41,7 @@ export function createCourseService(path:string,options:{loadInitial?:()=>Initia
   return courses.store(candidate.payload,db=>{
    if(canonicalJson(snapshot())!==canonicalJson(capture))throw new CourseError("conflict","目印の採用状態が変わりました。最新の内容を読み直してください。");
    if(basis(readDraftContext(db,loadInitial))!==before)throw new CourseError("conflict","保存前に下書き・台帳・補正が変わりました。最新内容から再生成してください。");
-  });
+  },(db,saved,created)=>{const cleared=clearSavedWorkingDraft(db,saved.payload.input,options.now??(()=>new Date().toISOString()));if(created&&!cleared)throw new CourseError("conflict","下書きが変更されました。保存内容を確認して再試行してください。")});
  }};
 }
 export const getCourseService=()=>createCourseService(getOperatorDatabasePath(),{landmarks:true,omission:true});

@@ -31,7 +31,7 @@ test("saved courses stay private until explicitly published and multiple public 
  const before=f.drafts.load(),publication=f.publisher.publish(f.input);
  assert.deepEqual(publication,{courseId:f.saved.id,fingerprint:f.saved.fingerprint,publishedAt:"2026-11-10T01:00:00.000Z",changedAt:"2026-11-10T01:00:00.000Z",status:"published",revision:1});
  const value=f.publisher.get(f.saved.id);assert.deepEqual(value.course,f.saved);assert.deepEqual(value.publication,publication);assert.deepEqual(f.drafts.load(),before);
- f.drafts.save({...draftInput(before.draft,1),title:"別の公開コース"});const c=f.drafts.load(),next=createCourseService(f.path).save(prepareCourseSave(c,createRallyPreview(c.draft,c.spots,c.corrections)).receipt);
+ f.drafts.save({...draftInput(f.state.draft,0),title:"別の公開コース"});const c=f.drafts.load(),next=createCourseService(f.path).save(prepareCourseSave(c,createRallyPreview(c.draft,c.spots,c.corrections)).receipt);
  f.publisher.publish({courseId:next.id,fingerprint:next.fingerprint,expectedRevision:0});const rows=f.publisher.list();assert.equal(rows.length,2);assert.ok(rows.every(r=>!r.cards&&!r.payload&&!r.input));assert.equal(new Set(rows.map(r=>r.id)).size,2);
 });
 test("retries keep the original publication date without rewriting the saved snapshot",t=>{
@@ -40,7 +40,7 @@ test("retries keep the original publication date without rewriting the saved sna
  assert.deepEqual(f.courses.get(before.id),before);assert.deepEqual(readFileSync(f.path),bytes);assert.equal(f.publisher.list().length,1);
 });
 test("publication reads and retries ignore changed or corrupt working draft and catalog data",t=>{
- const f=fixture(t),p=f.publisher.publish(f.input),db=new DatabaseSync(f.path);db.exec("UPDATE rally_draft SET value='{bad'; INSERT INTO spot_edits(id,value) VALUES('bad','{bad')");db.close();
+ const f=fixture(t),p=f.publisher.publish(f.input),db=new DatabaseSync(f.path);db.exec("INSERT OR REPLACE INTO rally_draft(slot,value) VALUES('working','{bad'); INSERT INTO spot_edits(id,value) VALUES('bad','{bad')");db.close();
  const before=readFileSync(f.path);assert.deepEqual(f.publisher.get(f.saved.id),{course:f.saved,publication:p});assert.equal(f.publisher.list()[0].title,f.saved.payload.preview.title);
  assert.deepEqual(f.publisher.publish(f.input),p);assert.deepEqual(readFileSync(f.path),before);
 });
@@ -58,13 +58,13 @@ test("strict publication input rejects forged metadata and stale fingerprints",t
 test("v5 to v7 preserves all prior records and does not publish any course automatically",t=>{
  const f=fixture(t),spots=createSpotRepository(f.path),s=f.state.spots.find(s=>![S,W,C,M].includes(s.id));
  spots.save({id:s.id,expectedRevision:s.revision,name:"保持する編集",category:s.category,position:{lat:s.position.lat,lon:s.position.lon},description:s.description});spots.remove({id:"osm-node-1211621029",expectedRevision:spots.list().find(s=>s.id==="osm-node-1211621029").revision});
- f.drafts.saveCorrection({expectedDraftRevision:1,expectedCorrectionRevision:0,spotId:S,spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.141,lon:139.621}});
- const db=new DatabaseSync(f.path),before={};for(const table of ["spot_edits","spot_deletions","rally_draft","rally_corrections","saved_courses"])before[table]=db.prepare("SELECT * FROM "+table).all();db.exec("DROP TABLE course_publications; PRAGMA user_version=5");db.close();
- assert.deepEqual(f.publisher.list(),[]);const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,7);
+ const working=f.drafts.save(draftInput(f.state.draft,0));f.drafts.saveCorrection({expectedDraftRevision:working.draft.revision,expectedCorrectionRevision:0,spotId:S,spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.141,lon:139.621}});
+ const db=new DatabaseSync(f.path),before={};for(const table of ["spot_edits","spot_deletions","rally_draft","rally_corrections","saved_courses"])before[table]=db.prepare("SELECT * FROM "+table).all();db.exec("DROP TABLE course_publications; DROP TABLE IF EXISTS course_deletions; DROP TABLE IF EXISTS working_draft_state; PRAGMA user_version=5");db.close();
+ assert.deepEqual(f.publisher.list(),[]);const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,8);
  for(const table of Object.keys(before))assert.deepEqual(check.prepare("SELECT * FROM "+table).all(),before[table]);check.close();assert.deepEqual(f.courses.get(f.saved.id),f.saved);
 });
 test("a foreign publication table rolls migration back and is not reset",t=>{
- const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE course_publications; CREATE TABLE course_publications(note TEXT); INSERT INTO course_publications VALUES('keep'); PRAGMA user_version=5");db.close();
+ const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE course_publications; CREATE TABLE course_publications(note TEXT); INSERT INTO course_publications VALUES('keep'); DROP TABLE IF EXISTS course_deletions; DROP TABLE IF EXISTS working_draft_state; PRAGMA user_version=5");db.close();
  assert.throws(()=>f.publisher.list());const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,5);assert.equal(check.prepare("SELECT note FROM course_publications").get().note,"keep");check.close();
 });
 test("missing v7 tables and unsupported versions never silently reset data",t=>{

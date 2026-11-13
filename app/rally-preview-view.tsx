@@ -1,4 +1,5 @@
 "use client";
+import {walkingMinutes,WALKING_SPEED_KMH} from "../lib/walking-estimate";
 import CourseOmissionSettings from "./course-omission-settings";
 import {manualLandmarkSequences,selectOmission,defaultOmissionMode,hybridFailureCount,type OmissionSnapshot} from "../lib/route/omission/selection";
 import {projectOmittedPreview} from "../lib/route/omission/projection";
@@ -58,13 +59,13 @@ export default function RallyPreviewView({data:source,saved,saveReceipt=null,sav
  return <div data-rally-preview data-preview-hydrated={hydrated} data-preview-revision={data.draftRevision} data-preview-count={data.cards.length} data-preview-source-count={source.cards.length}>
   <section className="preview-summary" aria-label="生成結果">
    <div><p className="eyebrow">{saved?"SAVED COURSE / REVIEW":"GENERATED COURSE / REVIEW"}</p><h1>{data.title}</h1><p>{saved?"保存済みの計算結果・読取専用"+(saved.publication?.status==="published"?"（参加者向け公開済み）":saved.publication?.status==="withdrawn"?"（公開停止中）":saved.publication===null?"（参加者へ未掲載）":"（公開状態は確認待ち）"):"未確認の道路上候補を使った開発用プレビュー"}</p></div>
-   <dl><div><dt>道路上の距離</dt><dd data-preview-meters>{Math.round(data.meters).toLocaleString("ja-JP")} m</dd></div><div><dt>歩行時間の概算</dt><dd>約{Math.ceil(data.minutes)}分</dd></div><div><dt>コマ数</dt><dd>{data.cards.length}枚</dd></div></dl>
+   <dl><div><dt>道路上の距離</dt><dd data-preview-meters>{Math.round(data.meters).toLocaleString("ja-JP")} m</dd></div><div><dt>歩行時間の概算</dt><dd>約{Math.ceil(walkingMinutes(data.meters))}分</dd></div><div><dt>コマ数</dt><dd>{data.cards.length}枚</dd></div></dl>
   </section>
-  <p className="operator-scope"><span>現地未確認</span>入口・施設までの通路・通行・安全性は確認待ちです。道路上の移動時間は時速{data.speedKmh}kmの概算で、観光・施設への移動や滞在時間を含みません。</p>
+  <p className="operator-scope"><span>現地未確認</span>入口・施設までの通路・通行・安全性は確認待ちです。道路上の移動時間は時速{WALKING_SPEED_KMH}kmの概算で、観光・施設への移動や滞在時間を含みません。</p>
   <section className="operator-next-action" aria-label="次の操作" data-operator-preview-guide><div><p className="eyebrow">次のステップ</p><h2>{saved?"保存した内容を確認して、公開へ":"ルートとコマができました"}</h2><p>{saved?"コマと道順を確かめたら、「参加者への公開」で公開の設定を確認できます。":"まずコマと道順を確かめましょう。確認できたら保存して、公開の設定へ進みます。"}</p></div><a className="operator-task-primary" href="#preview-koma-title">コマを確認する ↓</a></section>
   <details className="operator-secondary-details"><summary>{saved?"保存版と編集について":"下書きの編集・道路の調整・再生成"}</summary>
   {saved?<p className="preview-version" data-saved-course-id={saved.id}>保存日時：<time dateTime={saved.createdAt}>{new Date(saved.createdAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time>。保存時の下書き版{data.draftRevision}・補正版{data.correctionRevision}の計算結果です。台帳や下書きの変更を自動反映しません。</p>:<p className="preview-version">保存済み下書きの版{data.draftRevision}・到達点の補正版{data.correctionRevision}から生成（下書き保存日時：{new Date(data.draftUpdatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}）。表示後の変更は「最新の保存内容から再生成」で反映します。</p>}
-  {saved?<div className="preview-actions" data-saved-course-actions><a href="/operator/courses">保存済み一覧へ</a><a href="/operator/draft">作業中の下書きへ（保存済みは変更しません）</a></div>:<div className="preview-actions"><a href="/operator/connections" data-preview-corrections>道路上の到達点を修正</a><a href="/operator/draft" data-preview-back>下書きを編集</a><a href="/operator/preview" data-preview-regenerate>最新の保存内容から再生成</a></div>}
+  {saved?<div className="preview-actions" data-saved-course-actions><a href="/operator/courses">保存済み一覧へ</a><a href="/operator/draft">次のコースをつくる（保存済みは変更しません）</a></div>:<div className="preview-actions"><a href="/operator/connections" data-preview-corrections>道路上の到達点を修正</a><a href="/operator/draft" data-preview-back>下書きを編集</a><a href="/operator/preview" data-preview-regenerate>最新の保存内容から再生成</a></div>}
   </details>
   {plan&&<CourseOmissionSettings mode={mode} onChange={setMode} hybridAvailable={plan.version===2} failureCount={hybridFailureCount(plan)} total={source.cards.length} shown={data.cards.length} disabled={landmarkBusy} saved={!!saved}/>}
   {saved&&<CoursePublishPanel courseId={saved.id} fingerprint={saved.fingerprint} title={data.title} publication={saved.publication}/>}

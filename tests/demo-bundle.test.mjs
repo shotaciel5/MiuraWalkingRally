@@ -49,7 +49,7 @@ test("fixed sample and both bundled course routes have offline targets and real 
 test("explicit demo import seeds two published courses and one working draft without changing format",t=>{
  const p=path.join(temporary(t),"operator.sqlite"),r=seedDemoData(p),repo=createCourseRepository(p),publications=createPublicationRepository(p);
  assert.equal(r.added.length,2);assert.equal(r.draft,"added");assert.deepEqual(repo.list().map(c=>c.cards).sort((a,b)=>a-b),[29,39]);assert.equal(publications.list().length,2);assert.equal(createDraftRepository(p).load().draft.title,courses[0].payload.input.draft.title);
- const db=openOperatorDatabase(p);try{assert.equal(Number(db.prepare("PRAGMA user_version").get().user_version),7)}finally{db.close()}
+ const db=openOperatorDatabase(p);try{assert.equal(Number(db.prepare("PRAGMA user_version").get().user_version),8)}finally{db.close()}
 });
 test("reimport is idempotent and preserves withdrawal, operator edits and a different working draft",t=>{
  const p=path.join(temporary(t),"operator.sqlite");seedDemoData(p);const publications=createPublicationRepository(p),first=courses[0];publications.unpublish({courseId:first.id,fingerprint:first.fingerprint,expectedRevision:1});

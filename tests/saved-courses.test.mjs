@@ -28,11 +28,11 @@ const reason=code=>e=>e.reason===code;
 const edit=(repo,s,name)=>repo.save({id:s.id,expectedRevision:s.revision,name,category:s.category,position:{lat:s.position.lat,lon:s.position.lon},description:s.description});
 test("saves multiple immutable results and returns summaries without full models",t=>{
  const f=fixture(t),p=f.prepared(),before=f.drafts.load(),first=f.service.save(p.receipt);
- assert.ok(validCourseId(first.id));assert.deepEqual(first.payload,p.payload);assert.deepEqual(f.drafts.load(),before);
+ assert.ok(validCourseId(first.id));assert.deepEqual(first.payload,p.payload);assert.equal(f.drafts.load().draft,null);
  assert.deepEqual(f.courses.get(first.id),first);
- const next=f.drafts.save({...draftInput(before.draft,1),title:"別のコース",stops:[...draftInput(before.draft,1).stops].reverse()});
+ const next=f.drafts.save({...draftInput(before.draft,0),title:"別のコース",stops:[...draftInput(before.draft,1).stops].reverse()});
  const second=f.service.save(f.prepared().receipt);assert.notEqual(first.id,second.id);assert.notEqual(first.fingerprint,second.fingerprint);
- assert.deepEqual(f.courses.get(first.id),first);assert.deepEqual(f.drafts.load().draft,next.draft);
+ assert.deepEqual(f.courses.get(first.id),first);assert.equal(f.drafts.load().draft,null);
  const list=f.courses.list();assert.equal(list.length,2);assert.equal(list[0].id,second.id);assert.equal(list[1].title,first.payload.preview.title);
  assert.equal(list[0].payload,undefined);assert.equal(list[1].cards,39);assert.equal(list[1].nearby,12);
 });
@@ -44,7 +44,7 @@ test("identical retries preserve ID/time even after current draft and catalog ch
 });
 test("saved replay works after process restart and never reads corrupt current working data",t=>{
  const f=fixture(t),saved=f.service.save(f.prepared().receipt),db=new DatabaseSync(f.path);
- db.exec("UPDATE rally_draft SET value='{bad'; INSERT INTO spot_edits(id,value) VALUES('bad','{bad'); UPDATE rally_corrections SET value='{bad'");db.close();
+ db.exec("INSERT OR REPLACE INTO rally_draft(slot,value) VALUES('working','{bad'); INSERT INTO spot_edits(id,value) VALUES('bad','{bad'); INSERT OR REPLACE INTO rally_corrections(slot,value) VALUES('working','{bad')");db.close();
  const before=readFileSync(f.path);
  assert.deepEqual(f.courses.get(saved.id),saved);assert.deepEqual(f.courses.list().map(x=>x.id),[saved.id]);assert.deepEqual(readFileSync(f.path),before);
  const code="import {createCourseRepository} from './lib/operator/course-repository.ts'; console.log(JSON.stringify(createCourseRepository("+JSON.stringify(f.path)+").get("+JSON.stringify(saved.id)+")));";
@@ -91,13 +91,13 @@ test("SQLite v4 migration preserves edits, tombstones, draft and corrections",t=
  const f=fixture(t);edit(f.spots,f.state.spots.find(s=>![S,C,M].includes(s.id)),"移行前の編集");
  f.spots.remove({id:"osm-node-1211621029",expectedRevision:f.spots.list().find(s=>s.id==="osm-node-1211621029").revision});
  f.drafts.saveCorrection({expectedDraftRevision:1,expectedCorrectionRevision:0,spotId:S,spotRevision:0,sourceHash:CORRECTION_SOURCE.snapshotSha256,mode:"manual",point:{lat:35.141,lon:139.621}});
- const before=f.drafts.load(),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; PRAGMA user_version=4");db.close();
+ const before=f.drafts.load(),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; DROP TABLE IF EXISTS course_deletions; DROP TABLE IF EXISTS working_draft_state; PRAGMA user_version=4");db.close();
  assert.deepEqual(f.courses.list(),[]);assert.deepEqual(f.drafts.load(),before);
- const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,7);check.close();
+ const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,8);check.close();
  assert.ok(f.service.save(f.prepared().receipt));
 });
 test("foreign saved-course table rolls migration back and is never reset",t=>{
- const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; CREATE TABLE saved_courses(note TEXT); INSERT INTO saved_courses VALUES('keep'); PRAGMA user_version=4");db.close();
+ const f=fixture(t),db=new DatabaseSync(f.path);db.exec("DROP TABLE saved_courses; DROP TABLE course_publications; CREATE TABLE saved_courses(note TEXT); INSERT INTO saved_courses VALUES('keep'); DROP TABLE IF EXISTS course_deletions; DROP TABLE IF EXISTS working_draft_state; PRAGMA user_version=4");db.close();
  assert.throws(()=>f.courses.list());const check=new DatabaseSync(f.path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,4);assert.equal(check.prepare("SELECT note FROM saved_courses").get().note,"keep");check.close();
 });
 test("missing v5 table and unsupported DB version fail without recreating data",t=>{

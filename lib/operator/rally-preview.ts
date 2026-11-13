@@ -10,7 +10,7 @@ import {expandedKomaContext} from "../expanded-context.ts";
 import type {ManagedSpot} from "../spots/editing.ts";
 import type {Point} from "../route/types.ts";
 
-export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedSpot[],corrections:RallyCorrections=emptyCorrections(),options:{omission?:boolean}={}){
+export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedSpot[],corrections:RallyCorrections=emptyCorrections(),options:{omission?:boolean;speedKmh?:number}={}){
  const blocked=(reason:string,message:string)=>({state:"blocked" as const,reason,message});
  if(!input)return blocked("missing","保存済みの下書きがありません。地点を選んで保存してください。");
  const draft=decodeRallyDraft(input);if(!draft)return blocked("invalid","下書きの内容を確認してください。");
@@ -21,7 +21,7 @@ export function createRallyPreview(input:RallyDraft|null,spots:readonly ManagedS
  const prepared=prepareExpandedRoadConnections(visits.map(v=>v.spot),corrections.items),{graph,nodeIdsBySpot,splits}=prepared;
  const stops=visits.map(v=>({id:v.key,name:v.spot.name,nodeId:nodeIdsBySpot.get(v.spot.id)!,note:"未確認の道路上候補。施設までの通路は未検証です。"}));
  let route;
- try{route=routeThroughStops(graph,stops)}
+ try{route=routeThroughStops(graph,stops,options.speedKmh)}
  catch(error){
   if(!(error instanceof Error)||!/No walking path|Stop is missing/.test(error.message))throw error;
   // Identify the failed leg only after generation fails; successful paths run once.

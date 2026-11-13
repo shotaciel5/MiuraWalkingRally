@@ -1,3 +1,4 @@
+import {walkingMinutes} from "./walking-estimate.ts";
 import {projectOmittedPreview,projectOmittedLandmarks} from "./route/omission/projection.ts";
 import {CourseError,type SavedCourse} from "./operator/course-format.ts";
 import type {CoursePublication} from "./operator/publication.ts";
@@ -7,7 +8,7 @@ export function publishedSummary(saved:SavedCourse,publication:CoursePublication
  const p=saved.payload.formatVersion===3?projectOmittedPreview(saved.payload.preview,saved.payload.omission.selected):saved.payload.preview,d=saved.payload.input.draft,areas=new Set([d.start.area,...d.stops.map(s=>s.spot.area),d.finish.area]);
  const hiddenNames=d.stops.filter(s=>s.kind==="checkpoint").map(s=>s.spot.name);
  return {id:saved.id,revision:"published-v1-"+saved.fingerprint,href:"/rallies/"+saved.id,title:maskCheckpointNames(p.title,hiddenNames),publishedAt:publication.publishedAt,
-  distanceMeters:p.meters,walkingMinutes:Math.ceil(p.minutes),cardCount:p.cards.length,
+  distanceMeters:p.meters,walkingMinutes:Math.ceil(walkingMinutes(p.meters)),cardCount:p.cards.length,
   checkpointIds:d.stops.flatMap((s,i)=>s.kind==="checkpoint"?["stop-"+i]:[]),goalStopId:"finish",
   startName:d.stops.some(s=>s.kind==="checkpoint"&&s.spot.name===d.start.name)?"スタート地点":maskCheckpointNames(d.start.name,hiddenNames),finishName:d.stops.some(s=>s.kind==="checkpoint"&&s.spot.name===d.finish.name)?"終了地点":maskCheckpointNames(d.finish.name,hiddenNames),isLoop:d.start.id===d.finish.id,
   area:areas.size>1?"三崎・城ヶ島":areas.has("jogashima-vicinity")?"城ヶ島周辺":"三崎周辺"};

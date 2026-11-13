@@ -74,8 +74,8 @@ test("v3 stores both source geometry and frozen selection and publishes renumber
  assert.deepEqual(course.landmarks,projectOmittedLandmarks(saved.payload.landmarks,saved.payload.omission.selected));
 });
 test("all mode saves a distinct immutable edition and retries do not create duplicates",t=>{
- const f=fixture(t),rule=f.service.save(f.prepare().receipt),all=f.service.save(f.prepare("all").receipt);
- assert.notEqual(rule.id,all.id);assert.equal(all.payload.omission.selected.length,all.payload.preview.cards.length);assert.equal(f.service.save(f.prepare().receipt).id,rule.id);assert.equal(f.repo.list().length,2);
+ const f=fixture(t),rulePrepared=f.prepare(),allPrepared=f.prepare("all"),rule=f.service.save(rulePrepared.receipt);assert.throws(()=>f.service.save(allPrepared.receipt),e=>e.reason==="conflict");const all=f.repo.store(allPrepared.payload,()=>{});
+ assert.notEqual(rule.id,all.id);assert.equal(all.payload.omission.selected.length,all.payload.preview.cards.length);assert.equal(f.service.save(rulePrepared.receipt).id,rule.id);assert.equal(f.repo.list().length,2);
 });
 test("source sequence keys protect an edited omitted frame and stale displayed receipts conflict",t=>{
  const f=fixture(t),p=f.preview(),s=f.state(),selected=selectOmission(p.omissionPlan,"rule").selected;

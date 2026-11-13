@@ -18,7 +18,7 @@ export default function CourseSaveButton({receipt,unavailable}:{receipt:SaveRece
   finally{window.clearTimeout(timer);request.current=null;running.current=false;if(alive.current)setBusy(false)}
  }
  return <div className="course-save-panel operator-task-panel" data-course-save-panel>
-  <h2>確認できたら、保存して次へ</h2><p>この内容を保存すると、公開の設定画面へ進みます。保存だけでは参加者に公開されません。下書きは引き続き編集できます。</p>
+  <h2>確認できたら、保存して次へ</h2><p>この内容を保存すると、公開の設定画面へ進みます。保存だけでは参加者に公開されません。保存が完了すると作成画面は未記入に戻り、次のコースをつくれます。</p>
   <button type="button" className="operator-task-primary" disabled={busy||!receipt||conflict} data-course-save onClick={()=>void save()}>{busy?"保存しています…":conflict?"再生成してから保存":error?"同じ結果の保存を再試行":"この内容を保存して、公開設定へ"}</button>
   {!receipt&&<p role="alert">{unavailable??"保存の準備ができません。内容を確認して再生成してください。"}</p>}
   {error&&<p role="alert" data-course-save-error>{error}</p>}

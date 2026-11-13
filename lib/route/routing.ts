@@ -1,3 +1,4 @@
+import {WALKING_SPEED_KMH} from "../walking-estimate.ts";
 import type { Edge, Graph, Leg, Stop, WalkingRoute } from "./types.ts";
 
 export function shortestPath(graph: Graph, from: number, to: number): { nodeIds: number[]; edges: Edge[]; meters: number } {
@@ -38,7 +39,7 @@ export function shortestPath(graph: Graph, from: number, to: number): { nodeIds:
   return { nodeIds: [from, ...edges.map(edge => edge.to)], edges, meters: distances.get(to)! };
 }
 
-export function routeThroughStops(graph: Graph, stops: Stop[], speedKmh = 4): WalkingRoute {
+export function routeThroughStops(graph: Graph, stops: Stop[], speedKmh = WALKING_SPEED_KMH): WalkingRoute {
   if (!Number.isFinite(speedKmh) || speedKmh <= 0) throw new Error("Walking speed must be finite and positive");
   if (stops.length < 2 || new Set(stops.map(stop => stop.id)).size !== stops.length) throw new Error("At least two distinct stop IDs required");
   const legs: Leg[] = [];

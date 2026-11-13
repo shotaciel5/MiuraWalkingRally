@@ -6,6 +6,7 @@ import {decodeRallyDraft,parseDraftInput,draftSignature,DraftError,draftVisits,d
 
 import {emptyCorrections,decodeCorrections,parseCorrectionInput,CORRECTION_SOURCE,CorrectionError,type RallyCorrections} from "./rally-corrections.ts";
 import {roadConnectionForPoint,roadConnectionForSpot,connectionOnCurrentRoad} from "../miura-road-connections.ts";
+import {canonicalJson} from "./course-format.ts";
 import {distanceMeters} from "../route/graph.ts";
 
  function readDraft(db:ReturnType<typeof openOperatorDatabase>){
@@ -24,6 +25,28 @@ import {distanceMeters} from "../route/graph.ts";
   if(value.items.some(c=>c.snapshotSha256===CORRECTION_SOURCE.snapshotSha256&&c.osmBaseTimestamp===CORRECTION_SOURCE.osmBaseTimestamp&&!connectionOnCurrentRoad(c)))throw new CorrectionError("unavailable","保存された補正と元の道路情報が一致しません。保存ファイルを確認してください。");
   return value;
  }
+
+function lastDraftRevision(db:ReturnType<typeof openOperatorDatabase>,current:RallyDraft|null){
+ const rows=db.prepare("SELECT slot,last_revision FROM working_draft_state").all();
+ if(rows.length>1||rows.some(r=>r.slot!=="working"||!Number.isSafeInteger(r.last_revision)||Number(r.last_revision)<1||Number(r.last_revision)>=Number.MAX_SAFE_INTEGER))throw new DraftError("unavailable","下書きの版情報を確認できません。");
+ return Math.max(current?.revision??0,Number(rows[0]?.last_revision??0));
+}
+function recordDraftRevision(db:ReturnType<typeof openOperatorDatabase>,revision:number){
+ db.prepare("INSERT INTO working_draft_state(slot,last_revision) VALUES('working',?) ON CONFLICT(slot) DO UPDATE SET last_revision=MAX(last_revision,excluded.last_revision)").run(revision);
+}
+export function clearSavedWorkingDraft(db:ReturnType<typeof openOperatorDatabase>,input:{draft:unknown;corrections:unknown},now:()=>string){
+ let draft:RallyDraft|null,corrections:RallyCorrections;
+ try{draft=readDraft(db);if(!draft)return false;corrections=readCorrections(db)}catch(error){if(error instanceof DraftError||error instanceof CorrectionError)return false;throw error}
+ if(canonicalJson(draft)!==canonicalJson(input.draft)||canonicalJson(corrections)!==canonicalJson(input.corrections))return false;
+ recordDraftRevision(db,Math.max(lastDraftRevision(db,draft),draft.revision));
+ if(corrections.items.length){
+  const empty=decodeCorrections({revision:corrections.revision+1,updatedAt:now(),items:[]});
+  if(!empty)throw new CorrectionError("unavailable","道路到達点の初期化を確認できません。");
+  db.prepare("UPDATE rally_corrections SET value=? WHERE slot='working'").run(JSON.stringify(empty));
+ }
+ db.prepare("DELETE FROM rally_draft WHERE slot='working'").run();
+ return true;
+}
 
 export function readDraftContext(db:ReturnType<typeof openOperatorDatabase>,loadInitial:()=>InitialSpot[]|null=getBrowserSpots){return {draft:readDraft(db),spots:readSpotState(db,loadInitial).active,corrections:readCorrections(db)}}
 export function createDraftRepository(path:string,loadInitial:()=>InitialSpot[]|null=getBrowserSpots,now=()=>new Date().toISOString()){
@@ -84,9 +107,10 @@ export function createDraftRepository(path:string,loadInitial:()=>InitialSpot[]|
     const form={title:input.title,start:resolve(input.start),finish:resolve(input.finish),stops:input.stops.map(s=>({kind:s.kind,spot:resolve(s.spot)}))};
     if(current&&draftSignature(current)===draftSignature(form)){const corrections=prune(db,current,previousCorrections);db.exec("COMMIT");return {draft:current,spots,corrections}}
     if((current?.revision??0)!==input.expectedRevision)throw new DraftError("draft-conflict","別の画面で下書きが更新されています。未保存の内容を控え、保存済みを読み直してください。");
-    const draft=decodeRallyDraft({...form,revision:(current?.revision??0)+1,updatedAt:now()});
+    const draft=decodeRallyDraft({...form,revision:lastDraftRevision(db,current)+1,updatedAt:now()});
     if(!draft)throw new DraftError("unavailable","下書きの保存内容を確認できませんでした。");
     db.prepare("INSERT INTO rally_draft(slot,value) VALUES ('working',?) ON CONFLICT(slot) DO UPDATE SET value=excluded.value").run(JSON.stringify(draft));
+    recordDraftRevision(db,draft.revision);
     const saved=readDraft(db)!,corrections=prune(db,saved,previousCorrections);db.exec("COMMIT");return {draft:saved,spots,corrections};
    }catch(error){try{db.exec("ROLLBACK")}catch{}throw error}finally{db.close()}
   },

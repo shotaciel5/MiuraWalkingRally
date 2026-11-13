@@ -289,3 +289,20 @@ test("operator tasks show a guided course creation and publication path",async t
   assert.ok(courses.includes("data-course-list-empty")?courses.includes("最初のコースをつくる"):courses.includes("コマを確認・公開する"));
  });
 });
+
+test("saved course DELETE validates request guards and strict identity without deleting",async()=>{
+ const valid={courseId:"course-00000000-0000-4000-8000-000000000000",fingerprint:"a".repeat(64),expectedPublicationRevision:0};
+ for(const [headers,body,status]of [
+  [{"Content-Type":"application/json"},JSON.stringify(valid),403],
+  [{"Content-Type":"application/json",Origin:"https://example.com"},JSON.stringify(valid),403],
+  [{"Content-Type":"text/plain",Origin:baseUrl.origin},"x",415],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"{bad",400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify({...valid,force:true}),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify({...valid,expectedPublicationRevision:-1}),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},"x".repeat(17000),400],
+  [{"Content-Type":"application/json",Origin:baseUrl.origin},JSON.stringify(valid),404]
+ ]){
+  const r=await fetch(new URL("/api/operator/courses",baseUrl),{method:"DELETE",headers,body});
+  assert.equal(r.status,status);assert.equal(r.headers.get("cache-control"),"no-store");await r.arrayBuffer();
+ }
+});

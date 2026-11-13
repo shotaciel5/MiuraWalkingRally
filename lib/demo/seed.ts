@@ -15,7 +15,7 @@ export function demoCourses():SavedCourse[]{
  return definitions.courses.map(input=>{
   const draft=decodeRallyDraft({title:input.title,start:byId.get(input.start),finish:byId.get(input.finish),stops:input.stops.map(s=>({kind:s.kind,spot:byId.get(s.id)})),revision:1,updatedAt:definitions.preparedAt});
   if(!draft)throw Error("Invalid bundled draft");
-  const corrections=emptyCorrections(),preview=createRallyPreview(draft,spots,corrections);
+  const corrections=emptyCorrections(),preview=createRallyPreview(draft,spots,corrections,{speedKmh:4});
   if(preview.state!=="ready")throw Error("Bundled route unavailable");
   const {payload}=prepareCourseSave({draft,spots,corrections},preview);
   return parseSavedCourse({id:input.id,createdAt:definitions.preparedAt,fingerprint:courseFingerprint(payload),payload});
@@ -28,6 +28,7 @@ export function seedDemoData(path=getOperatorDatabasePath()){
  try{
   db.exec("BEGIN IMMEDIATE");
   for(const course of courses){
+   if(db.prepare("SELECT course_id FROM course_deletions WHERE course_id=?").get(course.id)){existing.push(course.id);continue}
    const current=readCourseById(db,course.id);
    if(current){if(current.fingerprint!==course.fingerprint)throw Error("Bundled course ID conflict");existing.push(current.id);continue}
    const same=db.prepare("SELECT id FROM saved_courses WHERE fingerprint=?").get(course.fingerprint);
@@ -36,7 +37,7 @@ export function seedDemoData(path=getOperatorDatabasePath()){
    db.prepare("INSERT INTO course_publications(course_id,fingerprint,published_at,status,revision,changed_at) VALUES(?,?,?,'published',1,?)").run(course.id,course.fingerprint,course.createdAt,course.createdAt);
    added.push(course.id);
   }
-  if(!db.prepare("SELECT slot FROM rally_draft WHERE slot='working'").get()&&!db.prepare("SELECT slot FROM rally_corrections WHERE slot='working'").get()){
+  if(!db.prepare("SELECT slot FROM rally_draft WHERE slot='working'").get()&&!db.prepare("SELECT slot FROM rally_corrections WHERE slot='working'").get()&&!db.prepare("SELECT slot FROM working_draft_state WHERE slot='working'").get()){
    const candidate=courses[0].payload.input.draft,spots=readSpotState(db).active;
    if(!draftIssues(candidate,spots).length){db.prepare("INSERT INTO rally_draft(slot,value) VALUES('working',?)").run(canonicalJson(candidate));draft="added"}
    else draft="catalog-changed";

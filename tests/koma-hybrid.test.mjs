@@ -96,7 +96,7 @@ test("new saved courses default to hybrid and pin the trained model without chan
  assert.equal(course.cards.length,saved.payload.omission.selected.length);assert.equal(course.rally.distanceMeters,f.preview.meters);for(const s of course.stops)assert.ok(course.cards[s.komaIndex].stopIds.includes(s.id));
 });
 test("all, rule and hybrid editions are distinct and retries preserve the frozen edition",t=>{
- const f=fixture(t),values=["hybrid","rule","all"].map(mode=>f.service.save(f.prepared(mode).receipt));assert.equal(new Set(values.map(v=>v.id)).size,3);assert.equal(f.repo.list().length,3);
+ const f=fixture(t),values=["hybrid","rule","all"].map(mode=>f.repo.store(f.prepared(mode).payload,()=>{}));assert.equal(new Set(values.map(v=>v.id)).size,3);assert.equal(f.repo.list().length,3);
  for(const v of values)assert.deepEqual(f.service.save(courseReceipt(v.payload,v.fingerprint)),v);
  assert.throws(()=>f.service.save({...f.prepared("hybrid").receipt,omissionMode:"rule"}),e=>e.reason==="invalid");
 });

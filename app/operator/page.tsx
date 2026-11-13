@@ -19,7 +19,7 @@ export default function OperatorHome(){
    <OperatorNav view="home"/>
    <div className="operator-welcome operator-task-welcome"><div><p className="eyebrow">YOUR WORKSPACE</p><h1>コースをつくって、<br/>参加者に届けよう。</h1><p className="participant-lead">登録済みのスポットから、行きたい場所を選べます。<br/>まずはスタートとゴールを決めて、道順を見てみましょう。</p>
     {draft&&<div className="operator-resume" data-operator-resume><span>作成中のコース</span><strong>{draft.title}</strong><small>保存した地点から再開できます</small></div>}
-    <Link prefetch={false} className="experience-button dark" href="/operator/draft" data-operator-start>{draft?"作成中のコースを続ける":unavailable?"コースの作成画面を開く":"最初のコースをつくる"}<ArrowIcon/></Link>
+    <Link prefetch={false} className="experience-button dark" href="/operator/draft" data-operator-start>{draft?"作成中のコースを続ける":unavailable?"コースの作成画面を開く":"新しいコースをつくる"}<ArrowIcon/></Link>
     <p className="operator-start-note">スポットの登録から始める必要はありません。保存しただけでは公開されません。最後に内容を確認して公開します。</p>
    </div><div className="operator-welcome-photo"><Image src="/mainphotos/shitamati.jpg" alt="コースに組み込める三崎の路地の風景" fill priority sizes="(max-width: 700px) 90vw, 32vw"/></div></div>
    {unavailable&&<p className="operator-status-error" role="alert" data-operator-home-error>作成中のコースの状態を読み込めませんでした。作成画面で保存内容を確認してください。</p>}

@@ -106,19 +106,19 @@ test("deleting every record leaves no phantom entries in the list filters",t=>{
 
 test("version 1 databases migrate transactionally and preserve existing seed edits and added rows",t=>{
  const {path}=fixture(t),db=new DatabaseSync(path),base=seed.find(s=>s.id===firstId);
- db.exec("CREATE TABLE spot_edits (id TEXT PRIMARY KEY,value TEXT NOT NULL) STRICT; PRAGMA user_version=1");
+ db.exec("CREATE TABLE spot_edits (id TEXT PRIMARY KEY,value TEXT NOT NULL) STRICT; DROP TABLE IF EXISTS course_deletions; DROP TABLE IF EXISTS working_draft_state; PRAGMA user_version=1");
  const rows=[{...added(),positionOverride:true,revision:1,updatedAt:"2026-11-08T03:00:00.000Z"},
   {...added({id:firstId,name:"Earlier edit",category:base.category,position:{lat:base.position.lat,lon:base.position.lon}}),positionOverride:false,revision:1,updatedAt:"2026-11-08T03:00:00.000Z"}];
  for(const row of rows){delete row.expectedRevision;db.prepare("INSERT INTO spot_edits VALUES (?,?)").run(row.id,JSON.stringify(row))}db.close();
  const repository=createSpotRepository(path);assert.equal(repository.list().length,90);assert.equal(repository.list().find(s=>s.id===firstId).name,"Earlier edit");
- const migrated=new DatabaseSync(path);assert.equal(migrated.prepare("PRAGMA user_version").get().user_version,7);
+ const migrated=new DatabaseSync(path);assert.equal(migrated.prepare("PRAGMA user_version").get().user_version,8);
  for(const row of rows)assert.deepEqual(JSON.parse(migrated.prepare("SELECT value FROM spot_edits WHERE id=?").get(row.id).value),row);
  assert.equal(migrated.prepare("SELECT count(*) AS n FROM spot_deletions").get().n,0);migrated.close();
  assert.equal(remove(repository,localId,1).revision,2);assert.equal(repository.list().length,89);
 });
 test("failed version 1 migrations roll back and do not overwrite an unexpected table",t=>{
  const {path}=fixture(t),db=new DatabaseSync(path);
- db.exec("CREATE TABLE spot_edits (id TEXT PRIMARY KEY,value TEXT NOT NULL) STRICT; CREATE TABLE spot_deletions(note TEXT); INSERT INTO spot_deletions VALUES ('keep'); PRAGMA user_version=1");db.close();
+ db.exec("CREATE TABLE spot_edits (id TEXT PRIMARY KEY,value TEXT NOT NULL) STRICT; CREATE TABLE spot_deletions(note TEXT); INSERT INTO spot_deletions VALUES ('keep'); DROP TABLE IF EXISTS course_deletions; DROP TABLE IF EXISTS working_draft_state; PRAGMA user_version=1");db.close();
  assert.throws(()=>createSpotRepository(path).list());
  const check=new DatabaseSync(path);assert.equal(check.prepare("PRAGMA user_version").get().user_version,1);assert.equal(check.prepare("SELECT note FROM spot_deletions").get().note,"keep");check.close();
 });
