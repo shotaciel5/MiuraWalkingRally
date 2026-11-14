@@ -11,6 +11,7 @@ import "./home-phone.css";
 import "./home-scene.css";
 import "./home-design.css";
 import "./operator-guidance.css";
+import "./operator-workspace.css";
 
 export const metadata: Metadata = {
   title: {default:"三浦市ウォーキングラリー",template:"%s | 三浦市ウォーキングラリー"},

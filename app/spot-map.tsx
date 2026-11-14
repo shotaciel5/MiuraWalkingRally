@@ -5,6 +5,7 @@ import type {} from "leaflet.markercluster";
 import {INITIAL_SPOT_BOUNDS,within} from "../lib/spots/initial-catalog";
 import type {ManagedSpot} from "../lib/spots/editing";
 import {groupFor,SPOT_GROUPS} from "../lib/spots/browser-view";
+import {spotSymbolMarkup} from "../lib/spots/symbols";
 import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 type Engine={L:typeof Leaflet;map:Leaflet.Map;group:Leaflet.MarkerClusterGroup;tiles:Leaflet.TileLayer;markers:Map<string,Leaflet.Marker>;alive:boolean};
 let library:Promise<typeof Leaflet>|undefined;
@@ -40,8 +41,8 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
       tiles.on("tileerror",()=>{tileFailed=true;if(!cancelled)setTilesState("unavailable")});
       tiles.on("load",()=>{if(!cancelled)setTilesState(tileFailed?"unavailable":"ready")});
       tiles.addTo(instance);
-      const group=L.markerClusterGroup({maxClusterRadius:40,showCoverageOnHover:false,animate:false,spiderfyOnMaxZoom:true,
-        iconCreateFunction:cluster=>L.divIcon({className:"spot-cluster",html:"<span>"+cluster.getChildCount()+"</span>",iconSize:[40,40]}),
+      const group=L.markerClusterGroup({maxClusterRadius:50,showCoverageOnHover:false,animate:false,spiderfyOnMaxZoom:true,
+        iconCreateFunction:cluster=>L.divIcon({className:"spot-cluster",html:'<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="m3 8 9-5 9 5-9 5-9-5Zm0 5 9 5 9-5M3 18l9 5 9-5"/></svg><b>'+cluster.getChildCount()+"</b></span>",iconSize:[40,40]}),
       }).addTo(instance);
       group.on("clusterclick",event=>{
         const element=(event.layer as Leaflet.MarkerCluster).getElement();element?.setAttribute("aria-label","近くのスポットを拡大");
@@ -53,8 +54,8 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
   },[attempt]);
   function icon(L:typeof Leaflet,spot:ManagedSpot,active:boolean){
     const group=SPOT_GROUPS[groupFor(spot.category)];
-    return L.divIcon({className:"spot-map-marker"+(active?" is-selected":""),iconSize:[34,34],iconAnchor:[17,17],
-      html:'<span style="--spot-color:'+group.color+'">'+group.glyph+'</span>'});
+    return L.divIcon({className:"spot-map-marker"+(active?" is-selected":""),iconSize:[36,42],iconAnchor:[18,42],tooltipAnchor:[14,-23],
+      html:'<span style="--spot-color:'+group.color+'">'+spotSymbolMarkup(spot.category)+'</span>'});
   }
   useEffect(()=>{
     if(!engine?.alive)return;
@@ -62,7 +63,7 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
     for(const spot of spots){
       const label=document.createElement("span");label.textContent=spot.name;
       const marker=L.marker([spot.position.lat,spot.position.lon],{icon:icon(L,spot,false),title:spot.name,keyboard:true,riseOnHover:true})
-        .bindTooltip(label,{direction:"top",offset:[0,-16]});
+        .bindTooltip(label,{permanent:true,direction:"right",offset:[8,0],className:"spot-name-label",opacity:1});
       marker.on("click",()=>{if(positionInput.current)positionInput.current({lat:spot.position.lat,lon:spot.position.lon});else select.current(spot.id)});
       marker.on("keydown",event=>{
         const key=(event as Leaflet.LeafletKeyboardEvent).originalEvent;
@@ -75,7 +76,7 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
       });
       markers.set(spot.id,marker);group.addLayer(marker);
     }
-    if(spots.length)map.fitBounds(L.latLngBounds(spots.map(s=>[s.position.lat,s.position.lon] as [number,number])),{padding:[35,35],maxZoom:16,animate:false});
+    if(spots.length)map.fitBounds(L.latLngBounds(spots.map(s=>[s.position.lat,s.position.lon] as [number,number])),{paddingTopLeft:[35,45],paddingBottomRight:[145,40],maxZoom:16,animate:false});
     return()=>{if(engine.alive){group.clearLayers();markers.clear()}};
     // Selection is updated separately to keep the current marker and its keyboard focus.
   },[engine,spots]);
@@ -83,7 +84,6 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
     if(!engine?.alive)return;
     for(const spot of spots){
       const marker=engine.markers.get(spot.id);if(!marker)continue;
-      if(spot.id!==selectedId)marker.closeTooltip();
       marker.setIcon(icon(engine.L,spot,spot.id===selectedId));marker.setZIndexOffset(spot.id===selectedId?1000:0);
       marker.getElement()?.setAttribute("aria-pressed",spot.id===selection.current?"true":"false");
     }
@@ -116,10 +116,10 @@ export default function SpotMap({spots,selectedId,onSelect,draftPosition,onPosit
     return()=>{if(engine.alive)layers.remove()};
   },[engine,connection,selectedId,spots,draftPosition]);
   function fit(){
-    if(engine?.alive&&spots.length){engine.map.stop();engine.map.fitBounds(engine.L.latLngBounds(spots.map(s=>[s.position.lat,s.position.lon] as [number,number])),{padding:[35,35],maxZoom:16,animate:false})}
+    if(engine?.alive&&spots.length){engine.map.stop();engine.map.fitBounds(engine.L.latLngBounds(spots.map(s=>[s.position.lat,s.position.lon] as [number,number])),{paddingTopLeft:[35,45],paddingBottomRight:[145,40],maxZoom:16,animate:false})}
   }
   return <section className="spot-map-panel" aria-label="スポットの位置図" data-spot-map-state={state} data-tile-state={tilesState}>
-    <div className="spot-map-toolbar"><span><strong>地図から探す</strong><small>{onPosition?(positionLabel??"地図をクリックして施設位置を指定"):"ピンを選ぶと詳細を表示"}</small></span><button type="button" onClick={fit} disabled={!engine||!spots.length} data-map-fit>表示中の範囲へ</button></div>
+    <div className="spot-map-toolbar"><span><strong>地図から探す</strong><small>{onPosition?(positionLabel??"地図をクリックして施設位置を指定"):"絵アイコン・名称から選択。密集地点は拡大できます"}</small></span><button type="button" onClick={fit} disabled={!engine||!spots.length} data-map-fit>表示中の範囲へ</button></div>
     <div className="spot-map-canvas" ref={container} aria-label="スポットの背景地図"/>
     {state==="loading"&&<p className="spot-map-feedback" role="status">地図を準備しています…</p>}
     {state==="unavailable"&&<div className="spot-map-feedback" role="alert"><p>地図を準備できませんでした。一覧からスポットを確認できます。</p><button type="button" onClick={()=>setAttempt(v=>v+1)} data-map-retry>地図を再試行</button></div>}

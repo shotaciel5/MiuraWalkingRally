@@ -1,34 +1,34 @@
 import type {Metadata} from "next";
-import Image from "next/image";
 import Link from "next/link";
 import SiteHeader from "../site-header";
 import OperatorNav from "../operator-nav";
-import ExperienceIcon from "../experience-icon";
-import {ArrowIcon,RallyFooter} from "../rally-ui";
+import {RallyFooter} from "../rally-ui";
 import {getDraftRepository} from "../../lib/operator/draft-repository";
-import type {RallyDraft} from "../../lib/operator/rally-draft";
-export const runtime="nodejs";
-export const dynamic="force-dynamic";
-export const metadata:Metadata={title:"コースをつくる"};
-
+import {getCourseRepository} from "../../lib/operator/course-repository";
+export const runtime="nodejs";export const dynamic="force-dynamic";
+export const metadata:Metadata={title:"運営ダッシュボード"};
 export default function OperatorHome(){
- let draft:RallyDraft|null=null,unavailable=false;
- try{draft=getDraftRepository().load().draft}catch{unavailable=true}
+ let context;let courses;try{context=getDraftRepository().load()}catch{context=null}try{courses=getCourseRepository().list()}catch{courses=null}
+ const draft=context?.draft;
  return <main className="participant-main operator-main operator-home" data-operator-page="home">
   <SiteHeader view="operator"/><section id="page-content" tabIndex={-1}>
    <OperatorNav view="home"/>
-   <div className="operator-welcome operator-task-welcome"><div><p className="eyebrow">YOUR WORKSPACE</p><h1>コースをつくって、<br/>参加者に届けよう。</h1><p className="participant-lead">登録済みのスポットから、行きたい場所を選べます。<br/>まずはスタートとゴールを決めて、道順を見てみましょう。</p>
-    {draft&&<div className="operator-resume" data-operator-resume><span>作成中のコース</span><strong>{draft.title}</strong><small>保存した地点から再開できます</small></div>}
-    <Link prefetch={false} className="experience-button dark" href="/operator/draft" data-operator-start>{draft?"作成中のコースを続ける":unavailable?"コースの作成画面を開く":"新しいコースをつくる"}<ArrowIcon/></Link>
-    <p className="operator-start-note">スポットの登録から始める必要はありません。保存しただけでは公開されません。最後に内容を確認して公開します。</p>
-   </div><div className="operator-welcome-photo"><Image src="/mainphotos/shitamati.jpg" alt="コースに組み込める三崎の路地の風景" fill priority sizes="(max-width: 700px) 90vw, 32vw"/></div></div>
-   {unavailable&&<p className="operator-status-error" role="alert" data-operator-home-error>作成中のコースの状態を読み込めませんでした。作成画面で保存内容を確認してください。</p>}
-   <div className="operator-start-heading"><h2>ほかの作業はこちら</h2></div>
-   <div className="operator-task-grid">
-    <Link prefetch={false} href="/operator/courses"><ExperienceIcon kind="publish"/><div><h3>保存したコースを公開する</h3><p>内容を開いて確認し、参加者に届ける。公開停止・再公開もここから。</p><span>コースを確認する<ArrowIcon/></span></div></Link>
-    <Link prefetch={false} href="/operator/spots"><ExperienceIcon kind="pin"/><div><h3>スポットを追加・編集する</h3><p>使いたい場所が見つからないときや、名称・位置を整えたいときに。</p><span>スポットを管理する<ArrowIcon/></span></div></Link>
+   <div className="operator-intro"><div><p className="eyebrow">OPERATOR DASHBOARD</p><h1>運営ダッシュボード</h1><p className="participant-lead">地点を選び、道順を確認して、参加者に届ける。</p></div></div>
+   <dl className="operator-dashboard-metrics"><div><dt>登録スポット</dt><dd>{context?context.spots.length+"件":"確認待ち"}</dd></div><div><dt>保存したコース</dt><dd>{courses?courses.length+"件":"確認待ち"}</dd></div><div><dt>作成中の下書き</dt><dd>{context?draft?"あり":"未作成":"確認待ち"}</dd></div></dl>
+   <div className="operator-dashboard-home">
+    <section><p className="eyebrow">CREATE A COURSE</p><h2>{draft?"作成中のコースを続ける":"新しいコースをつくる"}</h2><p>登録済みのスポットから、スタート・ゴール・立ち寄り先を選びます。訪問順を決めたら、ルートとコマを生成できます。</p>
+     {draft&&<div className="operator-resume" data-operator-resume><span>作成中のコース</span><strong>{draft.title}</strong><small>保存した地点から再開できます</small></div>}
+     {!context&&<p className="operator-status-error" role="alert" data-operator-home-error>下書きとスポット情報を確認できませんでした。作成画面で保存先を確認してください。</p>}
+     <Link prefetch={false} className="operator-task-primary operator-dashboard-primary" href="/operator/draft" data-operator-start>{draft?"地点を選ぶ画面へ戻る":"地図から地点を選ぶ →"}</Link>
+     <ol className="operator-dashboard-path"><li><b>1 地点を選ぶ</b>地図と一覧から選び、訪問順を決める</li><li><b>2 コマを確認・保存</b>全体地図とコマを見比べて仕上げる</li><li><b>3 参加者へ公開</b>保存版を確認し、公開を設定する</li></ol>
+     <p className="operator-start-note">保存しただけでは公開されません。入口・通行・安全性は公開前に現地で確認してください。</p>
+    </section>
+    <section><div className="operator-recent-heading"><h2>保存したコース</h2><Link prefetch={false} href="/operator/courses">すべて見る →</Link></div>
+     {courses===null?<p role="alert">保存済みコースを読み込めませんでした。<a href="/operator/courses">一覧で確認する</a></p>:courses.length?<ul className="operator-recent-courses">{courses.slice(0,4).map(c=><li key={c.id}><Link prefetch={false} href={"/operator/courses/"+c.id}><span><strong>{c.title}</strong><small>{(c.meters/1000).toFixed(2)}km · {c.cards}コマ</small></span><span aria-hidden="true">→</span></Link></li>)}</ul>:<p>コースを確認して保存すると、ここから公開設定へ進めます。</p>}
+     <Link prefetch={false} className="operator-dashboard-maintenance" href="/operator/spots"><b>スポットを追加・編集する →</b><span>使いたい場所がないときや、名称・位置を整えたいときに。</span></Link>
+     <p>公開停止・再公開・削除は、保存したコースを開いて操作できます。</p>
+    </section>
    </div>
-   <aside className="operator-workflow"><h2>コースづくりは、3ステップ</h2><ol><li>地図から地点を選ぶ</li><li>コマを確認して保存</li><li>参加者向けに公開</li></ol><p>ルートとコマ地図は自動生成します。公開前に、現地の入口・通行・横断などを確認してください。</p></aside>
   </section><RallyFooter/>
  </main>;
 }

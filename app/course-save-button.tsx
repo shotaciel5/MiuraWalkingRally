@@ -1,7 +1,7 @@
 "use client";
 import {useEffect,useRef,useState} from "react";
 import type {SaveReceipt} from "../lib/operator/course-format";
-export default function CourseSaveButton({receipt,unavailable}:{receipt:SaveReceipt|null;unavailable?:string}){
+export default function CourseSaveButton({receipt,unavailable,compact=false}:{receipt:SaveReceipt|null;unavailable?:string;compact?:boolean}){
  const [busy,setBusy]=useState(false),[error,setError]=useState(""),[conflict,setConflict]=useState(false),alive=useRef(true),running=useRef(false),request=useRef<AbortController|null>(null);
  useEffect(()=>{alive.current=true;return()=>{alive.current=false;request.current?.abort()}},[]);
  async function save(){
@@ -17,8 +17,8 @@ export default function CourseSaveButton({receipt,unavailable}:{receipt:SaveRece
   }catch(cause){if(alive.current)setError(cause instanceof Error&&cause.name!=="AbortError"?cause.message:"保存結果を確認できません。表示を残しています。同じ結果で再試行できます。")}
   finally{window.clearTimeout(timer);request.current=null;running.current=false;if(alive.current)setBusy(false)}
  }
- return <div className="course-save-panel operator-task-panel" data-course-save-panel>
-  <h2>確認できたら、保存して次へ</h2><p>この内容を保存すると、公開の設定画面へ進みます。保存だけでは参加者に公開されません。保存が完了すると作成画面は未記入に戻り、次のコースをつくれます。</p>
+ return <div className={"course-save-panel operator-task-panel"+(compact?" is-compact":"")} data-course-save-panel>
+  <h2 className={compact?"sr-only":undefined}>確認できたら、保存して次へ</h2><p>{compact?"保存後は下書きが空になります。公開は次の画面で設定。":"この内容を保存すると、公開の設定画面へ進みます。保存だけでは参加者に公開されません。保存が完了すると作成画面は未記入に戻り、次のコースをつくれます。"}</p>
   <button type="button" className="operator-task-primary" disabled={busy||!receipt||conflict} data-course-save onClick={()=>void save()}>{busy?"保存しています…":conflict?"再生成してから保存":error?"同じ結果の保存を再試行":"この内容を保存して、公開設定へ"}</button>
   {!receipt&&<p role="alert">{unavailable??"保存の準備ができません。内容を確認して再生成してください。"}</p>}
   {error&&<p role="alert" data-course-save-error>{error}</p>}

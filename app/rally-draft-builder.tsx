@@ -2,6 +2,7 @@
 import {useCallback,useEffect,useMemo,useRef,useState} from "react";
 import {decodeCorrectionContext,emptyCorrections,staleCorrections,type RallyCorrections} from "../lib/operator/rally-corrections";
 import SpotMap from "./spot-map";
+import SpotSymbol from "./spot-symbol";
 import SpotConnection from "./spot-connection";
 import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog";
@@ -67,17 +68,20 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
   const spot=form[key],issue=issues.find(i=>i.key===key);
   return <div className={"draft-slot"+(issue?" has-issue":"")} data-draft-slot={key}><div><b>{key==="start"?"S スタート":"G ゴール"}</b>{spot?<><button type="button" disabled={busy||!spots.some(s=>s.id===spot.id)} onClick={()=>show(spot)}>{spot.name}</button><details className="operator-inline-details"><summary>位置情報</summary><small>{spot.position.lat.toFixed(6)}, {spot.position.lon.toFixed(6)}</small></details></>:<p>地図・一覧から選択してください</p>}{issue&&<p className="draft-issue">{issue.state==="missing"?"削除済み・利用できない地点です。選び直してください。":"台帳で変更されています。現在："+issue.current!.name}</p>}</div>{spot&&<button type="button" className="draft-remove" disabled={busy} aria-label={(key==="start"?"開始":"終了")+"地点を外す"} onClick={()=>setForm(f=>({...f,[key]:null}))}>外す</button>}</div>;
  }
- return <div data-draft-builder data-draft-revision={saved?.revision??0} data-draft-dirty={dirty}>
+ return <div className="operator-draft-dashboard" data-draft-builder data-draft-revision={saved?.revision??0} data-draft-dirty={dirty}>
   <section className="operator-next-action" data-draft-guidance aria-live="polite"><div><p className="eyebrow">NEXT ACTION</p><h2>{nextTitle}</h2><p>{spots.length===0?"選べるスポットがありません。「スポットを追加・編集」から使いたい場所を登録してください。":!form.start||!form.finish?"地図のピンか一覧を押して、表示される役割ボタンで使い方を決めます。スタートとゴールは同じ場所でも構いません。":!form.title.trim()?"コース名を入力してください。立ち寄り先は、必要に応じてチェックポイントや経由地へ追加できます。":issues.length?"地点の変更・削除を確認し、現在の情報を反映して保存してください。":correctionProblems.length?"下の「道路の調整・保存内容の管理」から、補正した到達点を再確認してください。":dirty||!saved?"下の「地点を保存する」を押すと、ルートとコマをつくる操作へ進めます。":"下の「ルートとコマをつくる」から、道順とコマの表示を確認できます。"}</p></div><ul className="operator-draft-checks">{[[!!form.start,"スタート"],[!!form.finish,"ゴール"],[!!form.title.trim(),"コース名"],[!!saved&&!dirty,"地点の保存"]].map(([done,label])=><li key={String(label)} className={done?"is-done":undefined}><span aria-hidden="true">{done?"✓":"○"}</span>{label}</li>)}</ul></section>
-  <div className="draft-catalog-filters"><label>スポット名<input type="search" value={filters.query} disabled={busy} data-draft-search onChange={e=>setFilters(f=>({...f,query:e.target.value}))}/></label>
+  <div className="draft-workspace">
+   <section className="draft-candidates" aria-label="スポット候補"><div className="spot-list-heading"><h2>スポット候補</h2><span data-draft-count>{visible.length}件</span></div>
+    <div className="draft-catalog-filters"><label>スポット名<input type="search" value={filters.query} disabled={busy} data-draft-search onChange={e=>setFilters(f=>({...f,query:e.target.value}))}/></label>
    <label>エリア<select value={filters.area} disabled={busy} data-draft-area onChange={e=>setFilters(f=>({...f,area:e.target.value as SpotFilters["area"]}))}><option value="all">すべて</option>{Object.entries(AREA_LABELS).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>
    <div className="draft-group-filters">{(["all",...Object.keys(SPOT_GROUPS)] as ("all"|SpotGroup)[]).map(group=><button type="button" key={group} disabled={busy} aria-pressed={filters.group===group} data-draft-group={group} onClick={()=>setFilters(f=>({...f,group}))}>{group==="all"?"すべて":SPOT_GROUPS[group].label}</button>)}</div>
   </div>
-  <div className="draft-workspace">
+    {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=><li key={spot.id}><button type="button" data-draft-candidate={spot.id} aria-pressed={selected?.id===spot.id} className={selected?.id===spot.id?"is-selected":""} disabled={busy} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:SPOT_GROUPS[groupFor(spot.category)].color}}><SpotSymbol category={spot.category}/></span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">初期の確認記録：{ROUTING_LABELS[spot.routing.state]}</span></span></button></li>)}</ul>:<div className="spot-empty" data-draft-empty>{spots.length?<><p>条件に合う候補がありません。検索名・エリア・ジャンルを変えて探してください。</p><button type="button" disabled={busy} onClick={()=>setFilters(DEFAULT_FILTERS)} data-draft-reset>すべてのスポットを表示する</button></>:<><p>まだスポットが登録されていません。使いたい場所を追加して、コースづくりを始めましょう。</p><a className="operator-task-primary" href="/operator/spots">スポットを登録する →</a></>}</div>}
+   </section>
    <div className="draft-map" id="draft-map-picker" tabIndex={-1}><SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} connection={connectionMatchesSpot(connection,selected)?connection:null}/></div>
    <section className="draft-configuration" aria-label="作業中の下書き">
     <section className="draft-choice" ref={choice} data-draft-choice={selected?.id??""}><p className="eyebrow">選択中のスポット</p>{selected?<><h2>{selected.name}</h2><p>{SPOT_CATEGORIES[selected.category]} · {AREA_LABELS[selected.area]}</p><p className="operator-action-hint">この地点を、どこに使いますか？</p><div className="draft-assign-actions">{(["start","finish","checkpoint","waypoint"] as const).map(role=><button type="button" key={role} data-draft-assign={role} className={(!form.start?role==="start":!form.finish?role==="finish":role==="checkpoint")?"is-suggested":undefined} disabled={busy||(role==="checkpoint"||role==="waypoint")&&form.stops.some(s=>s.spot.id===selected.id)} onClick={()=>assign(role)}>{{start:"スタートにする",finish:"ゴールにする",checkpoint:"チェックポイントに追加",waypoint:"経由地に追加"}[role]}</button>)}</div><p className="operator-role-help">チェックポイントは写真を撮る場所。経由地は通るだけの場所です。</p><details className="operator-secondary-details" data-draft-road-details><summary>道路とのつながりを詳しく確認</summary><p className="spot-routing-state">初期の確認記録：{ROUTING_LABELS[selected.routing.state]}</p><SpotConnection spot={selected} override={manual} onConnection={setConnection}/></details></>:<p>まず地図のピンか一覧を押してください。ここに地点名と「スタートにする」などのボタンが表示されます。</p>}</section>
-    <form onSubmit={e=>{e.preventDefault();void operate("save")}}><fieldset disabled={busy}>
+    <form onSubmit={e=>{e.preventDefault();void operate("save")}}><div className="draft-form-body"><fieldset disabled={busy}>
      <div className="draft-form-heading"><h2>選んだ地点と訪問順</h2><span>{dirty?"未保存の変更あり":saved?"保存済み":"未保存"}</span></div>
      <label className="draft-title">コース名<input required maxLength={100} value={form.title} data-draft-title onChange={e=>setForm(f=>({...f,title:e.target.value}))} placeholder="例：三崎のまち歩き"/></label>
      {slot("start")}<div className="draft-stops-heading"><h3>途中の地点</h3><small>この並びで訪問・上下ボタンで変更</small></div>
@@ -87,12 +91,6 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
     </fieldset>
     {issues.length>0&&<div className="draft-review-needed" role="status" data-draft-issues>{issues.length}件の地点情報を確認してください。削除済みの地点は選び直しが必要です。</div>}
     {correctionProblems.length>0&&<p className="draft-review-needed" data-draft-correction-stale>到達点の補正{correctionProblems.length}件に再確認が必要です。地点の変更を保存した後、「道路上の到達点」で確認してください。</p>}
-    {error&&<div className="spot-edit-error" role="alert" data-draft-error>{error}</div>}
-    {notice&&<p className="spot-save-notice" role="status" data-draft-notice>{notice}</p>}
-    <div className="draft-save-actions operator-draft-primary-actions" id="draft-next-action">
-     <button type="submit" className={canGenerate?"operator-task-secondary":"rally-primary-link"} disabled={busy||invalid||reason==="draft-conflict"} data-draft-save>{busy?"保存しています…":error?"同じ内容で再試行":"地点を保存する"}</button>
-     {canGenerate?<a className="preview-generate operator-task-primary" href="/operator/preview" data-preview-generate>ルートとコマをつくる →</a>:<button type="button" className="preview-generate operator-task-secondary" disabled data-preview-generate>{correctionProblems.length?"到達点を再確認すると生成できます":"地点を保存すると生成できます"}</button>}
-    </div>
     {saved&&<p className="draft-saved-time">保存日時：<time dateTime={saved.updatedAt}>{new Date(saved.updatedAt).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo"})}</time></p>}
     <details className="operator-secondary-details" data-draft-management open={correctionProblems.length>0||issues.length>0||reason==="draft-conflict"||reason==="catalog-conflict"}>
      <summary>道路の調整・保存内容の管理</summary>
@@ -101,11 +99,16 @@ export default function RallyDraftBuilder({initial}:{initial:{draft:RallyDraft|n
      <div className="draft-save-actions"><button type="button" disabled={busy} data-draft-refresh onClick={()=>void operate("catalog")}>スポットの最新情報を反映</button><button type="button" disabled={busy} data-draft-reload onClick={()=>void operate("reload")}>保存内容を読み直す（未保存を破棄）</button></div>
     </details>
     <p className="draft-scope-note">作業中の下書きは1件です。ページを移動する前に保存してください。保存後にルート・コマを生成して確認できます。</p>
+    </div>
+    {error&&<div className="spot-edit-error" role="alert" data-draft-error>{error}</div>}
+    {notice&&<p className="spot-save-notice" role="status" data-draft-notice>{notice}</p>}
+    <div className="draft-save-actions operator-draft-primary-actions" id="draft-next-action">
+     <button type="submit" className={canGenerate?"operator-task-secondary":"rally-primary-link"} disabled={busy||invalid||reason==="draft-conflict"} data-draft-save>{busy?"保存しています…":error?"同じ内容で再試行":"地点を保存する"}</button>
+     {canGenerate?<a className="preview-generate operator-task-primary" href="/operator/preview" data-preview-generate>ルートとコマをつくる →</a>:<button type="button" className="preview-generate operator-task-secondary" disabled data-preview-generate>{correctionProblems.length?"到達点を再確認すると生成できます":"地点を保存すると生成できます"}</button>}
+    </div>
     </form>
    </section>
-   <section className="draft-candidates" aria-label="スポット候補"><div className="spot-list-heading"><h2>スポット候補</h2><span data-draft-count>{visible.length}件</span></div>
-    {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=><li key={spot.id}><button type="button" data-draft-candidate={spot.id} aria-pressed={selected?.id===spot.id} className={selected?.id===spot.id?"is-selected":""} disabled={busy} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:SPOT_GROUPS[groupFor(spot.category)].color}}>{SPOT_GROUPS[groupFor(spot.category)].glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">初期の確認記録：{ROUTING_LABELS[spot.routing.state]}</span></span></button></li>)}</ul>:<div className="spot-empty" data-draft-empty>{spots.length?<><p>条件に合う候補がありません。検索名・エリア・ジャンルを変えて探してください。</p><button type="button" disabled={busy} onClick={()=>setFilters(DEFAULT_FILTERS)} data-draft-reset>すべてのスポットを表示する</button></>:<><p>まだスポットが登録されていません。使いたい場所を追加して、コースづくりを始めましょう。</p><a className="operator-task-primary" href="/operator/spots">スポットを登録する →</a></>}</div>}
-   </section>
+
   </div>
  </div>;
 }

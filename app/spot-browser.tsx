@@ -7,6 +7,7 @@ import SpotEditor,{draftFor,type SpotDraft} from "./spot-editor";
 import {SPOT_CATEGORIES} from "../lib/spots/initial-catalog";
 import {AREA_LABELS,DEFAULT_FILTERS,ROUTING_LABELS,SPOT_GROUPS,filterSpots,groupFor,visibleSelection,type SpotFilters,type SpotGroup} from "../lib/spots/browser-view";
 import SpotMap from "./spot-map";
+import SpotSymbol from "./spot-symbol";
 import SpotConnection from "./spot-connection";
 import {connectionMatchesSpot,type RoadConnection} from "../lib/route/road-connection";
 export default function SpotBrowser({spots:initialSpots}:{spots:ManagedSpot[]}){
@@ -42,22 +43,11 @@ export default function SpotBrowser({spots:initialSpots}:{spots:ManagedSpot[]}){
   useEffect(()=>{if(selectedId&&!visible.some(s=>s.id===selectedId))setSelectedId(null)},[visible,selectedId]);
   const groups=Object.keys(SPOT_GROUPS) as SpotGroup[];
   const modeSpots=useMemo(()=>spots,[spots]);
-  return <div data-spot-browser data-visible-count={visible.length} data-selected-spot={selected?.id??""}>
+  return <div className="operator-spots-dashboard" data-spot-browser data-visible-count={visible.length} data-selected-spot={selected?.id??""}>
     <div className="spot-catalog-actions"><p>まちの立ち寄り先を、少しずつ育てる。</p><button type="button" className="rally-primary-link" disabled={locked} data-spot-add onClick={()=>{setDraft(draftFor());setNotice("")}}>＋ スポットを追加</button></div>
     {deleteTarget&&<SpotDelete key={deleteTarget.id} spot={deleteTarget} refreshing={refreshing} onCancel={()=>setDeleteTarget(null)} onRefresh={cancel} onDeleted={(deleted:SpotDeletion)=>{setSpots(before=>before.filter(s=>s.id!==deleted.id));setSelectedId(null);setDeleteTarget(null);setNotice(deleted.name+"を削除しました。")}}/>}
     {notice&&<p className="spot-save-notice" role="status" data-spot-notice>{notice}</p>}
     {refreshing&&<p role="status">最新のスポット情報を読み込んでいます…</p>}
-    <fieldset disabled={locked} className="spot-filter-lock"><div className="spot-filters">
-      <div className="spot-filter-top">
-        <label className="spot-search"><span>スポット名</span><input type="search" placeholder="名前で探す" value={filters.query} data-spot-search onChange={e=>setFilters(f=>({...f,query:e.target.value}))}/></label>
-        <label className="spot-area"><span>エリア</span><select value={filters.area} data-spot-area onChange={e=>setFilters(f=>({...f,area:e.target.value as SpotFilters["area"]}))}><option value="all">すべてのエリア</option>{Object.entries(AREA_LABELS).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>
-      </div>
-      <div className="spot-group-filters" aria-label="ジャンルで絞り込む">
-        <button type="button" aria-pressed={filters.group==="all"} data-spot-group="all" onClick={()=>setFilters(f=>({...f,group:"all"}))}>すべて <small>{modeSpots.length}</small></button>
-        {groups.map(id=><button key={id} type="button" aria-pressed={filters.group===id} data-spot-group={id} onClick={()=>setFilters(f=>({...f,group:id}))}><span className="spot-group-glyph" style={{color:SPOT_GROUPS[id].color}} aria-hidden="true">{SPOT_GROUPS[id].glyph}</span>{SPOT_GROUPS[id].label}<small>{modeSpots.filter(s=>groupFor(s.category)===id).length}</small></button>)}
-      </div>
-    </div>
-    </fieldset><div className="spot-result-heading"><p aria-live="polite"><strong data-spot-count>{visible.length}</strong> 件を表示 <span>／ 登録済み {spots.length} 件</span></p><button type="button" disabled={locked} onClick={()=>{setFilters(DEFAULT_FILTERS);setSelectedId(null)}} data-spot-reset>表示条件をリセット</button></div>
     <div className="spot-workspace">
       <div className="spot-map-column">
         <SpotMap spots={visible} selectedId={selected?.id??null} onSelect={select} connection={connectionMatchesSpot(connection,selected)?connection:null} draftPosition={draft?{lat:draft.lat.trim()?Number(draft.lat):NaN,lon:draft.lon.trim()?Number(draft.lon):NaN}:null} onPosition={draft&&!busy&&!refreshing?point=>setDraft({...draft,lat:point.lat.toFixed(7),lon:point.lon.toFixed(7)}):null}/>
@@ -75,11 +65,23 @@ export default function SpotBrowser({spots:initialSpots}:{spots:ManagedSpot[]}){
             {selected.source?<a className="spot-source-link" href={selected.source.url} target="_blank" rel="noopener noreferrer">OSMの元データを見る <span aria-hidden="true">↗</span></a>:<p className="spot-detail-note">運営者が追加したスポットです。</p>}
             <button type="button" className="spot-edit-open" data-spot-edit onClick={()=>{setDraft(draftFor(selected));setNotice("")}}>このスポットを編集</button>
             <button type="button" className="spot-delete-open" data-spot-delete-open onClick={()=>{setDeleteTarget(selected);setNotice("")}}>このスポットを削除</button>
-          </>:<><h2 id="spot-detail-title">気になるスポットを選択</h2><p className="spot-detail-note">地図のピンや右の一覧を選ぶと、ジャンル・代表位置・到達点の確認状態を表示します。</p></>}
+          </>:<><h2 id="spot-detail-title">気になるスポットを選択</h2><p className="spot-detail-note">地図のピンや一覧を選ぶと、ジャンル・代表位置・到達点の確認状態を表示します。</p></>}
         </section>}
       </div>
       <section className="spot-list-panel" aria-labelledby="spot-list-title"><div className="spot-list-heading"><h2 id="spot-list-title">スポット一覧</h2><span>{visible.length} 件</span></div>
-        {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=>{const g=SPOT_GROUPS[groupFor(spot.category)];return <li key={spot.id}><button type="button" className={selected?.id===spot.id?"is-selected":""} aria-pressed={selected?.id===spot.id} data-spot-list-id={spot.id} disabled={locked} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:g.color}} aria-hidden="true">{g.glyph}</span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">初期の確認記録：{ROUTING_LABELS[spot.routing.state]}</span></span><span aria-hidden="true" className="spot-list-arrow">↗</span></button></li>})}</ul>:<div className="spot-empty" role="status" data-spot-empty><strong>条件に合う候補がありません</strong><p>検索名・エリア・ジャンルを変えて探してください。</p></div>}
+    <fieldset disabled={locked} className="spot-filter-lock"><div className="spot-filters">
+      <div className="spot-filter-top">
+        <label className="spot-search"><span>スポット名</span><input type="search" placeholder="名前で探す" value={filters.query} data-spot-search onChange={e=>setFilters(f=>({...f,query:e.target.value}))}/></label>
+        <label className="spot-area"><span>エリア</span><select value={filters.area} data-spot-area onChange={e=>setFilters(f=>({...f,area:e.target.value as SpotFilters["area"]}))}><option value="all">すべてのエリア</option>{Object.entries(AREA_LABELS).map(([id,label])=><option key={id} value={id}>{label}</option>)}</select></label>
+      </div>
+      <div className="spot-group-filters" aria-label="ジャンルで絞り込む">
+        <button type="button" aria-pressed={filters.group==="all"} data-spot-group="all" onClick={()=>setFilters(f=>({...f,group:"all"}))}>すべて <small>{modeSpots.length}</small></button>
+        {groups.map(id=><button key={id} type="button" aria-pressed={filters.group===id} data-spot-group={id} onClick={()=>setFilters(f=>({...f,group:id}))}><span className="spot-group-glyph" style={{color:SPOT_GROUPS[id].color}} aria-hidden="true"><SpotSymbol category={SPOT_GROUPS[id].categories[0]}/></span>{SPOT_GROUPS[id].label}<small>{modeSpots.filter(s=>groupFor(s.category)===id).length}</small></button>)}
+      </div>
+    </div>
+    </fieldset><div className="spot-result-heading"><p aria-live="polite"><strong data-spot-count>{visible.length}</strong> 件を表示 <span>／ 登録済み {spots.length} 件</span></p><button type="button" disabled={locked} onClick={()=>{setFilters(DEFAULT_FILTERS);setSelectedId(null)}} data-spot-reset>表示条件をリセット</button></div>
+
+        {visible.length?<ul className="spot-result-list" ref={list}>{visible.map(spot=>{const g=SPOT_GROUPS[groupFor(spot.category)];return <li key={spot.id}><button type="button" className={selected?.id===spot.id?"is-selected":""} aria-pressed={selected?.id===spot.id} data-spot-list-id={spot.id} disabled={locked} onClick={()=>select(spot.id)}><span className="spot-list-glyph" style={{color:g.color}} aria-hidden="true"><SpotSymbol category={spot.category}/></span><span className="spot-list-copy"><strong>{spot.name}</strong><small>{SPOT_CATEGORIES[spot.category]} · {AREA_LABELS[spot.area]}</small><span className="spot-list-state">初期の確認記録：{ROUTING_LABELS[spot.routing.state]}</span></span><span aria-hidden="true" className="spot-list-arrow">↗</span></button></li>})}</ul>:<div className="spot-empty" role="status" data-spot-empty><strong>条件に合う候補がありません</strong><p>検索名・エリア・ジャンルを変えて探してください。</p></div>}
         <p className="spot-list-note">選択は位置・情報の閲覧です。コースへの追加は「ラリー下書き」で行います。</p>
       </section>
     </div>
